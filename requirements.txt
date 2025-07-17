@@ -7,3 +7,4 @@ fuzzywuzzy==0.18.0
 python-Levenshtein==0.12.2
 openai==1.11.1
 tenacity==8.2.3
+functions-framework==3.4.0
