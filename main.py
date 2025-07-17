@@ -17,6 +17,13 @@ import openai
 import tempfile # For handling Google credentials securely
 from datetime import datetime # Added for timestamp
 
+#------for function-----
+from flask import Request
+def main(request: Request):
+    return "✅ Scholarino is running correctly!", 200
+
+
+
 # --- Load Environment Variables ---
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
