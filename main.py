@@ -17,6 +17,8 @@ import openai
 from datetime import datetime
 from flask import Request
 from functions_framework import http
+import asyncio
+import threading
 
 # --- Define Conversation States ---
 ASKING_FIRST_NAME, ASKING_LAST_NAME, ASKING_AGE, ASKING_EMAIL, MAIN_MENU = range(5)
@@ -30,7 +32,7 @@ PORT = int(os.getenv("PORT", 8080))
 GOOGLE_CREDS = os.getenv("GOOGLE_CREDS")  # Path to credentials file
 SHEET_ID = os.getenv("SHEET_ID")
 ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID", 0))
-SCHOLARSHIPS_SHEET_NAME = "Scholarship"  # Updated to match Google Sheets
+SCHOLARSHIPS_SHEET_NAME = "Scholarship"
 BAZARINO_ORDERS_SHEET_NAME = "Bazarino Orders"
 
 # --- Set up Logging ---
@@ -74,7 +76,6 @@ def init_google_sheets():
         spreadsheet = gc.open_by_key(SHEET_ID)
         try:
             scholarships_sheet = spreadsheet.worksheet(SCHOLARSHIPS_SHEET_NAME)
-            # Verify columns
             expected_columns = ['telegram_id', 'first_name', 'last_name', 'age', 'email', 'language', 'registration_date']
             actual_columns = scholarships_sheet.row_values(1)
             if actual_columns != expected_columns:
@@ -85,7 +86,6 @@ def init_google_sheets():
         
         try:
             bazarino_orders_sheet = spreadsheet.worksheet(BAZARINO_ORDERS_SHEET_NAME)
-            # Verify columns
             expected_columns = ['telegram_id', 'question', 'answer', 'timestamp']
             actual_columns = bazarino_orders_sheet.row_values(1)
             if actual_columns != expected_columns:
@@ -499,12 +499,18 @@ conv_handler = ConversationHandler(
 application.add_handler(conv_handler)
 application.add_handler(CommandHandler("help", help_command))
 
+# --- AsyncIO Event Loop Setup ---
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
 # --- HTTP Handler for Render ---
 @http
 def main(request: Request):
     if request.method == "POST" and request.path == f"/{TELEGRAM_BOT_TOKEN}":
         update = Update.de_json(request.get_json(), application.bot)
-        application.create_task(application.process_update(update))
+        # Use run_coroutine_threadsafe to run async function in a separate thread
+        future = asyncio.run_coroutine_threadsafe(application.process_update(update), loop)
+        future.result()  # Wait for the coroutine to complete
         return "", 200
     return "Invalid request", 400
 
@@ -521,6 +527,13 @@ async def set_webhook():
     except Exception as e:
         logger.error(f"Failed to set webhook: {e}")
 
+# --- Run Event Loop in a Separate Thread ---
+def run_loop():
+    loop.run_forever()
+
 if __name__ == "__main__":
-    import asyncio
-    asyncio.run(set_webhook())
+    # Start the event loop in a separate thread
+    threading.Thread(target=run_loop, daemon=True).start()
+    # Set webhook
+    future = asyncio.run_coroutine_threadsafe(set_webhook(), loop)
+    future.result()
