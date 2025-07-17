@@ -17,13 +17,6 @@ import openai
 import tempfile # For handling Google credentials securely
 from datetime import datetime # Added for timestamp
 
-#------for function-----
-from flask import Request
-def main(request: Request):
-    return "✅ Scholarino is running correctly!", 200
-
-
-
 # --- Load Environment Variables ---
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -35,7 +28,7 @@ PORT = int(os.getenv("PORT", 8080))
 GOOGLE_CREDENTIALS_JSON_CONTENT = os.getenv("GOOGLE_CREDENTIALS_JSON_CONTENT")
 SHEET_ID = os.getenv("SHEET_ID")
 # SPREADSHEET_NAME is not directly used by gspread.open_by_key, but for clarity
-# SPREADSHEET_NAME = os.getenv("SPREADSHEET_NAME") 
+# SPREADSHEET_NAME = os.getenv("SPREADSHEET_NAME")
 SCHOLARSHIPS_SHEET_NAME = "scholarships" # As per user's info
 BAZARINO_ORDERS_SHEET_NAME = "Bazarino Orders" # As per user's info
 
@@ -207,16 +200,16 @@ def get_json_content_by_path(path_parts: list) -> str:
                             for change in current_level['fa']['items']:
                                 change_details.append(f"مورد: {change.get('مورد')}\n  سال قبل: {change.get('سال قبل')}\n  امسال: {change.get('امسال')}\n  توضیح: {change.get('توضیح')}")
                             content = "تغییرات:\n" + "\n".join(change_details)
-                    elif 'dates' in current_level['fa'] and isinstance(current_level['fa']['dates'], list):
-                        dates_content = []
-                        for date_item in current_level['fa']['dates']:
-                            dates_content.append(f"{date_item.get('event')}: {date_item.get('deadline')}")
-                        content = "ددلاین‌ها:\n" + "\n".join(dates_content)
-                    elif 'apps' in current_level['fa'] and isinstance(current_level['fa']['apps'], list):
-                        apps_content = []
-                        for app in current_level['fa']['apps']:
-                            apps_content.append(f"اپلیکیشن: {app.get('name')}\n  توضیح: {app.get('description')}\n  لینک: {app.get('link')}")
-                        content = "اپلیکیشن‌ها:\n" + "\n".join(apps_content)
+                        elif 'dates' in current_level['fa'] and isinstance(current_level['fa']['dates'], list):
+                            dates_content = []
+                            for date_item in current_level['fa']['dates']:
+                                dates_content.append(f"{date_item.get('event')}: {date_item.get('deadline')}")
+                            content = "ددلاین‌ها:\n" + "\n".join(dates_content)
+                        elif 'apps' in current_level['fa'] and isinstance(current_level['fa']['apps'], list):
+                            apps_content = []
+                            for app in current_level['fa']['apps']:
+                                apps_content.append(f"اپلیکیشن: {app.get('name')}\n  توضیح: {app.get('description')}\n  لینک: {app.get('link')}")
+                            content = "اپلیکیشن‌ها:\n" + "\n".join(apps_content)
                 
                 if not content and 'content' in current_level: # Fallback to general content if fa not found
                     content = current_level['content']
@@ -330,26 +323,26 @@ async def ask_email(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     # Basic email validation (can be more robust)
     if "@" not in email or "." not in email:
         await update.message.reply_text("لطفاً یک ایمیل معتبر وارد کنید.")
-        return ASKING_EMAIL
-    
-    context.user_data['email'] = email
-
-    # Save data to Google Sheet
-    if await append_user_data_to_sheet(context.user_data):
-        logger.info("User data successfully saved to Google Sheet.")
     else:
-        logger.warning("Could not save user data to Google Sheet.")
-    
-    # Personalized welcome message
-    first_name = context.user_data.get('first_name', 'دوست')
-    age = context.user_data.get('age', 'نامشخص')
-    personalized_message = (
-        f"عالیه، {first_name} عزیز! شما با سن {age} سال، آماده‌اید تا از خدمات ربات استفاده کنید.\n"
-        "حالا می‌توانید از منوی زیر برای دسترسی به اطلاعات استفاده کنید یا سوال خود را مطرح کنید:"
-    )
-    await update.message.reply_text(personalized_message, reply_markup=get_main_keyboard_markup(context.user_data['current_json_path']))
-    
-    return MAIN_MENU
+        context.user_data['email'] = email
+
+        # Save data to Google Sheet
+        if await append_user_data_to_sheet(context.user_data):
+            logger.info("User data successfully saved to Google Sheet.")
+        else:
+            logger.warning("Could not save user data to Google Sheet.")
+        
+        # Personalized welcome message
+        first_name = context.user_data.get('first_name', 'دوست')
+        age = context.user_data.get('age', 'نامشخص')
+        personalized_message = (
+            f"عالیه، {first_name} عزیز! شما با سن {age} سال، آماده‌اید تا از خدمات ربات استفاده کنید.\n"
+            "حالا می‌توانید از منوی زیر برای دسترسی به اطلاعات استفاده کنید یا سوال خود را مطرح کنید:"
+        )
+        await update.message.reply_text(personalized_message, reply_markup=get_main_keyboard_markup(context.user_data['current_json_path']))
+        
+        return MAIN_MENU
+    return ASKING_EMAIL # If email invalid, stay in this state
 
 async def handle_json_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Handles callback queries related to JSON menu navigation."""
