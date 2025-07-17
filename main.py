@@ -14,10 +14,12 @@ from telegram.ext import (
     CallbackQueryHandler,
 )
 import openai
-import tempfile
 from datetime import datetime
 from flask import Request
 from functions_framework import http
+
+# --- Define Conversation States ---
+ASKING_FIRST_NAME, ASKING_LAST_NAME, ASKING_AGE, ASKING_EMAIL, MAIN_MENU = range(5)
 
 # --- Load Environment Variables ---
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -27,8 +29,8 @@ BASE_URL = os.getenv("BASE_URL")
 PORT = int(os.getenv("PORT", 8080))
 GOOGLE_CREDS = os.getenv("GOOGLE_CREDS")  # Path to credentials file
 SHEET_ID = os.getenv("SHEET_ID")
-ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID", 0))  # Admin chat ID for notifications
-SCHOLARSHIPS_SHEET_NAME = "scholarships"
+ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID", 0))
+SCHOLARSHIPS_SHEET_NAME = "Scholarship"  # Updated to match Google Sheets
 BAZARINO_ORDERS_SHEET_NAME = "Bazarino Orders"
 
 # --- Set up Logging ---
@@ -36,6 +38,16 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
 )
 logger = logging.getLogger(__name__)
+
+# --- Log Environment Variables for Debugging ---
+logger.info(f"TELEGRAM_TOKEN: {'Set' if TELEGRAM_BOT_TOKEN else 'Not set'}")
+logger.info(f"OPENAI_API_KEY: {'Set' if OPENAI_API_KEY else 'Not set'}")
+logger.info(f"WEBHOOK_SECRET: {'Set' if WEBHOOK_SECRET else 'Not set'}")
+logger.info(f"BASE_URL: {BASE_URL}")
+logger.info(f"PORT: {PORT}")
+logger.info(f"GOOGLE_CREDS: {GOOGLE_CREDS}")
+logger.info(f"SHEET_ID: {SHEET_ID}")
+logger.info(f"ADMIN_CHAT_ID: {ADMIN_CHAT_ID}")
 
 # --- Initialize OpenAI client ---
 openai.api_key = OPENAI_API_KEY
@@ -48,19 +60,46 @@ bazarino_orders_sheet = None
 def init_google_sheets():
     global gc, scholarships_sheet, bazarino_orders_sheet
     try:
-        if GOOGLE_CREDS:
-            scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-            creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDS, scope)
-            gc = gspread.authorize(creds)
-            
-            spreadsheet = gc.open_by_key(SHEET_ID)
+        if not GOOGLE_CREDS:
+            logger.warning("GOOGLE_CREDS not set. Google Sheets functionality will be disabled.")
+            return
+        if not os.path.exists(GOOGLE_CREDS):
+            logger.error(f"Credentials file not found at {GOOGLE_CREDS}")
+            return
+        
+        scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+        creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDS, scope)
+        gc = gspread.authorize(creds)
+        
+        spreadsheet = gc.open_by_key(SHEET_ID)
+        try:
             scholarships_sheet = spreadsheet.worksheet(SCHOLARSHIPS_SHEET_NAME)
+            # Verify columns
+            expected_columns = ['telegram_id', 'first_name', 'last_name', 'age', 'email', 'language', 'registration_date']
+            actual_columns = scholarships_sheet.row_values(1)
+            if actual_columns != expected_columns:
+                logger.warning(f"Scholarship sheet columns mismatch. Expected: {expected_columns}, Found: {actual_columns}")
+        except gspread.exceptions.WorksheetNotFound:
+            logger.error(f"Worksheet '{SCHOLARSHIPS_SHEET_NAME}' not found in spreadsheet {SHEET_ID}")
+            scholarships_sheet = None
+        
+        try:
             bazarino_orders_sheet = spreadsheet.worksheet(BAZARINO_ORDERS_SHEET_NAME)
+            # Verify columns
+            expected_columns = ['telegram_id', 'question', 'answer', 'timestamp']
+            actual_columns = bazarino_orders_sheet.row_values(1)
+            if actual_columns != expected_columns:
+                logger.warning(f"Bazarino Orders sheet columns mismatch. Expected: {expected_columns}, Found: {actual_columns}")
+        except gspread.exceptions.WorksheetNotFound:
+            logger.error(f"Worksheet '{BAZARINO_ORDERS_SHEET_NAME}' not found in spreadsheet {SHEET_ID}")
+            bazarino_orders_sheet = None
+            
+        if scholarships_sheet and bazarino_orders_sheet:
             logger.info("Google Sheets initialized successfully.")
         else:
-            logger.warning("GOOGLE_CREDS not set. Google Sheets functionality will be disabled.")
+            logger.warning("One or more worksheets could not be initialized.")
     except Exception as e:
-        logger.error(f"Error initializing Google Sheets: {e}")
+        logger.error(f"Error initializing Google Sheets: {str(e)}")
         gc = None
         scholarships_sheet = None
         bazarino_orders_sheet = None
@@ -86,7 +125,7 @@ async def append_user_data_to_sheet(user_data: dict) -> bool:
             logger.error(f"Failed to append user data to Google Sheet: {e}")
             return False
     else:
-        logger.warning("Google Sheet (Scholarships) not initialized. Cannot append user data.")
+        logger.warning("Google Sheet (Scholarship) not initialized. Cannot append user data.")
         return False
 
 async def append_qa_to_sheet(telegram_id: int, question: str, answer: str) -> bool:
@@ -279,7 +318,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     )
     await update.message.reply_html(welcome_message)
     
-    # Notify admin of new user (if ADMIN_CHAT_ID is set)
     if ADMIN_CHAT_ID:
         try:
             await context.bot.send_message(
@@ -474,14 +512,15 @@ def main(request: Request):
 async def set_webhook():
     webhook_url = f"{BASE_URL}/{TELEGRAM_BOT_TOKEN}"
     logger.info(f"Setting webhook to: {webhook_url}")
-    await application.bot.set_webhook(
-        url=webhook_url,
-        secret_token=WEBHOOK_SECRET
-    )
+    try:
+        await application.bot.set_webhook(
+            url=webhook_url,
+            secret_token=WEBHOOK_SECRET
+        )
+        logger.info("Webhook set successfully.")
+    except Exception as e:
+        logger.error(f"Failed to set webhook: {e}")
 
 if __name__ == "__main__":
     import asyncio
-    # Run webhook setup
     asyncio.run(set_webhook())
-    # Note: The actual server is started by functions-framework
-    # This script will be invoked by functions-framework, so no need to call application.run_webhook
