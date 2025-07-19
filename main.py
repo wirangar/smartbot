@@ -36,7 +36,7 @@ def main() -> None:
 
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(post_init).build()
 
-    # Define conversation handlers
+    # Define conversation handlers for ISEE and Search
     isee_conv = ConversationHandler(
         entry_points=[CallbackQueryHandler(isee_handler.start_isee, pattern=r"^action:start_isee$")],
         states={

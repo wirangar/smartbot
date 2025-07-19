@@ -258,7 +258,7 @@
           "- Each additional person: +0.35",
           "Example: 4-person family, 100m² house, monthly income 2,000,000 IRR, exchange rate 3500 IRR/EUR, bank account €5,000:",
           "- Property value: 100 × 500 × 20% = €10,000",
-          "- Annual income: (2,000,000 ÷ 3500) × 12 ≈ €6,857",
+          "- Annual income: (2,000,000 ÷ 3500) × 12 ≈ 6,857",
           "- Bank account value: 5,000 × 20% = €1,000",
           "- Total ISE: 6,857 + 10,000 + 1,000 = €17,857",
           "- Divided by parameter (2.46): 17,857 ÷ 2.46 ≈ €7,259 (eligible for full scholarship)",

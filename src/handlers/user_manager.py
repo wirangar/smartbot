@@ -5,6 +5,7 @@ from telegram.ext import ContextTypes, ConversationHandler
 from src.database import get_db_cursor
 from src.utils.keyboard_builder import get_language_keyboard, get_main_menu_keyboard
 from src.config import logger
+from src.utils.text_formatter import sanitize_markdown
 
 # Conversation states
 SELECTING_LANG, ASKING_FIRST_NAME, ASKING_LAST_NAME, ASKING_AGE, ASKING_EMAIL, MAIN_MENU = range(6)
@@ -181,12 +182,14 @@ async def show_profile(update: Update, context: ContextTypes.DEFAULT_TYPE, is_co
             not_found_text_map = {'fa': "اطلاعات پروفایل شما یافت نشد. لطفاً با /start ثبت‌نام کنید.", 'en': "Your profile information was not found. Please register with /start.", 'it': "Le tue informazioni del profilo non sono state trovate. Registrati con /start."}
             profile_text = not_found_text_map.get(lang)
 
+        sanitized_text = sanitize_markdown(profile_text)
+
         if is_command:
-            await update.message.reply_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
+            await update.message.reply_text(sanitized_text, parse_mode='MarkdownV2', reply_markup=get_main_menu_keyboard(lang))
         else:
             query = update.callback_query
             await query.answer()
-            await query.edit_message_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
+            await query.edit_message_text(sanitized_text, parse_mode='MarkdownV2', reply_markup=get_main_menu_keyboard(lang))
 
     except Exception as e:
         logger.error(f"Failed to fetch profile for user {user_id}: {e}")
