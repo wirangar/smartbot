@@ -1,26 +1,34 @@
 import os
 import logging
 
-# --- Load Environment Variables ---
+# --- Telegram Bot Configuration ---
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET")
 BASE_URL = os.getenv("BASE_URL")
 PORT = int(os.getenv("PORT", 8080))
-GOOGLE_CREDS_JSON = os.getenv("GOOGLE_CREDS_JSON")  # Changed to accept JSON content directly
-SHEET_ID = os.getenv("SHEET_ID")
 ADMIN_CHAT_ID = int(os.getenv("ADMIN_CHAT_ID", 0))
-SCHOLARSHIPS_SHEET_NAME = "Scholarship"
-BAZARINO_ORDERS_SHEET_NAME = "Bazarino Orders"
 
-# --- System Prompt ---
+# --- API Keys ---
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+# --- Database Configuration ---
+# PostgreSQL for persistent data
+DATABASE_URL = os.getenv("DATABASE_URL")
+# Redis for temporary session data
+REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+
+# --- Google Sheets Configuration ---
+GOOGLE_CREDS = os.getenv("GOOGLE_CREDS") # Path to credentials file for Render
+SHEET_ID = os.getenv("SHEET_ID")
+SCHOLARSHIPS_SHEET_NAME = os.getenv("SPREADSHEET_NAME", "Scholarship")
+QUESTIONS_SHEET_NAME = os.getenv("QUESTIONS_SHEET_NAME", "Bazarino Orders")
+
+# --- System Prompts & Messages ---
 SYSTEM_PROMPT = """
-تو یک ربات هوش مصنوعی هستی که فقط در مورد بورسیه‌های دانشجویی و زندگی دانشجویی در شهر پروجا، ایتالیا اطلاعات ارائه می‌دهی.
-پاسخ‌هایت را به زبان فارسی بده.
-اگر اطلاعات مشخص و دقیقی در مورد سوال کاربر در دانش داخلی‌ات یا متنی که به تو داده می‌شود وجود دارد، از همان اطلاعات استفاده کن و به هیچ عنوان از آن منحرف نشو.
-اگر سوالی خارج از این موضوع (بورسیه‌های دانشجویی و زندگی در پروجا) از تو پرسیده شد، مودبانه و به فارسی بگو که فقط در مورد بورسیه‌های دانشجویی و زندگی در پروجا می‌توانی کمک کنی و نمی‌توانی به سوالات دیگر پاسخ دهی.
-اطلاعاتی که می‌دهی باید بر اساس داده‌های عمومی و موجود در مورد بورسیه‌های پروجا و زندگی دانشجویی باشد.
-مهم: هرگز خارج از حوزه بورسیه‌های دانشجویی و زندگی در پروجا پاسخ نده.
+You are Scholarino, an intelligent assistant for students in Perugia, Italy.
+Your goal is to provide accurate and friendly information based on the knowledge base provided.
+Always respond in the user's chosen language (fa/en/it).
+If a question is outside your scope (student life in Perugia), politely state that you cannot answer.
 """
 
 # --- Logging Setup ---
@@ -30,16 +38,10 @@ def setup_logging():
         level=logging.INFO
     )
     logger = logging.getLogger(__name__)
-    logger.info("Logging configured.")
-    # Log environment variable status for debugging
-    logger.info(f"TELEGRAM_TOKEN: {'Set' if TELEGRAM_BOT_TOKEN else 'Not set'}")
-    logger.info(f"OPENAI_API_KEY: {'Set' if OPENAI_API_KEY else 'Not set'}")
-    logger.info(f"WEBHOOK_SECRET: {'Set' if WEBHOOK_SECRET else 'Not set'}")
-    logger.info(f"BASE_URL: {BASE_URL}")
-    logger.info(f"PORT: {PORT}")
-    logger.info(f"GOOGLE_CREDS_JSON: {'Set' if GOOGLE_CREDS_JSON else 'Not set'}")
-    logger.info(f"SHEET_ID: {SHEET_ID}")
-    logger.info(f"ADMIN_CHAT_ID: {ADMIN_CHAT_ID}")
+    logger.info("--- Scholarino Bot Logging Initialized ---")
+    # Log critical environment variables for debugging
+    for var in ["TELEGRAM_TOKEN", "OPENAI_API_KEY", "DATABASE_URL", "REDIS_URL", "ADMIN_CHAT_ID"]:
+        logger.info(f"{var}: {'Set' if os.getenv(var) else 'Not set'}")
     return logger
 
 logger = setup_logging()

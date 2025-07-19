@@ -1,64 +1,120 @@
-from telegram import Update
-from telegram.ext import ContextTypes, ConversationHandler
 import logging
+from telegram import Update
+from telegram.ext import ContextTypes
 
-from src.utils.keyboard_builder import get_main_keyboard_markup
-from src.data.knowledge_base import get_json_content_by_path
-from src.services.google_sheets import get_previous_answers
-from src.handlers.start_handler import MAIN_MENU
+from src.utils.keyboard_builder import get_main_menu_keyboard, get_item_keyboard, get_content_keyboard
+from src.data.knowledge_base import get_content_by_path
+from src.config import logger, ADMIN_CHAT_ID
+from src.handlers.user_manager import MAIN_MENU
 
-logger = logging.getLogger(__name__)
+# A simple in-memory cache for user history. In a real-world scenario, this might be moved to Redis.
+user_history = {}
 
-async def handle_json_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Displays the main menu."""
+    lang = context.user_data.get('language', 'fa')
+    menu_text = {
+        'fa': "لطفاً یک گزینه را از منوی اصلی انتخاب کنید:",
+        'en': "Please select an option from the main menu:",
+        'it': "Seleziona un'opzione dal menu principale:"
+    }
+
+    # Check if we are editing a message (from a callback query) or sending a new one
+    if update.callback_query:
+        await update.callback_query.answer()
+        await update.callback_query.edit_message_text(
+            text=menu_text.get(lang),
+            reply_markup=get_main_menu_keyboard(lang)
+        )
+    else:
+        await update.message.reply_text(
+            text=menu_text.get(lang),
+            reply_markup=get_main_menu_keyboard(lang)
+        )
+
+async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Handles all menu navigation callbacks."""
     query = update.callback_query
     await query.answer()
 
-    data = query.data.split(":")
-    path_indicator = data[1] if len(data) > 1 else ""
+    path = query.data.split(":")[1:]
+    lang = context.user_data.get('language', 'fa')
 
-    if path_indicator == "main_menu":
-        context.user_data['current_json_path'] = []
-    else:
-        context.user_data['current_json_path'] = data[1:]
+    if not path or path[0] == "main_menu":
+        context.user_data['current_path'] = []
+        await main_menu(update, context)
+        return MAIN_MENU
 
-    current_path_parts = context.user_data.get('current_json_path', [])
-    content_to_display = get_json_content_by_path(current_path_parts)
+    context.user_data['current_path'] = path
 
-    keyboard = get_main_keyboard_markup(current_path_parts)
+    if len(path) == 1: # Category selected
+        category = path[0]
+        category_text = {'fa': f"شما دسته بندی '{category}' را انتخاب کردید. لطفاً یک مورد را انتخاب کنید:", 'en': f"You selected '{category}'. Please choose an item:", 'it': f"Hai selezionato '{category}'. Scegli un elemento:"}
+        await query.edit_message_text(
+            text=category_text.get(lang),
+            reply_markup=get_item_keyboard(category, lang)
+        )
 
-    if content_to_display:
-        await query.edit_message_text(content_to_display, reply_markup=keyboard)
-    else:
-        message_text = "لطفاً یک گزینه را انتخاب کنید:"
-        if not current_path_parts:
-            message_text = "شما در منوی اصلی هستید. لطفاً یک دسته را انتخاب کنید یا سوال خود را مطرح کنید:"
-        await query.edit_message_text(message_text, reply_markup=keyboard)
+    elif len(path) == 2: # Item selected
+        content, file_path = get_content_by_path(path, lang)
+
+        await query.edit_message_text(
+            text=content,
+            parse_mode='Markdown',
+            reply_markup=get_content_keyboard(path, lang)
+        )
+
+        if file_path:
+            try:
+                with open(file_path, 'rb') as file:
+                    await context.bot.send_document(chat_id=query.from_user.id, document=file)
+            except FileNotFoundError:
+                logger.warning(f"File not found: {file_path}")
+                not_found_text = {'fa': "فایل مرتبط یافت نشد.", 'en': "Associated file not found.", 'it': "File associato non trovato."}
+                await context.bot.send_message(chat_id=query.from_user.id, text=not_found_text.get(lang))
+            except Exception as e:
+                logger.error(f"Error sending file {file_path}: {e}")
+                error_text = {'fa': "خطایی در ارسال فایل رخ داد.", 'en': "An error occurred while sending the file.", 'it': "Si è verificato un errore durante l'invio del file."}
+                await context.bot.send_message(chat_id=query.from_user.id, text=error_text.get(lang))
 
     return MAIN_MENU
 
 async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Handles callbacks for static action buttons like help, profile, etc."""
     query = update.callback_query
     await query.answer()
     action = query.data.split(":")[1]
+    lang = context.user_data.get('language', 'fa')
 
-    user_path = context.user_data.get('current_json_path', [])
-    keyboard = get_main_keyboard_markup(user_path)
+    if action == "profile":
+        # This will be handled by the user_manager.py's show_profile function
+        # We can add a direct call here if needed, but for now, let's keep it in the main handler registration
+        pass
 
-    if action == "new_question":
-        await query.edit_message_text(
-            "لطفاً سوال جدید خود را مطرح کنید. من تلاش می‌کنم با هوش مصنوعی به آن پاسخ دهم.\n"
-            "برای بازگشت به منوها می‌توانید از دکمه‌های زیر استفاده کنید.",
-            reply_markup=keyboard
-        )
-    elif action == "previous_answers":
-        telegram_id = update.effective_user.id
-        previous_answers = await get_previous_answers(telegram_id)
-        await query.edit_message_text(previous_answers, reply_markup=keyboard)
+    elif action == "contact_admin":
+        context.user_data['next_message_is_admin_contact'] = True
+        contact_text = {
+            'fa': "لطفاً پیام خود را برای ارسال به ادمین تایپ کنید. پیام شما مستقیماً به ادمین ارسال خواهد شد.",
+            'en': "Please type your message to the admin. It will be forwarded directly.",
+            'it': "Scrivi il tuo messaggio per l'admin. Sarà inoltrato direttamente."
+        }
+        await query.edit_message_text(text=contact_text.get(lang))
+
+    elif action == "history":
+        # Placeholder for history functionality
+        history_text_map = {
+            'fa': "📜 تاریخچه پرسش و پاسخ شما در اینجا نمایش داده خواهد شد.",
+            'en': "📜 Your Q&A history will be displayed here.",
+            'it': "📜 La tua cronologia di domande e risposte sarà visualizzata qui."
+        }
+        await query.edit_message_text(history_text_map.get(lang), reply_markup=get_main_menu_keyboard(lang))
+
     elif action == "help":
-        help_text = (
-            "من یک ربات هوش مصنوعی هستم که در مورد بورسیه‌های دانشجویی و زندگی در شهر پروجا ایتالیا به شما کمک می‌کنم.\n"
-            "می‌توانید با استفاده از دکمه‌های منو اطلاعات مورد نظرتان را پیدا کنید، یا سوال خود را به صورت متنی مطرح کنید تا من با هوش مصنوعی پاسخ دهم."
-        )
-        await query.edit_message_text(help_text, reply_markup=keyboard)
+        help_text_map = {
+            'fa': "🤖 *راهنمای ربات Scholarino*\n\n- از منوها برای دسترسی به اطلاعات استفاده کنید.\n- برای سوالات خاص، پیام خود را تایپ کنید.\n- برای تماس با مدیر، از دکمه 'تماس با ادمین' استفاده کنید.",
+            'en': "🤖 *Scholarino Bot Help*\n\n- Use the menus to access information.\n- For specific questions, type your message.\n- Use the 'Contact Admin' button to reach the administrator.",
+            'it': "🤖 *Aiuto Bot Scholarino*\n\n- Usa i menu per accedere alle informazioni.\n- Per domande specifiche, digita il tuo messaggio.\n- Usa il pulsante 'Contatta Admin' per raggiungere l'amministratore."
+        }
+        await query.edit_message_text(help_text_map.get(lang), parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
 
     return MAIN_MENU

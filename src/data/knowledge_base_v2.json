@@ -1,0 +1,616 @@
+{
+  "راهنمای دانشجویی": [
+    {
+      "id": "scholarships",
+      "title": {
+        "fa": "🎓 بورسیه‌های تحصیلی و کمک‌هزینه‌های دانشجویی",
+        "en": "🎓 Scholarships and Student Financial Aid",
+        "it": "🎓 Borse di Studio e Aiuti Finanziari per Studenti"
+      },
+      "description": {
+        "fa": "راهنمای جامع بورسیه‌های تحصیلی و کمک‌هزینه‌های دانشجویی در پروجا، شامل ADiSU، Erasmus+، و سایر گزینه‌ها با ددلاین‌ها و نکات.",
+        "en": "Comprehensive guide to scholarships and financial aid for students in Perugia, including ADiSU, Erasmus+, and other options with deadlines and tips.",
+        "it": "Guida completa alle borse di studio e agli aiuti finanziari per studenti a Perugia, incluse ADiSU, Erasmus+ e altre opzioni con scadenze e consigli."
+      },
+      "subsections": [
+        {
+          "title": {
+            "fa": "بورسیه ADiSU Umbria",
+            "en": "ADiSU Umbria Scholarship",
+            "it": "Borsa ADiSU Umbria"
+          },
+          "content": {
+            "fa": [
+              "📋 **شرایط**:",
+              "- ثبت‌نام در دانشگاه پروجا.",
+              "- ISEE کمتر از €۲۳,۰۰۰ (محاسبه در CAF).",
+              "- حداقل واحدهای تحصیلی (مثل ۲۰ واحد در سال اول).",
+              "💰 **مزایا**: تا €۴,۰۰۰ سالانه + خوابگاه رایگان یا تخفیف غذا در کافه‌تریا.",
+              "📅 **ددلاین**: ۱۵ سپتامبر ۲۰۲۵ (۲۴ شهریور ۱۴۰۴).",
+              "📝 **مراحل درخواست**:",
+              "۱. فرم را از https://www.adisu.umbria.it/moduli دانلود کنید.",
+              "۲. اطلاعات شخصی، ISEE، و گواهی ثبت‌نام را وارد کنید.",
+              "۳. مدارک را در پرتال ADiSU (https://portale.adisu.umbria.it) آپلود کنید یا به دفتر ADiSU (Via Benedetta, 14, Perugia) تحویل دهید.",
+              "💡 **نکته**: مدارک باید به ایتالیایی ترجمه شوند."
+            ],
+            "en": [
+              "📋 **Eligibility**:",
+              "- Enrolled at University of Perugia.",
+              "- ISEE below €23,000 (calculated at CAF).",
+              "- Minimum academic credits (e.g., 20 credits in first year).",
+              "💰 **Benefits**: Up to €4,000 annually + free dorm or cafeteria discounts.",
+              "📅 **Deadline**: September 15, 2025.",
+              "📝 **Application Steps**:",
+              "1. Download form from https://www.adisu.umbria.it/moduli.",
+              "2. Enter personal details, ISEE, and enrollment certificate.",
+              "3. Upload documents on ADiSU portal (https://portale.adisu.umbria.it) or submit to ADiSU office (Via Benedetta, 14, Perugia).",
+              "💡 **Tip**: Documents must be translated into Italian."
+            ],
+            "it": [
+              "📋 **Requisiti**:",
+              "- Iscritto all’Università di Perugia.",
+              "- ISEE inferiore a €23.000 (calcolato presso CAF).",
+              "- Crediti accademici minimi (es. 20 crediti nel primo anno).",
+              "💰 **Vantaggi**: Fino a €4.000 all’anno + dormitorio gratuito o sconti in mensa.",
+              "📅 **Scadenza**: 15 settembre 2025.",
+              "📝 **Passaggi per la Richiesta**:",
+              "1. Scarica il modulo da https://www.adisu.umbria.it/moduli.",
+              "2. Inserisci dati personali, ISEE e certificato di iscrizione.",
+              "3. Carica i documenti sul portale ADiSU (https://portale.adisu.umbria.it) o consegnali all’ufficio ADiSU (Via Benedetta, 14, Perugia).",
+              "💡 **Consiglio**: I documenti devono essere tradotti in italiano."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "بورسیه Erasmus+ و سایر گزینه‌ها",
+            "en": "Erasmus+ and Other Scholarships",
+            "it": "Erasmus+ e Altre Borse"
+          },
+          "content": {
+            "fa": [
+              "🌍 **Erasmus+**:",
+              "- برای تبادل دانشجویی در اروپا. کمک‌هزینه: €۳۰۰-۵۰۰/ماه.",
+              "- درخواست از دفتر بین‌الملل دانشگاه (international@unipg.it).",
+              "- ددلاین: فوریه ۲۰۲۶ (دقیق در https://unipg.it/international).",
+              "🎓 **بورسیه‌های دانشگاه**:",
+              "- بورسیه شایستگی (Merit-Based): برای دانشجویان ممتاز (معدل بالای ۸۰٪).",
+              "- اطلاعات در پرتال دانشگاه: https://unipg.it/scholarships.",
+              "💡 **نکته**: برای Erasmus+، مدرک زبان (مثل IELTS 6.5) لازم است."
+            ],
+            "en": [
+              "🌍 **Erasmus+**:",
+              "- For student exchange in Europe. Grant: €300-500/month.",
+              "- Apply via university international office (international@unipg.it).",
+              "- Deadline: February 2026 (check https://unipg.it/international).",
+              "🎓 **University Scholarships**:",
+              "- Merit-Based Scholarship: For high-achieving students (GPA above 80%).",
+              "- Details on university portal: https://unipg.it/scholarships.",
+              "💡 **Tip**: Erasmus+ requires a language certificate (e.g., IELTS 6.5)."
+            ],
+            "it": [
+              "🌍 **Erasmus+**:",
+              "- Per scambi studenteschi in Europa. Contributo: €300-500/mese.",
+              "- Richiedi tramite l’ufficio internazionale dell’università (international@unipg.it).",
+              "- Scadenza: febbraio 2026 (verifica su https://unipg.it/international).",
+              "🎓 **Borse Universitarie**:",
+              "- Borsa al Merito: Per studenti eccellenti (media superiore all’80%).",
+              "- Dettagli sul portale universitario: https://unipg.it/scholarships.",
+              "💡 **Consiglio**: Per Erasmus+ è richiesto un certificato linguistico (es. IELTS 6.5)."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "نکات و سؤالات رایج",
+            "en": "Tips and FAQs",
+            "it": "Consigli e Domande Frequenti"
+          },
+          "content": {
+            "fa": [
+              "💡 **توصیه**: ISEE را زودتر محاسبه کنید تا ددلاین را از دست ندهید.",
+              "⚠️ **هشدار**: مدارک جعلی باعث رد درخواست و محرومیت از بورسیه می‌شود.",
+              "📌 **سؤال رایج**: آیا بورسیه شامل هزینه‌های سفر می‌شود؟ خیر، فقط شهریه، خوابگاه، یا کمک‌هزینه زندگی.",
+              "📌 **سؤال رایج**: چگونه وضعیت درخواست را چک کنم؟ از پرتال ADiSU یا ایمیل info@adisu.umbria.it.",
+              "📷 **تصویر راهنما**: scholarship_application_guide.jpg (در فایل‌های پروژه) برای مراحل درخواست."
+            ],
+            "en": [
+              "💡 **Advice**: Calculate ISEE early to meet deadlines.",
+              "⚠️ **Warning**: False documents lead to rejection and scholarship disqualification.",
+              "📌 **FAQ**: Does the scholarship cover travel costs? No, only tuition, dorm, or living expenses.",
+              "📌 **FAQ**: How to check application status? Via ADiSU portal or email info@adisu.umbria.it.",
+              "📷 **Guide Image**: scholarship_application_guide.jpg (in project files) for application steps."
+            ],
+            "it": [
+              "💡 **Consiglio**: Calcola l’ISEE in anticipo per rispettare le scadenze.",
+              "⚠️ **Attenzione**: Documenti falsi portano al rifiuto e alla squalifica dalla borsa.",
+              "📌 **Domanda Frequente**: La borsa copre i costi di viaggio? No, solo tasse, dormitorio o spese di vita.",
+              "📌 **Domanda Frequente**: Come controllare lo stato della richiesta? Tramite portale ADiSU o email info@adisu.umbria.it.",
+              "📷 **Immagine Guida**: scholarship_application_guide.jpg (nei file del progetto) per i passaggi della richiesta."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "health_services",
+      "title": {
+        "fa": "🏥 راهنمای خدمات درمانی در پروجا",
+        "en": "🏥 Guide to Healthcare Services in Perugia",
+        "it": "🏥 Guida ai Servizi Sanitari a Perugia"
+      },
+      "description": {
+        "fa": "راهنمای جامع دسترسی به خدمات درمانی در پروجا برای دانشجویان بین‌المللی، شامل بیمارستان‌ها، کلینیک‌ها، داروخانه‌ها، خدمات اورژانسی، و نکات برای استفاده از SSN یا بیمه خصوصی.",
+        "en": "Comprehensive guide to accessing healthcare services in Perugia for international students, including hospitals, clinics, pharmacies, emergency services, and tips for using SSN or private insurance.",
+        "it": "Guida completa per accedere ai servizi sanitari a Perugia per studenti internazionali, con ospedali, cliniche, farmacie, servizi di emergenza e consigli per utilizzare SSN o assicurazione privata."
+      },
+      "subsections": [
+        {
+          "title": {
+            "fa": "دسترسی به خدمات درمانی",
+            "en": "Accessing Healthcare Services",
+            "it": "Accesso ai Servizi Sanitari"
+          },
+          "content": {
+            "fa": [
+              "🏥 **بیمارستان‌ها**:",
+              "- Ospedale Santa Maria della Misericordia (Via Gerardo Dottori, نقشه: https://maps.app.goo.gl/HospitalPerugia): بیمارستان اصلی پروجا با خدمات کامل (اورژانس، جراحی، تخصصی). ساعات کاری: 24/7.",
+              "- Pronto Soccorso (اورژانس): خدمات رایگان با SSN یا کم‌هزینه (€25-50 بدون SSN). تماس اضطراری: 118.",
+              "🩺 **کلینیک‌ها و پزشکان عمومی**:",
+              "- انتخاب پزشک عمومی (Medico di Base) از ASL Umbria 1 (Via della Pallotta, +39 075 340 51, نقشه: https://maps.app.goo.gl/ASLPerugia). ساعات کاری: دوشنبه-جمعه 8:00-13:00، سه‌شنبه و پنج‌شنبه تا 17:00.",
+              "- ویزیت پزشک عمومی: رایگان با Tessera Sanitaria (SSN)، €20-50 با بیمه خصوصی یا بدون SSN.",
+              "- کلینیک‌های خصوصی: Centro Medico (Via XX Settembre, نقشه: https://maps.app.goo.gl/CentroMedicoPerugia): ویزیت تخصصی €50-100، رزرو وقت: +39 075 500 1234.",
+              "💊 **داروخانه‌ها**:",
+              "- Farmacia Afas (Piazza Matteotti, نقشه: https://maps.app.goo.gl/FarmaciaAfas): باز 8:30-20:00، داروهای با نسخه و بدون نسخه.",
+              "- Farmacia 24 Ore (Via Settevalli, نقشه: https://maps.app.goo.gl/Farmacia24Ore): خدمات 24/7، مناسب برای موارد اضطراری.",
+              "- اپلیکیشن Farmap: برای یافتن داروخانه‌های نزدیک و رزرو دارو (دانلود: https://play.google.com/store/apps/details?id=it.farmap).",
+              "🚑 **خدمات اورژانسی**:",
+              "- تماس 118: آمبولانس رایگان برای موارد اضطراری (24/7).",
+              "- Guardia Medica: خدمات پزشکی شبانه و تعطیلات (€15-30 بدون SSN، تماس: +39 075 365 7842).",
+              "💡 **توصیه**: Tessera Sanitaria را برای کاهش هزینه‌ها ثبت کنید (مراحل در مورد Codice Fiscale).",
+              "⚠️ **هشدار**: بدون SSN یا بیمه خصوصی، هزینه‌های درمانی (مثل بستری) ممکن است بالا باشد (€200-1000).",
+              "📷 **تصویر راهنما**: healthcare_map.jpg (در فایل‌های پروژه) برای نقشه بیمارستان‌ها و داروخانه‌ها."
+            ],
+            "en": [
+              "🏥 **Hospitals**:",
+              "- Ospedale Santa Maria della Misericordia (Via Gerardo Dottori, map: https://maps.app.goo.gl/HospitalPerugia): Perugia’s main hospital with full services (emergency, surgery, specialized care). Open: 24/7.",
+              "- Pronto Soccorso (Emergency): Free with SSN or low-cost (€25-50 without SSN). Emergency contact: 118.",
+              "🩺 **Clinics and General Practitioners**:",
+              "- Choose a GP (Medico di Base) at ASL Umbria 1 (Via della Pallotta, +39 075 340 51, map: https://maps.app.goo.gl/ASLPerugia). Hours: Monday-Friday 8:00 AM–1:00 PM, Tuesday/Thursday until 5:00 PM.",
+              "- GP visits: Free with Tessera Sanitaria (SSN), €20-50 with private insurance or without SSN.",
+              "- Private clinics: Centro Medico (Via XX Settembre, map: https://maps.app.goo.gl/CentroMedicoPerugia): Specialist visits €50-100, book: +39 075 500 1234.",
+              "💊 **Pharmacies**:",
+              "- Farmacia Afas (Piazza Matteotti, map: https://maps.app.goo.gl/FarmaciaAfas): Open 8:30 AM–8:00 PM, prescription and over-the-counter drugs.",
+              "- Farmacia 24 Ore (Via Settevalli, map: https://maps.app.goo.gl/Farmacia24Ore): 24/7 service, ideal for emergencies.",
+              "- Farmap app: Find nearby pharmacies and reserve medications (download: https://play.google.com/store/apps/details?id=it.farmap).",
+              "🚑 **Emergency Services**:",
+              "- Call 118: Free ambulance for emergencies (24/7).",
+              "- Guardia Medica: Night and holiday medical services (€15-30 without SSN, call: +39 075 365 7842).",
+              "💡 **Advice**: Register for Tessera Sanitaria to reduce costs (see Codice Fiscale section).",
+              "⚠️ **Warning**: Without SSN or private insurance, medical costs (e.g., hospitalization) can be high (€200-1000).",
+              "📷 **Guide Image**: healthcare_map.jpg (in project files) for hospital and pharmacy maps."
+            ],
+            "it": [
+              "🏥 **Ospedali**:",
+              "- Ospedale Santa Maria della Misericordia (Via Gerardo Dottori, mappa: https://maps.app.goo.gl/HospitalPerugia): Ospedale principale di Perugia con servizi completi (emergenza, chirurgia, cure specialistiche). Aperto: 24/7.",
+              "- Pronto Soccorso (Emergenza): Gratuito con SSN o a basso costo (€25-50 senza SSN). Contatto emergenza: 118.",
+              "🩺 **Cliniche e Medici di Base**:",
+              "- Scegli un medico di base presso ASL Umbria 1 (Via della Pallotta, +39 075 340 51, mappa: https://maps.app.goo.gl/ASLPerugia). Orari: Lunedì-Venerdì 8:00–13:00, Martedì/Giovedì fino alle 17:00.",
+              "- Visite medico di base: Gratuite con Tessera Sanitaria (SSN), €20-50 con assicurazione privata o senza SSN.",
+              "- Cliniche private: Centro Medico (Via XX Settembre, mappa: https://maps.app.goo.gl/CentroMedicoPerugia): Visite specialistiche €50-100, prenotazione: +39 075 500 1234.",
+              "💊 **Farmacie**:",
+              "- Farmacia Afas (Piazza Matteotti, mappa: https://maps.app.goo.gl/FarmaciaAfas): Aperta 8:30–20:00, farmaci con e senza ricetta.",
+              "- Farmacia 24 Ore (Via Settevalli, mappa: https://maps.app.goo.gl/Farmacia24Ore): Servizio 24/7, ideale per emergenze.",
+              "- App Farmap: Trova farmacie vicine e prenota farmaci (scarica: https://play.google.com/store/apps/details?id=it.farmap).",
+              "🚑 **Servizi di Emergenza**:",
+              "- Chiama 118: Ambulanza gratuita per emergenze (24/7).",
+              "- Guardia Medica: Servizi medici notturni e festivi (€15-30 senza SSN, chiama: +39 075 365 7842).",
+              "💡 **Consiglio**: Registra la Tessera Sanitaria per ridurre i costi (vedi sezione Codice Fiscale).",
+              "⚠️ **Attenzione**: Senza SSN o assicurazione privata, i costi medici (es. ospedalizzazione) possono essere elevati (€200-1000).",
+              "📷 **Immagine Guida**: healthcare_map.jpg (nei file del progetto) per mappe di ospedali e farmacie."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "ثبت‌نام در سیستم بهداشت عمومی (SSN)",
+            "en": "Registering for Public Healthcare (SSN)",
+            "it": "Registrazione al Sistema Sanitario Nazionale (SSN)"
+          },
+          "content": {
+            "fa": [
+              "📋 **مدارک لازم**:",
+              "- پاسپورت و ویزای تحصیلی (اصل و کپی).",
+              "- Codice Fiscale (اصل یا کپی).",
+              "- گواهی آدرس (قرارداد اجاره ثبت‌شده یا گواهی خوابگاه ADiSU).",
+              "- رسید پرداخت هزینه SSN (€149.77/سال برای 2025، قابل پرداخت با F24 در Poste Italiane).",
+              "🏢 **محل ثبت‌نام**: ASL Umbria 1 (Via della Pallotta, نقشه: https://maps.app.goo.gl/ASLPerugia). ساعات کاری: دوشنبه-جمعه 8:00-13:00.",
+              "📝 **مراحل**:",
+              "۱. فرم ثبت‌نام SSN را از وب‌سایت ASL Umbria 1 (https://www.uslumbria1.it) یا دفتر تهیه کنید.",
+              "۲. مدارک را آماده کنید (پاسپورت، Codice Fiscale، گواهی آدرس).",
+              "۳. هزینه SSN را در Poste Italiane با فرم F24 پرداخت کنید (دفتر مرکزی: Piazza Matteotti).",
+              "۴. مدارک و رسید پرداخت را به ASL Umbria 1 تحویل دهید.",
+              "۵. Tessera Sanitaria (کارت سلامت) را دریافت کنید (معمولاً 2-4 هفته).",
+              "💡 **توصیه**: پس از دریافت Tessera Sanitaria، پزشک عمومی را انتخاب کنید تا ویزیت‌های رایگان داشته باشید.",
+              "⚠️ **هشدار**: بدون SSN، هزینه‌های درمانی (مثل ویزیت متخصص) ممکن است بالا باشد."
+            ],
+            "en": [
+              "📋 **Required Documents**:",
+              "- Passport and study visa (original and copy).",
+              "- Codice Fiscale (original or copy).",
+              "- Proof of address (registered rental contract or ADiSU dorm certificate).",
+              "- Receipt of SSN fee payment (€149.77/year for 2025, payable via F24 at Poste Italiane).",
+              "🏢 **Registration Location**: ASL Umbria 1 (Via della Pallotta, map: https://maps.app.goo.gl/ASLPerugia). Hours: Monday-Friday 8:00 AM–1:00 PM.",
+              "📝 **Steps**:",
+              "1. Obtain the SSN registration form from ASL Umbria 1 website (https://www.uslumbria1.it) or office.",
+              "2. Prepare documents (passport, Codice Fiscale, proof of address).",
+              "3. Pay the SSN fee at Poste Italiane with F24 form (main office: Piazza Matteotti).",
+              "4. Submit documents and payment receipt to ASL Umbria 1.",
+              "5. Receive Tessera Sanitaria (health card) (usually 2-4 weeks).",
+              "💡 **Advice**: After receiving Tessera Sanitaria, choose a GP for free visits.",
+              "⚠️ **Warning**: Without SSN, medical costs (e.g., specialist visits) can be high."
+            ],
+            "it": [
+              "📋 **Documenti Richiesti**:",
+              "- Passaporto e visto di studio (originale e copia).",
+              "- Codice Fiscale (originale o copia).",
+              "- Prova di indirizzo (contratto di locazione registrato o certificato dormitorio ADiSU).",
+              "- Ricevuta del pagamento della quota SSN (€149.77/anno per il 2025, pagabile tramite F24 presso Poste Italiane).",
+              "🏢 **Luogo di Registrazione**: ASL Umbria 1 (Via della Pallotta, mappa: https://maps.app.goo.gl/ASLPerugia). Orari: Lunedì-Venerdì 8:00–13:00.",
+              "📝 **Passaggi**:",
+              "1. Ottieni il modulo di registrazione SSN dal sito ASL Umbria 1 (https://www.uslumbria1.it) o in ufficio.",
+              "2. Prepara i documenti (passaporto, Codice Fiscale, prova di indirizzo).",
+              "3. Paga la quota SSN presso Poste Italiane con modulo F24 (ufficio principale: Piazza Matteotti).",
+              "4. Consegna i documenti e la ricevuta di pagamento ad ASL Umbria 1.",
+              "5. Ricevi la Tessera Sanitaria (carta sanitaria) (di solito 2-4 settimane).",
+              "💡 **Consiglio**: Dopo aver ricevuto la Tessera Sanitaria, scegli un medico di base per visite gratuite.",
+              "⚠️ **Attenzione**: Senza SSN, i costi medici (es. visite specialistiche) possono essere elevati."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "نکات و سؤالات رایج",
+            "en": "Tips and FAQs",
+            "it": "Consigli e Domande Frequenti"
+          },
+          "content": {
+            "fa": [
+              "💡 **توصیه**: برای کاهش هزینه‌ها، SSN را در اولین ماه اقامت ثبت کنید.",
+              "⚠️ **هشدار**: در صورت نیاز به بستری یا جراحی، بیمه خصوصی (مثل Allianz یا UniSalute) را بررسی کنید.",
+              "📌 **سؤال رایج**: آیا SSN برای دانشجویان غیراروپایی اجباری است؟ خیر، اما برای کاهش هزینه‌های درمانی توصیه می‌شود.",
+              "📌 **سؤال رایج**: اگر Tessera Sanitaria گم شد؟ به ASL Umbria 1 مراجعه کنید یا از طریق وب‌سایت درخواست کپی کنید: https://www.uslumbria1.it.",
+              "📌 **سؤال رایج**: آیا بیمه خصوصی جایگزین SSN می‌شود؟ خیر، اما می‌تواند خدمات اضافی (مثل دندانپزشکی) را پوشش دهد.",
+              "📷 **تصویر راهنما**: healthcare_guide.pdf (در فایل‌های پروژه) برای نمایش فرم SSN و نقشه خدمات."
+            ],
+            "en": [
+              "💡 **Advice**: Register for SSN in your first month to reduce costs.",
+              "⚠️ **Warning**: For hospitalization or surgery, consider private insurance (e.g., Allianz or UniSalute).",
+              "📌 **FAQ**: Is SSN mandatory for non-EU students? No, but highly recommended to lower medical costs.",
+              "📌 **FAQ**: What if I lose my Tessera Sanitaria? Visit ASL Umbria 1 or request a copy online: https://www.uslumbria1.it.",
+              "📌 **FAQ**: Can private insurance replace SSN? No, but it can cover extra services (e.g., dental care).",
+              "📷 **Guide Image**: healthcare_guide.pdf (in project files) for SSN form and service maps."
+            ],
+            "it": [
+              "💡 **Consiglio**: Registra l’SSN nel primo mese di soggiorno per ridurre i costi.",
+              "⚠️ **Attenzione**: Per ricoveri o interventi chirurgici, considera un’assicurazione privata (es. Allianz o UniSalute).",
+              "📌 **Domanda Frequente**: L’SSN è obbligatorio per studenti non UE? No, ma fortemente consigliato per ridurre i costi medici.",
+              "📌 **Domanda Frequente**: Cosa fare se perdo la Tessera Sanitaria? Visita ASL Umbria 1 o richiedi una copia online: https://www.uslumbria1.it.",
+              "📌 **Domanda Frequente**: L’assicurazione privata può sostituire l’SSN? No, ma può coprire servizi extra (es. cure dentistiche).",
+              "📷 **Immagine Guida**: healthcare_guide.pdf (nei file del progetto) per modulo SSN e mappe dei servizi."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "public_transport",
+      "title": {
+        "fa": "🚍 راهنمای حمل‌ونقل عمومی در پروجا",
+        "en": "🚍 Guide to Public Transportation in Perugia",
+        "it": "🚍 Guida ai Trasporti Pubblici a Perugia"
+      },
+      "description": {
+        "fa": "راهنمای جامع استفاده از سیستم حمل‌ونقل عمومی در پروجا برای دانشجویان، شامل اتوبوس، قطار، مینی‌مترو، هزینه‌ها، و نکات برای صرفه‌جویی با تخفیف‌های دانشجویی.",
+        "en": "Comprehensive guide to using public transportation in Perugia for students, including buses, trains, minimetro, costs, and tips for saving with student discounts.",
+        "it": "Guida completa all’uso dei trasporti pubblici a Perugia per studenti, con autobus, treni, minimetrò, costi e consigli per risparmiare con sconti studenti."
+      },
+      "subsections": [
+        {
+          "title": {
+            "fa": "انواع حمل‌ونقل عمومی",
+            "en": "Types of Public Transportation",
+            "it": "Tipi di Trasporto Pubblico"
+          },
+          "content": {
+            "fa": [
+              "🚌 **اتوبوس (Busitalia)**:",
+              "- پوشش: سراسر پروجا و حومه (مثل Assisi، Gubbio).",
+              "- هزینه: بلیط تک‌سفر €1.50، اشتراک ماهانه دانشجویی €30 (با کارت Esse3).",
+              "- خرید بلیط: اپلیکیشن Busitalia (https://play.google.com/store/apps/details?id=it.busitalia)، کیوسک‌های Piazza Italia، یا داخل اتوبوس (گران‌تر، €2).",
+              "- مسیرهای اصلی: Fontivegge به Centro Storico، Monteluce به Piazza Matteotti.",
+              "🚆 **قطار (Trenitalia)**:",
+              "- ایستگاه اصلی: Perugia Fontivegge (نقشه: https://maps.app.goo.gl/FontiveggeStation).",
+              "- مقاصد: رم (€12-20، 2 ساعت)، فلورانس (€15-25، 1.5 ساعت).",
+              "- تخفیف دانشجویی: تا 30% با کارت Esse3 یا کد تخفیف (درخواست از international@unipg.it).",
+              "- خرید بلیط: https://www.trenitalia.com یا ایستگاه.",
+              "🚇 **مینی‌مترو**:",
+              "- مسیر: از Pian di Massiano به Piazza Matteotti (7 ایستگاه).",
+              "- هزینه: €1.50/سفر، اشتراک ماهانه €30 (مشترک با Busitalia).",
+              "- ساعات کاری: 7:00-21:00 (یکشنبه‌ها تا 20:00).",
+              "💡 **توصیه**: اشتراک ماهانه دانشجویی برای صرفه‌جویی در هزینه‌های روزانه مناسب است.",
+              "⚠️ **هشدار**: بلیط را قبل از سوار شدن اعتبارسنجی کنید (در اتوبوس یا مینی‌مترو) تا از جریمه €50 جلوگیری شود.",
+              "📷 **تصویر راهنما**: transport_map.jpg (در فایل‌های پروژه) برای نقشه مسیرهای اتوبوس و مینی‌مترو."
+            ],
+            "en": [
+              "🚌 **Bus (Busitalia)**:",
+              "- Coverage: Throughout Perugia and suburbs (e.g., Assisi, Gubbio).",
+              "- Cost: Single ticket €1.50, student monthly pass €30 (with Esse3 card).",
+              "- Ticket purchase: Busitalia app (https://play.google.com/store/apps/details?id=it.busitalia), Piazza Italia kiosks, or onboard (pricier, €2).",
+              "- Main routes: Fontivegge to Centro Storico, Monteluce to Piazza Matteotti.",
+              "🚆 **Train (Trenitalia)**:",
+              "- Main station: Perugia Fontivegge (map: https://maps.app.goo.gl/FontiveggeStation).",
+              "- Destinations: Rome (€12-20, 2 hours), Florence (€15-25, 1.5 hours).",
+              "- Student discount: Up to 30% with Esse3 card or discount code (request from international@unipg.it).",
+              "- Ticket purchase: https://www.trenitalia.com or at the station.",
+              "🚇 **Minimetro**:",
+              "- Route: From Pian di Massiano to Piazza Matteotti (7 stops).",
+              "- Cost: €1.50/trip, monthly pass €30 (shared with Busitalia).",
+              "- Operating hours: 7:00 AM–9:00 PM (Sundays until 8:00 PM).",
+              "💡 **Advice**: Get a student monthly pass for daily cost savings.",
+              "⚠️ **Warning**: Validate your ticket before boarding (on bus or minimetro) to avoid a €50 fine.",
+              "📷 **Guide Image**: transport_map.jpg (in project files) for bus and minimetro route maps."
+            ],
+            "it": [
+              "🚌 **Autobus (Busitalia)**:",
+              "- Copertura: Tutta Perugia e periferie (es. Assisi, Gubbio).",
+              "- Costo: Biglietto singolo €1.50, abbonamento mensile studenti €30 (con tessera Esse3).",
+              "- Acquisto biglietti: App Busitalia (https://play.google.com/store/apps/details?id=it.busitalia), chioschi Piazza Italia, o a bordo (più costoso, €2).",
+              "- Percorsi principali: Fontivegge a Centro Storico, Monteluce a Piazza Matteotti.",
+              "🚆 **Treno (Trenitalia)**:",
+              "- Stazione principale: Perugia Fontivegge (mappa: https://maps.app.goo.gl/FontiveggeStation).",
+              "- Destinazioni: Roma (€12-20, 2 ore), Firenze (€15-25, 1.5 ore).",
+              "- Sconto studenti: Fino al 30% con tessera Esse3 o codice sconto (richiesta a international@unipg.it).",
+              "- Acquisto biglietti: https://www.trenitalia.com o in stazione.",
+              "🚇 **Minimetro**:",
+              "- Percorso: Da Pian di Massiano a Piazza Matteotti (7 fermate).",
+              "- Costo: €1.50/viaggio, abbonamento mensile €30 (condiviso con Busitalia).",
+              "- Orari: 7:00–21:00 (domenica fino alle 20:00).",
+              "💡 **Consiglio**: Acquista un abbonamento mensile studenti per risparmiare sui costi giornalieri.",
+              "⚠️ **Attenzione**: Convalida il biglietto prima di salire (su autobus o minimetro) per evitare una multa di €50.",
+              "📷 **Immagine Guida**: transport_map.jpg (nei file del progetto) per mappe dei percorsi di autobus e minimetro."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "تخفیف‌های دانشجویی و نکات کاربردی",
+            "en": "Student Discounts and Practical Tips",
+            "it": "Sconti Studenti e Consigli Pratici"
+          },
+          "content": {
+            "fa": [
+              "🎓 **تخفیف‌های دانشجویی**:",
+              "- اشتراک ماهانه دانشجویی (€30) برای اتوبوس و مینی‌مترو با کارت Esse3.",
+              "- تخفیف قطار: تا 30% با کد تخفیف از دفتر بین‌الملل Unipg.",
+              "- کارت ISIC (https://www.isic.org): تخفیف برای حمل‌ونقل و خدمات دیگر (€12/سال).",
+              "💡 **توصیه‌ها**:",
+              "- اپلیکیشن‌های Busitalia و Moovit را برای برنامه‌ریزی مسیر نصب کنید.",
+              "- برای سفرهای بین‌شهری، بلیط قطار را زودتر رزرو کنید تا ارزان‌تر باشد.",
+              "- از مینی‌مترو برای رفت‌وآمد سریع به Centro Storico استفاده کنید.",
+              "⚠️ **هشدار**: بدون بلیط معتبر، جریمه‌های سنگین (€50-100) اعمال می‌شود.",
+              "📌 **منابع مفید**: وب‌سایت Busitalia (https://www.fsbusitalia.it) و گروه تلگرامی t.me/ESNPerugia."
+            ],
+            "en": [
+              "🎓 **Student Discounts**:",
+              "- Student monthly pass (€30) for bus and minimetro with Esse3 card.",
+              "- Train discount: Up to 30% with code from Unipg International Office.",
+              "- ISIC card (https://www.isic.org): Discounts for transport and other services (€12/year).",
+              "💡 **Tips**:",
+              "- Install Busitalia and Moovit apps for route planning.",
+              "- Book train tickets early for intercity travel to save costs.",
+              "- Use minimetro for quick trips to Centro Storico.",
+              "⚠️ **Warning**: Traveling without a valid ticket incurs heavy fines (€50-100).",
+              "📌 **Useful Resources**: Busitalia website (https://www.fsbusitalia.it) and Telegram group t.me/ESNPerugia."
+            ],
+            "it": [
+              "🎓 **Sconti Studenti**:",
+              "- Abbonamento mensile studenti (€30) per autobus e minimetro con tessera Esse3.",
+              "- Sconto treni: Fino al 30% con codice dall’Ufficio Internazionale Unipg.",
+              "- Tessera ISIC (https://www.isic.org): Sconti per trasporti e altri servizi (€12/anno).",
+              "💡 **Consigli**:",
+              "- Installa le app Busitalia e Moovit per pianificare i percorsi.",
+              "- Prenota i biglietti del treno in anticipo per viaggi intercity per risparmiare.",
+              "- Usa il minimetro per spostamenti rapidi verso Centro Storico.",
+              "⚠️ **Attenzione**: Viaggiare senza biglietto valido comporta multe pesanti (€50-100).",
+              "📌 **Risorse Utili**: Sito Busitalia (https://www.fsbusitalia.it) e gruppo Telegram t.me/ESNPerugia."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "نکات و سؤالات رایج",
+            "en": "Tips and FAQs",
+            "it": "Consigli e Domande Frequenti"
+          },
+          "content": {
+            "fa": [
+              "💡 **توصیه**: کارت Esse3 را همیشه همراه داشته باشید برای تخفیف‌ها.",
+              "⚠️ **هشدار**: ایستگاه Fontivegge در شب ممکن است ناامن باشد؛ با گروه سفر کنید.",
+              "📌 **سؤال رایج**: آیا بلیط اتوبوس و مینی‌مترو یکسان است؟ بله، بلیط‌ها مشترک هستند.",
+              "📌 **سؤال رایج**: چگونه اشتراک ماهانه بخرم؟ از کیوسک‌های Piazza Italia یا اپلیکیشن Busitalia.",
+              "📌 **سؤال رایج**: آیا تخفیف برای سفرهای بین‌المللی وجود دارد؟ بله، با ISIC یا Eurail Pass (https://www.eurail.com).",
+              "📷 **تصویر راهنما**: transport_guide.pdf (در فایل‌های پروژه) برای نمایش بلیط و نقشه‌ها."
+            ],
+            "en": [
+              "💡 **Advice**: Always carry your Esse3 card for discounts.",
+              "⚠️ **Warning**: Fontivegge station may be unsafe at night; travel in groups.",
+              "📌 **FAQ**: Are bus and minimetro tickets the same? Yes, tickets are shared.",
+              "📌 **FAQ**: How to buy a monthly pass? From Piazza Italia kiosks or Busitalia app.",
+              "📌 **FAQ**: Are there discounts for international travel? Yes, with ISIC or Eurail Pass (https://www.eurail.com).",
+              "📷 **Guide Image**: transport_guide.pdf (in project files) for tickets and maps."
+            ],
+            "it": [
+              "💡 **Consiglio**: Porta sempre la tessera Esse3 per gli sconti.",
+              "⚠️ **Attenzione**: La stazione Fontivegge può essere insicura di notte; viaggia in gruppo.",
+              "📌 **Domanda Frequente**: I biglietti per autobus e minimetro sono gli stessi? Sì, i biglietti sono condivisi.",
+              "📌 **Domanda Frequente**: Come acquistare un abbonamento mensile? Dai chioschi di Piazza Italia o app Busitalia.",
+              "📌 **Domanda Frequente**: Ci sono sconti per viaggi internazionali? Sì, con ISIC o Eurail Pass (https://www.eurail.com).",
+              "📷 **Immagine Guida**: transport_guide.pdf (nei file del progetto) per biglietti e mappe."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cost_of_living",
+      "title": {
+        "fa": "💶 راهنمای هزینه‌های زندگی در پروجا",
+        "en": "💶 Guide to Cost of Living in Perugia",
+        "it": "💶 Guida al Costo della Vita a Perugia"
+      },
+      "description": {
+        "fa": "راهنمای جامع هزینه‌های زندگی برای دانشجویان بین‌المللی در پروجا، شامل اقامت، غذا، حمل‌ونقل، و نکات برای مدیریت بودجه.",
+        "en": "Comprehensive guide to cost of living for international students in Perugia, including accommodation, food, transportation, and tips for budget management.",
+        "it": "Guida completa al costo della vita per studenti internazionali a Perugia, con alloggio, cibo, trasporti e consigli per gestire il budget."
+      },
+      "subsections": [
+        {
+          "title": {
+            "fa": "هزینه‌های اصلی",
+            "en": "Main Expenses",
+            "it": "Spese Principali"
+          },
+          "content": {
+            "fa": [
+              "🏠 **اقامت**:",
+              "- خوابگاه ADiSU: €200-350/ماه.",
+              "- آپارتمان اشتراکی: €250-400/ماه (بدون قبوض).",
+              "- قبوض (برق، گاز، اینترنت): €50-100/ماه.",
+              "🍽️ **غذا**:",
+              "- خرید از سوپرمارکت (Coop، Conad): €150-200/ماه.",
+              "- غذا در کافه/رستوران: €8-15/وعده.",
+              "- منوی دانشجویی Unipg: €3-5/وعده.",
+              "🚍 **حمل‌ونقل**:",
+              "- اشتراک ماهانه دانشجویی: €30 (اتوبوس و مینی‌مترو).",
+              "- بلیط تک‌سفر: €1.50.",
+              "📱 **اینترنت و موبایل**:",
+              "- بسته اینترنت (Vodafone، TIM): €10-15/ماه (20-50 گیگ).",
+              "- Wi-Fi آپارتمان: €20-30/ماه (اشتراکی).",
+              "💡 **توصیه**: از تخفیف‌های دانشجویی (Esse3، ISIC) برای کاهش هزینه‌ها استفاده کنید.",
+              "⚠️ **هشدار**: هزینه‌ها در Centro Storico بالاتر از مناطق دیگر است."
+            ],
+            "en": [
+              "🏠 **Accommodation**:",
+              "- ADiSU dorm: €200-350/month.",
+              "- Shared apartment: €250-400/month (excluding utilities).",
+              "- Utilities (electricity, gas, internet): €50-100/month.",
+              "🍽️ **Food**:",
+              "- Grocery shopping (Coop, Conad): €150-200/month.",
+              "- Cafe/restaurant meal: €8-15/meal.",
+              "- Unipg student menu: €3-5/meal.",
+              "🚍 **Transportation**:",
+              "- Student monthly pass: €30 (bus and minimetro).",
+              "- Single ticket: €1.50.",
+              "📱 **Internet and Mobile**:",
+              "- Mobile data plan (Vodafone, TIM): €10-15/month (20-50 GB).",
+              "- Apartment Wi-Fi: €20-30/month (shared).",
+              "💡 **Advice**: Use student discounts (Esse3, ISIC) to reduce costs.",
+              "⚠️ **Warning**: Costs in Centro Storico are higher than other areas."
+            ],
+            "it": [
+              "🏠 **Alloggio**:",
+              "- Dormitorio ADiSU: €200-350/mese.",
+              "- Appartamento condiviso: €250-400/mese (escluse utenze).",
+              "- Utenze (elettricità, gas, internet): €50-100/mese.",
+              "🍽️ **Cibo**:",
+              "- Spesa al supermercato (Coop, Conad): €150-200/mese.",
+              "- Pasto in bar/ristorante: €8-15/pasto.",
+              "- Menu studenti Unipg: €3-5/pasto.",
+              "🚍 **Trasporti**:",
+              "- Abbonamento mensile studenti: €30 (autobus e minimetro).",
+              "- Biglietto singolo: €1.50.",
+              "📱 **Internet e Cellulare**:",
+              "- Piano dati mobile (Vodafone, TIM): €10-15/mese (20-50 GB).",
+              "- Wi-Fi appartamento: €20-30/mese (condiviso).",
+              "💡 **Consiglio**: Usa sconti studenti (Esse3, ISIC) per ridurre i costi.",
+              "⚠️ **Attenzione**: I costi nel Centro Storico sono più alti rispetto ad altre zone."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "مدیریت بودجه",
+            "en": "Budget Management",
+            "it": "Gestione del Budget"
+          },
+          "content": {
+            "fa": [
+              "📝 **مراحل**:",
+              "۱. بودجه ماهانه خود را تنظیم کنید (€600-800/ماه برای زندگی متوسط).",
+              "۲. از سوپرمارکت‌های ارزان (Lidl، Eurospin) خرید کنید.",
+              "۳. اشتراک حمل‌ونقل ماهانه بخرید (€30) به‌جای بلیط تک‌سفر.",
+              "۴. از منوی دانشجویی Unipg برای وعده‌های ارزان استفاده کنید.",
+              "۵. برای صرفه‌جویی، آپارتمان اشتراکی یا خوابگاه انتخاب کنید.",
+              "💡 **توصیه**: اپلیکیشن‌هایی مثل Splitwise برای مدیریت هزینه‌های اشتراکی نصب کنید.",
+              "⚠️ **هشدار**: از خریدهای غیرضروری در Centro Storico پرهیز کنید."
+            ],
+            "en": [
+              "📝 **Steps**:",
+              "1. Set a monthly budget (€600-800/month for average living).",
+              "2. Shop at affordable supermarkets (Lidl, Eurospin).",
+              "3. Buy a monthly transport pass (€30) instead of single tickets.",
+              "4. Use Unipg student menu for cheap meals.",
+              "5. Choose shared apartments or dorms to save costs.",
+              "💡 **Advice**: Install apps like Splitwise for shared expense tracking.",
+              "⚠️ **Warning**: Avoid unnecessary purchases in Centro Storico."
+            ],
+            "it": [
+              "📝 **Passaggi**:",
+              "1. Imposta un budget mensile (€600-800/mese per vita media).",
+              "2. Fai la spesa in supermercati economici (Lidl, Eurospin).",
+              "3. Acquista un abbonamento mensile per i trasporti (€30) invece di biglietti singoli.",
+              "4. Usa il menu studenti Unipg per pasti economici.",
+              "5. Scegli appartamenti condivisi o dormitori per risparmiare.",
+              "💡 **Consiglio**: Installa app come Splitwise per tracciare le spese condivise.",
+              "⚠️ **Attenzione**: Evita acquisti non necessari nel Centro Storico."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "نکات و سؤالات رایج",
+            "en": "Tips and FAQs",
+            "it": "Consigli e Domande Frequenti"
+          },
+          "content": {
+            "fa": [
+              "💡 **توصیه**: برای کاهش هزینه غذا، در خانه آشپزی کنید و از بازارهای محلی (Piazza Matteotti) خرید کنید.",
+              "⚠️ **هشدار**: هزینه‌های سرگرمی (مثل کافه‌ها) می‌تواند سریع بودجه را تمام کند.",
+              "📌 **سؤال رایج**: ارزان‌ترین منطقه برای زندگی؟ Fontivegge یا Ponte San Giovanni.",
+              "📌 **سؤال رایج**: آیا بورسیه هزینه‌های زندگی را پوشش می‌دهد؟ بله، بورسیه ADiSU تا حدی پوشش می‌دهد.",
+              "📌 **سؤال رایج**: چگونه اینترنت ارزان بگیرم؟ بسته‌های Vodafone یا TIM را مقایسه کنید.",
+              "📷 **تصویر راهنما**: cost_guide.pdf (در فایل‌های پروژه) برای بودجه‌بندی و نقشه سوپرمارکت‌ها."
+            ],
+            "en": [
+              "💡 **Advice**: Cook at home and shop at local markets (Piazza Matteotti) to save on food.",
+              "⚠️ **Warning**: Entertainment costs (e.g., cafes) can quickly deplete your budget.",
+              "📌 **FAQ**: Cheapest area to live? Fontivegge or Ponte San Giovanni.",
+              "📌 **FAQ**: Do scholarships cover living costs? Yes, ADiSU scholarships partially cover them.",
+              "📌 **FAQ**: How to get cheap internet? Compare Vodafone or TIM plans.",
+              "📷 **Guide Image**: cost_guide.pdf (in project files) for budgeting and supermarket maps."
+            ],
+            "it": [
+              "💡 **Consiglio**: Cucina a casa e fai la spesa nei mercati locali (Piazza Matteotti) per risparmiare sul cibo.",
+              "⚠️ **Attenzione**: I costi di intrattenimento (es. bar) possono esaurire rapidamente il budget.",
+              "📌 **Domanda Frequente**: Qual è la zona più economica per vivere? Fontivegge o Ponte San Giovanni.",
+              "📌 **Domanda Frequente**: Le borse coprono i costi di vita? Sì, le borse ADiSU li coprono parzialmente.",
+              "📌 **Domanda Frequente**: Come ottenere internet economico? Confronta i piani Vodafone o TIM.",
+              "📷 **Immagine Guida**: cost_guide.pdf (nei file del progetto) per budget e mappe dei supermercati."
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
