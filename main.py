@@ -1,8 +1,4 @@
 import asyncio
-import logging
-from flask import Request
-from functions_framework import http
-from telegram import Update
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -12,88 +8,62 @@ from telegram.ext import (
     CallbackQueryHandler,
 )
 
-# Import configurations and handlers from the new modular structure
-from config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, logger
-from handlers.start_handler import (
-    start, ask_first_name, ask_last_name, ask_age, ask_email, cancel,
-    ASKING_FIRST_NAME, ASKING_LAST_NAME, ASKING_AGE, ASKING_EMAIL, MAIN_MENU
-)
-from handlers.menu_handler import handle_menu_callback, handle_action_callback
-from handlers.message_handler import handle_free_text_message, help_command
+from src.config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, PORT, logger
+from src.database import setup_database
+from src.handlers import user_manager, menu_handler, message_handler
 
-# --- Initialize Application ---
-# Ensure the token is available
-if not TELEGRAM_BOT_TOKEN:
-    logger.critical("TELEGRAM_BOT_TOKEN environment variable not set. Exiting.")
-    exit()
+def main() -> None:
+    """Run the bot."""
+    # Set up the database tables on startup
+    setup_database()
 
-application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+    # Create the Application and pass it your bot's token.
+    if not TELEGRAM_BOT_TOKEN:
+        logger.critical("TELEGRAM_BOT_TOKEN is not set. The bot cannot start.")
+        return
 
-# --- Conversation Handler Setup ---
-# This handler manages the user registration flow and the main menu interactions.
-conv_handler = ConversationHandler(
-    entry_points=[CommandHandler("start", start)],
-    states={
-        ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_first_name)],
-        ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_last_name)],
-        ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_age)],
-        ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_email)],
-        MAIN_MENU: [
-            CallbackQueryHandler(handle_menu_callback, pattern=r"^menu:.*"),
-            CallbackQueryHandler(handle_action_callback, pattern=r"^action:.*"),
-            MessageHandler(filters.TEXT & ~filters.COMMAND, handle_free_text_message),
-        ],
-    },
-    fallbacks=[CommandHandler("cancel", cancel)],
-    # Allow re-entry into the conversation with the /start command
-    allow_reentry=True,
-)
+    application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
-# Add handlers to the application
-application.add_handler(conv_handler)
-application.add_handler(CommandHandler("help", help_command))
+    # Setup the conversation handler with states
+    conv_handler = ConversationHandler(
+        entry_points=[CommandHandler("start", user_manager.start)],
+        states={
+            user_manager.SELECTING_LANG: [CallbackQueryHandler(user_manager.select_language, pattern=r"^lang:.*")],
+            user_manager.ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_first_name)],
+            user_manager.ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_last_name)],
+            user_manager.ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_age)],
+            user_manager.ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_email)],
+            user_manager.MAIN_MENU: [
+                CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"),
+                CallbackQueryHandler(user_manager.show_profile, pattern=r"^action:profile$"),
+                CallbackQueryHandler(menu_handler.handle_action_callback, pattern=r"^action:.*"),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message),
+                MessageHandler(filters.VOICE, message_handler.handle_voice_message),
+            ],
+        },
+        fallbacks=[CommandHandler("cancel", user_manager.cancel)],
+        allow_reentry=True,
+    )
 
-# --- Webhook Setup ---
-# This part is for deploying on a serverless platform like Google Cloud Functions or Render.
-# It uses an HTTP trigger to process updates.
+    application.add_handler(conv_handler)
 
-# The asyncio event loop is necessary for python-telegram-bot's async operations.
-loop = asyncio.get_event_loop()
-if loop.is_closed():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-
-@http
-def telegram_webhook(request: Request):
-    """HTTP-triggered function that processes a single Telegram update."""
-    if request.method == "POST":
-        update_json = request.get_json()
-        update = Update.de_json(update_json, application.bot)
-
-        # Running the async processing in the existing event loop
-        asyncio.run_coroutine_threadsafe(application.process_update(update), loop)
-
-        return "", 200
-    return "Invalid request", 400
-
-async def set_webhook():
-    """Sets the Telegram webhook URL."""
-    webhook_url = f"{BASE_URL}/{TELEGRAM_BOT_TOKEN}"
-    logger.info(f"Setting webhook to: {webhook_url}")
-    try:
-        await application.bot.set_webhook(url=webhook_url, secret_token=WEBHOOK_SECRET)
-        logger.info("Webhook set successfully.")
-    except Exception as e:
-        logger.error(f"Failed to set webhook: {e}")
-
-# --- Main Execution ---
-# This block is for local development (polling) and to set the webhook for production.
-if __name__ == "__main__":
-    # In a production environment (like Render), we might just want to set the webhook.
-    # The server (like Gunicorn) would run the `telegram_webhook` function.
+    # For local development, run via polling
+    # For production on Render, the webhook is set via a startup command
     if BASE_URL:
-        loop.run_until_complete(set_webhook())
+        # On Render, you would typically run a webserver.
+        # For simplicity with python-telegram-bot, we can run it in webhook mode.
+        logger.info(f"Starting bot in webhook mode, listening on port {PORT}")
+        application.run_webhook(
+            listen="0.0.0.0",
+            port=PORT,
+            secret_token=WEBHOOK_SECRET,
+            url_path=TELEGRAM_BOT_TOKEN,
+            webhook_url=f"{BASE_URL}/{TELEGRAM_BOT_TOKEN}"
+        )
     else:
-        # For local development, run the bot in polling mode.
-        logger.info("BASE_URL not found. Running in polling mode for local development.")
+        logger.info("No BASE_URL found, running in polling mode for local development.")
         application.run_polling()
+
+
+if __name__ == "__main__":
+    main()

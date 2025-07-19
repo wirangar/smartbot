@@ -2,12 +2,13 @@ import json
 import logging
 from pathlib import Path
 
-logger = logging.getLogger(__name__)
+from src.config import logger
 
 KNOWLEDGE_FILE = Path(__file__).parent / 'knowledge_base_v2.json'
 knowledge_base = {}
 
 def load_knowledge_base():
+    """Loads the knowledge base from the JSON file."""
     global knowledge_base
     try:
         with open(KNOWLEDGE_FILE, 'r', encoding='utf-8') as f:
@@ -16,68 +17,84 @@ def load_knowledge_base():
     except FileNotFoundError:
         logger.error(f"Knowledge base file '{KNOWLEDGE_FILE.name}' not found.")
         knowledge_base = {}
-    except json.JSONDecodeError:
-        logger.error(f"Error decoding JSON from '{KNOWLEDGE_FILE.name}'.")
+    except json.JSONDecodeError as e:
+        logger.error(f"Error decoding JSON from '{KNOWLEDGE_FILE.name}': {e}")
         knowledge_base = {}
 
 def get_knowledge_base():
+    """Returns the loaded knowledge base, loading it if it's empty."""
     if not knowledge_base:
         load_knowledge_base()
     return knowledge_base
 
-def get_json_content_by_path(path_parts: list, lang: str = 'fa') -> str:
+def get_content_by_path(path_parts: list, lang: str = 'fa') -> (str, str):
+    """
+    Retrieves and formats content from the knowledge base based on a path.
+    Returns a tuple of (formatted_content, file_to_send_path).
+    """
     kb = get_knowledge_base()
-    if not path_parts:
-        return ""
+    if not path_parts or len(path_parts) < 2:
+        return "محتوایی یافت نشد.", None
 
-    # Navigate to the correct category
-    category_key = path_parts[0]
-    if category_key not in kb:
-        return ""
+    category_key, item_id = path_parts[0], path_parts[1]
 
-    current_list = kb[category_key]
-
-    # Find the specific item by ID
-    item_id = path_parts[1] if len(path_parts) > 1 else None
-    if not item_id:
-        # If no item ID is provided, maybe return category description? For now, empty.
-        return ""
-
-    target_item = next((item for item in current_list if item.get('id') == item_id), None)
+    category = kb.get(category_key, [])
+    target_item = next((item for item in category if item.get('id') == item_id), None)
 
     if not target_item:
-        return f"موردی با شناسه '{item_id}' یافت نشد."
+        return f"موردی با شناسه '{item_id}' یافت نشد.", None
 
-    # Build the content string
     output_parts = []
+    file_to_send = None
 
-    # Title
-    if 'title' in target_item and lang in target_item['title']:
-        output_parts.append(f"*{target_item['title'][lang]}*")
+    # Title, Description, and File
+    title = target_item.get('title', {}).get(lang, '')
+    description = target_item.get('description', {}).get(lang, '')
 
-    # Description
-    if 'description' in target_item and lang in target_item['description']:
-        output_parts.append(f"_{target_item['description'][lang]}_")
-
-    # Main content (if it's a list of strings)
-    if 'content' in target_item and isinstance(target_item['content'], dict) and lang in target_item['content']:
-        if isinstance(target_item['content'][lang], list):
-            output_parts.extend(target_item['content'][lang])
-        else:
-            output_parts.append(target_item['content'][lang])
+    if title:
+        output_parts.append(f"*{title}*")
+    if description:
+        output_parts.append(f"_{description}_")
 
     # Subsections
     if 'subsections' in target_item:
         for subsection in target_item['subsections']:
-            if 'title' in subsection and lang in subsection['title']:
-                output_parts.append(f"\n*{subsection['title'][lang]}*")
-            if 'content' in subsection and lang in subsection['content']:
-                if isinstance(subsection['content'][lang], list):
-                    output_parts.extend(subsection['content'][lang])
-                else:
-                    output_parts.append(subsection['content'][lang])
+            sub_title = subsection.get('title', {}).get(lang, '')
+            if sub_title:
+                output_parts.append(f"\n*{sub_title}*")
 
-    return "\n\n".join(output_parts)
+            sub_content = subsection.get('content', {}).get(lang, [])
+            if isinstance(sub_content, list):
+                # Check for file references in content
+                for line in sub_content:
+                    if ".pdf" in line or ".jpg" in line:
+                        try:
+                            # Extract file name, e.g., from "file: file_name.pdf"
+                            file_name = line.split(':')[1].strip()
+                            file_to_send = f"assets/pdf/{file_name}" # Assuming pdf for now
+                        except IndexError:
+                            pass
+                    output_parts.append(line)
+            else:
+                output_parts.append(sub_content)
 
-# Load on module import
+    formatted_content = "\n\n".join(output_parts)
+    return formatted_content, file_to_send
+
+def search_knowledge_base(query: str, lang: str = 'fa') -> list:
+    """Searches the knowledge base for a query and returns matching items."""
+    kb = get_knowledge_base()
+    results = []
+    for category_name, items in kb.items():
+        for item in items:
+            title = item.get('title', {}).get(lang, '').lower()
+            description = item.get('description', {}).get(lang, '').lower()
+            if query.lower() in title or query.lower() in description:
+                results.append({
+                    "title": item.get('title', {}).get(lang, 'No Title'),
+                    "callback": f"menu:{category_name}:{item.get('id')}"
+                })
+    return results
+
+# Load the knowledge base on module import
 load_knowledge_base()
