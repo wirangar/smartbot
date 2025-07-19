@@ -2,8 +2,10 @@ import logging
 from telegram import Update
 from telegram.ext import ContextTypes
 
+import os
 from src.utils.keyboard_builder import get_main_menu_keyboard, get_item_keyboard, get_content_keyboard
 from src.data.knowledge_base import get_content_by_path
+from src.utils.text_formatter import sanitize_markdown
 from src.config import logger, ADMIN_CHAT_ID
 from src.handlers.user_manager import MAIN_MENU
 
@@ -57,26 +59,46 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
 
     elif len(path) == 2: # Item selected
         content, file_path = get_content_by_path(path, lang)
+        sanitized_content = sanitize_markdown(content)
 
         await query.edit_message_text(
-            text=content,
-            parse_mode='Markdown',
+            text=sanitized_content,
+            parse_mode='MarkdownV2',
             reply_markup=get_content_keyboard(path, lang)
         )
 
-        if file_path:
+        if file_path and os.path.exists(file_path):
             try:
                 with open(file_path, 'rb') as file:
-                    await context.bot.send_document(chat_id=query.from_user.id, document=file)
-            except FileNotFoundError:
-                logger.warning(f"File not found: {file_path}")
-                not_found_text = {'fa': "فایل مرتبط یافت نشد.", 'en': "Associated file not found.", 'it': "File associato non trovato."}
-                await context.bot.send_message(chat_id=query.from_user.id, text=not_found_text.get(lang))
+                    if file_path.lower().endswith(('.jpg', '.jpeg', '.png')):
+                        await context.bot.send_photo(chat_id=query.from_user.id, photo=file)
+                    else: # Assuming PDF or other documents
+                        await context.bot.send_document(chat_id=query.from_user.id, document=file)
             except Exception as e:
-                logger.error(f"Error sending file {file_path}: {e}")
+                logger.error(f"Error sending file {file_path} for user {query.from_user.id}: {e}")
                 error_text = {'fa': "خطایی در ارسال فایل رخ داد.", 'en': "An error occurred while sending the file.", 'it': "Si è verificato un errore durante l'invio del file."}
                 await context.bot.send_message(chat_id=query.from_user.id, text=error_text.get(lang))
+        elif file_path:
+            logger.warning(f"File not found at path: {file_path}")
+            not_found_text = {'fa': "فایل مرتبط یافت نشد.", 'en': "Associated file not found.", 'it': "File associato non trovato."}
+            await context.bot.send_message(chat_id=query.from_user.id, text=not_found_text.get(lang))
 
+    return MAIN_MENU
+
+async def main_menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Handler for the /menu command."""
+    await main_menu(update, context)
+    return MAIN_MENU
+
+async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Handler for the /help command."""
+    lang = context.user_data.get('language', 'fa')
+    help_text_map = {
+        'fa': "🤖 *راهنمای ربات Scholarino*\n\n- از منوها برای دسترسی به اطلاعات استفاده کنید.\n- برای سوالات خاص، پیام خود را تایپ کنید.\n- برای تماس با مدیر، از دکمه 'تماس با ادمین' استفاده کنید.",
+        'en': "🤖 *Scholarino Bot Help*\n\n- Use the menus to access information.\n- For specific questions, type your message.\n- Use the 'Contact Admin' button to reach the administrator.",
+        'it': "🤖 *Aiuto Bot Scholarino*\n\n- Usa i menu per accedere alle informazioni.\n- Per domande specifiche, digita il tuo messaggio.\n- Usa il pulsante 'Contatta Admin' per raggiungere l'amministratore."
+    }
+    await update.message.reply_text(help_text_map.get(lang), parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
     return MAIN_MENU
 
 async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:

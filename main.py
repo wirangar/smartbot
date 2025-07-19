@@ -25,14 +25,18 @@ def main() -> None:
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
 
     # Setup the conversation handler with states
+    # A conversation handler to manage the entire user flow
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", user_manager.start)],
         states={
+            # Onboarding States
             user_manager.SELECTING_LANG: [CallbackQueryHandler(user_manager.select_language, pattern=r"^lang:.*")],
             user_manager.ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_first_name)],
             user_manager.ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_last_name)],
             user_manager.ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_age)],
             user_manager.ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_email)],
+
+            # Main Menu State
             user_manager.MAIN_MENU: [
                 CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"),
                 CallbackQueryHandler(user_manager.show_profile, pattern=r"^action:profile$"),
@@ -41,10 +45,18 @@ def main() -> None:
                 MessageHandler(filters.VOICE, message_handler.handle_voice_message),
             ],
         },
-        fallbacks=[CommandHandler("cancel", user_manager.cancel)],
-        allow_reentry=True,
+        fallbacks=[
+            CommandHandler("start", user_manager.start), # Allow restarting
+            CommandHandler("menu", menu_handler.main_menu_command),
+            CommandHandler("profile", user_manager.show_profile_command),
+            CommandHandler("help", menu_handler.help_command),
+            CommandHandler("cancel", user_manager.cancel)
+        ],
+        map_to_parent={
+            # If ConversationHandler.END is returned, jump to the main menu
+            ConversationHandler.END: user_manager.MAIN_MENU
+        }
     )
-
     application.add_handler(conv_handler)
 
     # For local development, run via polling

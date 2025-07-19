@@ -139,11 +139,14 @@ async def ask_email(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     await update.message.reply_text(success_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
     return MAIN_MENU
 
-async def show_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+async def show_profile_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Command handler for /profile."""
+    await show_profile(update, context, is_command=True)
+    return MAIN_MENU
+
+async def show_profile(update: Update, context: ContextTypes.DEFAULT_TYPE, is_command: bool = False) -> int:
     """Displays the user's profile information."""
-    query = update.callback_query
-    await query.answer()
-    user_id = query.from_user.id
+    user_id = update.effective_user.id
     lang = context.user_data.get('language', 'fa')
 
     try:
@@ -158,14 +161,26 @@ async def show_profile(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
                 'en': f"👤 *Your Profile*\n\n*First Name:* {first_name}\n*Last Name:* {last_name}\n*Age:* {age}\n*Email:* {email}\n*Score:* {score} ✨",
                 'it': f"👤 *Il Tuo Profilo*\n\n*Nome:* {first_name}\n*Cognome:* {last_name}\n*Età:* {age}\n*Email:* {email}\n*Punteggio:* {score} ✨"
             }
-            await query.edit_message_text(profile_text_map.get(lang), parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
+            profile_text = profile_text_map.get(lang)
         else:
-            not_found_text = {'fa': "اطلاعات پروفایل شما یافت نشد. لطفاً با /start ثبت‌نام کنید.", 'en': "Your profile information was not found. Please register with /start.", 'it': "Le tue informazioni del profilo non sono state trovate. Registrati con /start."}
-            await query.edit_message_text(not_found_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+            not_found_text_map = {'fa': "اطلاعات پروفایل شما یافت نشد. لطفاً با /start ثبت‌نام کنید.", 'en': "Your profile information was not found. Please register with /start.", 'it': "Le tue informazioni del profilo non sono state trovate. Registrati con /start."}
+            profile_text = not_found_text_map.get(lang)
+
+        if is_command:
+            await update.message.reply_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
+        else:
+            query = update.callback_query
+            await query.answer()
+            await query.edit_message_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
+
     except Exception as e:
         logger.error(f"Failed to fetch profile for user {user_id}: {e}")
-        error_text = {'fa': "خطایی در دریافت اطلاعات پروفایل رخ داد.", 'en': "An error occurred while fetching your profile.", 'it': "Si è verificato un errore durante il recupero del tuo profilo."}
-        await query.edit_message_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+        error_text_map = {'fa': "خطایی در دریافت اطلاعات پروفایل رخ داد.", 'en': "An error occurred while fetching your profile.", 'it': "Si è verificato un errore durante il recupero del tuo profilo."}
+        error_text = error_text_map.get(lang)
+        if is_command:
+            await update.message.reply_text(error_text, reply_markup=get_main_menu_keyboard(lang))
+        else:
+            await update.callback_query.edit_message_text(error_text, reply_markup=get_main_menu_keyboard(lang))
 
     return MAIN_MENU
 
