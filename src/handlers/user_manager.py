@@ -1,5 +1,5 @@
 import logging
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, ConversationHandler
 
 from src.database import get_db_cursor
@@ -254,7 +254,8 @@ async def handle_subscription_callback(update: Update, context: ContextTypes.DEF
         await query.edit_message_text(text=error_text.get(lang))
 
     # After handling, show the main menu again
-    await query.message.reply_text(text="به منوی اصلی بازگشتید.", reply_markup=get_main_menu_keyboard(lang))
+    main_menu_text = {'fa': "به منوی اصلی بازگشتید.", 'en': "Returned to the main menu.", 'it': "Tornato al menu principale."}
+    await query.message.reply_text(text=main_menu_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
     return MAIN_MENU
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
