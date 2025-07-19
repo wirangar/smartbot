@@ -124,7 +124,7 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
         await query.edit_message_text(text=contact_text.get(lang))
 
     elif action == "calculate_isee":
-        # Transition to the ISEE conversation
+        # Start the ISEE conversation
         from . import isee_handler
         await query.message.reply_text(get_message("start_isee", lang))
         return isee_handler.INCOME

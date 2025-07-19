@@ -35,6 +35,21 @@ def main() -> None:
 
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(post_init).build()
 
+    # Define the ISEE conversation handler separately
+    isee_conv_handler = ConversationHandler(
+        entry_points=[CommandHandler("isee", isee_handler.start_isee)],
+        states={
+            isee_handler.INCOME: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_income)],
+            isee_handler.PROPERTY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_property)],
+            isee_handler.FAMILY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_family)],
+            isee_handler.CONFIRM: [CallbackQueryHandler(isee_handler.handle_confirm, pattern=r"^isee_confirm:.*")],
+        },
+        fallbacks=[CommandHandler("cancel", isee_handler.cancel_isee)],
+        # This allows the conversation to be started by another handler
+        allow_reentry=True,
+        name="isee_conversation"
+    )
+
     # Main conversation handler for user registration and primary interaction
     main_conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", user_manager.start)],
@@ -54,8 +69,9 @@ def main() -> None:
                 MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message),
                 MessageHandler(filters.VOICE, message_handler.handle_voice_message),
                 MessageHandler(filters.Document.ALL, message_handler.handle_file_upload),
-                MessageHandler(filters.Document.ALL, message_handler.handle_file_upload),
             ],
+            # Include ISEE states here to allow transition
+            **isee_conv_handler.states
         },
         fallbacks=[
             CommandHandler("start", user_manager.start),
@@ -64,35 +80,15 @@ def main() -> None:
             CommandHandler("subscribe", user_manager.subscribe_command),
             CommandHandler("weather", weather_handler.get_weather),
             CommandHandler("help", menu_handler.help_command),
-            CommandHandler("cancel", user_manager.cancel)
+            CommandHandler("cancel", user_manager.cancel),
+            # Add the ISEE handler as a fallback to be accessible from the main menu
+            isee_conv_handler
         ],
         name="main_conversation",
         persistent=True
     )
 
-    # ISEE conversation handler, can be initiated from the main conversation
-    isee_conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("isee", isee_handler.start_isee)],
-        states={
-            isee_handler.INCOME: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_income)],
-            isee_handler.PROPERTY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_property)],
-            isee_handler.FAMILY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_family)],
-            isee_handler.CONFIRM: [CallbackQueryHandler(isee_handler.handle_confirm, pattern=r"^isee_confirm:.*")],
-        },
-        fallbacks=[CommandHandler("cancel", isee_handler.cancel_isee)],
-        # When this conversation ends, it returns to the main menu state of the parent handler
-        map_to_parent={
-            ConversationHandler.END: user_manager.MAIN_MENU
-        }
-    )
-
-    # Add handlers to the application
     application.add_handler(main_conv_handler)
-    # Note: ISEE handler is now nested conceptually, but needs to be added to the application
-    # A better approach might be to add it to the fallbacks of the main handler.
-    # For now, this direct addition will work.
-    application.add_handler(CommandHandler("isee", isee_handler.start_isee))
-
 
     if BASE_URL:
         logger.info(f"Starting bot in webhook mode, listening on port {PORT}")
