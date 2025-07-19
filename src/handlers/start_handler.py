@@ -3,9 +3,9 @@ from telegram.ext import ContextTypes, ConversationHandler
 from datetime import datetime
 import logging
 
-from src.config import ADMIN_CHAT_ID
-from src.services.google_sheets import append_user_data_to_sheet
-from src.utils.keyboard_builder import get_main_keyboard_markup
+from config import ADMIN_CHAT_ID
+from services.google_sheets import append_user_data_to_sheet
+from utils.keyboard_builder import get_main_keyboard_markup
 
 logger = logging.getLogger(__name__)
 

@@ -2,39 +2,49 @@ from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
 import logging
 
-from src.services.openai_service import get_ai_response
-from src.services.google_sheets import append_qa_to_sheet
-from src.utils.keyboard_builder import get_main_keyboard_markup
-from src.handlers.start_handler import MAIN_MENU
+from services.openai_service import get_ai_response
+from services.google_sheets import append_qa_to_sheet
+from utils.keyboard_builder import get_main_keyboard_markup
+from handlers.start_handler import MAIN_MENU
 
 logger = logging.getLogger(__name__)
 
+from src.config import ADMIN_CHAT_ID
+
 async def handle_free_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     user_message = update.message.text
-    user_id = update.effective_user.id
-    logger.info(f"Received free text message from user {user_id}: '{user_message}'")
+    user = update.effective_user
+    logger.info(f"Received free text message from user {user.id}: '{user_message}'")
 
+    # Check if this message is for the admin
+    if context.user_data.get('next_message_is_admin_contact'):
+        context.user_data['next_message_is_admin_contact'] = False
+        if ADMIN_CHAT_ID:
+            try:
+                await context.bot.forward_message(chat_id=ADMIN_CHAT_ID, from_chat_id=user.id, message_id=update.message.message_id)
+                await update.message.reply_text("پیام شما با موفقیت برای ادمین ارسال شد. منتظر پاسخ بمانید.")
+            except Exception as e:
+                logger.error(f"Failed to forward message to admin: {e}")
+                await update.message.reply_text("متاسفانه در ارسال پیام به ادمین خطایی رخ داد.")
+        else:
+            await update.message.reply_text("قابلیت تماس با ادمین در حال حاضر فعال نیست.")
+
+        return MAIN_MENU
+
+    # Otherwise, process with OpenAI
     ai_response = await get_ai_response(user_message)
 
     if ai_response:
-        first_name = context.user_data.get('first_name')
-        age = context.user_data.get('age')
-
         # Personalize response
-        if first_name and age:
-            final_response = f"{first_name} عزیز ({age} ساله)، این پاسخ برای شماست:\n\n{ai_response}"
-        elif first_name:
-            final_response = f"{first_name} عزیز، این پاسخ برای شماست:\n\n{ai_response}"
-        else:
-            final_response = ai_response
-
-        await append_qa_to_sheet(user_id, user_message, ai_response)
+        first_name = context.user_data.get('first_name', 'کاربر')
+        final_response = f"{first_name} عزیز، این پاسخ برای شماست:\n\n{ai_response}"
+        await append_qa_to_sheet(user.id, user_message, ai_response)
     else:
-        final_response = "متاسفم، در حال حاضر قادر به پاسخگویی با هوش مصنوعی نیستم. لطفاً کمی بعدتر دوباره امتحان کنید یا از منوهای موجود استفاده کنید."
+        final_response = "متاسفم، در حال حاضر قادر به پاسخگویی با هوش مصنوعی نیستم. لطفاً از منوهای موجود استفاده کنید."
 
     await update.message.reply_text(
         final_response,
-        reply_markup=get_main_keyboard_markup(context.user_data.get('current_json_path', []))
+        reply_markup=get_main_keyboard_markup(context.user_data.get('current_path', []))
     )
 
     return MAIN_MENU

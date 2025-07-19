@@ -4,7 +4,7 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-KNOWLEDGE_FILE = Path(__file__).parent / 'knowledge.json'
+KNOWLEDGE_FILE = Path(__file__).parent / 'knowledge_base_v2.json'
 knowledge_base = {}
 
 def load_knowledge_base():
@@ -25,41 +25,59 @@ def get_knowledge_base():
         load_knowledge_base()
     return knowledge_base
 
-def get_json_content_by_path(path_parts: list) -> str:
+def get_json_content_by_path(path_parts: list, lang: str = 'fa') -> str:
     kb = get_knowledge_base()
-    current_level = kb
-    content = ""
-    try:
-        for i, part in enumerate(path_parts):
-            if isinstance(current_level, dict):
-                current_level = current_level.get(part)
-            elif isinstance(current_level, list):
-                found_item = next((item for item in current_level if item.get('title') == part or (item.get('fa') and item['fa'].get('title') == part)), None)
-                current_level = found_item
-
-            if not current_level:
-                return ""
-
-            if i == len(path_parts) - 1:
-                # This logic is complex and might need refactoring, but for now, it's a direct move.
-                if 'fa' in current_level:
-                    if 'content' in current_level['fa']:
-                        content = current_level['fa']['content']
-                    elif 'description' in current_level['fa']:
-                        content = current_level['fa']['description']
-                        if current_level['fa'].get('details'):
-                            content += "\\n" + "\\n".join(current_level['fa']['details'])
-                        if current_level['fa'].get('steps'):
-                            steps_content = [f"{step.get('title', '')}: {step.get('content', '') or ' / '.join(step.get('items', []))}" for step in current_level['fa']['steps']]
-                            content += "\\nمراحل:\\n" + "\\n".join(steps_content)
-                elif 'content' in current_level:
-                    content = "\\n".join(current_level['content']) if isinstance(current_level['content'], list) else current_level['content']
-                elif 'points' in current_level:
-                    content = "\\n".join(current_level['points'])
-        return content
-    except Exception as e:
-        logger.error(f"Error navigating JSON path {path_parts}: {e}")
+    if not path_parts:
         return ""
+
+    # Navigate to the correct category
+    category_key = path_parts[0]
+    if category_key not in kb:
+        return ""
+
+    current_list = kb[category_key]
+
+    # Find the specific item by ID
+    item_id = path_parts[1] if len(path_parts) > 1 else None
+    if not item_id:
+        # If no item ID is provided, maybe return category description? For now, empty.
+        return ""
+
+    target_item = next((item for item in current_list if item.get('id') == item_id), None)
+
+    if not target_item:
+        return f"موردی با شناسه '{item_id}' یافت نشد."
+
+    # Build the content string
+    output_parts = []
+
+    # Title
+    if 'title' in target_item and lang in target_item['title']:
+        output_parts.append(f"*{target_item['title'][lang]}*")
+
+    # Description
+    if 'description' in target_item and lang in target_item['description']:
+        output_parts.append(f"_{target_item['description'][lang]}_")
+
+    # Main content (if it's a list of strings)
+    if 'content' in target_item and isinstance(target_item['content'], dict) and lang in target_item['content']:
+        if isinstance(target_item['content'][lang], list):
+            output_parts.extend(target_item['content'][lang])
+        else:
+            output_parts.append(target_item['content'][lang])
+
+    # Subsections
+    if 'subsections' in target_item:
+        for subsection in target_item['subsections']:
+            if 'title' in subsection and lang in subsection['title']:
+                output_parts.append(f"\n*{subsection['title'][lang]}*")
+            if 'content' in subsection and lang in subsection['content']:
+                if isinstance(subsection['content'][lang], list):
+                    output_parts.extend(subsection['content'][lang])
+                else:
+                    output_parts.append(subsection['content'][lang])
+
+    return "\n\n".join(output_parts)
 
 # Load on module import
 load_knowledge_base()

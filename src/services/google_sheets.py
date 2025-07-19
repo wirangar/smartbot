@@ -2,9 +2,10 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 import logging
+import os
 from datetime import datetime
-from src.config import (
-    GOOGLE_CREDS_JSON,
+from config import (
+    GOOGLE_CREDS,
     SHEET_ID,
     SCHOLARSHIPS_SHEET_NAME,
     BAZARINO_ORDERS_SHEET_NAME,
@@ -19,13 +20,15 @@ bazarino_orders_sheet = None
 def init_google_sheets():
     global gc, scholarships_sheet, bazarino_orders_sheet
     try:
-        if not GOOGLE_CREDS_JSON:
-            logger.warning("GOOGLE_CREDS_JSON not set. Google Sheets functionality will be disabled.")
+        if not GOOGLE_CREDS:
+            logger.warning("GOOGLE_CREDS not set. Google Sheets functionality will be disabled.")
+            return
+        if not os.path.exists(GOOGLE_CREDS):
+            logger.error(f"Credentials file not found at {GOOGLE_CREDS}")
             return
 
-        creds_dict = json.loads(GOOGLE_CREDS_JSON)
         scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_name(GOOGLE_CREDS, scope)
         gc = gspread.authorize(creds)
 
         spreadsheet = gc.open_by_key(SHEET_ID)

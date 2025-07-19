@@ -13,13 +13,13 @@ from telegram.ext import (
 )
 
 # Import configurations and handlers from the new modular structure
-from src.config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, logger
-from src.handlers.start_handler import (
+from config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, logger
+from handlers.start_handler import (
     start, ask_first_name, ask_last_name, ask_age, ask_email, cancel,
     ASKING_FIRST_NAME, ASKING_LAST_NAME, ASKING_AGE, ASKING_EMAIL, MAIN_MENU
 )
-from src.handlers.menu_handler import handle_json_menu_callback, handle_action_callback
-from src.handlers.message_handler import handle_free_text_message, help_command
+from handlers.menu_handler import handle_menu_callback, handle_action_callback
+from handlers.message_handler import handle_free_text_message, help_command
 
 # --- Initialize Application ---
 # Ensure the token is available
@@ -39,7 +39,7 @@ conv_handler = ConversationHandler(
         ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_age)],
         ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_email)],
         MAIN_MENU: [
-            CallbackQueryHandler(handle_json_menu_callback, pattern=r"^json_menu:.*"),
+            CallbackQueryHandler(handle_menu_callback, pattern=r"^menu:.*"),
             CallbackQueryHandler(handle_action_callback, pattern=r"^action:.*"),
             MessageHandler(filters.TEXT & ~filters.COMMAND, handle_free_text_message),
         ],
