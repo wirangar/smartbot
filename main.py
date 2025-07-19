@@ -10,7 +10,7 @@ from telegram.ext import (
 
 from src.config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, PORT, logger
 from src.database import setup_database
-from src.handlers import user_manager, menu_handler, message_handler
+from src.handlers import user_manager, menu_handler, message_handler, isee_handler
 from src.services.notification_service import start_notification_job
 
 async def post_init(application: Application):
@@ -56,6 +56,7 @@ def main() -> None:
             CommandHandler("menu", menu_handler.main_menu_command),
             CommandHandler("profile", user_manager.show_profile_command),
             CommandHandler("subscribe", user_manager.subscribe_command),
+            CommandHandler("isee", isee_handler.start_isee),
             CommandHandler("help", menu_handler.help_command),
             CommandHandler("cancel", user_manager.cancel)
         ],
@@ -68,6 +69,19 @@ def main() -> None:
         persistent=False # Or use a database-backed persistence layer
     )
     application.add_handler(conv_handler)
+
+    # ISEE Conversation Handler
+    isee_conv_handler = ConversationHandler(
+        entry_points=[CommandHandler("isee", isee_handler.start_isee)],
+        states={
+            isee_handler.INCOME: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_income)],
+            isee_handler.PROPERTY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_property)],
+            isee_handler.FAMILY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_family)],
+            isee_handler.CONFIRM: [CallbackQueryHandler(isee_handler.handle_confirm, pattern=r"^isee_confirm:.*")],
+        },
+        fallbacks=[CommandHandler("cancel", isee_handler.cancel_isee)]
+    )
+    application.add_handler(isee_conv_handler)
 
     # For local development, run via polling
     # For production on Render, the webhook is set via a startup command

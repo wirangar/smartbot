@@ -7,6 +7,7 @@ from src.utils.keyboard_builder import get_main_menu_keyboard, get_item_keyboard
 from src.data.knowledge_base import get_content_by_path
 from src.utils.text_formatter import sanitize_markdown
 from src.config import logger, ADMIN_CHAT_ID
+from src.locale import get_message
 from src.handlers.user_manager import MAIN_MENU
 
 # A simple in-memory cache for user history. In a real-world scenario, this might be moved to Redis.
@@ -121,6 +122,12 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
             'it': "Scrivi il tuo messaggio per l'admin. Sarà inoltrato direttamente."
         }
         await query.edit_message_text(text=contact_text.get(lang))
+
+    elif action == "calculate_isee":
+        # Transition to the ISEE conversation
+        from . import isee_handler
+        await query.message.reply_text(get_message("start_isee", lang))
+        return isee_handler.INCOME
 
     elif action == "history":
         # Placeholder for history functionality

@@ -56,6 +56,11 @@ def get_item_keyboard(category: str, lang: str = 'fa') -> InlineKeyboardMarkup:
             if title and item_id:
                 keyboard.append([InlineKeyboardButton(title, callback_data=f"menu:{category}:{item_id}")])
 
+    # Add ISEE calculator button specifically to the scholarship menu
+    if category == "بورسیه و تقویم آموزشی":
+        isee_text = {"fa": "📊 محاسبه ISEE", "en": "📊 Calculate ISEE", "it": "📊 Calcola ISEE"}
+        keyboard.append([InlineKeyboardButton(isee_text.get(lang, "📊 Calculate ISEE"), callback_data="action:calculate_isee")])
+
     # Back button
     back_text = {"fa": "🔙 بازگشت", "en": "🔙 Back", "it": "🔙 Indietro"}
     keyboard.append([InlineKeyboardButton(back_text.get(lang, "🔙 Back"), callback_data="menu:main_menu")])
