@@ -54,6 +54,7 @@ def main() -> None:
                 MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message),
                 MessageHandler(filters.VOICE, message_handler.handle_voice_message),
                 MessageHandler(filters.Document.ALL, message_handler.handle_file_upload),
+                MessageHandler(filters.Document.ALL, message_handler.handle_file_upload),
             ],
         },
         fallbacks=[

@@ -18,8 +18,9 @@ async def handle_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         _, choice, message_id = query.data.split(":")
         is_helpful = True if choice == 'yes' else False
 
-        # We can store the original message text if needed, but for now, just the feedback
-        original_message = "" # context.bot_data.get(int(message_id))
+        # In a more advanced version, we could retrieve the original message text
+        # using the message_id and store it for context.
+        original_message = f"Feedback for message ID: {message_id}"
 
         with get_db_cursor() as cursor:
             cursor.execute(
@@ -27,10 +28,12 @@ async def handle_feedback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 (user_id, is_helpful, original_message)
             )
 
-        await query.edit_message_reply_markup(reply_markup=None) # Remove the feedback buttons
-        await query.message.reply_text(get_message("feedback_thanks", lang))
+        # Edit the original message to remove the feedback buttons
+        await query.edit_message_reply_markup(reply_markup=None)
+        # Send a new message to confirm feedback was received
+        await context.bot.send_message(chat_id=user_id, text=get_message("feedback_thanks", lang))
 
     except Exception as e:
         logger.error(f"Error handling feedback for user {user_id}: {e}")
-        # Optionally send an error message to the user
-        pass # Silently fail for now to not disrupt user flow
+        # Silently fail to not disrupt user flow, but log the error.
+        pass

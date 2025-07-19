@@ -48,7 +48,7 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
 
         keyboard = [[
             InlineKeyboardButton(get_message('view_button', lang), callback_data=first_page['content']['callback']),
-            InlineKeyboardButton(f"{first_page['page_num']}/{first_page['total_pages']}", callback_data="noop"),
+            InlineKeyboardButton(f"1/{first_page['total_pages']}", callback_data="noop"),
             InlineKeyboardButton(get_message('next_button', lang), callback_data="pagination:next"),
         ]]
 

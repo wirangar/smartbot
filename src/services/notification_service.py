@@ -8,9 +8,9 @@ from src.config import logger
 from src.data.knowledge_base import get_knowledge_base
 from src.database import get_db_cursor
 
-async def check_deadlines_and_notify(application: Application):
+async def check_and_send_notifications(application: Application):
     """
-    Checks for upcoming deadlines and notifies subscribed users.
+    A single function to check and send all types of notifications.
     This function is intended to be run as a daily job.
     """
     logger.info("Running daily deadline check...")
@@ -53,14 +53,13 @@ async def check_deadlines_and_notify(application: Application):
 
     logger.info(f"Found {len(subscribed_users)} subscribed users.")
 
+    # 1. Check for Deadlines
     for deadline in all_deadlines:
         time_until = deadline['date'] - now
-
         if time_until.days + 1 in notification_windows:
             days_left = time_until.days + 1
             logger.info(f"Deadline '{deadline['event']}' is in {days_left} days. Notifying users.")
-
-            for user_id, first_name, lang in subscribed_users:
+            for user_id, first_name, lang, _ in subscribed_users:
                 message_templates = {
                     'fa': (
                         f"🔔 *یادآوری مهم از Scholarino*\n\n"
@@ -84,7 +83,6 @@ async def check_deadlines_and_notify(application: Application):
                         "Non dimenticare di preparare i documenti e finalizzare la tua domanda."
                     )
                 }
-
                 message = message_templates.get(lang, message_templates['en'])
                 try:
                     await application.bot.send_message(chat_id=user_id, text=message, parse_mode='Markdown')
@@ -92,6 +90,29 @@ async def check_deadlines_and_notify(application: Application):
                 except Exception as e:
                     logger.error(f"Failed to send deadline notification to user {user_id}: {e}")
                 await asyncio.sleep(0.1) # Avoid hitting rate limits
+
+    # 2. Check for 30-day re-engagement
+    all_users = []
+    try:
+        with get_db_cursor() as cursor:
+            cursor.execute("SELECT telegram_id, first_name, language, registration_date FROM users")
+            all_users = cursor.fetchall()
+    except Exception as e:
+        logger.error(f"Failed to fetch all users for re-engagement: {e}")
+
+    for user_id, first_name, lang, reg_date in all_users:
+        if reg_date and (now.date() - reg_date.date()).days == 30:
+            logger.info(f"Sending 30-day re-engagement message to user {user_id}.")
+            reengagement_message = {
+                'fa': f"سلام {first_name} عزیز! یک ماه از حضورتان در ربات Scholarino می‌گذرد. امیدواریم که اطلاعات ما برایتان مفید بوده باشد. برای شروع مجدد، /menu را ارسال کنید.",
+                'en': f"Hi {first_name}! It's been a month since you joined the Scholarino bot. We hope our information has been helpful. Send /menu to get started again.",
+                'it': f"Ciao {first_name}! È passato un mese da quando ti sei unito al bot Scholarino. Speriamo che le nostre informazioni siano state utili. Invia /menu per ricominciare."
+            }
+            try:
+                await application.bot.send_message(chat_id=user_id, text=reengagement_message.get(lang, reengagement_message['en']))
+            except Exception as e:
+                logger.error(f"Failed to send re-engagement message to user {user_id}: {e}")
+            await asyncio.sleep(0.1)
 
 async def start_notification_job(application: Application):
     """Adds the daily deadline check job to the application's job queue."""
