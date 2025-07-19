@@ -5,7 +5,7 @@ from pathlib import Path
 
 from src.config import logger
 
-KNOWLEDGE_FILE = Path(__file__).parent / 'knowledge_base_v2.json'
+KNOWLEDGE_FILE = Path(__file__).parent / 'knowledge.json'
 knowledge_base = {}
 
 def load_knowledge_base():

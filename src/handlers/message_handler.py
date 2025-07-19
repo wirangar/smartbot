@@ -43,13 +43,13 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
         paginator_service.create_session(user.id, search_results)
         first_page = paginator_service.get_current_page(user.id)
 
-        message_text = f"🔎 نتایج یافت شده برای '{user_message}':\n\n"
+        message_text = f"🔎 {get_message('search_results', lang, query=user_message)}\n\n"
         message_text += f"*{first_page['content']['title']}*\n{first_page['content']['snippet']}"
 
         keyboard = [[
-            InlineKeyboardButton("مشاهده", callback_data=first_page['content']['callback']),
-            InlineKeyboardButton(f"صفحه {first_page['page_num']}/{first_page['total_pages']}", callback_data="noop"),
-            InlineKeyboardButton("بعدی ➡️", callback_data="pagination:next"),
+            InlineKeyboardButton(get_message('view_button', lang), callback_data=first_page['content']['callback']),
+            InlineKeyboardButton(f"{first_page['page_num']}/{first_page['total_pages']}", callback_data="noop"),
+            InlineKeyboardButton(get_message('next_button', lang), callback_data="pagination:next"),
         ]]
 
         await update.message.reply_text(message_text, reply_markup=InlineKeyboardMarkup(keyboard), parse_mode='Markdown')
@@ -59,17 +59,19 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
     ai_response = await get_ai_response(user_message, lang)
     if ai_response:
         await append_qa_to_sheet(user.id, user_message, ai_response)
+
+        # Ask for feedback
+        feedback_keyboard = InlineKeyboardMarkup([
+            [
+                InlineKeyboardButton(get_message("feedback_yes", lang), callback_data=f"feedback:yes:{update.message.message_id}"),
+                InlineKeyboardButton(get_message("feedback_no", lang), callback_data=f"feedback:no:{update.message.message_id}")
+            ]
+        ])
+        await update.message.reply_text(ai_response, reply_markup=feedback_keyboard)
+
     else:
         ai_response = get_message("ai_error", lang)
-
-    # Ask for feedback
-    feedback_keyboard = InlineKeyboardMarkup([
-        [
-            InlineKeyboardButton(get_message("feedback_yes", lang), callback_data=f"feedback:yes:{update.message.message_id}"),
-            InlineKeyboardButton(get_message("feedback_no", lang), callback_data=f"feedback:no:{update.message.message_id}")
-        ]
-    ])
-    await update.message.reply_text(ai_response, reply_markup=feedback_keyboard)
+        await update.message.reply_text(ai_response, reply_markup=get_main_menu_keyboard(lang))
 
     return MAIN_MENU
 
@@ -78,6 +80,7 @@ async def handle_pagination_callback(update: Update, context: ContextTypes.DEFAU
     query = update.callback_query
     await query.answer()
     user_id = query.from_user.id
+    lang = context.user_data.get('language', 'fa')
     action = query.data.split(":")[1]
 
     if action == "next":
@@ -91,13 +94,13 @@ async def handle_pagination_callback(update: Update, context: ContextTypes.DEFAU
         # Build dynamic keyboard
         buttons = []
         if page_data['page_num'] > 1:
-            buttons.append(InlineKeyboardButton("⬅️ قبلی", callback_data="pagination:prev"))
+            buttons.append(InlineKeyboardButton(get_message('prev_button', lang), callback_data="pagination:prev"))
 
         buttons.append(InlineKeyboardButton(f"{page_data['page_num']}/{page_data['total_pages']}", callback_data="noop"))
-        buttons.append(InlineKeyboardButton("مشاهده", callback_data=page_data['content']['callback']))
+        buttons.append(InlineKeyboardButton(get_message('view_button', lang), callback_data=page_data['content']['callback']))
 
         if page_data['page_num'] < page_data['total_pages']:
-            buttons.append(InlineKeyboardButton("بعدی ➡️", callback_data="pagination:next"))
+            buttons.append(InlineKeyboardButton(get_message('next_button', lang), callback_data="pagination:next"))
 
         await query.edit_message_text(message_text, reply_markup=InlineKeyboardMarkup([buttons]), parse_mode='Markdown')
 
@@ -118,7 +121,7 @@ async def handle_voice_message(update: Update, context: ContextTypes.DEFAULT_TYP
         transcribed_text = await process_voice_message(temp_voice_path, lang)
 
         if transcribed_text:
-            await update.message.reply_text(f"پیام شما: *{transcribed_text}*\nدرحال پردازش...", parse_mode='Markdown')
+            await update.message.reply_text(f"{get_message('voice_transcribed', lang)}: *{transcribed_text}*\n{get_message('processing', lang)}...", parse_mode='Markdown')
             update.message.text = transcribed_text
             return await handle_text_message(update, context)
         else:
@@ -129,3 +132,20 @@ async def handle_voice_message(update: Update, context: ContextTypes.DEFAULT_TYP
         await update.message.reply_text(get_message("voice_error_generic", lang))
 
     return MAIN_MENU
+
+async def handle_file_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handles file uploads and forwards them to the admin."""
+    user = update.effective_user
+    lang = context.user_data.get('language', 'fa')
+
+    if ADMIN_CHAT_ID:
+        try:
+            user_info = f"File uploaded by: {user.full_name} (ID: {user.id})"
+            await context.bot.send_message(chat_id=ADMIN_CHAT_ID, text=user_info)
+            await context.bot.forward_message(chat_id=ADMIN_CHAT_ID, from_chat_id=user.id, message_id=update.message.message_id)
+            await update.message.reply_text(get_message("file_upload_success", lang))
+        except Exception as e:
+            logger.error(f"Failed to forward file to admin: {e}")
+            await update.message.reply_text(get_message("file_upload_error", lang))
+    else:
+        await update.message.reply_text(get_message("feature_unavailable", lang))

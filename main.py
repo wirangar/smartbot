@@ -10,7 +10,14 @@ from telegram.ext import (
 
 from src.config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, PORT, logger
 from src.database import setup_database
-from src.handlers import user_manager, menu_handler, message_handler, isee_handler, feedback_handler, weather_handler
+from src.handlers import (
+    user_manager,
+    menu_handler,
+    message_handler,
+    isee_handler,
+    feedback_handler,
+    weather_handler
+)
 from src.services.notification_service import start_notification_job
 
 async def post_init(application: Application):
@@ -20,28 +27,23 @@ async def post_init(application: Application):
 
 def main() -> None:
     """Run the bot."""
-    # Set up the database tables on startup
     setup_database()
 
-    # Create the Application and pass it your bot's token.
     if not TELEGRAM_BOT_TOKEN:
         logger.critical("TELEGRAM_BOT_TOKEN is not set. The bot cannot start.")
         return
 
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(post_init).build()
 
-    # A conversation handler to manage the entire user flow
-    conv_handler = ConversationHandler(
+    # Main conversation handler for user registration and primary interaction
+    main_conv_handler = ConversationHandler(
         entry_points=[CommandHandler("start", user_manager.start)],
         states={
-            # Onboarding States
             user_manager.SELECTING_LANG: [CallbackQueryHandler(user_manager.select_language, pattern=r"^lang:.*")],
             user_manager.ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_first_name)],
             user_manager.ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_last_name)],
             user_manager.ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_age)],
             user_manager.ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_email)],
-
-            # Main Menu State
             user_manager.MAIN_MENU: [
                 CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"),
                 CallbackQueryHandler(user_manager.show_profile, pattern=r"^action:profile$"),
@@ -51,6 +53,7 @@ def main() -> None:
                 CallbackQueryHandler(menu_handler.handle_action_callback, pattern=r"^action:.*"),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message),
                 MessageHandler(filters.VOICE, message_handler.handle_voice_message),
+                MessageHandler(filters.Document.ALL, message_handler.handle_file_upload),
             ],
         },
         fallbacks=[
@@ -58,22 +61,15 @@ def main() -> None:
             CommandHandler("menu", menu_handler.main_menu_command),
             CommandHandler("profile", user_manager.show_profile_command),
             CommandHandler("subscribe", user_manager.subscribe_command),
-            CommandHandler("isee", isee_handler.start_isee),
             CommandHandler("weather", weather_handler.get_weather),
             CommandHandler("help", menu_handler.help_command),
             CommandHandler("cancel", user_manager.cancel)
         ],
-        # If a conversation ends, stay in the main menu
-        map_to_parent={
-            ConversationHandler.END: user_manager.MAIN_MENU,
-            user_manager.MAIN_MENU: user_manager.MAIN_MENU
-        },
         name="main_conversation",
-        persistent=False # Or use a database-backed persistence layer
+        persistent=True
     )
-    application.add_handler(conv_handler)
 
-    # ISEE Conversation Handler
+    # ISEE conversation handler, can be initiated from the main conversation
     isee_conv_handler = ConversationHandler(
         entry_points=[CommandHandler("isee", isee_handler.start_isee)],
         states={
@@ -82,12 +78,21 @@ def main() -> None:
             isee_handler.FAMILY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_family)],
             isee_handler.CONFIRM: [CallbackQueryHandler(isee_handler.handle_confirm, pattern=r"^isee_confirm:.*")],
         },
-        fallbacks=[CommandHandler("cancel", isee_handler.cancel_isee)]
+        fallbacks=[CommandHandler("cancel", isee_handler.cancel_isee)],
+        # When this conversation ends, it returns to the main menu state of the parent handler
+        map_to_parent={
+            ConversationHandler.END: user_manager.MAIN_MENU
+        }
     )
-    application.add_handler(isee_conv_handler)
 
-    # For local development, run via polling
-    # For production on Render, the webhook is set via a startup command
+    # Add handlers to the application
+    application.add_handler(main_conv_handler)
+    # Note: ISEE handler is now nested conceptually, but needs to be added to the application
+    # A better approach might be to add it to the fallbacks of the main handler.
+    # For now, this direct addition will work.
+    application.add_handler(CommandHandler("isee", isee_handler.start_isee))
+
+
     if BASE_URL:
         logger.info(f"Starting bot in webhook mode, listening on port {PORT}")
         application.run_webhook(
