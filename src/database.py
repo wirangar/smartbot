@@ -53,6 +53,7 @@ def setup_database():
         email VARCHAR(255),
         language VARCHAR(5) DEFAULT 'fa',
         score INTEGER DEFAULT 0,
+        is_subscribed_to_notifications BOOLEAN DEFAULT FALSE,
         registration_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     );
     """

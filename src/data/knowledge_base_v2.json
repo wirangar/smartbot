@@ -1,612 +1,632 @@
 {
+  "بورسیه و تقویم آموزشی": [
+    {
+      "id": "scholarship_guide",
+      "title": {
+        "fa": "🎓 راهنمای جامع بورسیه استانی (ADiSU Umbria) 2025/2026",
+        "en": "🎓 Comprehensive Guide to Regional Scholarship (ADiSU Umbria) 2025/2026",
+        "it": "🎓 Guida Completa alla Borsa Regionale (ADiSU Umbria) 2025/2026"
+      },
+      "description": {
+        "fa": "راهنمای کامل شرایط، مدارک، و تغییرات بورسیه استانی ADiSU Umbria برای دانشجویان بین‌المللی در سال تحصیلی 2025/2026.",
+        "en": "Complete guide to eligibility, required documents, and changes for the ADiSU Umbria regional scholarship for international students in 2025/2026.",
+        "it": "Guida completa su requisiti, documenti richiesti e cambiamenti della borsa regionale ADiSU Umbria per studenti internazionali nel 2025/2026."
+      },
+      "content": {
+        "fa": [
+          "بورسیه استانی ADiSU Umbria برای حمایت از دانشجویان با وضعیت اقتصادی ضعیف طراحی شده و شامل کمک‌هزینه نقدی، خوابگاه رایگان، و غذای یارانه‌ای است.",
+          "📌 شرایط بورسیه 2025/2026:",
+          "- ثبت‌نام در یک دانشگاه در منطقه اومبریا (مثل University of Perugia).",
+          "- شاخص ISEE زیر 27,948.60 یورو و ISPE زیر 60,757.87 یورو (جزئیات در بخش ISEE).",
+          "- حداقل واحدهای درسی (CFU): 20 واحد برای سال اول، 40 واحد برای سال دوم، 80 واحد برای سال سوم (تا 31 اکتبر 2025).",
+          "- ارائه مدارک رسمی ترجمه‌شده و تأییدشده توسط سفارت ایتالیا در ایران.",
+          "- اقامت قانونی در ایتالیا (ویزای تحصیلی یا Permesso di Soggiorno).",
+          "📑 مدارک موردنیاز:",
+          "- کپی پاسپورت و ویزای تحصیلی یا کارت اقامت (Permesso).",
+          "- Codice Fiscale (کد مالیاتی ایتالیایی).",
+          "- گواهی ثبت‌نام دانشگاه (Immatricolazione).",
+          "- مدارک مالی (ترجمه رسمی):",
+          "  - اظهارنامه درآمد خانواده در سال 2023 (ترجمه‌شده و تأییدشده).",
+          "  - سند مالکیت ملک یا اجاره‌نامه (برای محاسبه ISEE).",
+          "  - گواهی مانده حساب بانکی (تأییدشده توسط سفارت).",
+          "- فرم درخواست بورسیه (دانلود از سایت ADiSU: https://www.adisu.umbria.it).",
+          "- گواهی واحدهای درسی (برای دانشجویان سال دوم به بالا).",
+          "💰 مزایای بورسیه:",
+          "- کمک‌هزینه نقدی: تا 5,192 یورو (بسته به ISEE).",
+          "- خوابگاه رایگان یا تخفیف اجاره (ارزش: 2,000-3,000 یورو در سال).",
+          "- غذای یارانه‌ای در کافه‌تریای دانشگاه (1-3 یورو به ازای هر وعده).",
+          "🔄 تفاوت‌های بورسیه 2025/2026 با 2024/2025:",
+          "- سقف ISEE از 26,306.25 یورو به 27,948.60 یورو افزایش یافته است.",
+          "- سقف ISPE از 57,000 یورو به 60,757.87 یورو افزایش یافته است.",
+          "- حداقل CFU برای سال دوم از 36 به 40 واحد افزایش یافته است.",
+          "- امکان ارائه مدارک آنلاین از طریق پرتال ADiSU اضافه شده است (نیازی به حضور حضوری نیست).",
+          "- مهلت ثبت‌نام از 31 اوت به 15 سپتامبر 2025 تمدید شده است.",
+          "⚠️ نکات حقوقی و هشدارها:",
+          "- مدارک باید به صورت رسمی به ایتالیایی ترجمه و توسط سفارت تأیید شوند.",
+          "- ارائه مدارک جعلی منجر به محرومیت دائمی از بورسیه و جریمه قانونی می‌شود.",
+          "- در صورت دریافت بورسیه، باید تا پایان سال تحصیلی در اومبریا اقامت داشته باشید.",
+          "📌 سؤالات رایج:",
+          "- آیا دانشجویان کارشناسی ارشد واجد شرایط هستند؟ بله، اگر شرایط ISEE و CFU را داشته باشند.",
+          "- اگر ISEE بالای سقف باشد؟ ممکن است واجد شرایط غذای یارانه‌ای یا خوابگاه با هزینه باشید.",
+          "- مدارک را کجا تحویل دهیم؟ از طریق پرتال ADiSU یا حضوری در دفتر ADiSU: Via Benedetta, 14, 06123 Perugia.",
+          "💡 توصیه‌ها:",
+          "- مدارک را حداقل 2 ماه قبل از ددلاین آماده کنید.",
+          "- با دفتر ADiSU (info@adisu.umbria.it) یا ESN Perugia برای راهنمایی تماس بگیرید.",
+          "- از اپلیکیشن MyUnipg برای بررسی وضعیت واحدهای درسی استفاده کنید: https://play.google.com/store/apps/details?id=it.unipg.myunipg"
+        ],
+        "en": [
+          "The ADiSU Umbria regional scholarship supports students with limited financial means, offering cash grants, free dormitories, and subsidized meals.",
+          "📌 Eligibility for 2025/2026:",
+          "- Enrollment at a university in Umbria (e.g., University of Perugia).",
+          "- ISEE below €27,948.60 and ISPE below €60,757.87 (see ISEE section).",
+          "- Minimum academic credits (CFU): 20 for first year, 40 for second year, 80 for third year (by October 31, 2025).",
+          "- Officially translated and certified financial documents (by Italian embassy in Iran).",
+          "- Legal residence in Italy (study visa or Permesso di Soggiorno).",
+          "📑 Required Documents:",
+          "- Copy of passport and study visa or residence permit (Permesso).",
+          "- Codice Fiscale (Italian tax code).",
+          "- University enrollment certificate (Immatricolazione).",
+          "- Financial documents (officially translated):",
+          "  - Family income statement for 2023 (translated and certified).",
+          "  - Property deed or rental contract (for ISEE calculation).",
+          "  - Bank account balance certificate (certified by embassy).",
+          "- Scholarship application form (download from ADiSU website: https://www.adisu.umbria.it).",
+          "- Academic transcript (for second-year students and above).",
+          "💰 Scholarship Benefits:",
+          "- Cash grant: Up to €5,192 (based on ISEE).",
+          "- Free dormitory or rent subsidy (worth €2,000-3,000/year).",
+          "- Subsidized meals at university cafeterias (€1-3 per meal).",
+          "🔄 Changes from 2024/2025 to 2025/2026:",
+          "- ISEE threshold increased from €26,306.25 to €27,948.60.",
+          "- ISPE threshold increased from €57,000 to €60,757.87.",
+          "- Minimum CFU for second year raised from 36 to 40 credits.",
+          "- Online document submission now available via ADiSU portal (no in-person requirement).",
+          "- Application deadline extended from August 31 to September 15, 2025.",
+          "⚠️ Legal Notes and Warnings:",
+          "- Documents must be officially translated to Italian and certified by the Italian embassy.",
+          "- Submitting false documents leads to permanent scholarship disqualification and legal penalties.",
+          "- Scholarship recipients must reside in Umbria for the academic year.",
+          "📌 FAQs:",
+          "- Are master’s students eligible? Yes, if they meet ISEE and CFU requirements.",
+          "- What if my ISEE is above the threshold? You may still qualify for subsidized meals or paid dormitories.",
+          "- Where to submit documents? Via ADiSU portal or in person at ADiSU office: Via Benedetta, 14, 06123 Perugia.",
+          "💡 Tips:",
+          "- Prepare documents at least 2 months before the deadline.",
+          "- Contact ADiSU (info@adisu.umbria.it) or ESN Perugia for guidance.",
+          "- Use the MyUnipg app to track academic credits: https://play.google.com/store/apps/details?id=it.unipg.myunipg"
+        ],
+        "it": [
+          "La borsa regionale ADiSU Umbria supporta studenti con risorse economiche limitate, offrendo contributi in denaro, dormitori gratuiti e pasti sovvenzionati.",
+          "📌 Requisiti per il 2025/2026:",
+          "- Iscrizione a un’università in Umbria (es. Università di Perugia).",
+          "- ISEE inferiore a €27,948.60 e ISPE inferiore a €60,757.87 (vedi sezione ISEE).",
+          "- Crediti accademici minimi (CFU): 20 per il primo anno, 40 per il secondo, 80 per il terzo (entro il 31 ottobre 2025).",
+          "- Documenti finanziari tradotti ufficialmente e certificati dall’ambasciata italiana in Iran.",
+          "- Residenza legale in Italia (visto di studio o Permesso di Soggiorno).",
+          "📑 Documenti richiesti:",
+          "- Copia del passaporto e visto di studio o permesso di soggiorno.",
+          "- Codice Fiscale.",
+          "- Certificato di iscrizione universitaria (Immatricolazione).",
+          "- Documenti finanziari (tradotti ufficialmente):",
+          "  - Dichiarazione dei redditi familiari 2023 (tradotta e certificata).",
+          "  - Atto di proprietà o contratto d’affitto (per calcolo ISEE).",
+          "  - Certificato di saldo bancario (certificato dall’ambasciata).",
+          "- Modulo di domanda per la borsa (scaricabile dal sito ADiSU: https://www.adisu.umbria.it).",
+          "- Transcript accademico (per studenti dal secondo anno in poi).",
+          "💰 Benefici della borsa:",
+          "- Contributo in denaro: Fino a €5,192 (in base all’ISEE).",
+          "- Dormitorio gratuito o sussidio per l’affitto (valore: €2,000-3,000/anno).",
+          "- Pasti sovvenzionati nelle mense universitarie (€1-3 a pasto).",
+          "🔄 Cambiamenti dal 2024/2025 al 2025/2026:",
+          "- Soglia ISEE aumentata da €26,306.25 a €27,948.60.",
+          "- Soglia ISPE aumentata da €57,000 a €60,757.87.",
+          "- CFU minimo per il secondo anno aumentato da 36 a 40 crediti.",
+          "- Possibilità di inviare documenti online tramite il portale ADiSU (non più richiesta presenza fisica).",
+          "- Scadenza per la domanda estesa dal 31 agosto al 15 settembre 2025.",
+          "⚠️ Note legali e avvertenze:",
+          "- I documenti devono essere tradotti ufficialmente in italiano e certificati dall’ambasciata italiana.",
+          "- La presentazione di documenti falsi comporta la squalifica permanente dalla borsa e sanzioni legali.",
+          "- I beneficiari della borsa devono risiedere in Umbria per l’anno accademico.",
+          "📌 Domande frequenti:",
+          "- Gli studenti di master sono idonei? Sì, se soddisfano i requisiti ISEE e CFU.",
+          "- Se il mio ISEE supera la soglia? Potresti comunque accedere a mense sovvenzionate o dormitori a pagamento.",
+          "- Dove consegnare i documenti? Tramite il portale ADiSU o di persona presso l’ufficio ADiSU: Via Benedetta, 14, 06123 Perugia.",
+          "💡 Consigli:",
+          "- Prepara i documenti almeno 2 mesi prima della scadenza.",
+          "- Contatta ADiSU (info@adisu.umbria.it) o ESN Perugia per assistenza.",
+          "- Usa l’app MyUnipg per monitorare i crediti accademici: https://play.google.com/store/apps/details?id=it.unipg.myunipg"
+        ]
+      }
+    },
+    {
+      "id": "academic_calendar",
+      "title": {
+        "fa": "📅 تقویم سال تحصیلی 2025/2026",
+        "en": "📅 Academic Calendar 2025/2026",
+        "it": "📅 Calendario Accademico 2025/2026"
+      },
+      "description": {
+        "fa": "تقویم کامل سال تحصیلی دانشگاه پروجا شامل رویدادهای دانشگاهی، تعطیلات رسمی، امتحانات، و برنامه‌های ESN برای دانشجویان بین‌المللی.",
+        "en": "Complete University of Perugia academic calendar covering university events, public holidays, exams, and ESN programs for international students.",
+        "it": "Calendario accademico completo dell'Università di Perugia con eventi universitari, festività, esami e programmi ESN per studenti internazionali."
+      },
+      "details": {
+        "fa": [
+          "🎓 نمایشگاه معرفی دانشگاه: ۱-۱۵ مهر ۱۴۰۴ (۱-۱۵ اکتبر ۲۰۲۵) - فرصتی برای آشنایی با دپارتمان‌ها و امکانات دانشگاه.",
+          "🎉 جشن خوش‌آمدگویی ESN: ۱۰-۲۰ آبان ۱۴۰۴ (۱۰-۲۰ نوامبر ۲۰۲۵) - رویدادهای اجتماعی برای دانشجویان جدید.",
+          "🧪 امتحانات میان‌ترم: ۱۵-۳۰ دی ۱۴۰۴ (۱۵-۳۰ ژانویه ۲۰۲۶) - بسته به رشته ممکن است متفاوت باشد.",
+          "⛱️ تعطیلات زمستانی: ۲۹ آذر تا ۱۶ دی ۱۴۰۴ (۲۰ دسامبر ۲۰۲۵ - ۶ ژانویه ۲۰۲۶) - دانشگاه تعطیل است.",
+          "📝 امتحانات پایان‌ترم: ۱ بهمن تا ۱۵ اسفند ۱۴۰۴ (ژانویه-فوریه ۲۰۲۶) - برنامه دقیق را از پرتال دانشگاه بررسی کنید.",
+          "📚 شروع ترم دوم: ۱۱ اسفند ۱۴۰۴ (۱ مارس ۲۰۲۶) - آغاز کلاس‌های ترم دوم.",
+          "🎓 نمایشگاه فرصت‌های کاری AlmaLaurea: ۱-۱۵ اردیبهشت ۱۴۰۵ (۱-۱۵ می ۲۰۲۶) - فرصتی برای شبکه‌سازی و یافتن کار.",
+          "💡 نکته: برای جزئیات دقیق‌تر (مثل تاریخ امتحانات هر رشته)، به پرتال دانشگاه مراجعه کنید: https://unipg.esse3.cineca.it",
+          "📌 سؤال رایج: اگر امتحانات با تعطیلات تداخل داشته باشد؟ با استاد خود هماهنگ کنید یا با دفتر بین‌الملل تماس بگیرید: international@unipg.it"
+        ],
+        "en": [
+          "🎓 University orientation fair: October 1-15, 2025 - Opportunity to explore departments and facilities.",
+          "🎉 ESN welcome event: November 10-20, 2025 - Social events for new students.",
+          "🧪 Midterm exams: January 15-30, 2026 - May vary by department.",
+          "⛱️ Winter holidays: December 20, 2025 - January 6, 2026 - University closed.",
+          "📝 Final exams: January-February 2026 - Check exact schedule on the university website.",
+          "📚 Second semester begins: March 1, 2026 - Start of second-semester classes.",
+          "🎓 AlmaLaurea Career Fair: May 1-15, 2026 - Networking and job opportunities.",
+          "💡 Tip: For precise details (e.g., exam dates by department), check the university portal: https://unipg.esse3.cineca.it",
+          "📌 FAQ: What if exams conflict with holidays? Coordinate with your professor or contact the international office: international@unipg.it"
+        ],
+        "it": [
+          "🎓 Fiera informativa universitaria: 1-15 ottobre 2025 - Opportunità per conoscere dipartimenti e servizi.",
+          "🎉 Evento di benvenuto ESN: 10-20 novembre 2025 - Eventi sociali per nuovi studenti.",
+          "🧪 Esami intermedi: 15-30 gennaio 2026 - Possono variare a seconda del dipartimento.",
+          "⛱️ Vacanze invernali: 20 dicembre 2025 - 6 gennaio 2026 - Università chiusa.",
+          "📝 Esami finali: Gennaio-Febbraio 2026 - Controlla il calendario esatto sul sito dell’università.",
+          "📚 Inizio secondo semestre: 1 marzo 2026 - Inizio delle lezioni del secondo semestre.",
+          "🎓 Fiera del lavoro AlmaLaurea: 1-15 maggio 2026 - Opportunità di networking e lavoro.",
+          "💡 Consiglio: Per dettagli precisi (es. date esami per dipartimento), consulta il portale universitario: https://unipg.esse3.cineca.it",
+          "📌 Domanda frequente: Cosa fare se gli esami coincidono con le festività? Coordina con il professore o contatta l’ufficio internazionale: international@unipg.it"
+        ]
+      }
+    },
+    {
+      "id": "isee_explanation",
+      "title": {
+        "fa": "📊 توضیح کامل عدد ISEE و نحوه محاسبه آن",
+        "en": "📊 Full Explanation of ISEE Number and Calculation",
+        "it": "📊 Spiegazione Completa del Numero ISEE e Calcolo"
+      },
+      "description": {
+        "fa": "ISEE شاخصی کلیدی برای ارزیابی وضعیت اقتصادی خانواده جهت دریافت بورسیه‌های استانی (مانند ADiSU) و خدمات دانشجویی است.",
+        "en": "ISEE is a key index for assessing a family’s economic situation to qualify for regional scholarships (e.g., ADiSU) and student services.",
+        "it": "ISEE è un indice chiave per valutare la situazione economica di una famiglia per borse di studio regionali (es. ADiSU) e servizi per studenti."
+      },
+      "content": {
+        "fa": [
+          "ISEE (Indicatore della Situazione Economica Equivalente) شاخصی برای ارزیابی توان مالی خانواده است که برای دریافت بورسیه‌های استانی (مانند ADiSU Umbria) و خدمات دانشجویی (خوابگاه، غذای یارانه‌ای) استفاده می‌شود.",
+          "اجزای ISEE:",
+          "۱. ISE (شاخص وضعیت اقتصادی): مجموع درآمد خالص سالانه خانواده (فیش حقوقی، درآمد آزاد) به علاوه ۲۰٪ ارزش دارایی‌ها (املاک، حساب‌های بانکی، ماشین).",
+          "۲. Scala di Equivalenza: پارامتری که تأثیر تعداد اعضای خانواده را تنظیم می‌کند.",
+          "سقف‌های سال 2025/2026:",
+          "- ISEE: 27,948.60 یورو",
+          "- ISPE (شاخص اموال): 60,757.87 یورو",
+          "فرمول ساده‌شده: ISEE = (درآمد سالانه سرپرست + ۲۰٪ ارزش دارایی‌ها) ÷ پارامتر X",
+          "محاسبه دارایی‌ها:",
+          "- ارزش ملک: متراژ خانه × ۵۰۰ یورو (برای اجاره‌نشین‌ها = ۰).",
+          "- ارزش سایر دارایی‌ها (مثل حساب بانکی یا ماشین) بر اساس قوانین INPS محاسبه می‌شود.",
+          "پارامتر X بر اساس تعداد اعضای خانواده:",
+          "- ۱ نفر: ۱.۰۰",
+          "- ۲ نفر: ۱.۵۷",
+          "- ۳ نفر: ۲.۰۴",
+          "- ۴ نفر: ۲.۴۶",
+          "- ۵ نفر: ۲.۸۵",
+          "- هر نفر بیشتر: +۰.۳۵",
+          "مثال محاسبه: خانواده ۴ نفره، خانه ۱۰۰ متری، درآمد ماهانه ۲,۰۰۰,۰۰۰ تومان، نرخ یورو ۳۵۰۰ تومان، حساب بانکی ۵,۰۰۰ یورو:",
+          "- ارزش ملک: 100 × 500 × 20% = 10,000 یورو",
+          "- درآمد سالانه: (2,000,000 ÷ 3500) × 12 ≈ 6,857 یورو",
+          "- ارزش حساب بانکی: 5,000 × 20% = 1,000 یورو",
+          "- مجموع ISE: 6,857 + 10,000 + 1,000 = 17,857 یورو",
+          "- تقسیم بر پارامتر (2.46): 17,857 ÷ 2.46 ≈ 7,259 یورو (واجد شرایط بورسیه کامل)",
+          "نکات مهم:",
+          "- محاسبه دقیق ISEE توسط مراکز CAF یا INPS انجام می‌شود: http://www.inps.it",
+          "- مدارک موردنیاز: ترجمه رسمی درآمد ۲۰۲۳، سند ملک یا اجاره‌نامه، مانده حساب بانکی (تأییدشده توسط سفارت).",
+          "- برخی استان‌ها (مانند ER-GO در بولونیا) بورسیه را بر اساس بازه‌های ISEE تقسیم می‌کنند:",
+          "  - زیر 15,333 یورو: بورسیه کامل (5,192 یورو + خوابگاه رایگان)",
+          "  - 15,333-16,866 یورو: بورسیه کاهش‌یافته (3,634 یورو)",
+          "  - بالای 27,948.60 یورو: واجد شرایط نیست.",
+          "سؤالات رایج:",
+          "- سند خانه یا اجاره‌نامه؟ اجاره‌نشین‌ها معمولاً ISEE پایین‌تری دارند و در اولویت خوابگاه هستند.",
+          "- نرخ تبدیل ارز؟ از نرخ رسمی بانک مرکزی ایران در سال ۲۰۲۳ (یا نرخ اعلام‌شده توسط سفارت) استفاده کنید.",
+          "هشدار: ارائه مدارک جعلی منجر به محرومیت از بورسیه و جریمه قانونی می‌شود.",
+          "💡 توصیه: قبل از ارسال مدارک، با دفتر ADiSU (info@adisu.umbria.it) یا ESN Perugia مشورت کنید."
+        ],
+        "en": [
+          "ISEE (Equivalent Economic Situation Indicator) is a key index used to assess a family’s economic situation for regional scholarships (e.g., ADiSU Umbria) and student services (dormitories, subsidized meals).",
+          "Components of ISEE:",
+          "1. ISE (Economic Situation Index): Total annual net income (salaries, freelance income) plus 20% of asset value (properties, bank accounts, cars).",
+          "2. Scala di Equivalenza: A parameter adjusting for family size.",
+          "Thresholds for 2025/2026:",
+          "- ISEE: €27,948.60",
+          "- ISPE (asset index): €60,757.87",
+          "Simplified formula: ISEE = (Annual income + 20% asset value) ÷ Parameter X",
+          "Asset calculation:",
+          "- Property value: House square meters × €500 (zero for renters).",
+          "- Other assets (e.g., bank accounts, cars) calculated per INPS rules.",
+          "Parameter X based on family size:",
+          "- 1 person: 1.00",
+          "- 2 people: 1.57",
+          "- 3 people: 2.04",
+          "- 4 people: 2.46",
+          "- 5 people: 2.85",
+          "- Each additional person: +0.35",
+          "Example: 4-person family, 100m² house, monthly income 2,000,000 IRR, exchange rate 3500 IRR/EUR, bank account €5,000:",
+          "- Property value: 100 × 500 × 20% = €10,000",
+          "- Annual income: (2,000,000 ÷ 3500) × 12 ≈ €6,857",
+          "- Bank account value: 5,000 × 20% = €1,000",
+          "- Total ISE: 6,857 + 10,000 + 1,000 = €17,857",
+          "- Divided by parameter (2.46): 17,857 ÷ 2.46 ≈ €7,259 (eligible for full scholarship)",
+          "Key notes:",
+          "- Official ISEE calculation is done by CAF or INPS: http://www.inps.it",
+          "- Required documents: Certified translations of 2023 income, property deed or rental contract, bank balance (verified by Italian embassy).",
+          "- Some regions (e.g., ER-GO in Bologna) divide scholarships by ISEE ranges:",
+          "  - Below €15,333: Full scholarship (€5,192 + free dormitory)",
+          "  - €15,333-€16,866: Reduced scholarship (€3,634)",
+          "  - Above €27,948.60: Not eligible.",
+          "FAQs:",
+          "- Property deed or rental contract? Renters typically have lower ISEE and priority for dormitories.",
+          "- Currency exchange rate? Use the official 2023 rate from Iran’s Central Bank or embassy-provided rate.",
+          "Warning: Submitting false documents leads to scholarship disqualification and legal penalties.",
+          "💡 Tip: Consult ADiSU (info@adisu.umbria.it) or ESN Perugia before submitting documents."
+        ],
+        "it": [
+          "ISEE (Indicatore della Situazione Economica Equivalente) è un indice chiave per valutare la situazione economica di una famiglia per borse di studio regionali (es. ADiSU Umbria) e servizi per studenti (dormitori, mense sovvenzionate).",
+          "Componenti dell’ISEE:",
+          "1. ISE (Indice della Situazione Economica): Reddito netto annuo totale (stipendi, reddito freelance) più il 20% del valore degli asset (proprietà, conti bancari, auto).",
+          "2. Scala di Equivalenza: Un parametro che regola in base alla dimensione della famiglia.",
+          "Soglie per il 2025/2026:",
+          "- ISEE: €27,948.60",
+          "- ISPE (indice patrimoniale): €60,757.87",
+          "Formula semplificata: ISEE = (Reddito annuo + 20% valore asset) ÷ Parametro X",
+          "Calcolo degli asset:",
+          "- Valore proprietà: Metri quadrati casa × €500 (zero per affittuari).",
+          "- Altri asset (es. conti bancari, auto) calcolati secondo le regole INPS.",
+          "Parametro X in base alla dimensione della famiglia:",
+          "- 1 persona: 1.00",
+          "- 2 persone: 1.57",
+          "- 3 persone: 2.04",
+          "- 4 persone: 2.46",
+          "- 5 persone: 2.85",
+          "- Ogni persona aggiuntiva: +0.35",
+          "Esempio: Famiglia di 4 persone, casa di 100m², reddito mensile 2,000,000 IRR, tasso di cambio 3500 IRR/EUR, conto bancario €5,000:",
+          "- Valore proprietà: 100 × 500 × 20% = €10,000",
+          "- Reddito annuo: (2,000,000 ÷ 3500) × 12 ≈ €6,857",
+          "- Valore conto bancario: 5,000 × 20% = €1,000",
+          "- Totale ISE: 6,857 + 10,000 + 1,000 = €17,857",
+          "- Diviso per parametro (2.46): 17,857 ÷ 2.46 ≈ €7,259 (idoneo per borsa completa)",
+          "Note importanti:",
+          "- Il calcolo ufficiale ISEE è effettuato da CAF o INPS: http://www.inps.it",
+          "- Documenti richiesti: Traduzioni certificate di reddito 2023, atto di proprietà o contratto d’affitto, saldo bancario (certificato dall’ambasciata).",
+          "- Alcune regioni (es. ER-GO a Bologna) suddividono le borse per fasce ISEE:",
+          "  - Sotto €15,333: Borsa completa (€5,192 + dormitorio gratuito)",
+          "  - €15,333-€16,866: Borsa ridotta (€3,634)",
+          "  - Sopra €27,948.60: Non idoneo.",
+          "Domande frequenti:",
+          "- Atto di proprietà o contratto d’affitto? Gli affittuari hanno generalmente un ISEE più basso e priorità per i dormitori.",
+          "- Tasso di cambio? Usa il tasso ufficiale 2023 della Banca Centrale dell’Iran o quello fornito dall’ambasciata.",
+          "Attenzione: La presentazione di documenti falsi comporta la squalifica dalla borsa e sanzioni legali.",
+          "💡 Consiglio: Consulta ADiSU (info@adisu.umbria.it) o ESN Perugia prima di inviare i documenti."
+        ]
+      }
+    }
+  ],
   "راهنمای دانشجویی": [
     {
-      "id": "scholarships",
+      "id": "academic_calendar",
       "title": {
-        "fa": "🎓 بورسیه‌های تحصیلی و کمک‌هزینه‌های دانشجویی",
-        "en": "🎓 Scholarships and Student Financial Aid",
-        "it": "🎓 Borse di Studio e Aiuti Finanziari per Studenti"
+        "fa": "📅 تقویم سال تحصیلی 2025/2026 با جزئیات تصویری",
+        "en": "📅 Academic Calendar 2025/2026 with Visual Details",
+        "it": "📅 Calendario Accademico 2025/2026 con Dettagli Visivi"
       },
       "description": {
-        "fa": "راهنمای جامع بورسیه‌های تحصیلی و کمک‌هزینه‌های دانشجویی در پروجا، شامل ADiSU، Erasmus+، و سایر گزینه‌ها با ددلاین‌ها و نکات.",
-        "en": "Comprehensive guide to scholarships and financial aid for students in Perugia, including ADiSU, Erasmus+, and other options with deadlines and tips.",
-        "it": "Guida completa alle borse di studio e agli aiuti finanziari per studenti a Perugia, incluse ADiSU, Erasmus+ e altre opzioni con scadenze e consigli."
+        "fa": "تقویم جامع دانشگاه پروجا با رویدادهای کلیدی، تعطیلات، ددلاین‌های تحصیلی، و تصاویر مرتبط برای راهنمایی دانشجویان بین‌المللی.",
+        "en": "Comprehensive University of Perugia calendar with key events, holidays, academic deadlines, and related visuals for international students.",
+        "it": "Calendario completo dell'Università di Perugia con eventi chiave, festività, scadenze accademiche e immagini correlate per studenti internazionali."
       },
       "subsections": [
         {
           "title": {
-            "fa": "بورسیه ADiSU Umbria",
-            "en": "ADiSU Umbria Scholarship",
-            "it": "Borsa ADiSU Umbria"
+            "fa": "رویدادهای کلیدی دانشگاهی",
+            "en": "Key Academic Events",
+            "it": "Eventi Accademici Chiave"
           },
           "content": {
             "fa": [
-              "📋 **شرایط**:",
-              "- ثبت‌نام در دانشگاه پروجا.",
-              "- ISEE کمتر از €۲۳,۰۰۰ (محاسبه در CAF).",
-              "- حداقل واحدهای تحصیلی (مثل ۲۰ واحد در سال اول).",
-              "💰 **مزایا**: تا €۴,۰۰۰ سالانه + خوابگاه رایگان یا تخفیف غذا در کافه‌تریا.",
-              "📅 **ددلاین**: ۱۵ سپتامبر ۲۰۲۵ (۲۴ شهریور ۱۴۰۴).",
-              "📝 **مراحل درخواست**:",
-              "۱. فرم را از https://www.adisu.umbria.it/moduli دانلود کنید.",
-              "۲. اطلاعات شخصی، ISEE، و گواهی ثبت‌نام را وارد کنید.",
-              "۳. مدارک را در پرتال ADiSU (https://portale.adisu.umbria.it) آپلود کنید یا به دفتر ADiSU (Via Benedetta, 14, Perugia) تحویل دهید.",
-              "💡 **نکته**: مدارک باید به ایتالیایی ترجمه شوند."
+              "🎓 **نمایشگاه معرفی دانشگاه (Fiera di Orientamento)**: ۱-۱۵ مهر ۱۴۰۴ (۱-۱۵ اکتبر ۲۰۲۵) - رویدادی برای آشنایی با دپارتمان‌ها، امکانات، و خدمات دانشگاه. شامل غرفه‌های اطلاعاتی، تورهای دانشگاه، و جلسات معرفی رشته‌ها. محل: Palazzo Murena, Piazza dell’Università, 06123 Perugia (نقشه: https://maps.app.goo.gl/PalazzoMurena).",
+              "🎉 **جشن خوش‌آمدگویی ESN**: ۱۰-۲۰ آبان ۱۴۰۴ (۱۰-۲۰ نوامبر ۲۰۲۵) - مجموعه‌ای از رویدادهای اجتماعی مانند تورهای شهر، مهمانی‌های دانشجویی، و کارگاه‌های فرهنگی برای دانشجویان جدید. اطلاعات بیشتر: https://perugia.esn.it/events. محل نمونه: Centro Storico, Perugia.",
+              "🧪 **امتحانات میان‌ترم**: ۱۵-۳۰ دی ۱۴۰۴ (۱۵-۳۰ ژانویه ۲۰۲۶) - امتحانات برای اکثر رشته‌ها برگزار می‌شود. برنامه دقیق هر رشته در پرتال دانشگاه: https://unipg.esse3.cineca.it.",
+              "⛱️ **تعطیلات زمستانی**: ۲۹ آذر تا ۱۶ دی ۱۴۰۴ (۲۰ دسامبر ۲۰۲۵ - ۶ ژانویه ۲۰۲۶) - دانشگاه و ادارات تعطیل هستند. کافه‌تریاها و خوابگاه‌ها ممکن است خدمات محدودی ارائه دهند.",
+              "📝 **امتحانات پایان‌ترم**: ۱ بهمن تا ۱۵ اسفند ۱۴۰۴ (ژانویه-فوریه ۲۰۲۶) - امتحانات ترم اول. برای ثبت‌نام امتحان، حداقل ۱۰ روز قبل در پرتال Esse3 اقدام کنید.",
+              "📚 **شروع ترم دوم**: ۱۱ اسفند ۱۴۰۴ (۱ مارس ۲۰۲۶) - آغاز کلاس‌های ترم دوم. لیست دروس در پرتال دانشگاه.",
+              "🎓 **نمایشگاه فرصت‌های کاری AlmaLaurea**: ۱-۱۵ اردیبهشت ۱۴۰۵ (۱-۱۵ می ۲۰۲۶) - رویداد شبکه‌سازی برای یافتن فرصت‌های شغلی و کارآموزی. محل: Centro Congressi, Via della Pallotta, 06126 Perugia."
             ],
             "en": [
-              "📋 **Eligibility**:",
-              "- Enrolled at University of Perugia.",
-              "- ISEE below €23,000 (calculated at CAF).",
-              "- Minimum academic credits (e.g., 20 credits in first year).",
-              "💰 **Benefits**: Up to €4,000 annually + free dorm or cafeteria discounts.",
-              "📅 **Deadline**: September 15, 2025.",
-              "📝 **Application Steps**:",
-              "1. Download form from https://www.adisu.umbria.it/moduli.",
-              "2. Enter personal details, ISEE, and enrollment certificate.",
-              "3. Upload documents on ADiSU portal (https://portale.adisu.umbria.it) or submit to ADiSU office (Via Benedetta, 14, Perugia).",
-              "💡 **Tip**: Documents must be translated into Italian."
+              "🎓 **University Orientation Fair (Fiera di Orientamento)**: October 1-15, 2025 - Event to explore departments, facilities, and university services. Includes info booths, campus tours, and program introductions. Location: Palazzo Murena, Piazza dell’Università, 06123 Perugia (map: https://maps.app.goo.gl/PalazzoMurena).",
+              "🎉 **ESN Welcome Event**: November 10-20, 2025 - Social events like city tours, student parties, and cultural workshops for new students. Details: https://perugia.esn.it/events. Sample location: Centro Storico, Perugia.",
+              "🧪 **Midterm Exams**: January 15-30, 2026 - Exams for most programs. Check schedules on university portal: https://unipg.esse3.cineca.it.",
+              "⛱️ **Winter Holidays**: December 20, 2025 - January 6, 2026 - University and offices closed. Cafeterias and dorms may have limited services.",
+              "📝 **Final Exams**: January-February 2026 - First-semester exams. Register at least 10 days in advance via Esse3 portal.",
+              "📚 **Second Semester Starts**: March 1, 2026 - Beginning of second-semester classes. Course lists on university portal.",
+              "🎓 **AlmaLaurea Career Fair**: May 1-15, 2026 - Networking event for job and internship opportunities. Location: Centro Congressi, Via della Pallotta, 06126 Perugia."
             ],
             "it": [
-              "📋 **Requisiti**:",
-              "- Iscritto all’Università di Perugia.",
-              "- ISEE inferiore a €23.000 (calcolato presso CAF).",
-              "- Crediti accademici minimi (es. 20 crediti nel primo anno).",
-              "💰 **Vantaggi**: Fino a €4.000 all’anno + dormitorio gratuito o sconti in mensa.",
-              "📅 **Scadenza**: 15 settembre 2025.",
-              "📝 **Passaggi per la Richiesta**:",
-              "1. Scarica il modulo da https://www.adisu.umbria.it/moduli.",
-              "2. Inserisci dati personali, ISEE e certificato di iscrizione.",
-              "3. Carica i documenti sul portale ADiSU (https://portale.adisu.umbria.it) o consegnali all’ufficio ADiSU (Via Benedetta, 14, Perugia).",
-              "💡 **Consiglio**: I documenti devono essere tradotti in italiano."
+              "🎓 **Fiera di Orientamento**: 1-15 ottobre 2025 - Evento per scoprire dipartimenti, strutture e servizi universitari. Include stand informativi, tour del campus e presentazioni dei corsi. Luogo: Palazzo Murena, Piazza dell’Università, 06123 Perugia (mappa: https://maps.app.goo.gl/PalazzoMurena).",
+              "🎉 **Evento di Benvenuto ESN**: 10-20 novembre 2025 - Eventi sociali come tour della città, feste studentesche e workshop culturali per nuovi studenti. Dettagli: https://perugia.esn.it/events. Luogo campione: Centro Storico, Perugia.",
+              "🧪 **Esami Intermedi**: 15-30 gennaio 2026 - Esami per la maggior parte dei corsi. Controlla gli orari sul portale: https://unipg.esse3.cineca.it.",
+              "⛱️ **Vacanze Invernali**: 20 dicembre 2025 - 6 gennaio 2026 - Università e uffici chiusi. Mense e dormitori possono avere servizi limitati.",
+              "📝 **Esami Finali**: Gennaio-Febbraio 2026 - Esami del primo semestre. Registrati almeno 10 giorni prima tramite il portale Esse3.",
+              "📚 **Inizio Secondo Semestre**: 1 marzo 2026 - Inizio delle lezioni del secondo semestre. Elenco corsi sul portale universitario.",
+              "🎓 **Fiera del Lavoro AlmaLaurea**: 1-15 maggio 2026 - Evento di networking per opportunità di lavoro e stage. Luogo: Centro Congressi, Via della Pallotta, 06126 Perugia."
             ]
           }
         },
         {
           "title": {
-            "fa": "بورسیه Erasmus+ و سایر گزینه‌ها",
-            "en": "Erasmus+ and Other Scholarships",
-            "it": "Erasmus+ e Altre Borse"
+            "fa": "ددلاین‌های مهم",
+            "en": "Important Deadlines",
+            "it": "Scadenze Importanti"
           },
           "content": {
             "fa": [
-              "🌍 **Erasmus+**:",
-              "- برای تبادل دانشجویی در اروپا. کمک‌هزینه: €۳۰۰-۵۰۰/ماه.",
-              "- درخواست از دفتر بین‌الملل دانشگاه (international@unipg.it).",
-              "- ددلاین: فوریه ۲۰۲۶ (دقیق در https://unipg.it/international).",
-              "🎓 **بورسیه‌های دانشگاه**:",
-              "- بورسیه شایستگی (Merit-Based): برای دانشجویان ممتاز (معدل بالای ۸۰٪).",
-              "- اطلاعات در پرتال دانشگاه: https://unipg.it/scholarships.",
-              "💡 **نکته**: برای Erasmus+، مدرک زبان (مثل IELTS 6.5) لازم است."
+              "📅 **مهلت ثبت‌نام امتحانات**: حداقل ۱۰ روز قبل از هر امتحان در پرتال Esse3.",
+              "📅 **مهلت ارسال مدارک بورسیه ADiSU**: ۱۵ سپتامبر ۲۰۲۵ (۲۴ شهریور ۱۴۰۴).",
+              "📅 **مهلت انتخاب دروس ترم دوم**: ۲۸ فوریه ۲۰۲۶ (۹ اسفند ۱۴۰۴).",
+              "💡 فایل نمونه تقویم تصویری: academic_calendar_2025.pdf (در فایل‌های پروژه)."
             ],
             "en": [
-              "🌍 **Erasmus+**:",
-              "- For student exchange in Europe. Grant: €300-500/month.",
-              "- Apply via university international office (international@unipg.it).",
-              "- Deadline: February 2026 (check https://unipg.it/international).",
-              "🎓 **University Scholarships**:",
-              "- Merit-Based Scholarship: For high-achieving students (GPA above 80%).",
-              "- Details on university portal: https://unipg.it/scholarships.",
-              "💡 **Tip**: Erasmus+ requires a language certificate (e.g., IELTS 6.5)."
+              "📅 **Exam Registration Deadline**: At least 10 days before each exam on Esse3 portal.",
+              "📅 **ADiSU Scholarship Application Deadline**: September 15, 2025.",
+              "📅 **Second Semester Course Selection Deadline**: February 28, 2026.",
+              "💡 Sample visual calendar: academic_calendar_2025.pdf (in project files)."
             ],
             "it": [
-              "🌍 **Erasmus+**:",
-              "- Per scambi studenteschi in Europa. Contributo: €300-500/mese.",
-              "- Richiedi tramite l’ufficio internazionale dell’università (international@unipg.it).",
-              "- Scadenza: febbraio 2026 (verifica su https://unipg.it/international).",
-              "🎓 **Borse Universitarie**:",
-              "- Borsa al Merito: Per studenti eccellenti (media superiore all’80%).",
-              "- Dettagli sul portale universitario: https://unipg.it/scholarships.",
-              "💡 **Consiglio**: Per Erasmus+ è richiesto un certificato linguistico (es. IELTS 6.5)."
+              "📅 **Scadenza Registrazione Esami**: Almeno 10 giorni prima di ogni esame sul portale Esse3.",
+              "📅 **Scadenza Domanda Borsa ADiSU**: 15 settembre 2025.",
+              "📅 **Scadenza Scelta Corsi Secondo Semestre**: 28 febbraio 2026.",
+              "💡 Calendario visivo di esempio: academic_calendar_2025.pdf (nei file del progetto)."
             ]
           }
         },
         {
           "title": {
-            "fa": "نکات و سؤالات رایج",
-            "en": "Tips and FAQs",
-            "it": "Consigli e Domande Frequenti"
+            "fa": "نکات و منابع",
+            "en": "Tips and Resources",
+            "it": "Consigli e Risorse"
           },
           "content": {
             "fa": [
-              "💡 **توصیه**: ISEE را زودتر محاسبه کنید تا ددلاین را از دست ندهید.",
-              "⚠️ **هشدار**: مدارک جعلی باعث رد درخواست و محرومیت از بورسیه می‌شود.",
-              "📌 **سؤال رایج**: آیا بورسیه شامل هزینه‌های سفر می‌شود؟ خیر، فقط شهریه، خوابگاه، یا کمک‌هزینه زندگی.",
-              "📌 **سؤال رایج**: چگونه وضعیت درخواست را چک کنم؟ از پرتال ADiSU یا ایمیل info@adisu.umbria.it.",
-              "📷 **تصویر راهنما**: scholarship_application_guide.jpg (در فایل‌های پروژه) برای مراحل درخواست."
+              "💡 **بررسی منظم پرتال**: برای به‌روزرسانی‌های تقویم و امتحانات، مرتب پرتال Esse3 را چک کنید: https://unipg.esse3.cineca.it.",
+              "⚠️ **تداخل امتحانات**: در صورت تداخل، با استاد یا دفتر بین‌الملل (international@unipg.it) هماهنگ کنید.",
+              "📷 **تصاویر رویدادها**: گالری تصاویر نمایشگاه‌ها و جشن‌های ESN در: https://perugia.esn.it/gallery.",
+              "📌 **سؤال رایج**: اگر در تعطیلات زمستانی خوابگاه باز باشد؟ اکثر خوابگاه‌های ADiSU باز هستند، اما با دفتر خوابگاه (residenza@unipg.it) تأیید کنید."
             ],
             "en": [
-              "💡 **Advice**: Calculate ISEE early to meet deadlines.",
-              "⚠️ **Warning**: False documents lead to rejection and scholarship disqualification.",
-              "📌 **FAQ**: Does the scholarship cover travel costs? No, only tuition, dorm, or living expenses.",
-              "📌 **FAQ**: How to check application status? Via ADiSU portal or email info@adisu.umbria.it.",
-              "📷 **Guide Image**: scholarship_application_guide.jpg (in project files) for application steps."
+              "💡 **Regular Portal Checks**: Monitor Esse3 portal for calendar and exam updates: https://unipg.esse3.cineca.it.",
+              "⚠️ **Exam Conflicts**: Coordinate with your professor or international office (international@unipg.it) if exams overlap.",
+              "📷 **Event Photos**: Gallery of orientation fairs and ESN events at: https://perugia.esn.it/gallery.",
+              "📌 **FAQ**: Are dorms open during winter holidays? Most ADiSU dorms are open, confirm with dorm office (residenza@unipg.it)."
             ],
             "it": [
-              "💡 **Consiglio**: Calcola l’ISEE in anticipo per rispettare le scadenze.",
-              "⚠️ **Attenzione**: Documenti falsi portano al rifiuto e alla squalifica dalla borsa.",
-              "📌 **Domanda Frequente**: La borsa copre i costi di viaggio? No, solo tasse, dormitorio o spese di vita.",
-              "📌 **Domanda Frequente**: Come controllare lo stato della richiesta? Tramite portale ADiSU o email info@adisu.umbria.it.",
-              "📷 **Immagine Guida**: scholarship_application_guide.jpg (nei file del progetto) per i passaggi della richiesta."
+              "💡 **Controlli Regolari sul Portale**: Monitora il portale Esse3 per aggiornamenti su calendario ed esami: https://unipg.esse3.cineca.it.",
+              "⚠️ **Conflitti Esami**: Coordina con il professore o l’ufficio internazionale (international@unipg.it) in caso di sovrapposizioni.",
+              "📷 **Foto Eventi**: Galleria di fiere e eventi ESN su: https://perugia.esn.it/gallery.",
+              "📌 **Domanda Frequente**: I dormitori sono aperti durante le vacanze invernali? La maggior parte dei dormitori ADiSU è aperta, verifica con l’ufficio (residenza@unipg.it)."
             ]
           }
         }
       ]
     },
     {
-      "id": "health_services",
+      "id": "grocery_guide",
       "title": {
-        "fa": "🏥 راهنمای خدمات درمانی در پروجا",
-        "en": "🏥 Guide to Healthcare Services in Perugia",
-        "it": "🏥 Guida ai Servizi Sanitari a Perugia"
+        "fa": "🛒 راهنمای جامع خرید مواد غذایی در پروجا",
+        "en": "🛒 Comprehensive Grocery Shopping Guide in Perugia",
+        "it": "🛒 Guida Completa per la Spesa a Perugia"
       },
       "description": {
-        "fa": "راهنمای جامع دسترسی به خدمات درمانی در پروجا برای دانشجویان بین‌المللی، شامل بیمارستان‌ها، کلینیک‌ها، داروخانه‌ها، خدمات اورژانسی، و نکات برای استفاده از SSN یا بیمه خصوصی.",
-        "en": "Comprehensive guide to accessing healthcare services in Perugia for international students, including hospitals, clinics, pharmacies, emergency services, and tips for using SSN or private insurance.",
-        "it": "Guida completa per accedere ai servizi sanitari a Perugia per studenti internazionali, con ospedali, cliniche, farmacie, servizi di emergenza e consigli per utilizzare SSN o assicurazione privata."
+        "fa": "راهنمای کامل خرید مواد غذایی از فروشگاه‌های زنجیره‌ای، بازارهای محلی، سوپرمارکت‌های حلال، و نکات صرفه‌جویی برای دانشجویان در پروجا.",
+        "en": "Complete guide to grocery shopping at chain stores, local markets, halal supermarkets, and money-saving tips for students in Perugia.",
+        "it": "Guida completa per fare la spesa nei supermercati, mercati locali, negozi halal e consigli per risparmiare per studenti a Perugia."
       },
       "subsections": [
         {
           "title": {
-            "fa": "دسترسی به خدمات درمانی",
-            "en": "Accessing Healthcare Services",
-            "it": "Accesso ai Servizi Sanitari"
+            "fa": "فروشگاه‌های زنجیره‌ای",
+            "en": "Chain Stores",
+            "it": "Supermercati di Catena"
           },
           "content": {
             "fa": [
-              "🏥 **بیمارستان‌ها**:",
-              "- Ospedale Santa Maria della Misericordia (Via Gerardo Dottori, نقشه: https://maps.app.goo.gl/HospitalPerugia): بیمارستان اصلی پروجا با خدمات کامل (اورژانس، جراحی، تخصصی). ساعات کاری: 24/7.",
-              "- Pronto Soccorso (اورژانس): خدمات رایگان با SSN یا کم‌هزینه (€25-50 بدون SSN). تماس اضطراری: 118.",
-              "🩺 **کلینیک‌ها و پزشکان عمومی**:",
-              "- انتخاب پزشک عمومی (Medico di Base) از ASL Umbria 1 (Via della Pallotta, +39 075 340 51, نقشه: https://maps.app.goo.gl/ASLPerugia). ساعات کاری: دوشنبه-جمعه 8:00-13:00، سه‌شنبه و پنج‌شنبه تا 17:00.",
-              "- ویزیت پزشک عمومی: رایگان با Tessera Sanitaria (SSN)، €20-50 با بیمه خصوصی یا بدون SSN.",
-              "- کلینیک‌های خصوصی: Centro Medico (Via XX Settembre, نقشه: https://maps.app.goo.gl/CentroMedicoPerugia): ویزیت تخصصی €50-100، رزرو وقت: +39 075 500 1234.",
-              "💊 **داروخانه‌ها**:",
-              "- Farmacia Afas (Piazza Matteotti, نقشه: https://maps.app.goo.gl/FarmaciaAfas): باز 8:30-20:00، داروهای با نسخه و بدون نسخه.",
-              "- Farmacia 24 Ore (Via Settevalli, نقشه: https://maps.app.goo.gl/Farmacia24Ore): خدمات 24/7، مناسب برای موارد اضطراری.",
-              "- اپلیکیشن Farmap: برای یافتن داروخانه‌های نزدیک و رزرو دارو (دانلود: https://play.google.com/store/apps/details?id=it.farmap).",
-              "🚑 **خدمات اورژانسی**:",
-              "- تماس 118: آمبولانس رایگان برای موارد اضطراری (24/7).",
-              "- Guardia Medica: خدمات پزشکی شبانه و تعطیلات (€15-30 بدون SSN، تماس: +39 075 365 7842).",
-              "💡 **توصیه**: Tessera Sanitaria را برای کاهش هزینه‌ها ثبت کنید (مراحل در مورد Codice Fiscale).",
-              "⚠️ **هشدار**: بدون SSN یا بیمه خصوصی، هزینه‌های درمانی (مثل بستری) ممکن است بالا باشد (€200-1000).",
-              "📷 **تصویر راهنما**: healthcare_map.jpg (در فایل‌های پروژه) برای نقشه بیمارستان‌ها و داروخانه‌ها."
+              "🛍️ **Lidl**: ارزان‌ترین گزینه با تنوع مناسب برای خریدهای روزمره. کیفیت متوسط اما مقرون‌به‌صرفه. محصولات: نان، لبنیات، گوشت، سبزیجات تازه. آدرس نمونه: Via Eugenio Curiel, 06132 Perugia (نقشه: https://maps.app.goo.gl/LidlPerugia). ساعات کاری: ۸:۳۰ صبح تا ۸:۳۰ شب (یکشنبه‌ها تا ظهر).",
+              "🛍️ **Eurospin**: اقتصادی‌ترین فروشگاه با تمرکز بر محصولات ایتالیایی ارزان. تنوع کمتر اما مناسب برای بودجه دانشجویی. محصولات: پاستا، کنسرو، مواد شوینده. آدرس: Via Settevalli, 06129 Perugia (نقشه: https://maps.app.goo.gl/EurospinPerugia). ساعات کاری: ۸ صبح تا ۸ شب.",
+              "🛍️ **Conad/Coop**: کیفیت بالا، تنوع گسترده، قیمت متوسط تا بالا. مناسب برای خرید محصولات تازه (میوه، سبزیجات، گوشت). کارت تخفیف (Carta Conad) موجود است. آدرس نمونه: Via della Valtiera, 06135 Perugia (نقشه: https://maps.app.goo.gl/ConadPerugia). ساعات کاری: ۸ صبح تا ۹ شب."
             ],
             "en": [
-              "🏥 **Hospitals**:",
-              "- Ospedale Santa Maria della Misericordia (Via Gerardo Dottori, map: https://maps.app.goo.gl/HospitalPerugia): Perugia’s main hospital with full services (emergency, surgery, specialized care). Open: 24/7.",
-              "- Pronto Soccorso (Emergency): Free with SSN or low-cost (€25-50 without SSN). Emergency contact: 118.",
-              "🩺 **Clinics and General Practitioners**:",
-              "- Choose a GP (Medico di Base) at ASL Umbria 1 (Via della Pallotta, +39 075 340 51, map: https://maps.app.goo.gl/ASLPerugia). Hours: Monday-Friday 8:00 AM–1:00 PM, Tuesday/Thursday until 5:00 PM.",
-              "- GP visits: Free with Tessera Sanitaria (SSN), €20-50 with private insurance or without SSN.",
-              "- Private clinics: Centro Medico (Via XX Settembre, map: https://maps.app.goo.gl/CentroMedicoPerugia): Specialist visits €50-100, book: +39 075 500 1234.",
-              "💊 **Pharmacies**:",
-              "- Farmacia Afas (Piazza Matteotti, map: https://maps.app.goo.gl/FarmaciaAfas): Open 8:30 AM–8:00 PM, prescription and over-the-counter drugs.",
-              "- Farmacia 24 Ore (Via Settevalli, map: https://maps.app.goo.gl/Farmacia24Ore): 24/7 service, ideal for emergencies.",
-              "- Farmap app: Find nearby pharmacies and reserve medications (download: https://play.google.com/store/apps/details?id=it.farmap).",
-              "🚑 **Emergency Services**:",
-              "- Call 118: Free ambulance for emergencies (24/7).",
-              "- Guardia Medica: Night and holiday medical services (€15-30 without SSN, call: +39 075 365 7842).",
-              "💡 **Advice**: Register for Tessera Sanitaria to reduce costs (see Codice Fiscale section).",
-              "⚠️ **Warning**: Without SSN or private insurance, medical costs (e.g., hospitalization) can be high (€200-1000).",
-              "📷 **Guide Image**: healthcare_map.jpg (in project files) for hospital and pharmacy maps."
+              "🛍️ **Lidl**: Cheapest option with decent variety for daily shopping. Average quality but budget-friendly. Products: Bread, dairy, meat, fresh vegetables. Address: Via Eugenio Curiel, 06132 Perugia (map: https://maps.app.goo.gl/LidlPerugia). Hours: 8:30 AM–8:30 PM (Sundays until noon).",
+              "🛍️ **Eurospin**: Most economical store focusing on affordable Italian products. Less variety but ideal for student budgets. Products: Pasta, canned goods, detergents. Address: Via Settevalli, 06129 Perugia (map: https://maps.app.goo.gl/EurospinPerugia). Hours: 8 AM–8 PM.",
+              "🛍️ **Conad/Coop**: High quality, wide variety, mid-to-high prices. Great for fresh produce (fruits, vegetables, meat). Loyalty card (Carta Conad) available. Address: Via della Valtiera, 06135 Perugia (map: https://maps.app.goo.gl/ConadPerugia). Hours: 8 AM–9 PM."
             ],
             "it": [
-              "🏥 **Ospedali**:",
-              "- Ospedale Santa Maria della Misericordia (Via Gerardo Dottori, mappa: https://maps.app.goo.gl/HospitalPerugia): Ospedale principale di Perugia con servizi completi (emergenza, chirurgia, cure specialistiche). Aperto: 24/7.",
-              "- Pronto Soccorso (Emergenza): Gratuito con SSN o a basso costo (€25-50 senza SSN). Contatto emergenza: 118.",
-              "🩺 **Cliniche e Medici di Base**:",
-              "- Scegli un medico di base presso ASL Umbria 1 (Via della Pallotta, +39 075 340 51, mappa: https://maps.app.goo.gl/ASLPerugia). Orari: Lunedì-Venerdì 8:00–13:00, Martedì/Giovedì fino alle 17:00.",
-              "- Visite medico di base: Gratuite con Tessera Sanitaria (SSN), €20-50 con assicurazione privata o senza SSN.",
-              "- Cliniche private: Centro Medico (Via XX Settembre, mappa: https://maps.app.goo.gl/CentroMedicoPerugia): Visite specialistiche €50-100, prenotazione: +39 075 500 1234.",
-              "💊 **Farmacie**:",
-              "- Farmacia Afas (Piazza Matteotti, mappa: https://maps.app.goo.gl/FarmaciaAfas): Aperta 8:30–20:00, farmaci con e senza ricetta.",
-              "- Farmacia 24 Ore (Via Settevalli, mappa: https://maps.app.goo.gl/Farmacia24Ore): Servizio 24/7, ideale per emergenze.",
-              "- App Farmap: Trova farmacie vicine e prenota farmaci (scarica: https://play.google.com/store/apps/details?id=it.farmap).",
-              "🚑 **Servizi di Emergenza**:",
-              "- Chiama 118: Ambulanza gratuita per emergenze (24/7).",
-              "- Guardia Medica: Servizi medici notturni e festivi (€15-30 senza SSN, chiama: +39 075 365 7842).",
-              "💡 **Consiglio**: Registra la Tessera Sanitaria per ridurre i costi (vedi sezione Codice Fiscale).",
-              "⚠️ **Attenzione**: Senza SSN o assicurazione privata, i costi medici (es. ospedalizzazione) possono essere elevati (€200-1000).",
-              "📷 **Immagine Guida**: healthcare_map.jpg (nei file del progetto) per mappe di ospedali e farmacie."
+              "🛍️ **Lidl**: Opzione più economica con buona varietà per la spesa quotidiana. Qualità media ma conveniente. Prodotti: Pane, latticini, carne, verdure fresche. Indirizzo: Via Eugenio Curiel, 06132 Perugia (mappa: https://maps.app.goo.gl/LidlPerugia). Orari: 8:30–20:30 (domenica fino a mezzogiorno).",
+              "🛍️ **Eurospin**: Negozio più economico con focus su prodotti italiani a basso costo. Meno varietà ma ideale per budget studenteschi. Prodotti: Pasta, conserve, detersivi. Indirizzo: Via Settevalli, 06129 Perugia (mappa: https://maps.app.goo.gl/EurospinPerugia). Orari: 8–20.",
+              "🛍️ **Conad/Coop**: Alta qualità, ampia varietà, prezzi medio-alti. Ottimo per prodotti freschi (frutta, verdura, carne). Carta fedeltà (Carta Conad) disponibile. Indirizzo: Via della Valtiera, 06135 Perugia (mappa: https://maps.app.goo.gl/ConadPerugia). Orari: 8–21."
             ]
           }
         },
         {
           "title": {
-            "fa": "ثبت‌نام در سیستم بهداشت عمومی (SSN)",
-            "en": "Registering for Public Healthcare (SSN)",
-            "it": "Registrazione al Sistema Sanitario Nazionale (SSN)"
+            "fa": "سوپرمارکت‌های حلال و بازارهای محلی",
+            "en": "Halal Supermarkets and Local Markets",
+            "it": "Negozi Halal e Mercati Locali"
           },
           "content": {
             "fa": [
-              "📋 **مدارک لازم**:",
-              "- پاسپورت و ویزای تحصیلی (اصل و کپی).",
-              "- Codice Fiscale (اصل یا کپی).",
-              "- گواهی آدرس (قرارداد اجاره ثبت‌شده یا گواهی خوابگاه ADiSU).",
-              "- رسید پرداخت هزینه SSN (€149.77/سال برای 2025، قابل پرداخت با F24 در Poste Italiane).",
-              "🏢 **محل ثبت‌نام**: ASL Umbria 1 (Via della Pallotta, نقشه: https://maps.app.goo.gl/ASLPerugia). ساعات کاری: دوشنبه-جمعه 8:00-13:00.",
-              "📝 **مراحل**:",
-              "۱. فرم ثبت‌نام SSN را از وب‌سایت ASL Umbria 1 (https://www.uslumbria1.it) یا دفتر تهیه کنید.",
-              "۲. مدارک را آماده کنید (پاسپورت، Codice Fiscale، گواهی آدرس).",
-              "۳. هزینه SSN را در Poste Italiane با فرم F24 پرداخت کنید (دفتر مرکزی: Piazza Matteotti).",
-              "۴. مدارک و رسید پرداخت را به ASL Umbria 1 تحویل دهید.",
-              "۵. Tessera Sanitaria (کارت سلامت) را دریافت کنید (معمولاً 2-4 هفته).",
-              "💡 **توصیه**: پس از دریافت Tessera Sanitaria، پزشک عمومی را انتخاب کنید تا ویزیت‌های رایگان داشته باشید.",
-              "⚠️ **هشدار**: بدون SSN، هزینه‌های درمانی (مثل ویزیت متخصص) ممکن است بالا باشد."
+              "🥙 **Minimarket Halal**: فروشگاه تخصصی برای مواد غذایی حلال (گوشت، برنج باسماتی، ادویه‌های ایرانی). مناسب برای دانشجویان ایرانی. محصولات: زعفران، چای ایرانی، حبوبات. آدرس: Via Mario Angeloni, 06124 Perugia (نقشه: https://maps.app.goo.gl/HalalPerugia). ساعات کاری: ۹ صبح تا ۷ عصر.",
+              "🌿 **Asia Market**: عرضه برنج ایرانی، ادویه‌ها، و محصولات آسیایی. آدرس: Via dei Priori, 06123 Perugia (نقشه: https://maps.app.goo.gl/AsiaMarketPerugia). ساعات کاری: ۱۰ صبح تا ۸ شب.",
+              "🍎 **Mercato di Piazza Matteotti**: بازار هفتگی (پنج‌شنبه‌ها، ۸ صبح تا ۲ بعدازظهر) برای خرید میوه، سبزیجات تازه، و محصولات محلی. گاهی اوقات غرفه‌های ایرانی برای زعفران و خشکبار موجود است. محل: Piazza Matteotti, 06121 Perugia."
             ],
             "en": [
-              "📋 **Required Documents**:",
-              "- Passport and study visa (original and copy).",
-              "- Codice Fiscale (original or copy).",
-              "- Proof of address (registered rental contract or ADiSU dorm certificate).",
-              "- Receipt of SSN fee payment (€149.77/year for 2025, payable via F24 at Poste Italiane).",
-              "🏢 **Registration Location**: ASL Umbria 1 (Via della Pallotta, map: https://maps.app.goo.gl/ASLPerugia). Hours: Monday-Friday 8:00 AM–1:00 PM.",
-              "📝 **Steps**:",
-              "1. Obtain the SSN registration form from ASL Umbria 1 website (https://www.uslumbria1.it) or office.",
-              "2. Prepare documents (passport, Codice Fiscale, proof of address).",
-              "3. Pay the SSN fee at Poste Italiane with F24 form (main office: Piazza Matteotti).",
-              "4. Submit documents and payment receipt to ASL Umbria 1.",
-              "5. Receive Tessera Sanitaria (health card) (usually 2-4 weeks).",
-              "💡 **Advice**: After receiving Tessera Sanitaria, choose a GP for free visits.",
-              "⚠️ **Warning**: Without SSN, medical costs (e.g., specialist visits) can be high."
+              "🥙 **Minimarket Halal**: Specialty store for halal food (meat, basmati rice, Iranian spices). Ideal for Iranian students. Products: Saffron, Persian tea, legumes. Address: Via Mario Angeloni, 06124 Perugia (map: https://maps.app.goo.gl/HalalPerugia). Hours: 9 AM–7 PM.",
+              "🌿 **Asia Market**: Offers Iranian rice, spices, and Asian products. Address: Via dei Priori, 06123 Perugia (map: https://maps.app.goo.gl/AsiaMarketPerugia). Hours: 10 AM–8 PM.",
+              "🍎 **Mercato di Piazza Matteotti**: Weekly market (Thursdays, 8 AM–2 PM) for fresh fruits, vegetables, and local products. Occasionally Iranian stalls for saffron and dried fruits. Location: Piazza Matteotti, 06121 Perugia."
             ],
             "it": [
-              "📋 **Documenti Richiesti**:",
-              "- Passaporto e visto di studio (originale e copia).",
-              "- Codice Fiscale (originale o copia).",
-              "- Prova di indirizzo (contratto di locazione registrato o certificato dormitorio ADiSU).",
-              "- Ricevuta del pagamento della quota SSN (€149.77/anno per il 2025, pagabile tramite F24 presso Poste Italiane).",
-              "🏢 **Luogo di Registrazione**: ASL Umbria 1 (Via della Pallotta, mappa: https://maps.app.goo.gl/ASLPerugia). Orari: Lunedì-Venerdì 8:00–13:00.",
-              "📝 **Passaggi**:",
-              "1. Ottieni il modulo di registrazione SSN dal sito ASL Umbria 1 (https://www.uslumbria1.it) o in ufficio.",
-              "2. Prepara i documenti (passaporto, Codice Fiscale, prova di indirizzo).",
-              "3. Paga la quota SSN presso Poste Italiane con modulo F24 (ufficio principale: Piazza Matteotti).",
-              "4. Consegna i documenti e la ricevuta di pagamento ad ASL Umbria 1.",
-              "5. Ricevi la Tessera Sanitaria (carta sanitaria) (di solito 2-4 settimane).",
-              "💡 **Consiglio**: Dopo aver ricevuto la Tessera Sanitaria, scegli un medico di base per visite gratuite.",
-              "⚠️ **Attenzione**: Senza SSN, i costi medici (es. visite specialistiche) possono essere elevati."
+              "🥙 **Minimarket Halal**: Negozio specializzato per cibo halal (carne, riso basmati, spezie iraniane). Ideale per studenti iraniani. Prodotti: Zafferano, tè persiano, legumi. Indirizzo: Via Mario Angeloni, 06124 Perugia (mappa: https://maps.app.goo.gl/HalalPerugia). Orari: 9–19.",
+              "🌿 **Asia Market**: Offre riso iraniano, spezie e prodotti asiatici. Indirizzo: Via dei Priori, 06123 Perugia (mappa: https://maps.app.goo.gl/AsiaMarketPerugia). Orari: 10–20.",
+              "🍎 **Mercato di Piazza Matteotti**: Mercato settimanale (giovedì, 8–14) per frutta, verdura fresca e prodotti locali. A volte bancarelle iraniane per zafferano e frutta secca. Luogo: Piazza Matteotti, 06121 Perugia."
             ]
           }
         },
         {
           "title": {
-            "fa": "نکات و سؤالات رایج",
-            "en": "Tips and FAQs",
-            "it": "Consigli e Domande Frequenti"
+            "fa": "نکات صرفه‌جویی و سؤالات رایج",
+            "en": "Money-Saving Tips and FAQs",
+            "it": "Consigli per Risparmiare e Domande Frequenti"
           },
           "content": {
             "fa": [
-              "💡 **توصیه**: برای کاهش هزینه‌ها، SSN را در اولین ماه اقامت ثبت کنید.",
-              "⚠️ **هشدار**: در صورت نیاز به بستری یا جراحی، بیمه خصوصی (مثل Allianz یا UniSalute) را بررسی کنید.",
-              "📌 **سؤال رایج**: آیا SSN برای دانشجویان غیراروپایی اجباری است؟ خیر، اما برای کاهش هزینه‌های درمانی توصیه می‌شود.",
-              "📌 **سؤال رایج**: اگر Tessera Sanitaria گم شد؟ به ASL Umbria 1 مراجعه کنید یا از طریق وب‌سایت درخواست کپی کنید: https://www.uslumbria1.it.",
-              "📌 **سؤال رایج**: آیا بیمه خصوصی جایگزین SSN می‌شود؟ خیر، اما می‌تواند خدمات اضافی (مثل دندانپزشکی) را پوشش دهد.",
-              "📷 **تصویر راهنما**: healthcare_guide.pdf (در فایل‌های پروژه) برای نمایش فرم SSN و نقشه خدمات."
+              "💡 **کارت‌های تخفیف**: از Carta Conad یا Coop Card برای تخفیف‌های هفتگی استفاده کنید. ثبت‌نام رایگان در فروشگاه.",
+              "📱 **اپلیکیشن Too Good To Go**: خرید غذای ارزان از رستوران‌ها و فروشگاه‌ها (۱-۵ یورو برای بسته‌های غذا). لینک: https://play.google.com/store/apps/details?id=com.app.tgtg.",
+              "🛒 **خرید عمده**: برای اقلام غیرفاسدشدنی (برنج، پاستا) از Eurospin خرید کنید تا هزینه کمتری بپردازید.",
+              "⚠️ **هشدار**: تاریخ انقضای محصولات تازه را بررسی کنید، به‌ویژه در بازارهای محلی.",
+              "📌 **سؤال رایج**: از کجا برنج ایرانی بخریم؟ Minimarket Halal یا Asia Market (Via dei Priori).",
+              "📌 **سؤال رایج**: آیا فروشگاه‌های حلال تحویل در منزل دارند؟ خیر، اما می‌توانید از خدمات Glovo استفاده کنید: https://www.glovoapp.com.",
+              "💡 **تصویر راهنما**: grocery_guide_infographic.jpg (در فایل‌های پروژه) برای نقشه فروشگاه‌ها."
             ],
             "en": [
-              "💡 **Advice**: Register for SSN in your first month to reduce costs.",
-              "⚠️ **Warning**: For hospitalization or surgery, consider private insurance (e.g., Allianz or UniSalute).",
-              "📌 **FAQ**: Is SSN mandatory for non-EU students? No, but highly recommended to lower medical costs.",
-              "📌 **FAQ**: What if I lose my Tessera Sanitaria? Visit ASL Umbria 1 or request a copy online: https://www.uslumbria1.it.",
-              "📌 **FAQ**: Can private insurance replace SSN? No, but it can cover extra services (e.g., dental care).",
-              "📷 **Guide Image**: healthcare_guide.pdf (in project files) for SSN form and service maps."
+              "💡 **Loyalty Cards**: Use Carta Conad or Coop Card for weekly discounts. Free registration at stores.",
+              "📱 **Too Good To Go App**: Buy discounted food from restaurants and stores (€1-5 per package). Link: https://play.google.com/store/apps/details?id=com.app.tgtg.",
+              "🛒 **Bulk Buying**: Purchase non-perishables (rice, pasta) at Eurospin for lower costs.",
+              "⚠️ **Warning**: Check expiration dates on fresh products, especially at local markets.",
+              "📌 **FAQ**: Where to buy Iranian rice? Minimarket Halal or Asia Market (Via dei Priori).",
+              "📌 **FAQ**: Do halal stores offer home delivery? No, but use Glovo: https://www.glovoapp.com.",
+              "💡 **Guide Image**: grocery_guide_infographic.jpg (in project files) for store maps."
             ],
             "it": [
-              "💡 **Consiglio**: Registra l’SSN nel primo mese di soggiorno per ridurre i costi.",
-              "⚠️ **Attenzione**: Per ricoveri o interventi chirurgici, considera un’assicurazione privata (es. Allianz o UniSalute).",
-              "📌 **Domanda Frequente**: L’SSN è obbligatorio per studenti non UE? No, ma fortemente consigliato per ridurre i costi medici.",
-              "📌 **Domanda Frequente**: Cosa fare se perdo la Tessera Sanitaria? Visita ASL Umbria 1 o richiedi una copia online: https://www.uslumbria1.it.",
-              "📌 **Domanda Frequente**: L’assicurazione privata può sostituire l’SSN? No, ma può coprire servizi extra (es. cure dentistiche).",
-              "📷 **Immagine Guida**: healthcare_guide.pdf (nei file del progetto) per modulo SSN e mappe dei servizi."
+              "💡 **Carte Fedeltà**: Usa Carta Conad o Coop Card per sconti settimanali. Registrazione gratuita nei negozi.",
+              "📱 **App Too Good To Go**: Acquista cibo scontato da ristoranti e negozi (€1-5 per pacchetto). Link: https://play.google.com/store/apps/details?id=com.app.tgtg.",
+              "🛒 **Acquisti in Blocco**: Compra prodotti non deperibili (riso, pasta) da Eurospin per risparmiare.",
+              "⚠️ **Attenzione**: Controlla le date di scadenza sui prodotti freschi, specialmente nei mercati locali.",
+              "📌 **Domanda Frequente**: Dove comprare riso iraniano? Minimarket Halal o Asia Market (Via dei Priori).",
+              "📌 **Domanda Frequente**: I negozi halal offrono consegne a domicilio? No, ma usa Glovo: https://www.glovoapp.com.",
+              "💡 **Immagine Guida**: grocery_guide_infographic.jpg (nei file del progetto) per mappe dei negozi."
             ]
           }
         }
       ]
     },
     {
-      "id": "public_transport",
+      "id": "housing_guide",
       "title": {
-        "fa": "🚍 راهنمای حمل‌ونقل عمومی در پروجا",
-        "en": "🚍 Guide to Public Transportation in Perugia",
-        "it": "🚍 Guida ai Trasporti Pubblici a Perugia"
+        "fa": "🏠 راهنمای جامع یافتن خانه یا هم‌خانه در پروجا",
+        "en": "🏠 Comprehensive Housing & Flatmate Guide in Perugia",
+        "it": "🏠 Guida Completa per Trovare Casa o Coinquilino a Perugia"
       },
       "description": {
-        "fa": "راهنمای جامع استفاده از سیستم حمل‌ونقل عمومی در پروجا برای دانشجویان، شامل اتوبوس، قطار، مینی‌مترو، هزینه‌ها، و نکات برای صرفه‌جویی با تخفیف‌های دانشجویی.",
-        "en": "Comprehensive guide to using public transportation in Perugia for students, including buses, trains, minimetro, costs, and tips for saving with student discounts.",
-        "it": "Guida completa all’uso dei trasporti pubblici a Perugia per studenti, con autobus, treni, minimetrò, costi e consigli per risparmiare con sconti studenti."
+        "fa": "راهنمای کامل یافتن خانه، آپارتمان، یا هم‌خانه در پروجا با منابع، نکات حقوقی، و توصیه‌های عملی برای دانشجویان بین‌المللی.",
+        "en": "Complete guide to finding a house, apartment, or flatmate in Perugia with resources, legal tips, and practical advice for international students.",
+        "it": "Guida completa per trovare casa, appartamento o coinquilino a Perugia con risorse, consigli legali e suggerimenti pratici per studenti internazionali."
       },
       "subsections": [
         {
           "title": {
-            "fa": "انواع حمل‌ونقل عمومی",
-            "en": "Types of Public Transportation",
-            "it": "Tipi di Trasporto Pubblico"
+            "fa": "منابع جستجوی مسکن",
+            "en": "Housing Search Resources",
+            "it": "Risorse per la Ricerca di Alloggi"
           },
           "content": {
             "fa": [
-              "🚌 **اتوبوس (Busitalia)**:",
-              "- پوشش: سراسر پروجا و حومه (مثل Assisi، Gubbio).",
-              "- هزینه: بلیط تک‌سفر €1.50، اشتراک ماهانه دانشجویی €30 (با کارت Esse3).",
-              "- خرید بلیط: اپلیکیشن Busitalia (https://play.google.com/store/apps/details?id=it.busitalia)، کیوسک‌های Piazza Italia، یا داخل اتوبوس (گران‌تر، €2).",
-              "- مسیرهای اصلی: Fontivegge به Centro Storico، Monteluce به Piazza Matteotti.",
-              "🚆 **قطار (Trenitalia)**:",
-              "- ایستگاه اصلی: Perugia Fontivegge (نقشه: https://maps.app.goo.gl/FontiveggeStation).",
-              "- مقاصد: رم (€12-20، 2 ساعت)، فلورانس (€15-25، 1.5 ساعت).",
-              "- تخفیف دانشجویی: تا 30% با کارت Esse3 یا کد تخفیف (درخواست از international@unipg.it).",
-              "- خرید بلیط: https://www.trenitalia.com یا ایستگاه.",
-              "🚇 **مینی‌مترو**:",
-              "- مسیر: از Pian di Massiano به Piazza Matteotti (7 ایستگاه).",
-              "- هزینه: €1.50/سفر، اشتراک ماهانه €30 (مشترک با Busitalia).",
-              "- ساعات کاری: 7:00-21:00 (یکشنبه‌ها تا 20:00).",
-              "💡 **توصیه**: اشتراک ماهانه دانشجویی برای صرفه‌جویی در هزینه‌های روزانه مناسب است.",
-              "⚠️ **هشدار**: بلیط را قبل از سوار شدن اعتبارسنجی کنید (در اتوبوس یا مینی‌مترو) تا از جریمه €50 جلوگیری شود.",
-              "📷 **تصویر راهنما**: transport_map.jpg (در فایل‌های پروژه) برای نقشه مسیرهای اتوبوس و مینی‌مترو."
+              "🌐 **سایت‌های آنلاین**:",
+              "- Idealista.it: پلتفرم جامع برای اجاره اتاق و آپارتمان. فیلترهای قیمت و منطقه دارد. لینک: https://www.idealista.it.",
+              "- Immobiliare.it: مناسب برای قراردادهای بلندمدت. شامل تصاویر و جزئیات ملک. لینک: https://www.immobiliare.it.",
+              "- Subito.it: برای اجاره مستقیم از مالکان. لینک: https://www.subito.it.",
+              "📱 **گروه‌های تلگرام و واتساپ**: گروه 'Perugia Housing' (t.me/PerugiaHousing) برای یافتن هم‌خانه یا اتاق‌های دانشجویی. گروه ایرانیان پروجا: t.me/IraniansInPerugia (لطفاً لینک دقیق را تأیید کنید).",
+              "📢 **فیس‌بوک**: گروه 'Perugia Student Housing' برای آگهی‌های به‌روز. لینک نمونه: https://www.facebook.com/groups/perugiastudenthousing.",
+              "🏫 **تابلوهای اعلانات دانشگاه**: آگهی‌های مسکن در دانشکده‌ها یا دفتر ESN (Piazza dell’Università, 06123 Perugia).",
+              "💡 **آژانس‌های املاک**: آژانس Tecnocasa (Via XX Settembre, 06124 Perugia) برای قراردادهای رسمی. هزینه کارمزد: ۱۰-۱۵٪ اجاره سالیانه."
             ],
             "en": [
-              "🚌 **Bus (Busitalia)**:",
-              "- Coverage: Throughout Perugia and suburbs (e.g., Assisi, Gubbio).",
-              "- Cost: Single ticket €1.50, student monthly pass €30 (with Esse3 card).",
-              "- Ticket purchase: Busitalia app (https://play.google.com/store/apps/details?id=it.busitalia), Piazza Italia kiosks, or onboard (pricier, €2).",
-              "- Main routes: Fontivegge to Centro Storico, Monteluce to Piazza Matteotti.",
-              "🚆 **Train (Trenitalia)**:",
-              "- Main station: Perugia Fontivegge (map: https://maps.app.goo.gl/FontiveggeStation).",
-              "- Destinations: Rome (€12-20, 2 hours), Florence (€15-25, 1.5 hours).",
-              "- Student discount: Up to 30% with Esse3 card or discount code (request from international@unipg.it).",
-              "- Ticket purchase: https://www.trenitalia.com or at the station.",
-              "🚇 **Minimetro**:",
-              "- Route: From Pian di Massiano to Piazza Matteotti (7 stops).",
-              "- Cost: €1.50/trip, monthly pass €30 (shared with Busitalia).",
-              "- Operating hours: 7:00 AM–9:00 PM (Sundays until 8:00 PM).",
-              "💡 **Advice**: Get a student monthly pass for daily cost savings.",
-              "⚠️ **Warning**: Validate your ticket before boarding (on bus or minimetro) to avoid a €50 fine.",
-              "📷 **Guide Image**: transport_map.jpg (in project files) for bus and minimetro route maps."
+              "🌐 **Online Platforms**:",
+              "- Idealista.it: Comprehensive platform for renting rooms and apartments. Has price and area filters. Link: https://www.idealista.it.",
+              "- Immobiliare.it: Ideal for long-term rentals. Includes photos and property details. Link: https://www.immobiliare.it.",
+              "- Subito.it: For direct rentals from owners. Link: https://www.subito.it.",
+              "📱 **Telegram and WhatsApp Groups**: 'Perugia Housing' group (t.me/PerugiaHousing) for finding flatmates or student rooms. Iranian community group: t.me/IraniansInPerugia (please confirm exact link).",
+              "📢 **Facebook**: 'Perugia Student Housing' group for up-to-date listings. Sample link: https://www.facebook.com/groups/perugiastudenthousing.",
+              "🏫 **University Notice Boards**: Housing ads at faculty boards or ESN office (Piazza dell’Università, 06123 Perugia).",
+              "💡 **Real Estate Agencies**: Tecnocasa agency (Via XX Settembre, 06124 Perugia) for formal contracts. Agency fee: 10-15% of annual rent."
             ],
             "it": [
-              "🚌 **Autobus (Busitalia)**:",
-              "- Copertura: Tutta Perugia e periferie (es. Assisi, Gubbio).",
-              "- Costo: Biglietto singolo €1.50, abbonamento mensile studenti €30 (con tessera Esse3).",
-              "- Acquisto biglietti: App Busitalia (https://play.google.com/store/apps/details?id=it.busitalia), chioschi Piazza Italia, o a bordo (più costoso, €2).",
-              "- Percorsi principali: Fontivegge a Centro Storico, Monteluce a Piazza Matteotti.",
-              "🚆 **Treno (Trenitalia)**:",
-              "- Stazione principale: Perugia Fontivegge (mappa: https://maps.app.goo.gl/FontiveggeStation).",
-              "- Destinazioni: Roma (€12-20, 2 ore), Firenze (€15-25, 1.5 ore).",
-              "- Sconto studenti: Fino al 30% con tessera Esse3 o codice sconto (richiesta a international@unipg.it).",
-              "- Acquisto biglietti: https://www.trenitalia.com o in stazione.",
-              "🚇 **Minimetro**:",
-              "- Percorso: Da Pian di Massiano a Piazza Matteotti (7 fermate).",
-              "- Costo: €1.50/viaggio, abbonamento mensile €30 (condiviso con Busitalia).",
-              "- Orari: 7:00–21:00 (domenica fino alle 20:00).",
-              "💡 **Consiglio**: Acquista un abbonamento mensile studenti per risparmiare sui costi giornalieri.",
-              "⚠️ **Attenzione**: Convalida il biglietto prima di salire (su autobus o minimetro) per evitare una multa di €50.",
-              "📷 **Immagine Guida**: transport_map.jpg (nei file del progetto) per mappe dei percorsi di autobus e minimetro."
+              "🌐 **Piattaforme Online**:",
+              "- Idealista.it: Piattaforma completa per affittare stanze e appartamenti. Ha filtri per prezzo e zona. Link: https://www.idealista.it.",
+              "- Immobiliare.it: Ideale per affitti a lungo termine. Include foto e dettagli delle proprietà. Link: https://www.immobiliare.it.",
+              "- Subito.it: Per affitti diretti dai proprietari. Link: https://www.subito.it.",
+              "📱 **Gruppi Telegram e WhatsApp**: Gruppo 'Perugia Housing' (t.me/PerugiaHousing) per trovare coinquilini o stanze per studenti. Gruppo comunità iraniana: t.me/IraniansInPerugia (conferma il link esatto).",
+              "📢 **Facebook**: Gruppo 'Perugia Student Housing' per annunci aggiornati. Link di esempio: https://www.facebook.com/groups/perugiastudenthousing.",
+              "🏫 **Bacheche Universitarie**: Annunci di alloggi presso le facoltà o l’ufficio ESN (Piazza dell’Università, 06123 Perugia).",
+              "💡 **Agenzie Immobiliari**: Agenzia Tecnocasa (Via XX Settembre, 06124 Perugia) per contratti formali. Costo agenzia: 10-15% dell’affitto annuale."
             ]
           }
         },
         {
           "title": {
-            "fa": "تخفیف‌های دانشجویی و نکات کاربردی",
-            "en": "Student Discounts and Practical Tips",
-            "it": "Sconti Studenti e Consigli Pratici"
+            "fa": "مناطق پیشنهادی برای مسکن",
+            "en": "Recommended Housing Areas",
+            "it": "Zone Consigliate per Alloggi"
           },
           "content": {
             "fa": [
-              "🎓 **تخفیف‌های دانشجویی**:",
-              "- اشتراک ماهانه دانشجویی (€30) برای اتوبوس و مینی‌مترو با کارت Esse3.",
-              "- تخفیف قطار: تا 30% با کد تخفیف از دفتر بین‌الملل Unipg.",
-              "- کارت ISIC (https://www.isic.org): تخفیف برای حمل‌ونقل و خدمات دیگر (€12/سال).",
-              "💡 **توصیه‌ها**:",
-              "- اپلیکیشن‌های Busitalia و Moovit را برای برنامه‌ریزی مسیر نصب کنید.",
-              "- برای سفرهای بین‌شهری، بلیط قطار را زودتر رزرو کنید تا ارزان‌تر باشد.",
-              "- از مینی‌مترو برای رفت‌وآمد سریع به Centro Storico استفاده کنید.",
-              "⚠️ **هشدار**: بدون بلیط معتبر، جریمه‌های سنگین (€50-100) اعمال می‌شود.",
-              "📌 **منابع مفید**: وب‌سایت Busitalia (https://www.fsbusitalia.it) و گروه تلگرامی t.me/ESNPerugia."
+              "🏙️ **Centro Storico (مرکز شهر)**: نزدیک به دانشگاه و امکانات (رستوران‌ها، کافه‌ها). اجاره اتاق: ۳۰۰-۴۵۰ یورو/ماه. مزایا: دسترسی آسان، زندگی فرهنگی پرجنب‌وجوش. معایب: قیمت بالا، سر و صدا. نمونه آدرس: Via Ulisse Rocchi, 06123 Perugia (نقشه: https://maps.app.goo.gl/CentroStorico).",
+              "🚆 **Fontivegge**: نزدیک ایستگاه قطار، مناسب برای دانشجویان با بودجه محدود. اجاره اتاق: ۲۰۰-۳۵۰ یورو/ماه. مزایا: دسترسی به حمل‌ونقل عمومی. معایب: امنیت کمتر در شب. نمونه آدرس: Via Mario Angeloni, 06124 Perugia.",
+              "🏫 **Elce**: منطقه محبوب دانشجویان، نزدیک دانشگاه. اجاره اتاق: ۲۵۰-۴۰۰ یورو/ماه. مزایا: آرام، نزدیک به خوابگاه‌های ADiSU. معایب: فاصله از مرکز شهر. نمونه آدرس: Via Annibale Vecchi, 06123 Perugia."
             ],
             "en": [
-              "🎓 **Student Discounts**:",
-              "- Student monthly pass (€30) for bus and minimetro with Esse3 card.",
-              "- Train discount: Up to 30% with code from Unipg International Office.",
-              "- ISIC card (https://www.isic.org): Discounts for transport and other services (€12/year).",
-              "💡 **Tips**:",
-              "- Install Busitalia and Moovit apps for route planning.",
-              "- Book train tickets early for intercity travel to save costs.",
-              "- Use minimetro for quick trips to Centro Storico.",
-              "⚠️ **Warning**: Traveling without a valid ticket incurs heavy fines (€50-100).",
-              "📌 **Useful Resources**: Busitalia website (https://www.fsbusitalia.it) and Telegram group t.me/ESNPerugia."
+              "🏙️ **Centro Storico (City Center)**: Close to university and amenities (restaurants, cafes). Room rent: €300-450/month. Pros: Easy access, vibrant cultural life. Cons: High prices, noisy. Sample address: Via Ulisse Rocchi, 06123 Perugia (map: https://maps.app.goo.gl/CentroStorico).",
+              "🚆 **Fontivegge**: Near train station, ideal for budget-conscious students. Room rent: €200-350/month. Pros: Public transport access. Cons: Less safe at night. Sample address: Via Mario Angeloni, 06124 Perugia.",
+              "🏫 **Elce**: Popular student area, near university. Room rent: €250-400/month. Pros: Quiet, close to ADiSU dorms. Cons: Far from city center. Sample address: Via Annibale Vecchi, 06123 Perugia."
             ],
             "it": [
-              "🎓 **Sconti Studenti**:",
-              "- Abbonamento mensile studenti (€30) per autobus e minimetro con tessera Esse3.",
-              "- Sconto treni: Fino al 30% con codice dall’Ufficio Internazionale Unipg.",
-              "- Tessera ISIC (https://www.isic.org): Sconti per trasporti e altri servizi (€12/anno).",
-              "💡 **Consigli**:",
-              "- Installa le app Busitalia e Moovit per pianificare i percorsi.",
-              "- Prenota i biglietti del treno in anticipo per viaggi intercity per risparmiare.",
-              "- Usa il minimetro per spostamenti rapidi verso Centro Storico.",
-              "⚠️ **Attenzione**: Viaggiare senza biglietto valido comporta multe pesanti (€50-100).",
-              "📌 **Risorse Utili**: Sito Busitalia (https://www.fsbusitalia.it) e gruppo Telegram t.me/ESNPerugia."
+              "🏙️ **Centro Storico**: Vicino all’università e ai servizi (ristoranti, bar). Affitto stanza: €300-450/mese. Pro: Accesso facile, vita culturale vivace. Contro: Prezzi alti, rumoroso. Indirizzo di esempio: Via Ulisse Rocchi, 06123 Perugia (mappa: https://maps.app.goo.gl/CentroStorico).",
+              "🚆 **Fontivegge**: Vicino alla stazione, ideale per studenti con budget limitato. Affitto stanza: €200-350/mese. Pro: Accesso ai trasporti pubblici. Contro: Meno sicuro di notte. Indirizzo di esempio: Via Mario Angeloni, 06124 Perugia.",
+              "🏫 **Elce**: Zona popolare tra studenti, vicino all’università. Affitto stanza: €250-400/mese. Pro: Tranquilla, vicina ai dormitori ADiSU. Contro: Distante dal centro. Indirizzo di esempio: Via Annibale Vecchi, 06123 Perugia."
             ]
           }
         },
         {
           "title": {
-            "fa": "نکات و سؤالات رایج",
-            "en": "Tips and FAQs",
-            "it": "Consigli e Domande Frequenti"
+            "fa": "نکات حقوقی و توصیه‌های عملی",
+            "en": "Legal Tips and Practical Advice",
+            "it": "Consigli Legali e Suggerimenti Pratici"
           },
           "content": {
             "fa": [
-              "💡 **توصیه**: کارت Esse3 را همیشه همراه داشته باشید برای تخفیف‌ها.",
-              "⚠️ **هشدار**: ایستگاه Fontivegge در شب ممکن است ناامن باشد؛ با گروه سفر کنید.",
-              "📌 **سؤال رایج**: آیا بلیط اتوبوس و مینی‌مترو یکسان است؟ بله، بلیط‌ها مشترک هستند.",
-              "📌 **سؤال رایج**: چگونه اشتراک ماهانه بخرم؟ از کیوسک‌های Piazza Italia یا اپلیکیشن Busitalia.",
-              "📌 **سؤال رایج**: آیا تخفیف برای سفرهای بین‌المللی وجود دارد؟ بله، با ISIC یا Eurail Pass (https://www.eurail.com).",
-              "📷 **تصویر راهنما**: transport_guide.pdf (در فایل‌های پروژه) برای نمایش بلیط و نقشه‌ها."
+              "📝 **بررسی قرارداد**: قرارداد باید شامل Codice Fiscale، تاریخ شروع/پایان، مبلغ اجاره، ودیعه (۱-۲ ماه اجاره)، و امضای دو طرف باشد. ثبت در Agenzia delle Entrate (هزینه: ۶۷ یورو) اجباری است. نمونه قرارداد: rental_contract_sample.pdf (در فایل‌های پروژه).",
+              "⚠️ **هشدار**: از قراردادهای شفاهی یا پرداخت نقدی بدون رسید اجتناب کنید، زیرا در صورت اختلاف قانونی قابل پیگیری نیست.",
+              "💡 **بازدید حضوری**: ملک را از نظر گرمایش (riscaldamento)، اینترنت، و وضعیت آشپزخانه بررسی کنید. عکس بگیرید و مشکلات را قبل از امضای قرارداد گزارش دهید.",
+              "📌 **سؤال رایج**: آیا بدون Permesso می‌توان قرارداد بست؟ بله، با پاسپورت و Codice Fiscale امکان‌پذیر است، اما قرارداد ثبت‌شده امن‌تر است.",
+              "📌 **سؤال رایج**: ودیعه چگونه بازمی‌گردد؟ در پایان اجاره، پس از بررسی ملک توسط مالک، ودیعه (معمولاً ۱-۲ ماه اجاره) بازگردانده می‌شود.",
+              "💡 **توصیه**: برای مشاوره حقوقی، با دفتر بین‌الملل دانشگاه (international@unipg.it) یا ESN Perugia تماس بگیرید."
             ],
             "en": [
-              "💡 **Advice**: Always carry your Esse3 card for discounts.",
-              "⚠️ **Warning**: Fontivegge station may be unsafe at night; travel in groups.",
-              "📌 **FAQ**: Are bus and minimetro tickets the same? Yes, tickets are shared.",
-              "📌 **FAQ**: How to buy a monthly pass? From Piazza Italia kiosks or Busitalia app.",
-              "📌 **FAQ**: Are there discounts for international travel? Yes, with ISIC or Eurail Pass (https://www.eurail.com).",
-              "📷 **Guide Image**: transport_guide.pdf (in project files) for tickets and maps."
+              "📝 **Contract Review**: The contract must include Codice Fiscale, start/end dates, rent amount, deposit (1-2 months’ rent), and signatures. Registration at Agenzia delle Entrate (€67 fee) is mandatory. Sample contract: rental_contract_sample.pdf (in project files).",
+              "⚠️ **Warning**: Avoid verbal agreements or cash payments without receipts, as they’re not legally enforceable.",
+              "💡 **In-Person Visit**: Check the property for heating (riscaldamento), internet, and kitchen condition. Take photos and report issues before signing.",
+              "📌 **FAQ**: Can I sign a contract without Permesso? Yes, with a passport and Codice Fiscale, but a registered contract is safer.",
+              "📌 **FAQ**: How is the deposit returned? At the end of the lease, after the landlord inspects the property, the deposit (usually 1-2 months’ rent) is refunded.",
+              "💡 **Advice**: For legal guidance, contact the university’s international office (international@unipg.it) or ESN Perugia."
             ],
             "it": [
-              "💡 **Consiglio**: Porta sempre la tessera Esse3 per gli sconti.",
-              "⚠️ **Attenzione**: La stazione Fontivegge può essere insicura di notte; viaggia in gruppo.",
-              "📌 **Domanda Frequente**: I biglietti per autobus e minimetro sono gli stessi? Sì, i biglietti sono condivisi.",
-              "📌 **Domanda Frequente**: Come acquistare un abbonamento mensile? Dai chioschi di Piazza Italia o app Busitalia.",
-              "📌 **Domanda Frequente**: Ci sono sconti per viaggi internazionali? Sì, con ISIC o Eurail Pass (https://www.eurail.com).",
-              "📷 **Immagine Guida**: transport_guide.pdf (nei file del progetto) per biglietti e mappe."
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "cost_of_living",
-      "title": {
-        "fa": "💶 راهنمای هزینه‌های زندگی در پروجا",
-        "en": "💶 Guide to Cost of Living in Perugia",
-        "it": "💶 Guida al Costo della Vita a Perugia"
-      },
-      "description": {
-        "fa": "راهنمای جامع هزینه‌های زندگی برای دانشجویان بین‌المللی در پروجا، شامل اقامت، غذا، حمل‌ونقل، و نکات برای مدیریت بودجه.",
-        "en": "Comprehensive guide to cost of living for international students in Perugia, including accommodation, food, transportation, and tips for budget management.",
-        "it": "Guida completa al costo della vita per studenti internazionali a Perugia, con alloggio, cibo, trasporti e consigli per gestire il budget."
-      },
-      "subsections": [
-        {
-          "title": {
-            "fa": "هزینه‌های اصلی",
-            "en": "Main Expenses",
-            "it": "Spese Principali"
-          },
-          "content": {
-            "fa": [
-              "🏠 **اقامت**:",
-              "- خوابگاه ADiSU: €200-350/ماه.",
-              "- آپارتمان اشتراکی: €250-400/ماه (بدون قبوض).",
-              "- قبوض (برق، گاز، اینترنت): €50-100/ماه.",
-              "🍽️ **غذا**:",
-              "- خرید از سوپرمارکت (Coop، Conad): €150-200/ماه.",
-              "- غذا در کافه/رستوران: €8-15/وعده.",
-              "- منوی دانشجویی Unipg: €3-5/وعده.",
-              "🚍 **حمل‌ونقل**:",
-              "- اشتراک ماهانه دانشجویی: €30 (اتوبوس و مینی‌مترو).",
-              "- بلیط تک‌سفر: €1.50.",
-              "📱 **اینترنت و موبایل**:",
-              "- بسته اینترنت (Vodafone، TIM): €10-15/ماه (20-50 گیگ).",
-              "- Wi-Fi آپارتمان: €20-30/ماه (اشتراکی).",
-              "💡 **توصیه**: از تخفیف‌های دانشجویی (Esse3، ISIC) برای کاهش هزینه‌ها استفاده کنید.",
-              "⚠️ **هشدار**: هزینه‌ها در Centro Storico بالاتر از مناطق دیگر است."
-            ],
-            "en": [
-              "🏠 **Accommodation**:",
-              "- ADiSU dorm: €200-350/month.",
-              "- Shared apartment: €250-400/month (excluding utilities).",
-              "- Utilities (electricity, gas, internet): €50-100/month.",
-              "🍽️ **Food**:",
-              "- Grocery shopping (Coop, Conad): €150-200/month.",
-              "- Cafe/restaurant meal: €8-15/meal.",
-              "- Unipg student menu: €3-5/meal.",
-              "🚍 **Transportation**:",
-              "- Student monthly pass: €30 (bus and minimetro).",
-              "- Single ticket: €1.50.",
-              "📱 **Internet and Mobile**:",
-              "- Mobile data plan (Vodafone, TIM): €10-15/month (20-50 GB).",
-              "- Apartment Wi-Fi: €20-30/month (shared).",
-              "💡 **Advice**: Use student discounts (Esse3, ISIC) to reduce costs.",
-              "⚠️ **Warning**: Costs in Centro Storico are higher than other areas."
-            ],
-            "it": [
-              "🏠 **Alloggio**:",
-              "- Dormitorio ADiSU: €200-350/mese.",
-              "- Appartamento condiviso: €250-400/mese (escluse utenze).",
-              "- Utenze (elettricità, gas, internet): €50-100/mese.",
-              "🍽️ **Cibo**:",
-              "- Spesa al supermercato (Coop, Conad): €150-200/mese.",
-              "- Pasto in bar/ristorante: €8-15/pasto.",
-              "- Menu studenti Unipg: €3-5/pasto.",
-              "🚍 **Trasporti**:",
-              "- Abbonamento mensile studenti: €30 (autobus e minimetro).",
-              "- Biglietto singolo: €1.50.",
-              "📱 **Internet e Cellulare**:",
-              "- Piano dati mobile (Vodafone, TIM): €10-15/mese (20-50 GB).",
-              "- Wi-Fi appartamento: €20-30/mese (condiviso).",
-              "💡 **Consiglio**: Usa sconti studenti (Esse3, ISIC) per ridurre i costi.",
-              "⚠️ **Attenzione**: I costi nel Centro Storico sono più alti rispetto ad altre zone."
-            ]
-          }
-        },
-        {
-          "title": {
-            "fa": "مدیریت بودجه",
-            "en": "Budget Management",
-            "it": "Gestione del Budget"
-          },
-          "content": {
-            "fa": [
-              "📝 **مراحل**:",
-              "۱. بودجه ماهانه خود را تنظیم کنید (€600-800/ماه برای زندگی متوسط).",
-              "۲. از سوپرمارکت‌های ارزان (Lidl، Eurospin) خرید کنید.",
-              "۳. اشتراک حمل‌ونقل ماهانه بخرید (€30) به‌جای بلیط تک‌سفر.",
-              "۴. از منوی دانشجویی Unipg برای وعده‌های ارزان استفاده کنید.",
-              "۵. برای صرفه‌جویی، آپارتمان اشتراکی یا خوابگاه انتخاب کنید.",
-              "💡 **توصیه**: اپلیکیشن‌هایی مثل Splitwise برای مدیریت هزینه‌های اشتراکی نصب کنید.",
-              "⚠️ **هشدار**: از خریدهای غیرضروری در Centro Storico پرهیز کنید."
-            ],
-            "en": [
-              "📝 **Steps**:",
-              "1. Set a monthly budget (€600-800/month for average living).",
-              "2. Shop at affordable supermarkets (Lidl, Eurospin).",
-              "3. Buy a monthly transport pass (€30) instead of single tickets.",
-              "4. Use Unipg student menu for cheap meals.",
-              "5. Choose shared apartments or dorms to save costs.",
-              "💡 **Advice**: Install apps like Splitwise for shared expense tracking.",
-              "⚠️ **Warning**: Avoid unnecessary purchases in Centro Storico."
-            ],
-            "it": [
-              "📝 **Passaggi**:",
-              "1. Imposta un budget mensile (€600-800/mese per vita media).",
-              "2. Fai la spesa in supermercati economici (Lidl, Eurospin).",
-              "3. Acquista un abbonamento mensile per i trasporti (€30) invece di biglietti singoli.",
-              "4. Usa il menu studenti Unipg per pasti economici.",
-              "5. Scegli appartamenti condivisi o dormitori per risparmiare.",
-              "💡 **Consiglio**: Installa app come Splitwise per tracciare le spese condivise.",
-              "⚠️ **Attenzione**: Evita acquisti non necessari nel Centro Storico."
-            ]
-          }
-        },
-        {
-          "title": {
-            "fa": "نکات و سؤالات رایج",
-            "en": "Tips and FAQs",
-            "it": "Consigli e Domande Frequenti"
-          },
-          "content": {
-            "fa": [
-              "💡 **توصیه**: برای کاهش هزینه غذا، در خانه آشپزی کنید و از بازارهای محلی (Piazza Matteotti) خرید کنید.",
-              "⚠️ **هشدار**: هزینه‌های سرگرمی (مثل کافه‌ها) می‌تواند سریع بودجه را تمام کند.",
-              "📌 **سؤال رایج**: ارزان‌ترین منطقه برای زندگی؟ Fontivegge یا Ponte San Giovanni.",
-              "📌 **سؤال رایج**: آیا بورسیه هزینه‌های زندگی را پوشش می‌دهد؟ بله، بورسیه ADiSU تا حدی پوشش می‌دهد.",
-              "📌 **سؤال رایج**: چگونه اینترنت ارزان بگیرم؟ بسته‌های Vodafone یا TIM را مقایسه کنید.",
-              "📷 **تصویر راهنما**: cost_guide.pdf (در فایل‌های پروژه) برای بودجه‌بندی و نقشه سوپرمارکت‌ها."
-            ],
-            "en": [
-              "💡 **Advice**: Cook at home and shop at local markets (Piazza Matteotti) to save on food.",
-              "⚠️ **Warning**: Entertainment costs (e.g., cafes) can quickly deplete your budget.",
-              "📌 **FAQ**: Cheapest area to live? Fontivegge or Ponte San Giovanni.",
-              "📌 **FAQ**: Do scholarships cover living costs? Yes, ADiSU scholarships partially cover them.",
-              "📌 **FAQ**: How to get cheap internet? Compare Vodafone or TIM plans.",
-              "📷 **Guide Image**: cost_guide.pdf (in project files) for budgeting and supermarket maps."
-            ],
-            "it": [
-              "💡 **Consiglio**: Cucina a casa e fai la spesa nei mercati locali (Piazza Matteotti) per risparmiare sul cibo.",
-              "⚠️ **Attenzione**: I costi di intrattenimento (es. bar) possono esaurire rapidamente il budget.",
-              "📌 **Domanda Frequente**: Qual è la zona più economica per vivere? Fontivegge o Ponte San Giovanni.",
-              "📌 **Domanda Frequente**: Le borse coprono i costi di vita? Sì, le borse ADiSU li coprono parzialmente.",
-              "📌 **Domanda Frequente**: Come ottenere internet economico? Confronta i piani Vodafone o TIM.",
-              "📷 **Immagine Guida**: cost_guide.pdf (nei file del progetto) per budget e mappe dei supermercati."
+              "📝 **Revisione Contratto**: Il contratto deve includere Codice Fiscale, date di inizio/fine, importo dell’affitto, cauzione (1-2 mesi di affitto) e firme. La registrazione presso Agenzia delle Entrate (€67) è obbligatoria. Contratto di esempio: rental_contract_sample.pdf (nei file del progetto).",
+              "⚠️ **Attenzione**: Evita accordi verbali o pagamenti in contanti senza ricevuta, non sono legalmente validi.",
+              "💡 **Visita di Persona**: Controlla l’immobile per riscaldamento, internet e condizioni della cucina. Scatta foto e segnala problemi prima di firmare.",
+              "📌 **Domanda Frequente**: Posso firmare senza Permesso? SÌ, con passaporto e Codice Fiscale, ma un contratto registrato è più sicuro.",
+              "📌 **Domanda Frequente**: Come viene restituita la cauzione? Alla fine del contratto, dopo l’ispezione del proprietario, la cauzione (1-2 mesi di affitto) viene rimborsata.",
+              "💡 **Consiglio**: Per assistenza legale, contatta l’ufficio internazionale dell’università (international@unipg.it) o ESN Perugia."
             ]
           }
         }

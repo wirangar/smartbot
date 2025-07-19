@@ -135,6 +135,21 @@ async def ask_email(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await update.message.reply_text(error_text.get(lang))
         return ConversationHandler.END
 
+    # Notify admin about the new user
+    if ADMIN_CHAT_ID:
+        try:
+            admin_notification = (
+                f"🎉 کاربر جدید ثبت‌نام کرد!\n\n"
+                f"ID: {user_id}\n"
+                f"نام: {context.user_data['first_name']} {context.user_data['last_name']}\n"
+                f"سن: {context.user_data['age']}\n"
+                f"ایمیل: {email}\n"
+                f"زبان: {lang}"
+            )
+            await context.bot.send_message(chat_id=ADMIN_CHAT_ID, text=admin_notification)
+        except Exception as e:
+            logger.error(f"Failed to send new user notification to admin: {e}")
+
     success_text = {'fa': "✅ ثبت‌نام شما با موفقیت انجام شد! به منوی اصلی خوش آمدید.", 'en': "✅ Registration complete! Welcome to the main menu.", 'it': "✅ Registrazione completata! Benvenuto nel menu principale."}
     await update.message.reply_text(success_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
     return MAIN_MENU
@@ -182,6 +197,64 @@ async def show_profile(update: Update, context: ContextTypes.DEFAULT_TYPE, is_co
         else:
             await update.callback_query.edit_message_text(error_text, reply_markup=get_main_menu_keyboard(lang))
 
+    return MAIN_MENU
+
+async def subscribe_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Asks the user if they want to subscribe to notifications."""
+    lang = context.user_data.get('language', 'fa')
+
+    keyboard = [
+        [
+            InlineKeyboardButton("✅ بله", callback_data="subscribe:yes"),
+            InlineKeyboardButton("❌ خیر", callback_data="subscribe:no"),
+        ]
+    ]
+
+    subscribe_text = {
+        'fa': "آیا مایلید یادآوری‌های مربوط به ددلاین‌های مهم را دریافت کنید؟",
+        'en': "Would you like to receive reminders for important deadlines?",
+        'it': "Vuoi ricevere promemoria per le scadenze importanti?"
+    }
+
+    # Check if called from a command or as part of a flow
+    if update.message:
+        await update.message.reply_text(subscribe_text.get(lang), reply_markup=InlineKeyboardMarkup(keyboard))
+    elif update.callback_query:
+        await update.callback_query.edit_message_text(subscribe_text.get(lang), reply_markup=InlineKeyboardMarkup(keyboard))
+
+    return MAIN_MENU # Stay in the main menu state
+
+async def handle_subscription_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """Handles the subscription choice."""
+    query = update.callback_query
+    await query.answer()
+    choice = query.data.split(":")[1]
+    user_id = query.from_user.id
+    lang = context.user_data.get('language', 'fa')
+
+    subscribe_status = True if choice == 'yes' else False
+
+    try:
+        with get_db_cursor() as cursor:
+            cursor.execute(
+                "UPDATE users SET is_subscribed_to_notifications = %s WHERE telegram_id = %s",
+                (subscribe_status, user_id)
+            )
+
+        if subscribe_status:
+            response_text = {'fa': "عالی! شما برای دریافت یادآوری‌ها مشترک شدید.", 'en': "Great! You have subscribed to reminders.", 'it': "Ottimo! Ti sei iscritto ai promemoria."}
+        else:
+            response_text = {'fa': "شما اشتراک خود را لغو کردید.", 'en': "You have unsubscribed from reminders.", 'it': "Hai annullato l'iscrizione ai promemoria."}
+
+        await query.edit_message_text(text=response_text.get(lang))
+
+    except Exception as e:
+        logger.error(f"Failed to update subscription status for user {user_id}: {e}")
+        error_text = {'fa': "خطایی در به‌روزرسانی وضعیت اشتراک شما رخ داد.", 'en': "An error occurred while updating your subscription status.", 'it': "Si è verificato un errore durante l'aggiornamento dello stato dell'abbonamento."}
+        await query.edit_message_text(text=error_text.get(lang))
+
+    # After handling, show the main menu again
+    await query.message.reply_text(text="به منوی اصلی بازگشتید.", reply_markup=get_main_menu_keyboard(lang))
     return MAIN_MENU
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
