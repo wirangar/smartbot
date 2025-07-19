@@ -15,11 +15,16 @@ def get_main_menu_keyboard(lang: str = 'fa') -> InlineKeyboardMarkup:
     kb = get_knowledge_base()
     keyboard = []
 
-    # Main categories
+    # Main categories from the root of the JSON
+    # Add emojis for better UX
+    category_emojis = {
+        "بورسیه و تقویم آموزشی": "🎓",
+        "راهنمای دانشجویی": "🏠"
+    }
+
     for category_name in kb.keys():
-        # For now, we assume category names are the keys themselves.
-        # This can be improved by adding a title field to categories in JSON.
-        keyboard.append([InlineKeyboardButton(f"🔹 {category_name}", callback_data=f"menu:{category_name}")])
+        emoji = category_emojis.get(category_name, "🔹")
+        keyboard.append([InlineKeyboardButton(f"{emoji} {category_name}", callback_data=f"menu:{category_name}")])
 
     # Static action buttons at the bottom
     # These should be translated based on the 'lang' parameter.

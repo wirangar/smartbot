@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 from pathlib import Path
 
 from src.config import logger
@@ -67,13 +68,17 @@ def get_content_by_path(path_parts: list, lang: str = 'fa') -> (str, str):
             if isinstance(sub_content, list):
                 # Check for file references in content
                 for line in sub_content:
-                    if ".pdf" in line or ".jpg" in line:
-                        try:
-                            # Extract file name, e.g., from "file: file_name.pdf"
-                            file_name = line.split(':')[1].strip()
-                            file_to_send = f"assets/pdf/{file_name}" # Assuming pdf for now
-                        except IndexError:
-                            pass
+                    # Improved file reference extraction
+                    match = re.search(r'\(([^)]+\.(?:pdf|jpg|jpeg|png))\)', line, re.IGNORECASE)
+                    if match:
+                        file_name = match.group(1)
+                        # Determine subdirectory based on extension
+                        extension = file_name.split('.')[-1].lower()
+                        if extension in ['jpg', 'jpeg', 'png']:
+                            file_to_send = f"assets/images/{file_name}"
+                        elif extension == 'pdf':
+                            file_to_send = f"assets/pdf/{file_name}"
+                        # Add more types if needed (video, audio)
                     output_parts.append(line)
             else:
                 output_parts.append(sub_content)
