@@ -8,8 +8,18 @@ from src.locale import get_message
 
 weather_service = WeatherService()
 
+async def get_weather_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handles the weather button callback."""
+    query = update.callback_query
+    await query.answer()
+    await send_weather_update(query.message, context)
+
 async def get_weather(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handles the /weather command and sends the current weather in Perugia."""
+    """Handles the /weather command."""
+    await send_weather_update(update.message, context)
+
+async def send_weather_update(message, context: ContextTypes.DEFAULT_TYPE):
+    """Fetches and sends the weather update."""
     lang = context.user_data.get('language', 'fa')
 
     weather_data = weather_service.get_weather()

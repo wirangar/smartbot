@@ -16,7 +16,8 @@ from src.handlers import (
     message_handler,
     isee_handler,
     feedback_handler,
-    weather_handler
+    weather_handler,
+    search_handler
 )
 from src.services.notification_service import start_notification_job
 
@@ -35,9 +36,9 @@ def main() -> None:
 
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(post_init).build()
 
-    # ISEE Conversation Handler
+    # Define conversation handlers
     isee_conv = ConversationHandler(
-        entry_points=[CommandHandler("isee", isee_handler.start_isee)],
+        entry_points=[CallbackQueryHandler(isee_handler.start_isee, pattern=r"^action:start_isee$")],
         states={
             isee_handler.INCOME: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_income)],
             isee_handler.PROPERTY: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_property)],
@@ -48,7 +49,20 @@ def main() -> None:
         map_to_parent={ ConversationHandler.END: user_manager.MAIN_MENU }
     )
 
-    # Main Conversation Handler
+    search_conv = ConversationHandler(
+        entry_points=[CallbackQueryHandler(search_handler.start_search, pattern=r"^action:start_search$")],
+        states={
+            search_handler.ASKING_QUERY: [MessageHandler(filters.TEXT & ~filters.COMMAND, search_handler.handle_query)],
+            search_handler.SHOWING_RESULTS: [
+                CallbackQueryHandler(message_handler.handle_pagination_callback, pattern=r"^pagination:.*"),
+                CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*")
+            ]
+        },
+        fallbacks=[CommandHandler("cancel", search_handler.cancel_search)],
+        map_to_parent={ ConversationHandler.END: user_manager.MAIN_MENU }
+    )
+
+    # Main conversation handler
     main_conv = ConversationHandler(
         entry_points=[CommandHandler("start", user_manager.start)],
         states={
@@ -59,18 +73,17 @@ def main() -> None:
             user_manager.ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_email)],
             user_manager.MAIN_MENU: [
                 CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"),
-                CallbackQueryHandler(user_manager.show_profile, pattern=r"^action:profile$"),
-                CallbackQueryHandler(user_manager.handle_subscription_callback, pattern=r"^subscribe:.*"),
-                CallbackQueryHandler(message_handler.handle_pagination_callback, pattern=r"^pagination:.*"),
                 CallbackQueryHandler(feedback_handler.handle_feedback, pattern=r"^feedback:.*"),
+                isee_conv,
+                search_conv,
+                CallbackQueryHandler(user_manager.show_profile, pattern=r"^action:profile$"),
+                CallbackQueryHandler(weather_handler.get_weather_callback, pattern=r"^action:weather$"),
+                CallbackQueryHandler(user_manager.handle_subscription_callback, pattern=r"^subscribe:.*"),
                 CallbackQueryHandler(menu_handler.handle_action_callback, pattern=r"^action:.*"),
-                isee_conv, # Nest ISEE handler
             ],
         },
         fallbacks=[
             CommandHandler("weather", weather_handler.get_weather),
-            CommandHandler("help", menu_handler.help_command),
-            CommandHandler("menu", menu_handler.main_menu_command),
             MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message),
             MessageHandler(filters.VOICE, message_handler.handle_voice_message),
             MessageHandler(filters.Document.ALL, message_handler.handle_file_upload),
@@ -83,13 +96,7 @@ def main() -> None:
 
     if BASE_URL:
         logger.info(f"Starting bot in webhook mode, listening on port {PORT}")
-        application.run_webhook(
-            listen="0.0.0.0",
-            port=PORT,
-            secret_token=WEBHOOK_SECRET,
-            url_path=TELEGRAM_BOT_TOKEN,
-            webhook_url=f"{BASE_URL}/{TELEGRAM_BOT_TOKEN}"
-        )
+        application.run_webhook(listen="0.0.0.0", port=PORT, secret_token=WEBHOOK_SECRET, url_path=TELEGRAM_BOT_TOKEN, webhook_url=f"{BASE_URL}/{TELEGRAM_BOT_TOKEN}")
     else:
         logger.info("No BASE_URL found, running in polling mode for local development.")
         application.run_polling()

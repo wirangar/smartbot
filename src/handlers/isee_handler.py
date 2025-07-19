@@ -14,7 +14,13 @@ INCOME, PROPERTY, FAMILY, CONFIRM = range(4)
 async def start_isee(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Starts the ISEE calculation conversation."""
     lang = context.user_data.get('language', 'fa')
-    await update.message.reply_text(get_message("start_isee", lang))
+
+    if update.callback_query:
+        await update.callback_query.answer()
+        await update.callback_query.edit_message_text(get_message("start_isee", lang))
+    else: # Started via /isee command
+        await update.message.reply_text(get_message("start_isee", lang))
+
     return INCOME
 
 async def handle_income(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:

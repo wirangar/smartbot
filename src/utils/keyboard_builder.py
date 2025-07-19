@@ -1,5 +1,6 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from src.data.knowledge_base import get_knowledge_base
+from src.locale import get_message
 
 def get_language_keyboard() -> InlineKeyboardMarkup:
     """Returns the language selection keyboard."""
@@ -11,35 +12,30 @@ def get_language_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(keyboard)
 
 def get_main_menu_keyboard(lang: str = 'fa') -> InlineKeyboardMarkup:
-    """Returns the main menu keyboard."""
+    """Returns the main menu keyboard with top-level actions."""
     kb = get_knowledge_base()
     keyboard = []
 
-    # Main categories from the root of the JSON
-    # Add emojis for better UX
-    category_emojis = {
-        "بورسیه و تقویم آموزشی": "🎓",
-        "راهنمای دانشجویی": "🏠"
-    }
-
+    # Dynamic categories from knowledge base
+    category_emojis = {"بورسیه و تقویم آموزشی": "🎓", "راهنمای دانشجویی": "🏠"}
     for category_name in kb.keys():
         emoji = category_emojis.get(category_name, "🔹")
         keyboard.append([InlineKeyboardButton(f"{emoji} {category_name}", callback_data=f"menu:{category_name}")])
 
-    # Static action buttons at the bottom
-    # These should be translated based on the 'lang' parameter.
-    profile_text = {"fa": "👤 پروفایل من", "en": "👤 My Profile", "it": "👤 Il Mio Profilo"}
-    contact_text = {"fa": "📞 تماس با ادمین", "en": "📞 Contact Admin", "it": "📞 Contatta Admin"}
-    history_text = {"fa": "📜 تاریخچه", "en": "📜 History", "it": "📜 Cronologia"}
-    help_text = {"fa": "❓ راهنما", "en": "❓ Help", "it": "❓ Aiuto"}
-
+    # Static feature buttons
     keyboard.append([
-        InlineKeyboardButton(profile_text.get(lang, "👤 My Profile"), callback_data="action:profile"),
-        InlineKeyboardButton(contact_text.get(lang, "📞 Contact Admin"), callback_data="action:contact_admin")
+        InlineKeyboardButton(get_message("isee_button", lang), callback_data="action:start_isee"),
+        InlineKeyboardButton(get_message("search_button", lang), callback_data="action:start_search")
+    ])
+
+    # Static action buttons at the bottom
+    keyboard.append([
+        InlineKeyboardButton(get_message("profile_button", lang), callback_data="action:profile"),
+        InlineKeyboardButton(get_message("weather_button", lang), callback_data="action:weather")
     ])
     keyboard.append([
-        InlineKeyboardButton(history_text.get(lang, "📜 History"), callback_data="action:history"),
-        InlineKeyboardButton(help_text.get(lang, "❓ Help"), callback_data="action:help")
+        InlineKeyboardButton(get_message("contact_button", lang), callback_data="action:contact_admin"),
+        InlineKeyboardButton(get_message("help_button", lang), callback_data="action:help")
     ])
 
     return InlineKeyboardMarkup(keyboard)
@@ -56,14 +52,8 @@ def get_item_keyboard(category: str, lang: str = 'fa') -> InlineKeyboardMarkup:
             if title and item_id:
                 keyboard.append([InlineKeyboardButton(title, callback_data=f"menu:{category}:{item_id}")])
 
-    # Add ISEE calculator button specifically to the scholarship menu
-    if category == "بورسیه و تقویم آموزشی":
-        isee_text = {"fa": "📊 محاسبه ISEE", "en": "📊 Calculate ISEE", "it": "📊 Calcola ISEE"}
-        keyboard.append([InlineKeyboardButton(isee_text.get(lang, "📊 Calculate ISEE"), callback_data="action:calculate_isee")])
-
     # Back button
-    back_text = {"fa": "🔙 بازگشت", "en": "🔙 Back", "it": "🔙 Indietro"}
-    keyboard.append([InlineKeyboardButton(back_text.get(lang, "🔙 Back"), callback_data="menu:main_menu")])
+    keyboard.append([InlineKeyboardButton(get_message("back_button", lang), callback_data="menu:main_menu")])
 
     return InlineKeyboardMarkup(keyboard)
 
@@ -72,12 +62,10 @@ def get_content_keyboard(path_parts: list, lang: str = 'fa') -> InlineKeyboardMa
     keyboard = []
 
     # Back to item list
-    back_to_items_text = {"fa": "🔙 بازگشت به لیست", "en": "🔙 Back to List", "it": "🔙 Torna alla Lista"}
     if len(path_parts) > 1:
-        keyboard.append([InlineKeyboardButton(back_to_items_text.get(lang, "🔙 Back to List"), callback_data=f"menu:{path_parts[0]}")])
+        keyboard.append([InlineKeyboardButton(get_message("back_to_list_button", lang), callback_data=f"menu:{path_parts[0]}")])
 
     # Back to main menu
-    back_to_main_text = {"fa": "🏠 بازگشت به منوی اصلی", "en": "🏠 Back to Main Menu", "it": "🏠 Torna al Menu Principale"}
-    keyboard.append([InlineKeyboardButton(back_to_main_text.get(lang, "🏠 Back to Main Menu"), callback_data="menu:main_menu")])
+    keyboard.append([InlineKeyboardButton(get_message("back_to_main_menu_button", lang), callback_data="menu:main_menu")])
 
     return InlineKeyboardMarkup(keyboard)

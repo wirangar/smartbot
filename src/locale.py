@@ -48,6 +48,18 @@ MESSAGES = {
         "feature_unavailable": "این قابلیت در حال حاضر در دسترس نیست.",
         "weather_report": "🌦️ *آب و هوای {city}*:\n\n- *توضیحات:* {description}\n- *دما:* {temp}°C",
         "weather_error": "متاسفانه در حال حاضر امکان دریافت اطلاعات آب و هوا وجود ندارد.",
+        "isee_button": "📊 محاسبه ISEE",
+        "search_button": "🔎 جستجو در راهنما",
+        "profile_button": "👤 پروفایل من",
+        "weather_button": "🌦️ آب و هوا",
+        "contact_button": "📞 تماس با ادمین",
+        "help_button": "❓ راهنما",
+        "back_button": "🔙 بازگشت",
+        "back_to_list_button": "🔙 بازگشت به لیست",
+        "back_to_main_menu_button": "🏠 بازگشت به منوی اصلی",
+        "ask_search_query": "🔎 لطفاً عبارت مورد نظر خود را برای جستجو وارد کنید:",
+        "no_search_results": "نتیجه‌ای برای '{query}' یافت نشد.",
+        "search_cancelled": "جستجو لغو شد.",
     },
     'en': {
         "start_isee": f"{Emoji.ISEE} Welcome to the ISEE calculator. Please enter your family's annual income in EUR:",
