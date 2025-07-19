@@ -65,11 +65,21 @@ def setup_database():
         calculation_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     );
     """
+    feedback_table_sql = """
+    CREATE TABLE IF NOT EXISTS feedback (
+        id SERIAL PRIMARY KEY,
+        user_id BIGINT REFERENCES users(telegram_id),
+        is_helpful BOOLEAN,
+        message_text TEXT,
+        timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    );
+    """
     try:
         with get_db_cursor() as cursor:
             if cursor:
                 cursor.execute(users_table_sql)
                 cursor.execute(isee_table_sql)
+                cursor.execute(feedback_table_sql)
                 logger.info("Database tables checked/created successfully.")
     except Exception as e:
         logger.error(f"Failed to set up database tables: {e}")

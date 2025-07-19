@@ -28,6 +28,12 @@ MESSAGES = {
         "confirm_prompt": "لطفاً با استفاده از دکمه‌ها تأیید کنید.",
         "yes": "✅ بله",
         "no": "❌ خیر",
+        "feedback_prompt": "آیا این پاسخ برای شما مفید بود؟",
+        "feedback_thanks": "از بازخورد شما متشکریم!",
+        "feedback_yes": "👍 مفید بود",
+        "feedback_no": "👎 مفید نبود",
+        "weather_report": "🌦️ *آب و هوای {city}*:\n\n- *توضیحات:* {description}\n- *دما:* {temp}°C",
+        "weather_error": "متاسفانه در حال حاضر امکان دریافت اطلاعات آب و هوا وجود ندارد.",
     },
     'en': {
         "start_isee": f"{Emoji.ISEE} Welcome to the ISEE calculator. Please enter your family's annual income in EUR:",

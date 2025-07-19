@@ -10,7 +10,7 @@ from telegram.ext import (
 
 from src.config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, PORT, logger
 from src.database import setup_database
-from src.handlers import user_manager, menu_handler, message_handler, isee_handler
+from src.handlers import user_manager, menu_handler, message_handler, isee_handler, feedback_handler, weather_handler
 from src.services.notification_service import start_notification_job
 
 async def post_init(application: Application):
@@ -46,6 +46,8 @@ def main() -> None:
                 CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"),
                 CallbackQueryHandler(user_manager.show_profile, pattern=r"^action:profile$"),
                 CallbackQueryHandler(user_manager.handle_subscription_callback, pattern=r"^subscribe:.*"),
+                CallbackQueryHandler(message_handler.handle_pagination_callback, pattern=r"^pagination:.*"),
+                CallbackQueryHandler(feedback_handler.handle_feedback, pattern=r"^feedback:.*"),
                 CallbackQueryHandler(menu_handler.handle_action_callback, pattern=r"^action:.*"),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message),
                 MessageHandler(filters.VOICE, message_handler.handle_voice_message),
@@ -57,6 +59,7 @@ def main() -> None:
             CommandHandler("profile", user_manager.show_profile_command),
             CommandHandler("subscribe", user_manager.subscribe_command),
             CommandHandler("isee", isee_handler.start_isee),
+            CommandHandler("weather", weather_handler.get_weather),
             CommandHandler("help", menu_handler.help_command),
             CommandHandler("cancel", user_manager.cancel)
         ],
