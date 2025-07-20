@@ -24,8 +24,8 @@ def get_main_menu_keyboard(lang: str = 'fa') -> InlineKeyboardMarkup:
 
     # Static feature buttons
     keyboard.append([
-        InlineKeyboardButton(get_message("isee_button", lang), callback_data="isee_start"),
-        InlineKeyboardButton(get_message("search_button", lang), callback_data="search_start")
+        InlineKeyboardButton(get_message("isee_button", lang), callback_data="action:start_isee"),
+        InlineKeyboardButton(get_message("search_button", lang), callback_data="action:start_search")
     ])
 
     # Static action buttons at the bottom

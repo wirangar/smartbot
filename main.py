@@ -36,11 +36,25 @@ def main() -> None:
 
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(post_init).build()
 
-    # --- Independent Conversation Handlers ---
+    # --- Registration Conversation Handler ---
+    registration_conv = ConversationHandler(
+        entry_points=[CommandHandler("start", user_manager.start)],
+        states={
+            user_manager.SELECTING_LANG: [CallbackQueryHandler(user_manager.select_language, pattern=r"^lang:.*")],
+            user_manager.ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_first_name)],
+            user_manager.ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_last_name)],
+            user_manager.ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_age)],
+            user_manager.ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_email)],
+        },
+        fallbacks=[CommandHandler("cancel", user_manager.cancel)],
+        name="registration_conversation"
+    )
+
+    # --- ISEE Conversation Handler ---
     isee_conv = ConversationHandler(
         entry_points=[
             CommandHandler("isee", isee_handler.start_isee),
-            CallbackQueryHandler(isee_handler.start_isee, pattern=r"^isee_start$")
+            CallbackQueryHandler(isee_handler.start_isee, pattern=r"^action:start_isee$")
         ],
         states={
             isee_handler.INCOME: [MessageHandler(filters.TEXT & ~filters.COMMAND, isee_handler.handle_income)],
@@ -49,64 +63,46 @@ def main() -> None:
             isee_handler.CONFIRM: [CallbackQueryHandler(isee_handler.handle_confirm, pattern=r"^isee_confirm:.*")],
         },
         fallbacks=[CommandHandler("cancel", isee_handler.cancel_isee)],
-        name="isee_conversation",
-        persistent=True,
+        name="isee_conversation"
     )
 
+    # --- Search Conversation Handler ---
     search_conv = ConversationHandler(
         entry_points=[
             CommandHandler("search", search_handler.start_search),
-            CallbackQueryHandler(search_handler.start_search, pattern=r"^search_start$")
+            CallbackQueryHandler(search_handler.start_search, pattern=r"^action:start_search$")
         ],
         states={
             search_handler.ASKING_QUERY: [MessageHandler(filters.TEXT & ~filters.COMMAND, search_handler.handle_query)],
-            search_handler.SHOWING_RESULTS: [
-                CallbackQueryHandler(message_handler.handle_pagination_callback, pattern=r"^pagination:.*"),
-                CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*")
-            ]
         },
         fallbacks=[CommandHandler("cancel", search_handler.cancel_search)],
-        name="search_conversation",
-        persistent=True,
-    )
-
-    # --- Main Conversation Handler for Registration and Menu Navigation ---
-    main_conv = ConversationHandler(
-        entry_points=[CommandHandler("start", user_manager.start)],
-        states={
-            user_manager.SELECTING_LANG: [CallbackQueryHandler(user_manager.select_language, pattern=r"^lang:.*")],
-            user_manager.ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_first_name)],
-            user_manager.ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_last_name)],
-            user_manager.ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_age)],
-            user_manager.ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_email)],
-            user_manager.MAIN_MENU: [
-                CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"),
-            ],
-        },
-        fallbacks=[CommandHandler("cancel", user_manager.cancel)],
-        name="main_menu_conversation",
-        persistent=True,
+        name="search_conversation"
     )
 
     # Add all handlers to the application
-    application.add_handler(main_conv)
+    application.add_handler(registration_conv)
     application.add_handler(isee_conv)
     application.add_handler(search_conv)
 
-    # Add handlers for commands that can be used at any time
-    application.add_handler(CommandHandler("weather", weather_handler.get_weather))
-    application.add_handler(CommandHandler("help", menu_handler.help_command))
+    # --- Independent Handlers ---
+    # Commands
+    application.add_handler(CommandHandler("menu", menu_handler.main_menu_command))
     application.add_handler(CommandHandler("profile", user_manager.show_profile_command))
     application.add_handler(CommandHandler("subscribe", user_manager.subscribe_command))
+    application.add_handler(CommandHandler("weather", weather_handler.get_weather))
+    application.add_handler(CommandHandler("help", menu_handler.help_command))
 
-    # Add handlers for callbacks that are not part of a conversation
+    # Callbacks
+    application.add_handler(CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"))
+    application.add_handler(CallbackQueryHandler(message_handler.handle_pagination_callback, pattern=r"^pagination:.*"))
     application.add_handler(CallbackQueryHandler(feedback_handler.handle_feedback, pattern=r"^feedback:.*"))
     application.add_handler(CallbackQueryHandler(user_manager.handle_subscription_callback, pattern=r"^subscribe:.*"))
+    # A general callback for simple actions that don't need a full handler
+    application.add_handler(CallbackQueryHandler(menu_handler.handle_action_callback, pattern=r"^action:.*"))
 
-    # Add handlers for messages
+    # Messages
     application.add_handler(MessageHandler(filters.VOICE, message_handler.handle_voice_message))
     application.add_handler(MessageHandler(filters.Document.ALL, message_handler.handle_file_upload))
-    # This should be the last handler to act as a fallback for non-command text
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message))
 
 
