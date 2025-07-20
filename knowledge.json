@@ -318,72 +318,210 @@
   ],
   "راهنمای دانشجویی": [
     {
-      "id": "university_registration",
+      "id": "umbrian_attractions",
       "title": {
-        "fa": "🎓 ثبت‌نام در دانشگاه پروجا",
-        "en": "🎓 Registration at the University of Perugia",
-        "it": "🎓 Iscrizione all’Università di Perugia"
+        "fa": "🏛️ مکان‌های دیدنی اومبریا",
+        "en": "🏛️ Umbrian Attractions",
+        "it": "🏛️ Attrazioni Umbre"
       },
       "description": {
-        "fa": "راهنمای جامع ثبت‌نام در دانشگاه پروجا برای دانشجویان بین‌المللی، شامل مراحل، مدارک، و نکات مربوط به پرتال Esse3.",
-        "en": "Comprehensive guide to registering at the University of Perugia for international students, covering steps, documents, and Esse3 portal tips.",
-        "it": "Guida completa per l’iscrizione all’Università di Perugia per studenti internazionali, con passaggi, documenti e consigli sul portale Esse3."
+        "fa": "راهنمای جامع مکان‌های دیدنی اومبریا برای دانشجویان بین‌المللی، شامل جاذبه‌های تاریخی، طبیعی، و فرهنگی با توضیحات دقیق، آدرس‌ها، لینک‌های نقشه گوگل، هزینه‌ها، و نکات کاربردی.",
+        "en": "Comprehensive guide to Umbrian attractions for international students, covering historical, natural, and cultural sites with detailed descriptions, addresses, Google Maps links, costs, and practical tips.",
+        "it": "Guida completa alle attrazioni umbre per studenti internazionali, che copre siti storici, naturali e culturali con descrizioni dettagliate, indirizzi, link a Google Maps, costi e consigli pratici."
       },
       "subsections": [
         {
           "title": {
-            "fa": "مراحل ثبت‌نام",
-            "en": "Registration Steps",
-            "it": "Passaggi per l’Iscrizione"
+            "fa": "جاذبه‌های تاریخی و فرهنگی",
+            "en": "Historical and Cultural Attractions",
+            "it": "Attrazioni Storiche e Culturali"
           },
           "content": {
             "fa": [
-              "📋 **مدارک لازم**:",
-              "- پاسپورت و کپی (صفحه اصلی و ویزا).",
-              "- Codice Fiscale.",
-              "- دیپلم/مدرک کارشناسی (ترجمه‌شده به ایتالیایی و تأییدشده توسط سفارت).",
-              "- گواهی زبان (مثل IELTS 6.5 یا CILS B2 برای رشته‌های ایتالیایی).",
-              "- رسید پرداخت شهریه (حداقل €۱۵۶ برای سال اول، از طریق PagoPA).",
-              "🏢 **محل ثبت‌نام**: دفتر بین‌الملل دانشگاه، Piazza Ermini, 06123 Perugia (نقشه: https://maps.app.goo.gl/UnipgInternational). ساعات کاری: دوشنبه-جمعه، ۹ صبح تا ۱ ظهر.",
-              "📝 **مراحل**:",
-              "۱. در پرتال Esse3 (https://unipg.esse3.cineca.it) ثبت‌نام کنید و ایمیل دانشگاهی (name.surname@studenti.unipg.it) دریافت کنید.",
-              "۲. فرم آنلاین را با اطلاعات شخصی، مدارک تحصیلی، و Codice Fiscale پر کنید.",
-              "۳. مدارک را آپلود کرده و شهریه را پرداخت کنید (با Revolut/Wise یا PagoPA).",
-              "۴. وقت حضوری در دفتر بین‌الملل رزرو کنید (ایمیل: international@unipg.it).",
-              "۵. گواهی ثبت‌نام را دریافت کنید (برای Permesso یا بورسیه ADiSU).",
-              "💡 **هزینه**: شهریه سالانه €۵۰۰-۲,۰۰۰ (بسته به رشته و ISEE)."
+              "🏛️ **Centro Storico پروجا**:",
+              "- **توضیحات**: قلب تاریخی پروجا با خیابان‌های سنگ‌فرش، معماری قرون وسطایی، و بناهای نمادین. شامل Fontana Maggiore (فواره قرن سیزدهمی)، Palazzo dei Priori (تالار شهر با نقاشی‌های تاریخی)، و Cattedrale di San Lorenzo (کلیسای جامع با دکوراسیون گوتیک). گالری ملی اومبریا (Galleria Nazionale dell’Umbria) مجموعه‌ای از آثار هنری قرن 13-18 را نمایش می‌دهد.",
+              "- **آدرس**: Piazza IV Novembre, 06123 Perugia (نقشه: https://maps.app.goo.gl/CentroStoricoPerugia).",
+              "- **هزینه**: رایگان (ورودی گالری ملی: €8، دانشجویی €4).",
+              "- **ساعات بازدید**: گالری ملی: 8:30-19:30 (دوشنبه بسته). بازدید از خیابان‌ها و میدان‌ها: 24/7.",
+              "- **دسترسی**: مینی‌مترو از Pian di Massiano به Piazza Matteotti (بلیط: €1.50).",
+              "- **ویژگی‌ها**: کافه‌های دنج (مثل Sandri در Corso Vannucci)، بازارهای هفتگی، و چشم‌اندازهای پانورامیک از Arco Etrusco.",
+              "🏛️ **جاذبه‌های اسیسی (Assisi)**:",
+              "- **Basilica di San Francesco**: سایت میراث جهانی یونسکو، محل دفن سنت فرانسیس، با نقاشی‌های جوتو و چیمابوئه. شامل دو کلیسا (بالا و پایین) و آرامگاه سنت فرانسیس.",
+              "  - **آدرس**: Piazza San Francesco, 06081 Assisi (نقشه: https://maps.app.goo.gl/BasilicaAssisi).",
+              "  - **هزینه**: رایگان (تورهای هدایت‌شده: €10، صوتی: €5).",
+              "  - **ساعات بازدید**: 8:30-18:45 (آخرین ورود: 18:00).",
+              "- **Rocca Maggiore**: قلعه قرون وسطایی با چشم‌انداز پانورامیک از اسیسی و دره اومبریا.",
+              "  - **آدرس**: Via della Rocca, 06081 Assisi (نقشه: https://maps.app.goo.gl/RoccaMaggioreAssisi).",
+              "  - **هزینه**: €6 (دانشجویی €4).",
+              "  - **ساعات بازدید**: 10:00-18:00 (تابستان تا 20:00).",
+              "- **Basilica di Santa Chiara**: کلیسای اختصاص‌یافته به سنت کلر، با معماری گوتیک و آرامگاه سنت کلر.",
+              "  - **آدرس**: Piazza Santa Chiara, 06081 Assisi (نقشه: https://maps.app.goo.gl/SantaChiaraAssisi).",
+              "  - **هزینه**: رایگان.",
+              "  - **ساعات بازدید**: 6:30-12:00، 14:00-19:00.",
+              "- **Piazza del Comune**: میدان مرکزی اسیسی با معبد مینروا (Tempio di Minerva) و کافه‌های سنتی.",
+              "  - **آدرس**: Piazza del Comune, 06081 Assisi (نقشه: https://maps.app.goo.gl/PiazzaComuneAssisi).",
+              "  - **هزینه**: رایگان.",
+              "  - **ویژگی‌ها**: بازارهای محلی و رویدادهای فرهنگی.",
+              "- **دسترسی به اسیسی**: قطار از Perugia Fontivegge به Assisi (بلیط: €3، 20 دقیقه). اتوبوس از Piazza Partigiani (بلیط: €2.50).",
+              "🏛️ **Gubbio و Palazzo dei Consoli**:",
+              "- **توضیحات**: گوبیو، شهر قرون وسطایی با معماری سنگی و تاریخ اومبری. Palazzo dei Consoli موزه‌ای با آثار باستانی و چشم‌انداز به Piazza Grande دارد.",
+              "- **آدرس**: Piazza Grande, 06024 Gubbio (نقشه: https://maps.app.goo.gl/PalazzoConsoliGubbio).",
+              "- **هزینه**: €7 (دانشجویی €5).",
+              "- **ساعات بازدید**: 10:00-18:00 (دوشنبه بسته).",
+              "- **دسترسی**: اتوبوس از Perugia Piazza Partigiani (بلیط: €5، 45 دقیقه).",
+              "💡 **توصیه**: از کارت Esse3 یا ISIC برای تخفیف‌های دانشجویی در موزه‌ها استفاده کنید. تورهای گروهی ESN (t.me/ESNPerugia) برای اسیسی و گوبیو ارزان‌ترند."
             ],
             "en": [
-              "📋 **Required Documents**:",
-              "- Passport and copy (main page and visa).",
-              "- Codice Fiscale.",
-              "- High school diploma/bachelor’s degree (translated to Italian and certified by embassy).",
-              "- Language certificate (e.g., IELTS 6.5 or CILS B2 for Italian-taught programs).",
-              "- Tuition fee receipt (minimum €156 for first year, via PagoPA).",
-              "🏢 **Where to Register**: International Office, Piazza Ermini, 06123 Perugia (map: https://maps.app.goo.gl/UnipgInternational). Hours: Monday-Friday, 9 AM–1 PM.",
-              "📝 **Steps**:",
-              "1. Register on Esse3 portal (https://unipg.esse3.cineca.it) to get university email (name.surname@studenti.unipg.it).",
-              "2. Fill online form with personal details, academic records, and Codice Fiscale.",
-              "3. Upload documents and pay tuition (via Revolut/Wise or PagoPA).",
-              "4. Book an in-person appointment at International Office (email: international@unipg.it).",
-              "5. Receive enrollment certificate (for Permesso or ADiSU scholarship).",
-              "💡 **Cost**: Annual tuition €500-2,000 (depending on program and ISEE)."
+              "🏛️ **Centro Storico, Perugia**:",
+              "- **Description**: Historic heart of Perugia with cobblestone streets and medieval architecture. Features Fontana Maggiore (13th-century fountain), Palazzo dei Priori (city hall with historical frescoes), and Cattedrale di San Lorenzo (Gothic cathedral). The Galleria Nazionale dell’Umbria showcases 13th-18th century art.",
+              "- **Address**: Piazza IV Novembre, 06123 Perugia (map: https://maps.app.goo.gl/CentroStoricoPerugia).",
+              "- **Cost**: Free (Galleria Nazionale: €8, student €4).",
+              "- **Hours**: Galleria Nazionale: 8:30 AM–7:30 PM (closed Mondays). Streets and squares: 24/7.",
+              "- **Access**: Minimetro from Pian di Massiano to Piazza Matteotti (ticket: €1.50).",
+              "- **Features**: Cozy cafes (e.g., Sandri on Corso Vannucci), weekly markets, and panoramic views from Arco Etrusco.",
+              "🏛️ **Assisi Attractions**:",
+              "- **Basilica di San Francesco**: UNESCO World Heritage Site, burial place of St. Francis, with frescoes by Giotto and Cimabue. Includes Upper and Lower Basilicas and St. Francis’ tomb.",
+              "  - **Address**: Piazza San Francesco, 06081 Assisi (map: https://maps.app.goo.gl/BasilicaAssisi).",
+              "  - **Cost**: Free (guided tours: €10, audio guide: €5).",
+              "  - **Hours**: 8:30 AM–6:45 PM (last entry: 6:00 PM).",
+              "- **Rocca Maggiore**: Medieval fortress with panoramic views of Assisi and the Umbrian valley.",
+              "  - **Address**: Via della Rocca, 06081 Assisi (map: https://maps.app.goo.gl/RoccaMaggioreAssisi).",
+              "  - **Cost**: €6 (student €4).",
+              "  - **Hours**: 10:00 AM–6:00 PM (summer until 8:00 PM).",
+              "- **Basilica di Santa Chiara**: Church dedicated to St. Clare, with Gothic architecture and her tomb.",
+              "  - **Address**: Piazza Santa Chiara, 06081 Assisi (map: https://maps.app.goo.gl/SantaChiaraAssisi).",
+              "- **Cost**: Free.",
+              "  - **Hours**: 6:30 AM–12:00 PM, 2:00 PM–7:00 PM.",
+              "- **Piazza del Comune**: Central square with the Temple of Minerva (Tempio di Minerva) and traditional cafes.",
+              "  - **Address**: Piazza del Comune, 06081 Assisi (map: https://maps.app.goo.gl/PiazzaComuneAssisi).",
+              "  - **Cost**: Free.",
+              "  - **Features**: Local markets and cultural events.",
+              "- **Access to Assisi**: Train from Perugia Fontivegge to Assisi (ticket: €3, 20 min). Bus from Piazza Partigiani (ticket: €2.50).",
+              "🏛️ **Gubbio and Palazzo dei Consoli**:",
+              "- **Description**: Gubbio, a medieval town with stone architecture and Umbrian history. Palazzo dei Consoli houses a museum with ancient artifacts and views over Piazza Grande.",
+              "- **Address**: Piazza Grande, 06024 Gubbio (map: https://maps.app.goo.gl/PalazzoConsoliGubbio).",
+              "- **Cost**: €7 (student €5).",
+              "- **Hours**: 10:00 AM–6:00 PM (closed Mondays).",
+              "- **Access**: Bus from Perugia Piazza Partigiani (ticket: €5, 45 min).",
+              "💡 **Advice**: Use Esse3 or ISIC card for student discounts at museums. Join ESN group tours (t.me/ESNPerugia) for cheaper visits to Assisi and Gubbio."
             ],
             "it": [
-              "📋 **Documenti Richiesti**:",
-              "- Passaporto e copia (pagina principale e visto).",
-              "- Codice Fiscale.",
-              "- Diploma di scuola superiore/laurea (tradotto in italiano e certificato dall’ambasciata).",
-              "- Certificato linguistico (es. IELTS 6.5 o CILS B2 per corsi in italiano).",
-              "- Ricevuta pagamento tasse (minimo €156 per il primo anno, tramite PagoPA).",
-              "🏢 **Dove Iscriversi**: Ufficio Internazionale, Piazza Ermini, 06123 Perugia (mappa: https://maps.app.goo.gl/UnipgInternational). Orari: Lunedì-Venerdì, 9–13.",
-              "📝 **Passaggi**:",
-              "1. Registrati sul portale Esse3 (https://unipg.esse3.cineca.it) per ottenere l’email universitaria (name.surname@studenti.unipg.it).",
-              "2. Compila il modulo online con dati personali, documenti accademici e Codice Fiscale.",
-              "3. Carica i documenti e paga le tasse (tramite Revolut/Wise o PagoPA).",
-              "4. Prenota un appuntamento in presenza all’Ufficio Internazionale (email: international@unipg.it).",
-              "5. Ricevi il certificato di iscrizione (per Permesso o borsa ADiSU).",
-              "💡 **Costo**: Tasse annuali €500-2.000 (in base al corso e ISEE)."
+              "🏛️ **Centro Storico, Perugia**:",
+              "- **Descrizione**: Cuore storico di Perugia con strade acciottolate e architettura medievale. Include la Fontana Maggiore (fontana del XIII secolo), Palazzo dei Priori (municipio con affreschi storici) e Cattedrale di San Lorenzo (cattedrale gotica). La Galleria Nazionale dell’Umbria espone opere d’arte dal XIII al XVIII secolo.",
+              "- **Indirizzo**: Piazza IV Novembre, 06123 Perugia (mappa: https://maps.app.goo.gl/CentroStoricoPerugia).",
+              "- **Costo**: Gratuito (Galleria Nazionale: €8, studenti €4).",
+              "- **Orari**: Galleria Nazionale: 8:30–19:30 (chiuso il lunedì). Strade e piazze: 24/7.",
+              "- **Accesso**: Minimetro da Pian di Massiano a Piazza Matteotti (biglietto: €1.50).",
+              "- **Caratteristiche**: Caffè accoglienti (es. Sandri su Corso Vannucci), mercati settimanali e viste panoramiche dall’Arco Etrusco.",
+              "🏛️ **Attrazioni di Assisi**:",
+              "- **Basilica di San Francesco**: Sito Patrimonio UNESCO, luogo di sepoltura di San Francesco, con affreschi di Giotto e Cimabue. Include Basilica Superiore e Inferiore e la tomba di San Francesco.",
+              "  - **Indirizzo**: Piazza San Francesco, 06081 Assisi (mappa: https://maps.app.goo.gl/BasilicaAssisi).",
+              "  - **Costo**: Gratuito (tour guidati: €10, audioguida: €5).",
+              "  - **Orari**: 8:30–18:45 (ultimo ingresso: 18:00).",
+              "- **Rocca Maggiore**: Fortezza medievale con viste panoramiche su Assisi e la valle umbra.",
+              "  - **Indirizzo**: Via della Rocca, 06081 Assisi (mappa: https://maps.app.goo.gl/RoccaMaggioreAssisi).",
+              "  - **Costo**: €6 (studenti €4).",
+              "  - **Orari**: 10:00–18:00 (estate fino alle 20:00).",
+              "- **Basilica di Santa Chiara**: Chiesa dedicata a Santa Chiara, con architettura gotica e la sua tomba.",
+              "  - **Indirizzo**: Piazza Santa Chiara, 06081 Assisi (mappa: https://maps.app.goo.gl/SantaChiaraAssisi).",
+              "- **Costo**: Gratuito.",
+              "  - **Orari**: 6:30–12:00, 14:00–19:00.",
+              "- **Piazza del Comune**: Piazza centrale con il Tempio di Minerva e caffè tradizionali.",
+              "  - **Indirizzo**: Piazza del Comune, 06081 Assisi (mappa: https://maps.app.goo.gl/PiazzaComuneAssisi).",
+              "  - **Costo**: Gratuito.",
+              "  - **Caratteristiche**: Mercati locali ed eventi culturali.",
+              "- **Accesso ad Assisi**: Treno da Perugia Fontivegge ad Assisi (biglietto: €3, 20 min). Autobus da Piazza Partigiani (biglietto: €2.50).",
+              "🏛️ **Gubbio e Palazzo dei Consoli**:",
+              "- **Descrizione**: Gubbio, città medievale con architettura in pietra e storia umbra. Palazzo dei Consoli ospita un museo con reperti antichi e viste su Piazza Grande.",
+              "- **Indirizzo**: Piazza Grande, 06024 Gubbio (mappa: https://maps.app.goo.gl/PalazzoConsoliGubbio).",
+              "- **Costo**: €7 (studenti €5).",
+              "- **Orari**: 10:00–18:00 (chiuso il lunedì).",
+              "- **Accesso**: Autobus da Perugia Piazza Partigiani (biglietto: €5, 45 min).",
+              "💡 **Consiglio**: Usa la tessera Esse3 o ISIC per sconti sui musei. Partecipa ai tour di gruppo ESN (t.me/ESNPerugia) per visite più economiche ad Assisi e Gubbio."
+            ]
+          }
+        },
+        {
+          "title": {
+            "fa": "جاذبه‌های طبیعی",
+            "en": "Natural Attractions",
+            "it": "Attrazioni Naturali"
+          },
+          "content": {
+            "fa": [
+              "🌊 **آبشار کاسکاتا دل مارمور (Cascata delle Marmore)**:",
+              "- **توضیحات**: یکی از بلندترین آبشارهای اروپا (165 متر)، ساخته‌شده توسط رومی‌ها در قرن سوم پیش از میلاد برای مدیریت رودخانه ولیا. شامل مسیرهای پیاده‌روی، نقاط مشاهده، و امکان قایق‌سواری در رودخانه.",
+              "- **آدرس**: Via Valnerina, 05100 Terni (نقشه: https://maps.app.goo.gl/MarmoreFalls).",
+              "- **هزینه**: €10 (دانشجویی €7، شامل مسیرهای اصلی).",
+              "- **ساعات بازدید**: 10:00-18:00 (تابستان تا 20:00، زمستان تا 17:00).",
+              "- **دسترسی**: قطار از Perugia Fontivegge به Terni (€5، 1 ساعت)، سپس اتوبوس محلی به آبشار (€2).",
+              "- **ویژگی‌ها**: پارک طبیعی با مسیرهای پیاده‌روی (Balcone degli Innamorati)، کافه، و فروشگاه سوغاتی.",
+              "🌅 **دریاچه تراسیمنو (Lago Trasimeno)**:",
+              "- **توضیحات**: بزرگ‌ترین دریاچه اومبریا، با جزایر (Isola Maggiore و Isola Polvese) و سواحل آرام. ایده‌آل برای قایق‌سواری، دوچرخه‌سواری، و تماشای پرندگان. Castiglione del Lago قلعه‌ای تاریخی و رستوران‌های ساحلی دارد.",
+              "- **آدرس**: Castiglione del Lago, 06061 (نقشه: https://maps.app.goo.gl/LagoTrasimeno).",
+              "- **هزینه**: رایگان (قایق‌سواری: €15-20، اجاره دوچرخه: €10/روز).",
+              "- **ساعات بازدید**: 24/7 (فعالیت‌های قایق‌سواری: 9:00-18:00).",
+              "- **دسترسی**: قطار از Perugia Fontivegge به Castiglione del Lago (€5، 30 دقیقه).",
+              "- **ویژگی‌ها**: غروب‌های زیبا، بازارهای محلی، و مسیرهای دوچرخه‌سواری در اطراف دریاچه.",
+              "🏞️ **پارک مونته کوکو (Monte Cucco)**:",
+              "- **توضیحات**: پارک طبیعی در شمال اومبریا، معروف برای غارنوردی، پیاده‌روی، و پاراگلایدر. غار مونته کوکو یکی از عمیق‌ترین سیستم‌های غاری ایتالیاست.",
+              "- **آدرس**: Via Parco Monte Cucco, 06021 Costacciaro (نقشه: https://maps.app.goo.gl/MonteCucco).",
+              "- **هزینه**: رایگان (تورهای غارنوردی: €20-30).",
+              "- **ساعات بازدید**: 24/7 (تورهای غار: 10:00-16:00، رزرو الزامی).",
+              "- **دسترسی**: اتوبوس از Perugia به Gubbio (€5)، سپس تاکسی یا تور گروهی (€15).",
+              "- **ویژگی‌ها**: مناظر کوهستانی، مسیرهای پیاده‌روی، و فعالیت‌های ماجراجویانه.",
+              "💡 **توصیه**: برای دریاچه تراسیمنو، دوچرخه کرایه کنید و از مسیرهای ساحلی لذت ببرید. برای مونته کوکو، تورهای گروهی ESN رزرو کنید (t.me/ESNPerugia).",
+              "⚠️ **هشدار**: در آبشار مارمور، کفش مناسب و ضدآب بپوشید؛ مسیرها لغزنده‌اند."
+            ],
+            "en": [
+              "🌊 **Cascata delle Marmore Waterfall**:",
+              "- **Description**: One of Europe’s tallest waterfalls (165m), built by Romans in the 3rd century BC to manage the Velino River. Features hiking trails, viewpoints, and river rafting.",
+              "- **Address**: Via Valnerina, 05100 Terni (map: https://maps.app.goo.gl/MarmoreFalls).",
+              "- **Cost**: €10 (student €7, includes main trails).",
+              "- **Hours**: 10:00 AM–6:00 PM (summer until 8:00 PM, winter until 5:00 PM).",
+              "- **Access**: Train from Perugia Fontivegge to Terni (€5, 1 hr), then local bus to falls (€2).",
+              "- **Features**: Natural park with hiking trails (Balcone degli Innamorati), cafe, and souvenir shop.",
+              "🌅 **Lake Trasimeno**:",
+              "- **Description**: Umbria’s largest lake, with islands (Isola Maggiore, Isola Polvese) and tranquil shores. Ideal for boating, cycling, and birdwatching. Castiglione del Lago has a historic castle and lakeside restaurants.",
+              "- **Address**: Castiglione del Lago, 06061 (map: https://maps.app.goo.gl/LagoTrasimeno).",
+              "- **Cost**: Free (boating: €15-20, bike rental: €10/day).",
+              "- **Hours**: 24/7 (boating activities: 9:00 AM–6:00 PM).",
+              "- **Access**: Train from Perugia Fontivegge to Castiglione del Lago (€5, 30 min).",
+              "- **Features**: Stunning sunsets, local markets, and cycling paths around the lake.",
+              "🏞️ **Monte Cucco Park**:",
+              "- **Description**: Natural park in northern Umbria, known for caving, hiking, and paragliding. Monte Cucco Cave is one of Italy’s deepest cave systems.",
+              "- **Address**: Via Parco Monte Cucco, 06021 Costacciaro (map: https://maps.app.goo.gl/MonteCucco).",
+              "- **Cost**: Free (cave tours: €20-30).",
+              "- **Hours**: 24/7 (cave tours: 10:00 AM–4:00 PM, reservation required).",
+              "- **Access**: Bus from Perugia to Gubbio (€5), then taxi or group tour (€15).",
+              "- **Features**: Mountain views, hiking trails, and adventure activities.",
+              "💡 **Advice**: Rent a bike at Lake Trasimeno to enjoy coastal paths. Book Monte Cucco group tours via ESN (t.me/ESNPerugia).",
+              "⚠️ **Warning**: Wear sturdy, waterproof shoes at Marmore Falls; paths are slippery."
+            ],
+            "it": [
+              "🌊 **Cascata delle Marmore**:",
+              "- **Descrizione**: Una delle cascate più alte d’Europa (165m), costruita dai Romani nel III secolo a.C. per gestire il fiume Velino. Offre sentieri escursionistici, punti panoramici e rafting sul fiume.",
+              "- **Indirizzo**: Via Valnerina, 05100 Terni (mappa: https://maps.app.goo.gl/MarmoreFalls).",
+              "- **Costo**: €10 (studenti €7, include sentieri principali).",
+              "- **Orari**: 10:00–18:00 (estate fino alle 20:00, inverno fino alle 17:00).",
+              "- **Accesso**: Treno da Perugia Fontivegge a Terni (€5, 1 ora), poi autobus locale per le cascate (€2).",
+              "- **Caratteristiche**: Parco naturale con sentieri (Balcone degli Innamorati), caffè e negozio di souvenir.",
+              "🌅 **Lago Trasimeno**:",
+              "- **Descrizione**: Il lago più grande dell’Umbria, con isole (Isola Maggiore, Isola Polvese) e coste tranquille. Ideale per gite in barca, ciclismo e birdwatching. Castiglione del Lago ha un castello storico e ristoranti sul lago.",
+              "- **Indirizzo**: Castiglione del Lago, 06061 (mappa: https://maps.app.goo.gl/LagoTrasimeno).",
+              "- **Costo**: Gratuito (gite in barca: €15-20, noleggio bici: €10/giorno).",
+              "- **Orari**: 24/7 (attività in barca: 9:00–18:00).",
+              "- **Accesso**: Treno da Perugia Fontivegge a Castiglione del Lago (€5, 30 min).",
+              "- **Caratteristiche**: Tramonti spettacolari, mercati locali e percorsi ciclabili intorno al lago.",
+              "🏞️ **Parco del Monte Cucco**:",
+              "- **Descrizione**: Parco naturale nel nord dell’Umbria, noto per speleologia, escursionismo e parapendio. La Grotta del Monte Cucco è uno dei sistemi di grotte più profondi d’Italia.",
+              "- **Indirizzo**: Via Parco Monte Cucco, 06021 Costacciaro (mappa: https://maps.app.goo.gl/MonteCucco).",
+              "- **Costo**: Gratuito (tour delle grotte: €20-30).",
+              "- **Orari**: 24/7 (tour delle grotte: 10:00–16:00, prenotazione obbligatoria).",
+              "- **Accesso**: Autobus da Perugia a Gubbio (€5), poi taxi o tour di gruppo (€15).",
+              "- **Caratteristiche**: Viste montane, sentieri escursionistici e attività avventurose.",
+              "💡 **Consiglio**: Noleggia una bici al Lago Trasimeno per goderti i sentieri costieri. Prenota tour di gruppo al Monte Cucco tramite ESN (t.me/ESNPerugia).",
+              "⚠️ **Attenzione**: Indossa scarpe robuste e impermeabili alle Cascate Marmore; i sentieri sono scivolosi."
             ]
           }
         },
@@ -395,308 +533,87 @@
           },
           "content": {
             "fa": [
-              "💡 **توصیه**: قبل از ددلاین (معمولاً ۳۰ ژوئن برای پاییز ۲۰۲۵)، مدارک را آماده کنید.",
-              "⚠️ **هشدار**: مدارک ترجمه‌نشده یا ناقص باعث رد درخواست می‌شود.",
-              "📌 **سؤال رایج**: اگر ایمیل Esse3 کار نکرد؟ با دفتر IT دانشگاه (supporto.tecnico@unipg.it) تماس بگیرید.",
-              "📌 **سؤال رایج**: آیا می‌توانم شهریه را قسطی پرداخت کنم؟ بله، با ISEE پایین‌تر از €۳۰,۰۰۰، از پرتال Esse3 درخواست دهید.",
-              "📷 **تصویر راهنما**: unipg_registration_guide.jpg (در فایل‌های پروژه) برای نمایش پرتال Esse3."
+              "💡 **توصیه**: برای بازدید از اسیسی، یک روز کامل اختصاص دهید تا تمام جاذبه‌ها (باسیلیکا، روکا، و میدان) را ببینید. از تورهای گروهی ESN برای صرفه‌جویی استفاده کنید (t.me/ESNPerugia).",
+              "⚠️ **هشدار**: در فصل توریستی (تابستان)، رزرو بلیط برای جاذبه‌ها و اقامتگاه‌ها ضروری است. اسیسی در اکتبر (جشن سنت فرانسیس) بسیار شلوغ است.",
+              "📌 **سؤال رایج**: آیا بازدید از Centro Storico پروجا رایگان است؟ بله، جز برخی موزه‌ها مثل گالری ملی (€8).",
+              "📌 **سؤال رایج**: چگونه به اسیسی بروم؟ قطار از Perugia Fontivegge (€3، 20 دقیقه) یا اتوبوس از Piazza Partigiani (€2.50).",
+              "📌 **سؤال رایج**: بهترین زمان بازدید از دریاچه تراسیمنو؟ بهار یا پاییز برای آب‌وهوای معتدل و جمعیت کمتر.",
+              "📌 **سؤال رایج**: آیا برای غارنوردی در مونته کوکو تجهیزات لازم است؟ بله، تورهای هدایت‌شده تجهیزات (کلاه ایمنی، چراغ) ارائه می‌دهند.",
+              "📷 **تصویر راهنما**: attractions_guide.pdf (در فایل‌های پروژه) برای نقشه‌ها، تصاویر جاذبه‌ها، و برنامه‌ریزی سفر."
             ],
             "en": [
-              "💡 **Advice**: Prepare documents before the deadline (usually June 30 for Fall 2025).",
-              "⚠️ **Warning**: Untranslated or incomplete documents lead to rejection.",
-              "📌 **FAQ**: What if Esse3 email doesn’t work? Contact university IT office (supporto.tecnico@unipg.it).",
-              "📌 **FAQ**: Can I pay tuition in installments? Yes, with ISEE below €30,000, apply via Esse3 portal.",
-              "📷 **Guide Image**: unipg_registration_guide.jpg (in project files) for Esse3 portal visuals."
+              "💡 **Advice**: Dedicate a full day to Assisi to visit all attractions (Basilica, Rocca, and Piazza). Join ESN group tours for savings (t.me/ESNPerugia).",
+              "⚠️ **Warning**: During tourist season (summer), book tickets and accommodations in advance. Assisi is crowded in October (St. Francis Feast).",
+              "📌 **FAQ**: Is visiting Centro Storico in Perugia free? Yes, except for some museums like Galleria Nazionale (€8).",
+              "📌 **FAQ**: How to reach Assisi? Train from Perugia Fontivegge (€3, 20 min) or bus from Piazza Partigiani (€2.50).",
+              "📌 **FAQ**: Best time to visit Lake Trasimeno? Spring or autumn for mild weather and fewer crowds.",
+              "📌 **FAQ**: Is equipment needed for Monte Cucco caving? Yes, guided tours provide gear (helmet, light).",
+              "📷 **Guide Image**: attractions_guide.pdf (in project files) for maps, attraction images, and trip planning."
             ],
             "it": [
-              "💡 **Consiglio**: Prepara i documenti prima della scadenza (di solito 30 giugno per l’autunno 2025).",
-              "⚠️ **Attenzione**: Documenti non tradotti o incompleti portano al rifiuto.",
-              "📌 **Domanda Frequente**: Cosa fare se l’email Esse3 non funziona? Contatta l’ufficio IT dell’università (supporto.tecnico@unipg.it).",
-              "📌 **Domanda Frequente**: Posso pagare le tasse a rate? SÌ, con ISEE inferiore a €30.000, richiedi tramite portale Esse3.",
-              "📷 **Immagine Guida**: unipg_registration_guide.jpg (nei file del progetto) per visualizzazioni del portale Esse3."
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "library_access",
-      "title": {
-        "fa": "📚 دسترسی به کتابخانه‌ها و منابع دانشگاهی",
-        "en": "📚 Access to Libraries and Academic Resources",
-        "it": "📚 Accesso a Biblioteche e Risorse Accademiche"
-      },
-      "description": {
-        "fa": "راهنمای استفاده از کتابخانه‌های دانشگاه پروجا و منابع آنلاین، شامل ثبت‌نام، دسترسی به JSTOR، و نکات مطالعه.",
-        "en": "Guide to using University of Perugia libraries and online resources, including registration, JSTOR access, and study tips.",
-        "it": "Guida all’uso delle biblioteche dell’Università di Perugia e risorse online, con registrazione, accesso a JSTOR e consigli di studio."
-      },
-      "subsections": [
-        {
-          "title": {
-            "fa": "کتابخانه‌های دانشگاه",
-            "en": "University Libraries",
-            "it": "Biblioteche Universitarie"
-          },
-          "content": {
-            "fa": [
-              "📍 **کتابخانه مرکزی (Biblioteca Centrale)**: Piazza Ermini, 06123 Perugia (نقشه: https://maps.app.goo.gl/UnipgLibrary). ساعات کاری: دوشنبه-جمعه، ۸:۳۰ صبح تا ۷ عصر.",
-              "📍 **کتابخانه علوم انسانی**: Via degli Offici, 06123 Perugia. مناسب برای ادبیات، تاریخ، و فلسفه.",
-              "📋 **ثبت‌نام**:",
-              "- با کارت دانشجویی (از Esse3) و Codice Fiscale در کتابخانه ثبت‌نام کنید.",
-              "- دسترسی رایگان به کتاب‌ها، مقالات، و فضای مطالعه.",
-              "💡 **امکانات**: وای‌فای رایگان، کامپیوتر، و اتاق‌های مطالعه گروهی."
-            ],
-            "en": [
-              "📍 **Central Library (Biblioteca Centrale)**: Piazza Ermini, 06123 Perugia (map: https://maps.app.goo.gl/UnipgLibrary). Hours: Monday-Friday, 8:30 AM–7 PM.",
-              "📍 **Humanities Library**: Via degli Offici, 06123 Perugia. Ideal for literature, history, and philosophy.",
-              "📋 **Registration**:",
-              "- Register with student card (from Esse3) and Codice Fiscale at the library.",
-              "- Free access to books, journals, and study spaces.",
-              "💡 **Facilities**: Free Wi-Fi, computers, and group study rooms."
-            ],
-            "it": [
-              "📍 **Biblioteca Centrale**: Piazza Ermini, 06123 Perugia (mappa: https://maps.app.goo.gl/UnipgLibrary). Orari: Lunedì-Venerdì, 8:30–19.",
-              "📍 **Biblioteca di Scienze Umane**: Via degli Offici, 06123 Perugia. Ideale per letteratura, storia e filosofia.",
-              "📋 **Registrazione**:",
-              "- Registrati con la tessera studentesca (da Esse3) e Codice Fiscale in biblioteca.",
-              "- Accesso gratuito a libri, riviste e spazi di studio.",
-              "💡 **Servizi**: Wi-Fi gratuito, computer e sale studio di gruppo."
-            ]
-          }
-        },
-        {
-          "title": {
-            "fa": "منابع آنلاین و JSTOR",
-            "en": "Online Resources and JSTOR",
-            "it": "Risorse Online e JSTOR"
-          },
-          "content": {
-            "fa": [
-              "🌐 **پرتال منابع دانشگاه**: https://unipg.it/library-resources. دسترسی به JSTOR، Scopus، و Web of Science با ایمیل دانشگاهی.",
-              "📝 **دسترسی به JSTOR**:",
-              "۱. به پرتال دانشگاه (https://unipg.esse3.cineca.it) وارد شوید.",
-              "۲. از بخش Library Services، لینک JSTOR را انتخاب کنید.",
-              "۳. با ایمیل دانشگاهی (name.surname@studenti.unipg.it) وارد شوید.",
-              "💡 **نکته**: برای دانلود مقالات در خارج از دانشگاه، از VPN دانشگاه استفاده کنید (دستورالعمل: https://unipg.it/vpn)."
-            ],
-            "en": [
-              "🌐 **University Resource Portal**: https://unipg.it/library-resources. Access to JSTOR, Scopus, and Web of Science with university email.",
-              "📝 **JSTOR Access**:",
-              "1. Log in to university portal (https://unipg.esse3.cineca.it).",
-              "2. Select JSTOR link from Library Services section.",
-              "3. Sign in with university email (name.surname@studenti.unipg.it).",
-              "💡 **Tip**: Use university VPN for off-campus article downloads (instructions: https://unipg.it/vpn)."
-            ],
-            "it": [
-              "🌐 **Portale Risorse Universitarie**: https://unipg.it/library-resources. Accesso a JSTOR, Scopus e Web of Science con email universitaria.",
-              "📝 **Accesso a JSTOR**:",
-              "1. Accedi al portale universitario (https://unipg.esse3.cineca.it).",
-              "2. Seleziona il link JSTOR dalla sezione Servizi Bibliotecari.",
-              "3. Accedi con l’email universitaria (name.surname@studenti.unipg.it).",
-              "💡 **Consiglio**: Usa la VPN universitaria per scaricare articoli fuori campus (istruzioni: https://unipg.it/vpn)."
-            ]
-          }
-        },
-        {
-          "title": {
-            "fa": "نکات و سؤالات رایج",
-            "en": "Tips and FAQs",
-            "it": "Consigli e Domande Frequenti"
-          },
-          "content": {
-            "fa": [
-              "💡 **توصیه**: برای مطالعه گروهی، اتاق‌ها را از قبل رزرو کنید (از طریق پرتال کتابخانه).",
-              "⚠️ **هشدار**: امانت کتاب‌ها محدود به ۳۰ روز است؛ تأخیر جریمه €۱/روز دارد.",
-              "📌 **سؤال رایج**: آیا غیر학생ان می‌توانند از کتابخانه استفاده کنند؟ خیر، فقط با کارت دانشجویی.",
-              "📌 **سؤال رایج**: چگونه مقاله دانلود کنم؟ از JSTOR یا Scopus با VPN دانشگاه.",
-              "📷 **تصویر راهنما**: library_access_guide.jpg (در فایل‌های پروژه) برای نمایش پرتال و امکانات."
-            ],
-            "en": [
-              "💡 **Advice**: Book group study rooms in advance (via library portal).",
-              "⚠️ **Warning**: Book loans are limited to 30 days; late returns incur €1/day fine.",
-              "📌 **FAQ**: Can non-students use the library? No, only with a student card.",
-              "📌 **FAQ**: How to download articles? Use JSTOR or Scopus with university VPN.",
-              "📷 **Guide Image**: library_access_guide.jpg (in project files) for portal and facility visuals."
-            ],
-            "it": [
-              "💡 **Consiglio**: Prenota in anticipo le sale studio di gruppo (tramite portale biblioteca).",
-              "⚠️ **Attenzione**: Il prestito libri è limitato a 30 giorni; ritardi comportano una multa di €1/giorno.",
-              "📌 **Domanda Frequente**: I non studenti possono usare la biblioteca? No, solo con tessera studentesca.",
-              "📌 **Domanda Frequente**: Come scaricare articoli? Usa JSTOR o Scopus con VPN universitaria.",
-              "📷 **Immagine Guida**: library_access_guide.jpg (nei file del progetto) per visualizzazioni del portale e dei servizi."
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "student_activities",
-      "title": {
-        "fa": "🎉 فعالیت‌های دانشجویی و گروه‌های فرهنگی",
-        "en": "🎉 Student Activities and Cultural Groups",
-        "it": "🎉 Attività Studentesche e Gruppi Culturali"
-      },
-      "description": {
-        "fa": "معرفی فعالیت‌های دانشجویی، گروه‌های فرهنگی، و رویدادهای اجتماعی در پروجا برای دانشجویان بین‌المللی، با لینک‌های گروه‌ها و نکات شرکت.",
-        "en": "Overview of student activities, cultural groups, and social events in Perugia for international students, with group links and participation tips.",
-        "it": "Panoramica delle attività studentesche, gruppi culturali ed eventi sociali a Perugia per studenti internazionali, con link ai gruppi e consigli di partecipazione."
-      },
-      "subsections": [
-        {
-          "title": {
-            "fa": "گروه‌ها و انجمن‌های دانشجویی",
-            "en": "Student Groups and Associations",
-            "it": "Gruppi e Associazioni Studentesche"
-          },
-          "content": {
-            "fa": [
-              "🌍 **ESN Perugia**: انجمن دانشجویان بین‌المللی. رویدادهای هفتگی (مثل تور شهر، شب‌های فرهنگی). لینک: https://perugia.esn.it, تلگرام: t.me/ESNPerugia.",
-              "🇮🇷 **انجمن ایرانیان پروجا**: گروه غیررسمی برای دانشجویان ایرانی. لینک تلگرام: t.me/IraniansInPerugia (لطفاً لینک دقیق را تأیید کنید).",
-              "🎭 **Circolo Universitario**: گروه تئاتر و موسیقی دانشگاه. ثبت‌نام: https://unipg.it/circolo."
-            ],
-            "en": [
-              "🌍 **ESN Perugia**: International student association. Weekly events (e.g., city tours, cultural nights). Link: https://perugia.esn.it, Telegram: t.me/ESNPerugia.",
-              "🇮🇷 **Perugia Iranian Community**: Informal group for Iranian students. Telegram link: t.me/IraniansInPerugia (please confirm exact link).",
-              "🎭 **Circolo Universitario**: University theater and music group. Sign-up: https://unipg.it/circolo."
-            ],
-            "it": [
-              "🌍 **ESN Perugia**: Associazione per studenti internazionali. Eventi settimanali (es. tour della città, serate culturali). Link: https://perugia.esn.it, Telegram: t.me/ESNPerugia.",
-              "🇮🇷 **Comunità Iraniana di Perugia**: Gruppo informale per studenti iraniani. Link Telegram: t.me/IraniansInPerugia (confermare il link esatto).",
-              "🎭 **Circolo Universitario**: Gruppo di teatro e musica universitario. Iscrizione: https://unipg.it/circolo."
-            ]
-          }
-        },
-        {
-          "title": {
-            "fa": "رویدادها و نکات شرکت",
-            "en": "Events and Participation Tips",
-            "it": "Eventi e Consigli di Partecipazione"
-          },
-          "content": {
-            "fa": [
-              "🎉 **رویدادهای اصلی**:",
-              "- Eurochocolate (اکتبر): جشنواره شکلات در Piazza IV Novembre.",
-              "- Umbria Jazz (ژوئیه): کنسرت‌های جاز در مرکز شهر.",
-              "- Welcome Day: مراسم خوش‌آمدگویی دانشگاه در سپتامبر.",
-              "💡 **توصیه**: برای رویدادهای ESN، در گروه تلگرام ثبت‌نام کنید تا اعلان‌ها را دریافت کنید.",
-              "📌 **سؤال رایج**: آیا رویدادها رایگان هستند؟ برخی رایگان (مثل Welcome Day) و برخی پولی (مثل Umbria Jazz، €۱۵-۵۰).",
-              "📌 **سؤال رایج**: چگونه به گروه ایرانیان بپیوندم؟ لینک تلگرام را از دانشجویان دیگر یا ESN بگیرید."
-            ],
-            "en": [
-              "🎉 **Main Events**:",
-              "- Eurochocolate (October): Chocolate festival in Piazza IV Novembre.",
-              "- Umbria Jazz (July): Jazz concerts in city center.",
-              "- Welcome Day: University welcome event in September.",
-              "💡 **Advice**: Join ESN Telegram group for event notifications.",
-              "📌 **FAQ**: Are events free? Some are free (e.g., Welcome Day), others cost money (e.g., Umbria Jazz, €15-50).",
-              "📌 **FAQ**: How to join the Iranian community? Get Telegram link from other students or ESN."
-            ],
-            "it": [
-              "🎉 **Eventi Principali**:",
-              "- Eurochocolate (Ottobre): Festival del cioccolato in Piazza IV Novembre.",
-              "- Umbria Jazz (Luglio): Concerti jazz nel centro città.",
-              "- Welcome Day: Evento di benvenuto universitario a settembre.",
-              "💡 **Consiglio**: Iscriviti al gruppo Telegram ESN per notifiche sugli eventi.",
-              "📌 **Domanda Frequente**: Gli eventi sono gratuiti? Alcuni sono gratuiti (es. Welcome Day), altri a pagamento (es. Umbria Jazz, €15-50).",
-              "📌 **Domanda Frequente**: Come unirsi alla comunità iraniana? Ottieni il link Telegram da altri studenti o ESN."
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "halal_food",
-      "title": {
-        "fa": "🍴 رستوران‌ها و فروشگاه‌های حلال در پروجا",
-        "en": "🍴 Halal Restaurants and Shops in Perugia",
-        "it": "🍴 Ristoranti e Negozi Halal a Perugia"
-      },
-      "description": {
-        "fa": "معرفی رستوران‌ها و فروشگاه‌های حلال در پروجا، با آدرس، منو، و نکات خرید مواد غذایی حلال.",
-        "en": "Guide to halal restaurants and shops in Perugia, with addresses, menus, and tips for sourcing halal ingredients.",
-        "it": "Guida a ristoranti e negozi halal a Perugia, con indirizzi, menu e consigli per reperire ingredienti halal."
-      },
-      "subsections": [
-        {
-          "title": {
-            "fa": "رستوران‌های حلال",
-            "en": "Halal Restaurants",
-            "it": "Ristoranti Halal"
-          },
-          "content": {
-            "fa": [
-              "🍔 **Kebab House Perugia**: غذاهای حلال (کباب، فلافل). قیمت: €۵-۸. آدرس: Via dei Priori, 06123 Perugia (نقشه: https://maps.app.goo.gl/KebabHousePerugia). ساعات کاری: ۱۲ ظهر تا ۱۱ شب.",
-              "🥙 **Aladdin Ristorante**: غذاهای مدیترانه‌ای حلال (شاورما، حummus). قیمت: €۶-۱۲. آدرس: Via Fontivegge, 06124 Perugia (نقشه: https://maps.app.goo.gl/AladdinPerugia).",
-              "💡 **نکته**: منوهای حلال را قبل از سفارش تأیید کنید."
-            ],
-            "en": [
-              "🍔 **Kebab House Perugia**: Halal food (kebabs, falafel). Price: €5-8. Address: Via dei Priori, 06123 Perugia (map: https://maps.app.goo.gl/KebabHousePerugia). Hours: 12 PM–11 PM.",
-              "🥙 **Aladdin Ristorante**: Halal Mediterranean food (shawarma, hummus). Price: €6-12. Address: Via Fontivegge, 06124 Perugia (map: https://maps.app.goo.gl/AladdinPerugia).",
-              "💡 **Tip**: Confirm halal menu items before ordering."
-            ],
-            "it": [
-              "🍔 **Kebab House Perugia**: Cibo halal (kebab, falafel). Prezzo: €5-8. Indirizzo: Via dei Priori, 06123 Perugia (mappa: https://maps.app.goo.gl/KebabHousePerugia). Orari: 12:00–23:00.",
-              "🥙 **Aladdin Ristorante**: Cibo mediterraneo halal (shawarma, hummus). Prezzo: €6-12. Indirizzo: Via Fontivegge, 06124 Perugia (mappa: https://maps.app.goo.gl/AladdinPerugia).",
-              "💡 **Consiglio**: Conferma gli elementi del menu halal prima di ordinare."
-            ]
-          }
-        },
-        {
-          "title": {
-            "fa": "فروشگاه‌های حلال",
-            "en": "Halal Shops",
-            "it": "Negozi Halal"
-          },
-          "content": {
-            "fa": [
-              "🛒 **Minimarket Halal**: گوشت حلال، ادویه‌ها، و برنج باسماتی. آدرس: Via Mario Angeloni, 06124 Perugia (نقشه: https://maps.app.goo.gl/MinimarketHalal). ساعات کاری: ۹ صبح تا ۸ شب.",
-              "🛒 **Asia Market**: مواد غذایی حلال (زعفران، لپه، لیمو عمانی). آدرس: Via dei Priori, 06123 Perugia (نقشه: https://maps.app.goo.gl/AsiaMarketPerugia).",
-              "💡 **نکته**: برای گوشت تازه، مستقیماً با فروشنده صحبت کنید."
-            ],
-            "en": [
-              "🛒 **Minimarket Halal**: Halal meat, spices, and basmati rice. Address: Via Mario Angeloni, 06124 Perugia (map: https://maps.app.goo.gl/MinimarketHalal). Hours: 9 AM–8 PM.",
-              "🛒 **Asia Market**: Halal ingredients (saffron, split peas, dried limes). Address: Via dei Priori, 06123 Perugia (map: https://maps.app.goo.gl/AsiaMarketPerugia).",
-              "💡 **Tip**: For fresh meat, speak directly with the shopkeeper."
-            ],
-            "it": [
-              "🛒 **Minimarket Halal**: Carne halal, spezie e riso basmati. Indirizzo: Via Mario Angeloni, 06124 Perugia (mappa: https://maps.app.goo.gl/MinimarketHalal). Orari: 9:00–20:00.",
-              "🛒 **Asia Market**: Ingredienti halal (zafferano, piselli spezzati, limoni secchi). Indirizzo: Via dei Priori, 06123 Perugia (mappa: https://maps.app.goo.gl/AsiaMarketPerugia).",
-              "💡 **Consiglio**: Per carne fresca, parla direttamente con il negoziante."
-            ]
-          }
-        },
-        {
-          "title": {
-            "fa": "نکات و سؤالات رایج",
-            "en": "Tips and FAQs",
-            "it": "Consigli e Domande Frequenti"
-          },
-          "content": {
-            "fa": [
-              "💡 **توصیه**: برای یافتن رستوران‌های جدید، گروه تلگرام ایرانیان (t.me/IraniansInPerugia) را چک کنید.",
-              "⚠️ **هشدار**: برخی رستوران‌ها ممکن است غذای غیرحلال سرو کنند؛ همیشه گواهی حلال را بخواهید.",
-              "📌 **سؤال رایج**: آیا غذای حلال در کافه‌تریای دانشگاه موجود است؟ خیر، باید از رستوران‌های خارجی استفاده کنید.",
-              "📌 **سؤال رایج**: چگونه گوشت حلال پیدا کنم؟ Minimarket Halal یا قصابی‌های نزدیک Fontivegge.",
-              "📷 **تصویر راهنما**: halal_food_map.jpg (در فایل‌های پروژه) برای نقشه رستوران‌ها و فروشگاه‌ها."
-            ],
-            "en": [
-              "💡 **Advice**: Check Iranian Telegram group (t.me/IraniansInPerugia) for new halal restaurant recommendations.",
-              "⚠️ **Warning**: Some restaurants may serve non-halal food; always request halal certification.",
-              "📌 **FAQ**: Is halal food available at university cafeterias? No, use external restaurants.",
-              "📌 **FAQ**: Where to find halal meat? Minimarket Halal or butchers near Fontivegge.",
-              "📷 **Guide Image**: halal_food_map.jpg (in project files) for restaurant and shop map."
-            ],
-            "it": [
-              "💡 **Consiglio**: Controlla il gruppo Telegram iraniano (t.me/IraniansInPerugia) per consigli su nuovi ristoranti halal.",
-              "⚠️ **Attenzione**: Alcuni ristoranti potrebbero servire cibo non halal; richiedi sempre la certificazione halal.",
-              "📌 **Domanda Frequente**: È disponibile cibo halal nelle mense universitarie? No, usa ristoranti esterni.",
-              "📌 **Domanda Frequente**: Dove trovare carne halal? Minimarket Halal o macellerie vicino a Fontivegge.",
-              "📷 **Immagine Guida**: halal_food_map.jpg (nei file del progetto) per mappa di ristoranti e negozi."
+              "💡 **Consiglio**: Dedica un’intera giornata ad Assisi per visitare tutte le attrazioni (Basilica, Rocca e Piazza). Partecipa ai tour di gruppo ESN per risparmiare (t.me/ESNPerugia).",
+              "⚠️ **Attenzione**: Durante la stagione turistica (estate), prenota biglietti e alloggi in anticipo. Assisi è affollata in ottobre (Festa di San Francesco).",
+              "📌 **Domanda Frequente**: Visitare il Centro Storico di Perugia è gratuito? Sì, tranne alcuni musei come la Galleria Nazionale (€8).",
+              "📌 **Domanda Frequente**: Come raggiungere Assisi? Treno da Perugia Fontivegge (€3, 20 min) o autobus da Piazza Partigiani (€2.50).",
+              "📌 **Domanda Frequente**: Miglior periodo per visitare il Lago Trasimeno? Primavera o autunno per clima mite e meno folla.",
+              "📌 **Domanda Frequente**: Serve attrezzatura per l’esplorazione delle grotte del Monte Cucco? Sì, i tour guidati forniscono attrezzature (casco, luce).",
+              "📷 **Immagine Guida**: attractions_guide.pdf (nei file del progetto) per mappe, immagini delle attrazioni e pianificazione del viaggio."
             ]
           }
         }
       ]
     }
-  ]
+  ],
+  "scholarship_2025_2026": {
+    "novità": {
+      "fa": "📌 تغییرات مهم بورسیه ۲۰۲۵/۲۰۲۶:\n- افزایش سقف ISEE به €۲۷٬۹۴۸٫۶۰\n- افزایش ISPE به €۶۰٬۷۵۷٫۸۷\n- حذف شرط معدل برای استفاده از سلف دانشگاه\n- امکان درخواست هویت Alias برای افراد ترنس و غیره با ماده ۱۳\n- افزایش ودیعه خوابگاه از ۱۵۰€ به ۲۵۰€",
+      "it": "📌 Novità principali 2025/2026:\n- Nuovo limite ISEE: €27.948,60\n- Nuovo limite ISPE: €60.757,87\n- Aboliti i requisiti di merito per la mensa\n- Introduzione dell'identità Alias (art. 13)\n- Aumento deposito cauzionale da €150 a €250",
+      "en": "📌 Key updates for 2025/2026:\n- New ISEE limit: €27,948.60\n- New ISPE limit: €60,757.87\n- Merit requirements removed for university canteen\n- Alias identity introduced (Article 13)\n- Dorm deposit increased from €150 to €250"
+    },
+    "financial_requirements": {
+      "fa": "✅ شرایط مالی:\n- حداکثر ISEE: €۲۷٬۹۴۸٫۶۰\n- حداکثر ISPE: €۶۰٬۷۵۷٫۸۷\nبرای شرکت در بورسیه، دریافت کد ISEE دانشگاهی از INPS الزامی است.",
+      "it": "✅ Requisiti economici:\n- ISEE massimo: €27.948,60\n- ISPE massimo: €60.757,87\nÈ obbligatorio avere l'ISEE universitario valido entro il 2 settembre 2025.",
+      "en": "✅ Financial criteria:\n- Maximum ISEE: €27,948.60\n- Maximum ISPE: €60,757.87\nYou must submit a valid university-specific ISEE certificate by Sept 2, 2025."
+    },
+    "required_documents": {
+      "fa": "📄 مدارک موردنیاز:\n1. کد مالیاتی (Codice Fiscale)\n2. گواهی ثبت‌نام دانشگاه\n3. گواهی ISEE دانشگاهی\n4. مدارک مربوط به محل اقامت (قرارداد اجاره یا گواهی خوابگاه)\n5. پاسپورت یا کارت شناسایی معتبر\n6. فرم درخواست بورسیه (از طریق پورتال ADiSU)",
+      "it": "📄 Documenti richiesti:\n1. Codice Fiscale\n2. Certificato di iscrizione universitaria\n3. Attestazione ISEE 2025\n4. Contratto di affitto o certificato alloggio\n5. Passaporto o carta d'identità\n6. Domanda tramite portale ADiSU",
+      "en": "📄 Required documents:\n1. Codice Fiscale\n2. University enrollment certificate\n3. ISEE 2025 certificate\n4. Rent contract or dorm confirmation\n5. Valid passport or ID card\n6. Online application via ADiSU portal"
+    },
+    "timeline": {
+      "fa": "📅 تقویم رسمی:\n- شروع درخواست بورسیه: 20 جولای 2025\n- ددلاین ثبت‌نام: 2 سپتامبر 2025\n- اعلام نتایج اولیه: 20 سپتامبر 2025\n- مهلت اعتراض: تا 30 سپتامبر 2025\n- نتایج نهایی: 15 اکتبر 2025\n- پرداخت قسط اول: تا پایان اکتبر 2025",
+      "it": "📅 Calendario ufficiale:\n- Apertura domande: 20 luglio 2025\n- Scadenza: 2 settembre 2025\n- Graduatoria provvisoria: 20 settembre 2025\n- Reclami: entro 30 settembre 2025\n- Graduatoria definitiva: 15 ottobre 2025\n- Primo pagamento: entro fine ottobre",
+      "en": "📅 Official timeline:\n- Application opens: July 20, 2025\n- Deadline: September 2, 2025\n- Preliminary results: September 20, 2025\n- Appeals deadline: September 30, 2025\n- Final results: October 15, 2025\n- First payment: by end of October"
+    },
+    "housing": {
+      "fa": "🏠 خوابگاه:\n- مبلغ ودیعه: ۲۵۰ یورو (افزایش یافته)\n- درخواست از طریق پورتال ADiSU\n- مدارک موردنیاز: کارت شناسایی، گواهی پذیرش، فرم درخواست خوابگاه\n- لینک پورتال: https://servizi.adisu.umbria.it",
+      "it": "🏠 Alloggio:\n- Deposito cauzionale: €250\n- Richiesta tramite portale ADiSU\n- Documenti: documento d'identità, certificato di ammissione, modulo alloggio\n- Portale: https://servizi.adisu.umbria.it",
+      "en": "🏠 Housing:\n- Dorm deposit: €250\n- Apply via ADiSU portal\n- Required docs: ID, university admission certificate, housing form\n- Portal: https://servizi.adisu.umbria.it"
+    },
+    "canteen_service": {
+      "fa": "🍽 خدمات سلف دانشگاه:\n- بدون نیاز به شرط معدل\n- اپلیکیشن: 'Ticket Restaurant Mobile'\n- دسترسی با QR کد اختصاصی\n- پرداخت از کیف پول دیجیتال در اپلیکیشن\n- لینک راهنما: https://www.adisu.umbria.it/mensa",
+      "it": "🍽 Servizio mensa:\n- Senza requisiti di merito\n- App: 'Ticket Restaurant Mobile'\n- Accesso con QR code personale\n- Pagamento tramite wallet digitale\n- Guida: https://www.adisu.umbria.it/mensa",
+      "en": "🍽 University canteen service:\n- No merit requirement\n- App: 'Ticket Restaurant Mobile'\n- Access via personal QR code\n- Pay via digital wallet\n- Guide: https://www.adisu.umbria.it/mensa"
+    },
+    "benefits": {
+      "fa": "🎁 مزایای بورسیه:\n- مبلغ بورسیه:\n  • دانشجوی خوابگاهی: ~5500 یورو در سال\n  • دانشجوی خارج از شهر: ~4500 یورو\n  • دانشجوی مقیم پروجا: ~2000 یورو\n- تخفیف غذا\n- معافیت از شهریه دانشگاه (تا سقف مشخص)",
+      "it": "🎁 Benefici della borsa:\n- Importo:\n  • Studente in alloggio: ~€5500\n  • Fuori sede: ~€4500\n  • In sede (Perugia): ~€2000\n- Sconto mensa\n- Esenzione dalle tasse universitarie",
+      "en": "🎁 Scholarship benefits:\n- Amount:\n  • Dorm student: ~€5500\n  • Off-campus student: ~€4500\n  • Local student: ~€2000\n- Canteen discounts\n- Tuition waiver (up to a defined limit)"
+    },
+    "evaluation_criteria": {
+      "fa": "📊 ارزیابی و اولویت:\n- شرایط مالی (ISEE / ISPE پایین‌تر، امتیاز بیشتر)\n- شرایط تحصیلی (پیشرفت تحصیلی و تعداد واحد پاس‌شده)\n- برای سال اولی‌ها فقط شرایط مالی بررسی می‌شود.",
+      "it": "📊 Criteri di valutazione:\n- Economici (ISEE/ISPE più bassi = più punti)\n- Merito (esami superati e progressi)\n- Per le matricole, solo criteri economici.",
+      "en": "📊 Evaluation criteria:\n- Financial (lower ISEE/ISPE = higher score)\n- Academic progress (credits passed)\n- First-year students: only financial criteria."
+    },
+    "special_cases": {
+      "fa": "🧠 موارد خاص:\n- Alias: برای دانشجویان ترنس یا با هویت متفاوت جنسی (درخواست ماده ۱۳)\n- پناهنده‌ها: معاف از برخی مدارک\n- بیماری‌های خاص: ارائه گواهی پزشکی جهت امتیاز یا استثنا\n- والد دارای فرزند: امتیاز ویژه",
+      "it": "🧠 Casi speciali:\n- Alias: per studenti trans o non-binary (art. 13)\n- Rifugiati: esonerati da alcuni documenti\n- Patologie gravi: certificato medico\n- Genitori con figli: priorità",
+      "en": "🧠 Special cases:\n- Alias: for trans/non-binary students (Article 13)\n- Refugees: exempt from some documents\n- Medical conditions: with certificate\n- Parents with children: priority"
+    },
+    "contacts": {
+      "fa": "☎️ راه‌های تماس ADiSU:\n- ایمیل: info@adisu.umbria.it\n- تلفن: +39 075 575 9999\n- آدرس: Via Innamorati 4, Perugia\n- ساعت پاسخگویی: دوشنبه تا جمعه، ۹ تا ۱۳\n- سایت رسمی: https://www.adisu.umbria.it",
+      "it": "☎️ Contatti ADiSU:\n- Email: info@adisu.umbria.it\n- Telefono: +39 075 575 9999\n- Indirizzo: Via Innamorati 4, Perugia\n- Orari: Lun-Ven, 09:00-13:00\n- Sito ufficiale: https://www.adisu.umbria.it",
+      "en": "☎️ ADiSU Contact info:\n- Email: info@adisu.umbria.it\n- Phone: +39 075 575 9999\n- Address: Via Innamorati 4, Perugia\n- Hours: Mon-Fri, 09:00–13:00\n- Official site: https://www.adisu.umbria.it"
+    }
+  }
 }
