@@ -1,16 +1,15 @@
 import logging
-from telegram import Update
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import MessageHandler, filters, ContextTypes
 from src.config import logger
 from src.utils.text_formatter import sanitize_markdown
 from src.utils.paginator import Paginator
 from src.utils.keyboard_builder import get_main_menu_keyboard
 from src.database import get_db_cursor
+from src.data.knowledge_base import search_knowledge_base, get_content_by_path
 
 class SearchEngine:
-    def __init__(self, json_data: dict, db_manager, paginator: Paginator):
-        self.json_data = json_data if json_data else {}
-        self.db = db_manager
+    def __init__(self, paginator: Paginator):
         self.paginator = paginator
 
     def get_handler(self):
@@ -30,37 +29,63 @@ class SearchEngine:
             result = cur.fetchone()
             lang = result[0] if result else 'fa'
 
-        if not self.json_data:
-            messages = {
-                'fa': "❌ پایگاه داده دانش در دسترس نیست.",
-                'en': "❌ Knowledge base is not available.",
-                'it': "❌ La base di conoscenza non è disponibile."
-            }
-            await update.message.reply_text(
-                sanitize_markdown(messages[lang]),
-                parse_mode='MarkdownV2',
-                reply_markup=get_main_menu_keyboard(lang)
-            )
-            context.user_data['awaiting_search_query'] = False
-            return MAIN_MENU
-
-        results = []
         try:
-            for section in self.json_data.values():
-                for item in section:
-                    title = item.get(lang, {}).get('title', item.get('title', '')).lower()
-                    description = item.get(lang, {}).get('description', item.get('description', '')).lower()
-                    content = item.get(lang, {}).get('content', item.get('content', []))
-                    details = item.get(lang, {}).get('details', item.get('details', []))
+            # استفاده از search_knowledge_base برای جستجو
+            results = search_knowledge_base(query, lang)
+            if not results:
+                messages = {
+                    'fa': "❌ نتیجه‌ای یافت نشد.",
+                    'en': "❌ No results found.",
+                    'it': "❌ Nessun risultato trovato."
+                }
+                await update.message.reply_text(
+                    sanitize_markdown(messages[lang]),
+                    parse_mode='MarkdownV2',
+                    reply_markup=get_main_menu_keyboard(lang)
+                )
+                context.user_data['awaiting_search_query'] = False
+                return MAIN_MENU
 
-                    if query in title:
-                        results.append(f"*{sanitize_markdown(title)}*\n{sanitize_markdown(description)}")
-                    if isinstance(content, list):
-                        results.extend([sanitize_markdown(line) for line in content if query in line.lower()])
-                    elif isinstance(content, str) and query in content.lower():
-                        results.append(sanitize_markdown(content))
-                    if isinstance(details, list):
-                        results.extend([sanitize_markdown(detail) for detail in details if query in detail.lower()])
+            # آماده‌سازی محتوا برای صفحه‌بندی
+            formatted_results = []
+            for result in results:
+                callback = result['callback'].replace("menu:", "")
+                content, file_path = get_content_by_path(callback.split(":"), lang)
+                formatted_results.append({
+                    "content": content,
+                    "file_path": file_path,
+                    "callback": result['callback']
+                })
+
+            # ذخیره نتایج در Paginator
+            self.paginator.create_session(user_id, formatted_results, 'search')
+            page_data = self.paginator._prepare_page({
+                'content': formatted_results,
+                'type': 'search',
+                'current_page': 0,
+                'total_pages': len(formatted_results)
+            })
+
+            # ارسال محتوا و فایل (اگه وجود داره)
+            await update.message.reply_text(
+                sanitize_markdown(f"{page_data['content']['content']}\n\nصفحه {page_data['page_num']} از {page_data['total_pages']}" if lang == 'fa' else
+                                f"{page_data['content']['content']}\n\nPage {page_data['page_num']} of {page_data['total_pages']}" if lang == 'en' else
+                                f"{page_data['content']['content']}\n\nPagina {page_data['page_num']} di {page_data['total_pages']}"),
+                parse_mode='MarkdownV2',
+                reply_markup=self.paginator.get_pagination_markup(page_data, lang)
+            )
+
+            # ارسال فایل اگه وجود داشته باشه
+            if page_data['content']['file_path']:
+                try:
+                    with open(page_data['content']['file_path'], 'rb') as f:
+                        if page_data['content']['file_path'].endswith(('.jpg', '.jpeg', '.png')):
+                            await update.message.reply_photo(photo=f)
+                        elif page_data['content']['file_path'].endswith('.pdf'):
+                            await update.message.reply_document(document=f)
+                except Exception as e:
+                    logger.error(f"Error sending file {page_data['content']['file_path']} for user {user_id}: {e}")
+
         except Exception as e:
             logger.error(f"Error searching knowledge base for user {user_id}: {e}")
             messages = {
@@ -73,34 +98,6 @@ class SearchEngine:
                 parse_mode='MarkdownV2',
                 reply_markup=get_main_menu_keyboard(lang)
             )
-            context.user_data['awaiting_search_query'] = False
-            return MAIN_MENU
 
-        if results:
-            self.paginator.create_session(user_id, results, 'text')
-            page_data = self.paginator._prepare_page({
-                'content': results,
-                'type': 'text',
-                'current_page': 0,
-                'total_pages': len(results)
-            })
-            await update.message.reply_text(
-                sanitize_markdown(f"{page_data['content']}\n\nصفحه {page_data['page_num']} از {page_data['total_pages']}" if lang == 'fa' else
-                                f"{page_data['content']}\n\nPage {page_data['page_num']} of {page_data['total_pages']}" if lang == 'en' else
-                                f"{page_data['content']}\n\nPagina {page_data['page_num']} di {page_data['total_pages']}"),
-                parse_mode='MarkdownV2',
-                reply_markup=self.paginator.get_pagination_markup(page_data, lang)
-            )
-        else:
-            messages = {
-                'fa': "❌ نتیجه‌ای یافت نشد.",
-                'en': "❌ No results found.",
-                'it': "❌ Nessun risultato trovato."
-            }
-            await update.message.reply_text(
-                sanitize_markdown(messages[lang]),
-                parse_mode='MarkdownV2',
-                reply_markup=get_main_menu_keyboard(lang)
-            )
         context.user_data['awaiting_search_query'] = False
         return MAIN_MENU
