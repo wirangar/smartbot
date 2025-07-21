@@ -3,18 +3,14 @@ from pathlib import Path
 from telegram import Update
 from telegram.ext import ContextTypes
 import aiohttp
-import os
 
 from src.utils.keyboard_builder import get_main_menu_keyboard, get_item_keyboard, get_content_keyboard
 from src.data.knowledge_base import get_content_by_path, search_knowledge_base
 from src.utils.text_formatter import sanitize_markdown
-from src.config import logger, ADMIN_CHAT_ID
+from src.config import logger, ADMIN_CHAT_ID, OPENWEATHERMAP_API_KEY
 
 # حالت مکالمه
 from src.handlers.user_manager import MAIN_MENU
-
-# متغیر موقت برای ذخیره توکن OpenWeatherMap (لطفاً توکن واقعی رو در config.py تنظیم کنید)
-OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY", "YOUR_API_KEY_HERE")  # جای خالی برای توکن
 
 async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """نمایش منوی اصلی."""
@@ -224,7 +220,7 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
         return MAIN_MENU
 
     elif action == "weather":
-        if not OPENWEATHERMAP_API_KEY or OPENWEATHERMAP_API_KEY == "YOUR_API_KEY_HERE":
+        if not OPENWEATHERMAP_API_KEY:
             error_text = {
                 'fa': "API آب‌وهوا تنظیم نشده است. لطفاً با ادمین تماس بگیرید.",
                 'en': "Weather API not configured. Please contact the admin.",
@@ -252,6 +248,13 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
                     temp = data['main']['temp']
                     feels_like = data['main']['feels_like']
                     humidity = data['main']['humidity']
+                    wind_speed = data['wind']['speed']
+                    sunrise = data['sys']['sunrise']
+                    sunset = data['sys']['sunset']
+
+                    from datetime import datetime
+                    sunrise_time = datetime.fromtimestamp(sunrise).strftime("%H:%M")
+                    sunset_time = datetime.fromtimestamp(sunset).strftime("%H:%M")
 
                     weather_text = {
                         'fa': (
@@ -259,26 +262,35 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
                             f"وضعیت: {weather}\n"
                             f"دما: {temp}°C\n"
                             f"حس می‌شود: {feels_like}°C\n"
-                            f"رطوبت: {humidity}%"
+                            f"رطوبت: {humidity}%\n"
+                            f"سرعت باد: {wind_speed} متر/ثانیه\n"
+                            f"طلوع آفتاب: {sunrise_time}\n"
+                            f"غروب آفتاب: {sunset_time}"
                         ),
                         'en': (
                             f"🌦 *Weather in Perugia*\n\n"
                             f"Condition: {weather}\n"
                             f"Temperature: {temp}°C\n"
                             f"Feels like: {feels_like}°C\n"
-                            f"Humidity: {humidity}%"
+                            f"Humidity: {humidity}%\n"
+                            f"Wind speed: {wind_speed} m/s\n"
+                            f"Sunrise: {sunrise_time}\n"
+                            f"Sunset: {sunset_time}"
                         ),
                         'it': (
                             f"🌦 *Meteo a Perugia*\n\n"
                             f"Condizione: {weather}\n"
                             f"Temperatura: {temp}°C\n"
                             f"Percepita: {feels_like}°C\n"
-                            f"Umidità: {humidity}%"
+                            f"Umidità: {humidity}%\n"
+                            f"Velocità del vento: {wind_speed} m/s\n"
+                            f"Alba: {sunrise_time}\n"
+                            f"Tramonto: {sunset_time}"
                         )
                     }
                     await query.edit_message_text(
-                        weather_text.get(lang),
-                        parse_mode='Markdown',
+                        sanitize_markdown(weather_text.get(lang)),
+                        parse_mode='MarkdownV2',
                         reply_markup=get_main_menu_keyboard(lang)
                     )
             except Exception as e:
@@ -291,5 +303,3 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
                 await query.edit_message_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
 
         return MAIN_MENU
-
-    return MAIN_MENU
