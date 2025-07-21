@@ -104,4 +104,198 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
         return await main_menu_command(update, context)
     elif query.data == "menu:change_language":
         messages = {
-            'fa': "لطف
+            'fa': "لطفاً زبان موردنظر خود را انتخاب کنید:",
+            'en': "Please select your preferred language:",
+            'it': "Seleziona la lingua preferita:"
+        }
+        buttons = [
+            [InlineKeyboardButton("فارسی 🇮🇷", callback_data="lang:fa"),
+             InlineKeyboardButton("English 🇬🇧", callback_data="lang:en"),
+             InlineKeyboardButton("Italiano 🇮🇹", callback_data="lang:it")]
+        ]
+        try:
+            await query.message.edit_text(
+                sanitize_markdown(messages.get(lang, messages['fa'])),
+                parse_mode='MarkdownV2',
+                reply_markup=InlineKeyboardMarkup(buttons)
+            )
+        except Exception as e:
+            logger.error(f"Error handling menu callback: {e}")
+            await query.message.edit_text(
+                sanitize_markdown("خطایی رخ داد. لطفاً دوباره امتحان کنید." if lang == 'fa' else
+                                "An error occurred. Please try again." if lang == 'en' else
+                                "Si è verificato un errore. Riprova."),
+                parse_mode='MarkdownV2'
+            )
+        return SELECTING_LANG
+    elif query.data == "menu:scholarships":
+        scholarships = context.bot_data.get('knowledge_base', {}).get('بورسیه و تقویم آموزشی', [])
+        if not scholarships:
+            messages = {
+                'fa': "❌ اطلاعاتی درباره بورسیه‌ها یافت نشد.",
+                'en': "❌ No scholarship information found.",
+                'it': "❌ Nessuna informazione sulle borse di studio trovata."
+            }
+            await query.message.edit_text(
+                sanitize_markdown(messages.get(lang, messages['fa'])),
+                parse_mode='MarkdownV2',
+                reply_markup=get_main_menu_keyboard(lang)
+            )
+            return MAIN_MENU
+        items = [{'title': item.get(lang, {}).get('title', item.get('title', '')), 'callback': f"scholarship_{idx}"} for idx, item in enumerate(scholarships)]
+        await query.message.edit_text(
+            sanitize_markdown("لطفاً یک بورسیه را انتخاب کنید:" if lang == 'fa' else
+                            "Please select a scholarship:" if lang == 'en' else
+                            "Seleziona una borsa di studio:"),
+            parse_mode='MarkdownV2',
+            reply_markup=get_item_keyboard(items, lang)
+        )
+        return MAIN_MENU
+    elif query.data == "menu:calendar":
+        calendar = context.bot_data.get('knowledge_base', {}).get('تقویم تحصیلی', [])
+        if not calendar:
+            messages = {
+                'fa': "❌ اطلاعاتی درباره تقویم تحصیلی یافت نشد.",
+                'en': "❌ No academic calendar information found.",
+                'it': "❌ Nessuna informazione sul calendario accademico trovata."
+            }
+            await query.message.edit_text(
+                sanitize_markdown(messages.get(lang, messages['fa'])),
+                parse_mode='MarkdownV2',
+                reply_markup=get_main_menu_keyboard(lang)
+            )
+            return MAIN_MENU
+        items = [{'title': item.get(lang, {}).get('title', item.get('title', '')), 'callback': f"calendar_{idx}"} for idx, item in enumerate(calendar)]
+        await query.message.edit_text(
+            sanitize_markdown("لطفاً یک تقویم را انتخاب کنید:" if lang == 'fa' else
+                            "Please select a calendar:" if lang == 'en' else
+                            "Seleziona un calendario:"),
+            parse_mode='MarkdownV2',
+            reply_markup=get_item_keyboard(items, lang)
+        )
+        return MAIN_MENU
+    elif query.data == "menu:weather":
+        messages = {
+            'fa': "در حال دریافت وضعیت آب‌وهوا...",
+            'en': "Fetching weather information...",
+            'it': "Recupero delle informazioni meteo..."
+        }
+        await query.message.edit_text(
+            sanitize_markdown(messages.get(lang, messages['fa'])),
+            parse_mode='MarkdownV2'
+        )
+        try:
+            weather_response = await get_ai_response("Current weather in Perugia, Italy", lang)
+            await query.message.edit_text(
+                sanitize_markdown(weather_response),
+                parse_mode='MarkdownV2',
+                reply_markup=get_main_menu_keyboard(lang)
+            )
+        except Exception as e:
+            logger.error(f"Error fetching weather for user {query.from_user.id}: {e}")
+            messages = {
+                'fa': "❌ خطایی در دریافت آب‌وهوا رخ داد.",
+                'en': "❌ An error occurred while fetching weather.",
+                'it': "❌ Si è verificato un errore durante il recupero del meteo."
+            }
+            await query.message.edit_text(
+                sanitize_markdown(messages.get(lang, messages['fa'])),
+                parse_mode='MarkdownV2',
+                reply_markup=get_main_menu_keyboard(lang)
+            )
+        return MAIN_MENU
+    elif query.data == "menu:profile":
+        from src.handlers.user_manager import show_profile_command
+        return await show_profile_command(update, context)
+    elif query.data == "menu:help":
+        return await help_command(update, context)
+    return MAIN_MENU
+
+async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """مدیریت اقدامات انتخاب‌شده توسط کاربر."""
+    from src.handlers.user_manager import MAIN_MENU
+    query = update.callback_query
+    await query.answer()
+    lang = context.user_data.get('language', 'fa')
+
+    action = query.data.replace("action:", "")
+    if action == "isee":
+        from src.services.isee_service import start_isee_calculation
+        return await start_isee_calculation(update, context)
+    elif action == "search":
+        messages = {
+            'fa': "لطفاً عبارت موردنظر برای جستجو را وارد کنید:",
+            'en': "Please enter the search query:",
+            'it': "Inserisci la query di ricerca:"
+        }
+        context.user_data['awaiting_search_query'] = True
+        try:
+            await query.message.edit_text(
+                sanitize_markdown(messages.get(lang, messages['fa'])),
+                parse_mode='MarkdownV2',
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton(
+                        "🔙 بازگشت" if lang == 'fa' else "🔙 Back" if lang == 'en' else "🔙 Indietro",
+                        callback_data="menu:main_menu"
+                    )
+                ]])
+            )
+        except Exception as e:
+            logger.error(f"Error prompting for search query: {e}")
+            await query.message.edit_text(
+                sanitize_markdown("خطایی رخ داد. لطفاً دوباره امتحان کنید." if lang == 'fa' else
+                                "An error occurred. Please try again." if lang == 'en' else
+                                "Si è verificato un errore. Riprova."),
+                parse_mode='MarkdownV2'
+            )
+        return MAIN_MENU
+    elif action == "contact_admin":
+        messages = {
+            'fa': "لطفاً پیام خود را برای ادمین بنویسید:",
+            'en': "Please write your message for the admin:",
+            'it': "Scrivi il tuo messaggio per l'admin:"
+        }
+        context.user_data['next_message_is_admin_contact'] = True
+        try:
+            await query.message.edit_text(
+                sanitize_markdown(messages.get(lang, messages['fa'])),
+                parse_mode='MarkdownV2',
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton(
+                        "🔙 بازگشت" if lang == 'fa' else "🔙 Back" if lang == 'en' else "🔙 Indietro",
+                        callback_data="menu:main_menu"
+                    )
+                ]])
+            )
+        except Exception as e:
+            logger.error(f"Error prompting for admin contact: {e}")
+            await query.message.edit_text(
+                sanitize_markdown("خطایی رخ داد. لطفاً دوباره امتحان کنید." if lang == 'fa' else
+                                "An error occurred. Please try again." if lang == 'en' else
+                                "Si è verificato un errore. Riprova."),
+                parse_mode='MarkdownV2'
+            )
+        return MAIN_MENU
+    elif action.startswith("scholarship_") or action.startswith("calendar_"):
+        idx = int(action.split("_")[1])
+        section = "بورسیه و تقویم آموزشی" if action.startswith("scholarship_") else "تقویم تحصیلی"
+        item = context.bot_data.get('knowledge_base', {}).get(section, [])[idx]
+        content = item.get(lang, {}).get('content', item.get('content', []))
+        description = item.get(lang, {}).get('description', item.get('description', ''))
+        details = item.get(lang, {}).get('details', item.get('details', []))
+        message = f"*{sanitize_markdown(item.get(lang, {}).get('title', item.get('title', '')))}*\n"
+        message += f"{sanitize_markdown(description)}\n\n"
+        if isinstance(content, list):
+            message += "\n".join([f"- {sanitize_markdown(line)}" for line in content])
+        else:
+            message += sanitize_markdown(content)
+        if details:
+            message += "\n\n*جزئیات:*\n" if lang == 'fa' else "\n\n*Details:*\n" if lang == 'en' else "\n\n*Dettagli:*\n"
+            message += "\n".join([f"- {sanitize_markdown(detail)}" for detail in details])
+        await query.message.edit_text(
+            sanitize_markdown(message),
+            parse_mode='MarkdownV2',
+            reply_markup=get_main_menu_keyboard(lang)
+        )
+        return MAIN_MENU
+    return MAIN_MENU
