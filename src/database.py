@@ -7,11 +7,10 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 
 from src.config import logger, DATABASE_URL, REDIS_URL
 
-# تنظیم اتصال Redis
 def get_redis_client() -> Optional[redis.Redis]:
  """ایجاد یا بازگشت کلاینت Redis با مدیریت خطا."""
  try:
- client = redis.from_url (REDIS_URL, decode_responses=True)
+ client = redis.from_url(REDIS_URL, decode_responses=True)
  client.ping()
  logger.info("Successfully connected to Redis.")
  return client
@@ -22,7 +21,7 @@ def get_redis_client() -> Optional[redis.Redis]:
  logger.error(f"Unexpected error while connecting to Redis: {e}")
  return None
 
-redis_client = None # کلاینت Redis در زمان نیاز مقداردهی می‌شود
+redis_client = None
 
 @contextmanager
 def get_db_cursor(commit: bool = True):
@@ -84,11 +83,22 @@ def setup_database():
  );
  CREATE INDEX IF NOT EXISTS idx_isee_user_id ON isee_calculations(user_id);
  """
+ sessions_table_sql = """
+ CREATE TABLE IF NOT EXISTS sessions (
+ id SERIAL PRIMARY KEY,
+ session_id VARCHAR(255) UNIQUE,
+ user_id BIGINT REFERENCES users(telegram_id) ON DELETE CASCADE,
+ data JSONB NOT NULL,
+ created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+ );
+ CREATE INDEX IF NOT EXISTS idx_sessions_user_id ON sessions(user_id);
+ """
  try:
  with get_db_cursor() as cursor:
  cursor.execute(users_table_sql)
  cursor.execute(isee_table_sql)
- logger.info ("Database tables and indexes checked/created successfully.")
+ cursor.execute(sessions_table_sql)
+ logger.info("Database tables and indexes checked/created successfully.")
  except Exception as e:
  logger.error(f"Failed to set up database tables: {e}")
  raise
