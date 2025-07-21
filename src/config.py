@@ -21,7 +21,8 @@ def validate_env_vars():
         "DATABASE_URL",
         "GOOGLE_CREDS",
         "SHEET_ID",
-        "OPENWEATHERMAP_API_KEY"
+        "OPENWEATHERMAP_API_KEY",
+        "ADMIN_CHAT_ID"
     ]
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     if missing_vars:
@@ -32,14 +33,14 @@ def validate_env_vars():
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 DATABASE_URL = os.getenv("DATABASE_URL")
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+REDIS_URL = os.getenv("REDIS_URL")  # اختیاری، اگر استفاده نشود خطا نمی‌دهد
 GOOGLE_CREDS = os.getenv("GOOGLE_CREDS")
 SHEET_ID = os.getenv("SHEET_ID")
-OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY", "f5a89bfd73faa02664da501c0afb2d1b")
+OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY")
 SCHOLARSHIPS_SHEET_NAME = os.getenv("SCHOLARSHIPS_SHEET_NAME", "Scholarships")
 QUESTIONS_SHEET_NAME = os.getenv("QUESTIONS_SHEET_NAME", "UserQuestions")
 BASE_URL = os.getenv("BASE_URL")
-PORT = int(os.getenv("PORT", 8443))
+PORT = int(os.getenv("PORT", 8080))
 WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "scholarino-secret")
 ADMIN_CHAT_ID = os.getenv("ADMIN_CHAT_ID")
 
