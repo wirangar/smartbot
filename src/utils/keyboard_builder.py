@@ -1,6 +1,6 @@
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from src.config import logger
-from src.utils.text_formatter import sanitize_markdown  # تغییر به sanitize_markdown برای سازگاری
+from src.utils.text_formatter import sanitize_markdown
 
 def get_main_menu_keyboard(lang: str = 'fa') -> InlineKeyboardMarkup:
     """ایجاد کیبورد منوی اصلی."""
@@ -67,7 +67,7 @@ def get_item_keyboard(items: list, lang: str = 'fa', back_option: str = "menu:ma
     """ایجاد کیبورد برای آیتم‌ها با دکمه بازگشت."""
     try:
         keyboard = [
-            [InlineKeyboardButton(sanitize_markdown(item['title']), callback_data=f"action:{item['callback']}")]
+            [InlineKeyboardButton(sanitize_markdown(item['title']), callback_data=item['callback'])]
             for item in items
         ]
         back_text = {
