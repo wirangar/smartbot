@@ -2,84 +2,169 @@ import logging
 from pathlib import Path
 from telegram import Update
 from telegram.ext import ContextTypes
-
-from src.config import ADMIN_CHAT_ID, logger
+from src.config import logger, ADMIN_CHAT_ID
 from src.services.openai_service import get_ai_response, process_voice_message
 from src.services.google_sheets_service import append_qa_to_sheet
-from src.utils.keyboard_builder import get_main_menu_keyboard
+from src.data.knowledge_base import search_knowledge_base
+from src.utils.keyboard_builder import get_main_menu_keyboard, get_item_keyboard
+from src.utils.text_formatter import sanitize_markdown
+
+# حالت مکالمه
 from src.handlers.user_manager import MAIN_MENU
 
 async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Handles incoming text messages from the user."""
-    user_message = update.message.text
-    user = update.effective_user
-    lang = context.user_data.get('language', 'fa')
-
-    # Check if this message is intended for the admin
-    if context.user_data.get('next_message_is_admin_contact'):
-        context.user_data['next_message_is_admin_contact'] = False
-        if ADMIN_CHAT_ID:
-            try:
-                # Forward the user's message and add user info
-                user_info = f"Message from: {user.full_name} (ID: {user.id})"
-                await context.bot.send_message(chat_id=ADMIN_CHAT_ID, text=user_info)
-                await context.bot.forward_message(chat_id=ADMIN_CHAT_ID, from_chat_id=user.id, message_id=update.message.message_id)
-
-                success_text = {'fa': "پیام شما با موفقیت برای ادمین ارسال شد.", 'en': "Your message has been sent to the admin.", 'it': "Il tuo messaggio è stato inviato all'admin."}
-                await update.message.reply_text(success_text.get(lang))
-            except Exception as e:
-                logger.error(f"Failed to forward message to admin: {e}")
-                error_text = {'fa': "متاسفانه در ارسال پیام به ادمین خطایی رخ داد.", 'en': "Sorry, an error occurred while sending your message.", 'it': "Spiacenti, si è verificato un errore durante l'invio del messaggio."}
-                await update.message.reply_text(error_text.get(lang))
-        else:
-            unavailable_text = {'fa': "قابلیت تماس با ادمین در حال حاضر فعال نیست.", 'en': "The contact admin feature is not currently active.", 'it': "La funzione di contatto admin non è attualmente attiva."}
-            await update.message.reply_text(unavailable_text.get(lang))
-
+    """مدیریت پیام‌های متنی کاربر."""
+    if 'language' not in context.user_data:
+        await update.message.reply_text(
+            "لطفاً ابتدا زبان خود را انتخاب کنید.",
+            reply_markup=get_main_menu_keyboard('fa')
+        )
         return MAIN_MENU
 
-    # Process with OpenAI
-    ai_response = await get_ai_response(user_message, lang)
-    if ai_response:
-        await append_qa_to_sheet(user.id, user_message, ai_response)
-    else:
-        error_text = {'fa': "متاسفم، مشکلی در پردازش پیام شما رخ داد. لطفاً از منوها استفاده کنید.", 'en': "I'm sorry, there was an issue processing your message. Please use the menus.", 'it': "Mi dispiace, si è verificato un problema nell'elaborare il tuo messaggio. Usa i menu."}
-        ai_response = error_text.get(lang)
+    user_id = update.effective_user.id
+    lang = context.user_data.get('language', 'fa')
+    user_message = update.message.text.strip()
 
-    await update.message.reply_text(ai_response, reply_markup=get_main_menu_keyboard(lang))
+    # بررسی پیام برای تماس با ادمین
+    if context.user_data.get('next_message_is_admin_contact', False):
+        if not ADMIN_CHAT_ID:
+            error_text = {
+                'fa': "شناسه ادمین تنظیم نشده است. لطفاً بعداً امتحان کنید.",
+                'en': "Admin chat ID not configured. Please try again later.",
+                'it': "ID chat admin non configurato. Riprova più tardi."
+            }
+            await update.message.reply_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+        else:
+            try:
+                await context.bot.forward_message(ADMIN_CHAT_ID, update.message.chat_id, update.message.message_id)
+                success_text = {
+                    'fa': "پیام شما به ادمین ارسال شد.",
+                    'en': "Your message was sent to the admin.",
+                    'it': "Il tuo messaggio è stato inviato all'admin."
+                }
+                await update.message.reply_text(success_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+            except Exception as e:
+                logger.error(f"Error forwarding message to admin for user {user_id}: {e}")
+                error_text = {
+                    'fa': "خطایی در ارسال پیام به ادمین رخ داد.",
+                    'en': "An error occurred while sending the message to the admin.",
+                    'it': "Si è verificato un errore durante l'invio del messaggio all'admin."
+                }
+                await update.message.reply_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+        context.user_data['next_message_is_admin_contact'] = False
+        return MAIN_MENU
+
+    # بررسی پیام برای جستجو
+    if context.user_data.get('awaiting_search_query', False):
+        search_results = search_knowledge_base(user_message, lang)
+        context.user_data['awaiting_search_query'] = False
+
+        if not search_results:
+            no_results_text = {
+                'fa': "هیچ نتیجه‌ای برای جستجوی شما یافت نشد. لطفاً عبارت دیگری امتحان کنید.",
+                'en': "No results found for your search. Please try a different query.",
+                'it': "Nessun risultato trovato per la tua ricerca. Prova un'altra query."
+            }
+            await update.message.reply_text(no_results_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+            return MAIN_MENU
+
+        keyboard = []
+        for result in search_results:
+            keyboard.append([InlineKeyboardButton(result['title'], callback_data=result['callback'])])
+        back_text = {"fa": "🔙 بازگشت", "en": "🔙 Back", "it": "🔙 Indietro"}
+        keyboard.append([InlineKeyboardButton(back_text.get(lang, "🔙 Back"), callback_data="menu:main_menu")])
+
+        search_results_text = {
+            'fa': "نتایج جستجو:",
+            'en': "Search results:",
+            'it': "Risultati della ricerca:"
+        }
+        await update.message.reply_text(
+            search_results_text.get(lang),
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
+        return MAIN_MENU
+
+    # پردازش پیام متنی عمومی با OpenAI
+    try:
+        ai_response = await get_ai_response(user_message, lang)
+        if ai_response:
+            sanitized_response = sanitize_markdown(ai_response)
+            await update.message.reply_text(sanitized_response, parse_mode='MarkdownV2', reply_markup=get_main_menu_keyboard(lang))
+            # ذخیره پرس‌وجو و پاسخ در Google Sheets
+            await append_qa_to_sheet(user_id, user_message, ai_response)
+        else:
+            error_text = {
+                'fa': "متأسفم، نتوانستم پاسخی تولید کنم. لطفاً دوباره امتحان کنید.",
+                'en': "Sorry, I couldn't generate a response. Please try again.",
+                'it': "Mi dispiace, non sono riuscito a generare una risposta. Riprova."
+            }
+            await update.message.reply_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+    except Exception as e:
+        logger.error(f"Error processing text message for user {user_id}: {e}")
+        error_text = {
+            'fa': "خطایی در پردازش پیام شما رخ داد.",
+            'en': "An error occurred while processing your message.",
+            'it': "Si è verificato un errore durante l'elaborazione del tuo messaggio."
+        }
+        await update.message.reply_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+
     return MAIN_MENU
 
 async def handle_voice_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Handles incoming voice messages."""
-    user = update.effective_user
+    """مدیریت پیام‌های صوتی."""
+    user_id = update.effective_user.id
     lang = context.user_data.get('language', 'fa')
+
+    if 'language' not in context.user_data:
+        await update.message.reply_text(
+            "لطفاً ابتدا زبان خود را انتخاب کنید.",
+            reply_markup=get_main_menu_keyboard('fa')
+        )
+        return MAIN_MENU
 
     try:
         voice_file = await context.bot.get_file(update.message.voice.file_id)
-        # Define a temporary path to save the voice file
         temp_dir = Path("./temp_audio")
         temp_dir.mkdir(exist_ok=True)
         temp_voice_path = temp_dir / f"{update.message.voice.file_id}.ogg"
 
         await voice_file.download_to_drive(temp_voice_path)
-        logger.info(f"Voice message from {user.id} saved to {temp_voice_path}")
+        logger.info(f"Voice message from {user_id} saved to {temp_voice_path}")
 
         transcribed_text = await process_voice_message(temp_voice_path, lang)
 
         if transcribed_text:
-            # Show transcription to user and process it as a text message
-            feedback_text = {'fa': f"پیام شما: *{transcribed_text}*\nدرحال پردازش...", 'en': f"Your message: *{transcribed_text}*\nProcessing...", 'it': f"Il tuo messaggio: *{transcribed_text}*\nElaborazione..."}
-            await update.message.reply_text(feedback_text.get(lang), parse_mode='Markdown')
+            feedback_text = {
+                'fa': f"پیام شما: *{transcribed_text}*\nدرحال پردازش...",
+                'en': f"Your message: *{transcribed_text}*\nProcessing...",
+                'it': f"Il tuo messaggio: *{transcribed_text}*\nElaborazione..."
+            }
+            await update.message.reply_text(sanitize_markdown(feedback_text.get(lang)), parse_mode='MarkdownV2')
 
-            # Re-route the transcribed text to the text handler logic
             update.message.text = transcribed_text
             return await handle_text_message(update, context)
         else:
-            error_text = {'fa': "متاسفم، نتوانستم پیام صوتی شما را پردازش کنم.", 'en': "I'm sorry, I couldn't process your voice message.", 'it': "Mi dispiace, non sono riuscito a elaborare il tuo messaggio vocale."}
-            await update.message.reply_text(error_text.get(lang))
-
+            error_text = {
+                'fa': "متأسفم، نتوانستم پیام صوتی شما را پردازش کنم.",
+                'en': "Sorry, I couldn't process your voice message.",
+                'it': "Mi dispiace, non sono riuscito a elaborare il tuo messaggio vocale."
+            }
+            await update.message.reply_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
     except Exception as e:
-        logger.error(f"Error handling voice message for user {user.id}: {e}")
-        error_text = {'fa': "خطایی در پردازش پیام صوتی رخ داد.", 'en': "An error occurred while processing the voice message.", 'it': "Si è verificato un errore durante l'elaborazione del messaggio vocale."}
-        await update.message.reply_text(error_text.get(lang))
+        logger.error(f"Error handling voice message for user {user_id}: {e}")
+        error_text = {
+            'fa': "خطایی در پردازش پیام صوتی رخ داد.",
+            'en': "An error occurred while processing the voice message.",
+            'it': "Si è verificato un errore durante l'elaborazione del messaggio vocale."
+        }
+        await update.message.reply_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+    finally:
+        if temp_voice_path and temp_voice_path.exists():
+            try:
+                temp_voice_path.unlink()
+                logger.info(f"Temporary voice file {temp_voice_path} deleted.")
+            except Exception as e:
+                logger.error(f"Failed to delete temporary voice file {temp_voice_path}: {e}")
 
     return MAIN_MENU
