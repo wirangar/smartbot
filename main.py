@@ -29,6 +29,7 @@ from src.services.search_engine import SearchEngine
 from src.utils.paginator import Paginator
 from src.utils.text_formatter import sanitize_markdown
 from src.utils.keyboard_builder import get_main_menu_keyboard
+from src.data.knowledge_base import get_knowledge_base
 
 async def handle_pagination(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """مدیریت دکمه‌های صفحه‌بندی."""
@@ -50,12 +51,21 @@ async def handle_pagination(update: Update, context: ContextTypes.DEFAULT_TYPE) 
 
     if page_data:
         await query.message.edit_text(
-            sanitize_markdown(f"{page_data['content']}\n\nصفحه {page_data['page_num']} از {page_data['total_pages']}" if lang == 'fa' else
-                            f"{page_data['content']}\n\nPage {page_data['page_num']} of {page_data['total_pages']}" if lang == 'en' else
-                            f"{page_data['content']}\n\nPagina {page_data['page_num']} di {page_data['total_pages']}"),
+            sanitize_markdown(f"{page_data['content']['content']}\n\nصفحه {page_data['page_num']} از {page_data['total_pages']}" if lang == 'fa' else
+                            f"{page_data['content']['content']}\n\nPage {page_data['page_num']} of {page_data['total_pages']}" if lang == 'en' else
+                            f"{page_data['content']['content']}\n\nPagina {page_data['page_num']} di {page_data['total_pages']}"),
             parse_mode='MarkdownV2',
             reply_markup=paginator.get_pagination_markup(page_data, lang)
         )
+        if page_data['content']['file_path']:
+            try:
+                with open(page_data['content']['file_path'], 'rb') as f:
+                    if page_data['content']['file_path'].endswith(('.jpg', '.jpeg', '.png')):
+                        await query.message.reply_photo(photo=f)
+                    elif page_data['content']['file_path'].endswith('.pdf'):
+                        await query.message.reply_document(document=f)
+            except Exception as e:
+                logger.error(f"Error sending file {page_data['content']['file_path']} for user {user_id}: {e}")
     else:
         messages = {
             'fa': "❌ دیگر صفحه‌ای وجود ندارد.",
@@ -83,13 +93,7 @@ async def main():
         raise
 
     # بارگذاری knowledge base
-    try:
-        knowledge_base_path = Path("src/data/knowledge_base_v2.json")
-        with open(knowledge_base_path, 'r', encoding='utf-8') as f:
-            knowledge_base = json.load(f)
-    except Exception as e:
-        logger.critical(f"Failed to load knowledge base: {e}")
-        knowledge_base = {}
+    knowledge_base = get_knowledge_base()
 
     # ایجاد اپلیکیشن تلگرام
     application = (
@@ -107,7 +111,7 @@ async def main():
 
     # تنظیم ConversationHandler برای ثبت‌نام کاربر، ISEE، و جستجو
     isee_service = ISEEService(knowledge_base, None)
-    search_engine = SearchEngine(knowledge_base, None, Paginator())
+    search_engine = SearchEngine(Paginator())
 
     conv_handler = ConversationHandler(
         entry_points=[
