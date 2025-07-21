@@ -1,81 +1,103 @@
-import asyncio
+import logging
 from telegram.ext import (
     Application,
     CommandHandler,
     MessageHandler,
-    filters,
-    ConversationHandler,
     CallbackQueryHandler,
+    ConversationHandler,
+    filters
 )
+from src.config import logger, TELEGRAM_BOT_TOKEN, BASE_URL, PORT, WEBHOOK_SECRET
+from src.handlers.user_manager import (
+    start,
+    select_language,
+    ask_first_name,
+    ask_last_name,
+    ask_age,
+    ask_email,
+    cancel,
+    show_profile_command,
+    SELECTING_LANG, ASKING_FIRST_NAME, ASKING_LAST_NAME, ASKING_AGE, ASKING_EMAIL, MAIN_MENU
+)
+from src.handlers.menu_handler import main_menu_command, help_command, handle_menu_callback, handle_action_callback
+from src.handlers.message_handler import handle_text_message, handle_voice_message
 
-from src.config import TELEGRAM_BOT_TOKEN, WEBHOOK_SECRET, BASE_URL, PORT, logger
-from src.database import setup_database
-from src.handlers import user_manager, menu_handler, message_handler
-
-def main() -> None:
-    """Run the bot."""
-    # Set up the database tables on startup
-    setup_database()
-
-    # Create the Application and pass it your bot's token.
+async def main():
+    """راه‌اندازی ربات تلگرام با webhook."""
     if not TELEGRAM_BOT_TOKEN:
-        logger.critical("TELEGRAM_BOT_TOKEN is not set. The bot cannot start.")
-        return
+        logger.critical("TELEGRAM_BOT_TOKEN is not configured.")
+        raise ValueError("TELEGRAM_BOT_TOKEN is missing.")
 
-    application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+    # ایجاد اپلیکیشن تلگرام
+    application = (
+        Application.builder()
+        .token(TELEGRAM_BOT_TOKEN)
+        .read_timeout(10)
+        .write_timeout(10)
+        .build()
+    )
 
-    # Setup the conversation handler with states
-    # A conversation handler to manage the entire user flow
+    # تنظیم ConversationHandler برای ثبت‌نام کاربر
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("start", user_manager.start)],
+        entry_points=[CommandHandler("start", start)],
         states={
-            # Onboarding States
-            user_manager.SELECTING_LANG: [CallbackQueryHandler(user_manager.select_language, pattern=r"^lang:.*")],
-            user_manager.ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_first_name)],
-            user_manager.ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_last_name)],
-            user_manager.ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_age)],
-            user_manager.ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, user_manager.ask_email)],
-
-            # Main Menu State
-            user_manager.MAIN_MENU: [
-                CallbackQueryHandler(menu_handler.handle_menu_callback, pattern=r"^menu:.*"),
-                CallbackQueryHandler(user_manager.show_profile, pattern=r"^action:profile$"),
-                CallbackQueryHandler(menu_handler.handle_action_callback, pattern=r"^action:.*"),
-                MessageHandler(filters.TEXT & ~filters.COMMAND, message_handler.handle_text_message),
-                MessageHandler(filters.VOICE, message_handler.handle_voice_message),
+            SELECTING_LANG: [CallbackQueryHandler(select_language, pattern="^lang:")],
+            ASKING_FIRST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_first_name)],
+            ASKING_LAST_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_last_name)],
+            ASKING_AGE: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_age)],
+            ASKING_EMAIL: [MessageHandler(filters.TEXT & ~filters.COMMAND, ask_email)],
+            MAIN_MENU: [
+                CommandHandler("menu", main_menu_command),
+                CommandHandler("help", help_command),
+                CommandHandler("profile", show_profile_command),
+                CallbackQueryHandler(handle_menu_callback, pattern="^menu:"),
+                CallbackQueryHandler(handle_action_callback, pattern="^action:"),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text_message),
+                MessageHandler(filters.VOICE, handle_voice_message),
             ],
         },
-        fallbacks=[
-            CommandHandler("start", user_manager.start), # Allow restarting
-            CommandHandler("menu", menu_handler.main_menu_command),
-            CommandHandler("profile", user_manager.show_profile_command),
-            CommandHandler("help", menu_handler.help_command),
-            CommandHandler("cancel", user_manager.cancel)
-        ],
-        map_to_parent={
-            # If ConversationHandler.END is returned, jump to the main menu
-            ConversationHandler.END: user_manager.MAIN_MENU
-        }
+        fallbacks=[CommandHandler("cancel", cancel)],
     )
+
+    # اضافه کردن ConversationHandler به اپلیکیشن
     application.add_handler(conv_handler)
 
-    # For local development, run via polling
-    # For production on Render, the webhook is set via a startup command
-    if BASE_URL:
-        # On Render, you would typically run a webserver.
-        # For simplicity with python-telegram-bot, we can run it in webhook mode.
-        logger.info(f"Starting bot in webhook mode, listening on port {PORT}")
-        application.run_webhook(
+    # مدیریت خطاها
+    async def error_handler(update, context):
+        logger.error(f"Update {update} caused error: {context.error}")
+        if update and update.effective_message:
+            error_text = {
+                'fa': "خطایی رخ داد. لطفاً دوباره امتحان کنید.",
+                'en': "An error occurred. Please try again.",
+                'it': "Si è verificato un errore. Riprova."
+            }
+            lang = context.user_data.get('language', 'fa') if context.user_data else 'fa'
+            await update.effective_message.reply_text(error_text.get(lang))
+
+    application.add_error_handler(error_handler)
+
+    # راه‌اندازی webhook
+    webhook_url = f"{BASE_URL}/webhook"
+    try:
+        await application.initialize()
+        await application.bot.set_webhook(
+            url=webhook_url,
+            secret_token=WEBHOOK_SECRET,
+            allowed_updates=["message", "callback_query"]
+        )
+        logger.info(f"Webhook set successfully at {webhook_url}")
+
+        # راه‌اندازی سرور webhook
+        await application.run_webhook(
             listen="0.0.0.0",
             port=PORT,
             secret_token=WEBHOOK_SECRET,
-            url_path=TELEGRAM_BOT_TOKEN,
-            webhook_url=f"{BASE_URL}/{TELEGRAM_BOT_TOKEN}"
+            webhook_url=webhook_url
         )
-    else:
-        logger.info("No BASE_URL found, running in polling mode for local development.")
-        application.run_polling()
-
+    except Exception as e:
+        logger.critical(f"Failed to start webhook: {e}")
+        raise
 
 if __name__ == "__main__":
-    main()
+    import asyncio
+    asyncio.run(main())
