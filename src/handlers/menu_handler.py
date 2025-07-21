@@ -6,6 +6,7 @@ from src.utils.keyboard_builder import get_main_menu_keyboard, get_item_keyboard
 from src.utils.text_formatter import sanitize_markdown
 from src.services.openai_service import get_ai_response
 from src.services.google_sheets_service import append_qa_to_sheet
+from src.data.knowledge_base import get_knowledge_base, get_content_by_path
 
 async def main_menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """نمایش منوی اصلی."""
@@ -129,7 +130,8 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
             )
         return SELECTING_LANG
     elif query.data == "menu:scholarships":
-        scholarships = context.bot_data.get('knowledge_base', {}).get('بورسیه و تقویم آموزشی', [])
+        kb = get_knowledge_base()
+        scholarships = kb.get('بورسیه و تقویم آموزشی', [])
         if not scholarships:
             messages = {
                 'fa': "❌ اطلاعاتی درباره بورسیه‌ها یافت نشد.",
@@ -142,7 +144,7 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
                 reply_markup=get_main_menu_keyboard(lang)
             )
             return MAIN_MENU
-        items = [{'title': item.get(lang, {}).get('title', item.get('title', '')), 'callback': f"scholarship_{idx}"} for idx, item in enumerate(scholarships)]
+        items = [{'title': item.get('title', {}).get(lang, item.get('title', {}).get('en', '')), 'callback': f"menu:بورسیه و تقویم آموزشی:{item.get('id', '')}"} for item in scholarships]
         await query.message.edit_text(
             sanitize_markdown("لطفاً یک بورسیه را انتخاب کنید:" if lang == 'fa' else
                             "Please select a scholarship:" if lang == 'en' else
@@ -152,7 +154,8 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
         )
         return MAIN_MENU
     elif query.data == "menu:calendar":
-        calendar = context.bot_data.get('knowledge_base', {}).get('تقویم تحصیلی', [])
+        kb = get_knowledge_base()
+        calendar = kb.get('تقویم تحصیلی', [])
         if not calendar:
             messages = {
                 'fa': "❌ اطلاعاتی درباره تقویم تحصیلی یافت نشد.",
@@ -165,7 +168,7 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
                 reply_markup=get_main_menu_keyboard(lang)
             )
             return MAIN_MENU
-        items = [{'title': item.get(lang, {}).get('title', item.get('title', '')), 'callback': f"calendar_{idx}"} for idx, item in enumerate(calendar)]
+        items = [{'title': item.get('title', {}).get(lang, item.get('title', {}).get('en', '')), 'callback': f"menu:تقویم تحصیلی:{item.get('id', '')}"} for item in calendar]
         await query.message.edit_text(
             sanitize_markdown("لطفاً یک تقویم را انتخاب کنید:" if lang == 'fa' else
                             "Please select a calendar:" if lang == 'en' else
@@ -209,6 +212,24 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
         return await show_profile_command(update, context)
     elif query.data == "menu:help":
         return await help_command(update, context)
+    elif query.data.startswith("menu:بورسیه و تقویم آموزشی:") or query.data.startswith("menu:تقویم تحصیلی:"):
+        path_parts = query.data.replace("menu:", "").split(":")
+        content, file_path = get_content_by_path(path_parts, lang)
+        await query.message.edit_text(
+            sanitize_markdown(content),
+            parse_mode='MarkdownV2',
+            reply_markup=get_main_menu_keyboard(lang)
+        )
+        if file_path:
+            try:
+                with open(file_path, 'rb') as f:
+                    if file_path.endswith(('.jpg', '.jpeg', '.png')):
+                        await query.message.reply_photo(photo=f)
+                    elif file_path.endswith('.pdf'):
+                        await query.message.reply_document(document=f)
+            except Exception as e:
+                logger.error(f"Error sending file {file_path} for user {query.from_user.id}: {e}")
+        return MAIN_MENU
     return MAIN_MENU
 
 async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
@@ -275,27 +296,5 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
                                 "Si è verificato un errore. Riprova."),
                 parse_mode='MarkdownV2'
             )
-        return MAIN_MENU
-    elif action.startswith("scholarship_") or action.startswith("calendar_"):
-        idx = int(action.split("_")[1])
-        section = "بورسیه و تقویم آموزشی" if action.startswith("scholarship_") else "تقویم تحصیلی"
-        item = context.bot_data.get('knowledge_base', {}).get(section, [])[idx]
-        content = item.get(lang, {}).get('content', item.get('content', []))
-        description = item.get(lang, {}).get('description', item.get('description', ''))
-        details = item.get(lang, {}).get('details', item.get('details', []))
-        message = f"*{sanitize_markdown(item.get(lang, {}).get('title', item.get('title', '')))}*\n"
-        message += f"{sanitize_markdown(description)}\n\n"
-        if isinstance(content, list):
-            message += "\n".join([f"- {sanitize_markdown(line)}" for line in content])
-        else:
-            message += sanitize_markdown(content)
-        if details:
-            message += "\n\n*جزئیات:*\n" if lang == 'fa' else "\n\n*Details:*\n" if lang == 'en' else "\n\n*Dettagli:*\n"
-            message += "\n".join([f"- {sanitize_markdown(detail)}" for detail in details])
-        await query.message.edit_text(
-            sanitize_markdown(message),
-            parse_mode='MarkdownV2',
-            reply_markup=get_main_menu_keyboard(lang)
-        )
         return MAIN_MENU
     return MAIN_MENU
