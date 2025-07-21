@@ -8,18 +8,18 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from src.config import logger, DATABASE_URL, REDIS_URL
 
 def get_redis_client() -> Optional[redis.Redis]:
- """ایجاد یا بازگشت کلاینت Redis با مدیریت خطا."""
- try:
- client = redis.from_url(REDIS_URL, decode_responses=True)
- client.ping()
- logger.info("Successfully connected to Redis.")
- return client
- except redis.exceptions.ConnectionError as e:
- logger.error(f"Could not connect to Redis: {e}")
- return None
- except Exception as e:
- logger.error(f"Unexpected error while connecting to Redis: {e}")
- return None
+    """ایجاد یا بازگشت کلاینت Redis با مدیریت خطا."""
+    try:
+        client = redis.from_url(REDIS_URL, decode_responses=True)
+        client.ping()
+        logger.info("Successfully connected to Redis.")
+        return client
+    except redis.exceptions.ConnectionError as e:
+        logger.error(f"Could not connect to Redis: {e}")
+        return None
+    except Exception as e:
+        logger.error(f"Unexpected error while connecting to Redis: {e}")
+        return None
 
 redis_client = None
 
