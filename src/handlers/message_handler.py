@@ -68,7 +68,7 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
 
     # بررسی پیام برای جستجو
     if context.user_data.get('awaiting_search_query', False):
-        search_engine = SearchEngine(context.bot_data.get('knowledge_base', {}), context.bot_data.get('db_manager'), Paginator())
+        search_engine = SearchEngine(Paginator())
         return await search_engine.search(update, context)
 
     # پردازش پیام متنی عمومی با OpenAI
