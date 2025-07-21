@@ -325,3 +325,30 @@ class ISEEService:
  logger.error(f"Error finishing ISEE calculation: {e}")
  lang = context.user_data.get('language', 'fa')
  errors = {
+ 'fa': "❌ خطایی در محاسبه ISEE رخ داد. لطفاً دوباره امتحان کنید.",
+ 'en': "❌ An error occurred during ISEE calculation. Please try again.",
+ 'it': "❌ Si è verificato un errore durante il calcolo ISEE. Riprova."
+ }
+ await (update.message or update.callback_query.message).reply_text(
+ sanitize_markdown(errors[lang]),
+ parse_mode='MarkdownV2',
+ reply_markup=get_main_menu_keyboard(lang)
+ )
+ return MAIN_MENU
+
+ async def cancel(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+ """لغو فرآیند محاسبه ISEE."""
+ from src.handlers.user_manager import MAIN_MENU
+ lang = context.user_data.get('language', 'fa')
+ messages = {
+ 'fa': "❌ محاسبه ISEE لغو شد.",
+ 'en': "❌ ISEE calculation canceled.",
+ 'it': "❌ Calcolo ISEE annullato."
+ }
+ context.user_data.clear()
+ await update.message.reply_text(
+ sanitize_markdown(messages[lang]),
+ parse_mode='MarkdownV2',
+ reply_markup=get_main_menu_keyboard(lang)
+ )
+ return MAIN_MENU
