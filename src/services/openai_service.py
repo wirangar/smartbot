@@ -1,23 +1,34 @@
-import openai
 import logging
-import os
 from pathlib import Path
+from typing import Optional
+import openai
+from tenacity import retry, stop_after_attempt, wait_exponential
 
-from src.config import OPENAI_API_KEY, SYSTEM_PROMPT, logger
+from src.config import logger, OPENAI_API_KEY
 
-if OPENAI_API_KEY:
-    openai.api_key = OPENAI_API_KEY
-else:
-    logger.warning("OPENAI_API_KEY not set. OpenAI functionality will be disabled.")
+# تنظیم کلید API
+openai.api_key = OPENAI_API_KEY
 
-async def get_ai_response(user_message: str, lang: str = 'fa') -> str | None:
-    """Gets a response from OpenAI's chat model."""
-    if not openai.api_key:
+# پرامپت سیستمی برای پاسخ‌های متنی
+SYSTEM_PROMPT = (
+    "You are Scholarino, a helpful assistant for students in Perugia, Italy. "
+    "Provide accurate and concise answers related to living and studying in Perugia. "
+    "If the question is unrelated, respond politely and suggest focusing on relevant topics. "
+    "Always respond in the user's selected language."
+)
+
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
+async def get_ai_response(user_message: str, lang: str = 'fa') -> Optional[str]:
+    """
+    دریافت پاسخ از OpenAI Chat API برای پیام متنی کاربر.
+    """
+    if not OPENAI_API_KEY:
         logger.error("OpenAI API key is not configured.")
         return None
 
-    # Append language context to the system prompt
-    lang_prompt = f"Please respond in {lang}."
+    # نگاشت کد زبان برای OpenAI
+    lang_map = {'fa': 'Persian', 'en': 'English', 'it': 'Italian'}
+    lang_prompt = f"Please respond in {lang_map.get(lang, 'English')}."
     full_system_prompt = f"{SYSTEM_PROMPT}\n{lang_prompt}"
 
     messages = [
@@ -29,7 +40,7 @@ async def get_ai_response(user_message: str, lang: str = 'fa') -> str | None:
         response = await openai.chat.completions.create(
             model="gpt-4o",
             messages=messages,
-            temperature=0.6, # Slightly lower temperature for more factual responses
+            temperature=0.6,
             max_tokens=1500
         )
         ai_response = response.choices[0].message.content
@@ -39,26 +50,31 @@ async def get_ai_response(user_message: str, lang: str = 'fa') -> str | None:
         logger.error(f"Error calling OpenAI Chat API: {e}")
         return None
 
-async def process_voice_message(voice_file_path: Path, lang: str = 'fa') -> str | None:
-    """Transcribes a voice message using OpenAI's Whisper model."""
-    if not openai.api_key:
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
+async def process_voice_message(voice_file_path: Path, lang: str = 'fa') -> Optional[str]:
+    """
+    تبدیل پیام صوتی به متن با استفاده از OpenAI Whisper API.
+    """
+    if not OPENAI_API_KEY:
         logger.error("OpenAI API key is not configured.")
         return None
+
+    # نگاشت کد زبان برای Whisper API
+    LANGUAGE_CODES = {
+        'fa': 'fa',
+        'en': 'en',
+        'it': 'it'
+    }
 
     try:
         with open(voice_file_path, "rb") as audio_file:
             transcript = await openai.audio.transcriptions.create(
                 model="whisper-1",
                 file=audio_file,
-                language=lang[:2] # Whisper uses 2-letter language codes (e.g., 'fa', 'en', 'it')
+                language=LANGUAGE_CODES.get(lang, 'en')
             )
-        logger.info(f"Successfully transcribed voice message. Text: '{transcript.text[:50]}...'")
-        return transcript.text
+            logger.info(f"Successfully transcribed voice message. Text: '{transcript.text[:50]}...'")
+            return transcript.text
     except Exception as e:
         logger.error(f"Error calling OpenAI Whisper API: {e}")
         return None
-    finally:
-        # Clean up the temporary file
-        if os.path.exists(voice_file_path):
-            os.remove(voice_file_path)
-            logger.info(f"Temporary voice file {voice_file_path} deleted.")
