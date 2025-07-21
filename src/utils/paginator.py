@@ -6,6 +6,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from src.config import logger
 from src.database import get_redis_client
 from src.utils.text_formatter import sanitize_markdown
+from src.utils.keyboard_builder import get_main_menu_keyboard
 
 class Paginator:
     def __init__(self):
