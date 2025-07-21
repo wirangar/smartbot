@@ -1,19 +1,23 @@
 import logging
+from pathlib import Path
 from telegram import Update
 from telegram.ext import ContextTypes
-
+import aiohttp
 import os
+
 from src.utils.keyboard_builder import get_main_menu_keyboard, get_item_keyboard, get_content_keyboard
-from src.data.knowledge_base import get_content_by_path
+from src.data.knowledge_base import get_content_by_path, search_knowledge_base
 from src.utils.text_formatter import sanitize_markdown
 from src.config import logger, ADMIN_CHAT_ID
+
+# حالت مکالمه
 from src.handlers.user_manager import MAIN_MENU
 
-# A simple in-memory cache for user history. In a real-world scenario, this might be moved to Redis.
-user_history = {}
+# متغیر موقت برای ذخیره توکن OpenWeatherMap (لطفاً توکن واقعی رو در config.py تنظیم کنید)
+OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY", "YOUR_API_KEY_HERE")  # جای خالی برای توکن
 
 async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Displays the main menu."""
+    """نمایش منوی اصلی."""
     lang = context.user_data.get('language', 'fa')
     menu_text = {
         'fa': "لطفاً یک گزینه را از منوی اصلی انتخاب کنید:",
@@ -21,7 +25,6 @@ async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
         'it': "Seleziona un'opzione dal menu principale:"
     }
 
-    # Check if we are editing a message (from a callback query) or sending a new one
     if update.callback_query:
         await update.callback_query.answer()
         await update.callback_query.edit_message_text(
@@ -33,9 +36,10 @@ async def main_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
             text=menu_text.get(lang),
             reply_markup=get_main_menu_keyboard(lang)
         )
+    return MAIN_MENU
 
 async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Handles all menu navigation callbacks."""
+    """مدیریت callbackهای منو."""
     query = update.callback_query
     await query.answer()
 
@@ -49,15 +53,19 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
 
     context.user_data['current_path'] = path
 
-    if len(path) == 1: # Category selected
+    if len(path) == 1:  # دسته‌بندی انتخاب شده
         category = path[0]
-        category_text = {'fa': f"شما دسته بندی '{category}' را انتخاب کردید. لطفاً یک مورد را انتخاب کنید:", 'en': f"You selected '{category}'. Please choose an item:", 'it': f"Hai selezionato '{category}'. Scegli un elemento:"}
+        category_text = {
+            'fa': f"شما دسته‌بندی '{category}' را انتخاب کردید. لطفاً یک مورد را انتخاب کنید:",
+            'en': f"You selected '{category}'. Please choose an item:",
+            'it': f"Hai selezionato '{category}'. Scegli un elemento:"
+        }
         await query.edit_message_text(
             text=category_text.get(lang),
             reply_markup=get_item_keyboard(category, lang)
         )
 
-    elif len(path) == 2: # Item selected
+    elif len(path) == 2:  # آیتم انتخاب شده
         content, file_path = get_content_by_path(path, lang)
         sanitized_content = sanitize_markdown(content)
 
@@ -67,51 +75,82 @@ async def handle_menu_callback(update: Update, context: ContextTypes.DEFAULT_TYP
             reply_markup=get_content_keyboard(path, lang)
         )
 
-        if file_path and os.path.exists(file_path):
-            try:
-                with open(file_path, 'rb') as file:
-                    if file_path.lower().endswith(('.jpg', '.jpeg', '.png')):
-                        await context.bot.send_photo(chat_id=query.from_user.id, photo=file)
-                    else: # Assuming PDF or other documents
-                        await context.bot.send_document(chat_id=query.from_user.id, document=file)
-            except Exception as e:
-                logger.error(f"Error sending file {file_path} for user {query.from_user.id}: {e}")
-                error_text = {'fa': "خطایی در ارسال فایل رخ داد.", 'en': "An error occurred while sending the file.", 'it': "Si è verificato un errore durante l'invio del file."}
-                await context.bot.send_message(chat_id=query.from_user.id, text=error_text.get(lang))
-        elif file_path:
-            logger.warning(f"File not found at path: {file_path}")
-            not_found_text = {'fa': "فایل مرتبط یافت نشد.", 'en': "Associated file not found.", 'it': "File associato non trovato."}
-            await context.bot.send_message(chat_id=query.from_user.id, text=not_found_text.get(lang))
+        if file_path:
+            file_path = Path(file_path)
+            if file_path.exists():
+                try:
+                    with open(file_path, 'rb') as file:
+                        if file_path.suffix.lower() in ('.jpg', '.jpeg', '.png'):
+                            await context.bot.send_photo(chat_id=query.from_user.id, photo=file)
+                        elif file_path.suffix.lower() == '.pdf':
+                            await context.bot.send_document(chat_id=query.from_user.id, document=file)
+                except Exception as e:
+                    logger.error(f"Error sending file {file_path} for user {query.from_user.id}: {e}")
+                    error_text = {
+                        'fa': "خطایی در ارسال فایل رخ داد.",
+                        'en': "An error occurred while sending the file.",
+                        'it': "Si è verificato un errore durante l'invio del file."
+                    }
+                    await context.bot.send_message(chat_id=query.from_user.id, text=error_text.get(lang))
+            else:
+                logger.warning(f"File not found at path: {file_path}")
+                not_found_text = {
+                    'fa': "فایل مرتبط یافت نشد.",
+                    'en': "Associated file not found.",
+                    'it': "File associato non trovato."
+                }
+                await context.bot.send_message(chat_id=query.from_user.id, text=not_found_text.get(lang))
 
     return MAIN_MENU
 
 async def main_menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Handler for the /menu command."""
+    """مدیریت دستور /menu."""
     await main_menu(update, context)
     return MAIN_MENU
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Handler for the /help command."""
+    """مدیریت دستور /help."""
     lang = context.user_data.get('language', 'fa')
     help_text_map = {
-        'fa': "🤖 *راهنمای ربات Scholarino*\n\n- از منوها برای دسترسی به اطلاعات استفاده کنید.\n- برای سوالات خاص، پیام خود را تایپ کنید.\n- برای تماس با مدیر، از دکمه 'تماس با ادمین' استفاده کنید.",
-        'en': "🤖 *Scholarino Bot Help*\n\n- Use the menus to access information.\n- For specific questions, type your message.\n- Use the 'Contact Admin' button to reach the administrator.",
-        'it': "🤖 *Aiuto Bot Scholarino*\n\n- Usa i menu per accedere alle informazioni.\n- Per domande specifiche, digita il tuo messaggio.\n- Usa il pulsante 'Contatta Admin' per raggiungere l'amministratore."
+        'fa': (
+            "🤖 *راهنمای ربات Scholarino*\n\n"
+            "- از منوها برای دسترسی به اطلاعات استفاده کنید.\n"
+            "- برای جستجوی سریع، از گزینه 'جستجو' استفاده کنید.\n"
+            "- برای بررسی آب‌وهوای پروجا، گزینه 'آب‌وهوا' را انتخاب کنید.\n"
+            "- برای سوالات خاص، پیام خود را تایپ کنید.\n"
+            "- برای تماس با مدیر، از دکمه 'تماس با ادمین' استفاده کنید."
+        ),
+        'en': (
+            "🤖 *Scholarino Bot Help*\n\n"
+            "- Use the menus to access information.\n"
+            "- Use the 'Search' option for quick searches.\n"
+            "- Check Perugia's weather with the 'Weather' option.\n"
+            "- For specific questions, type your message.\n"
+            "- Use the 'Contact Admin' button to reach the administrator."
+        ),
+        'it': (
+            "🤖 *Aiuto Bot Scholarino*\n\n"
+            "- Usa i menu per accedere alle informazioni.\n"
+            "- Usa l'opzione 'Cerca' per ricerche rapide.\n"
+            "- Controlla il meteo di Perugia con l'opzione 'Meteo'.\n"
+            "- Per domande specifiche, digita il tuo messaggio.\n"
+            "- Usa il pulsante 'Contatta Admin' per raggiungere l'amministratore."
+        )
     }
     await update.message.reply_text(help_text_map.get(lang), parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
     return MAIN_MENU
 
 async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Handles callbacks for static action buttons like help, profile, etc."""
+    """مدیریت callbackهای دکمه‌های ثابت مثل جستجو، آب‌وهوا، پروفایل و غیره."""
     query = update.callback_query
     await query.answer()
     action = query.data.split(":")[1]
     lang = context.user_data.get('language', 'fa')
 
     if action == "profile":
-        # This will be handled by the user_manager.py's show_profile function
-        # We can add a direct call here if needed, but for now, let's keep it in the main handler registration
-        pass
+        from src.handlers.user_manager import show_profile
+        await show_profile(update, context)
+        return MAIN_MENU
 
     elif action == "contact_admin":
         context.user_data['next_message_is_admin_contact'] = True
@@ -121,22 +160,136 @@ async def handle_action_callback(update: Update, context: ContextTypes.DEFAULT_T
             'it': "Scrivi il tuo messaggio per l'admin. Sarà inoltrato direttamente."
         }
         await query.edit_message_text(text=contact_text.get(lang))
+        return MAIN_MENU
 
     elif action == "history":
-        # Placeholder for history functionality
-        history_text_map = {
-            'fa': "📜 تاریخچه پرسش و پاسخ شما در اینجا نمایش داده خواهد شد.",
-            'en': "📜 Your Q&A history will be displayed here.",
-            'it': "📜 La tua cronologia di domande e risposte sarà visualizzata qui."
-        }
-        await query.edit_message_text(history_text_map.get(lang), reply_markup=get_main_menu_keyboard(lang))
+        from src.services.google_sheets_service import get_user_history_from_sheet
+        user_id = query.from_user.id
+        try:
+            history = await get_user_history_from_sheet(user_id)
+            history_text_map = {
+                'fa': history if history != "No history found." else "📜 تاریخچه‌ای برای شما یافت نشد.",
+                'en': history if history != "No history found." else "📜 No history found for you.",
+                'it': history if history != "No history found." else "📜 Nessuna cronologia trovata per te."
+            }
+            await query.edit_message_text(history_text_map.get(lang), reply_markup=get_main_menu_keyboard(lang))
+        except Exception as e:
+            logger.error(f"Error fetching history for user {user_id}: {e}")
+            error_text = {
+                'fa': "خطایی در دریافت تاریخچه رخ داد.",
+                'en': "An error occurred while fetching your history.",
+                'it': "Si è verificato un errore durante il recupero della cronologia."
+            }
+            await query.edit_message_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+        return MAIN_MENU
 
     elif action == "help":
         help_text_map = {
-            'fa': "🤖 *راهنمای ربات Scholarino*\n\n- از منوها برای دسترسی به اطلاعات استفاده کنید.\n- برای سوالات خاص، پیام خود را تایپ کنید.\n- برای تماس با مدیر، از دکمه 'تماس با ادمین' استفاده کنید.",
-            'en': "🤖 *Scholarino Bot Help*\n\n- Use the menus to access information.\n- For specific questions, type your message.\n- Use the 'Contact Admin' button to reach the administrator.",
-            'it': "🤖 *Aiuto Bot Scholarino*\n\n- Usa i menu per accedere alle informazioni.\n- Per domande specifiche, digita il tuo messaggio.\n- Usa il pulsante 'Contatta Admin' per raggiungere l'amministratore."
+            'fa': (
+                "🤖 *راهنمای ربات Scholarino*\n\n"
+                "- از منوها برای دسترسی به اطلاعات استفاده کنید.\n"
+                "- برای جستجوی سریع، از گزینه 'جستجو' استفاده کنید.\n"
+                "- برای بررسی آب‌وهوای پروجا، گزینه 'آب‌وهوا' را انتخاب کنید.\n"
+                "- برای سوالات خاص، پیام خود را تایپ کنید.\n"
+                "- برای تماس با مدیر، از دکمه 'تماس با ادمین' استفاده کنید."
+            ),
+            'en': (
+                "🤖 *Scholarino Bot Help*\n\n"
+                "- Use the menus to access information.\n"
+                "- Use the 'Search' option for quick searches.\n"
+                "- Check Perugia's weather with the 'Weather' option.\n"
+                "- For specific questions, type your message.\n"
+                "- Use the 'Contact Admin' button to reach the administrator."
+            ),
+            'it': (
+                "🤖 *Aiuto Bot Scholarino*\n\n"
+                "- Usa i menu per accedere alle informazioni.\n"
+                "- Usa l'opzione 'Cerca' per ricerche rapide.\n"
+                "- Controlla il meteo di Perugia con l'opzione 'Meteo'.\n"
+                "- Per domande specifiche, digita il tuo messaggio.\n"
+                "- Usa il pulsante 'Contatta Admin' per raggiungere l'amministratore."
+            )
         }
         await query.edit_message_text(help_text_map.get(lang), parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
+        return MAIN_MENU
+
+    elif action == "search":
+        context.user_data['awaiting_search_query'] = True
+        search_text = {
+            'fa': "لطفاً عبارت موردنظر خود را برای جستجو تایپ کنید:",
+            'en': "Please type your search query:",
+            'it': "Digita la tua query di ricerca:"
+        }
+        await query.edit_message_text(search_text.get(lang))
+        return MAIN_MENU
+
+    elif action == "weather":
+        if not OPENWEATHERMAP_API_KEY or OPENWEATHERMAP_API_KEY == "YOUR_API_KEY_HERE":
+            error_text = {
+                'fa': "API آب‌وهوا تنظیم نشده است. لطفاً با ادمین تماس بگیرید.",
+                'en': "Weather API not configured. Please contact the admin.",
+                'it': "API meteo non configurata. Contatta l'admin."
+            }
+            await query.edit_message_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+            return MAIN_MENU
+
+        async with aiohttp.ClientSession() as session:
+            url = f"http://api.openweathermap.org/data/2.5/weather?q=Perugia,IT&appid={OPENWEATHERMAP_API_KEY}&units=metric&lang={lang}"
+            try:
+                async with session.get(url) as response:
+                    if response.status != 200:
+                        logger.error(f"Weather API error: Status {response.status}")
+                        error_text = {
+                            'fa': "خطایی در دریافت اطلاعات آب‌وهوا رخ داد.",
+                            'en': "An error occurred while fetching weather data.",
+                            'it': "Si è verificato un errore durante il recupero dei dati meteo."
+                        }
+                        await query.edit_message_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+                        return MAIN_MENU
+
+                    data = await response.json()
+                    weather = data['weather'][0]['description']
+                    temp = data['main']['temp']
+                    feels_like = data['main']['feels_like']
+                    humidity = data['main']['humidity']
+
+                    weather_text = {
+                        'fa': (
+                            f"🌦 *وضعیت آب‌وهوا در پروجا*\n\n"
+                            f"وضعیت: {weather}\n"
+                            f"دما: {temp}°C\n"
+                            f"حس می‌شود: {feels_like}°C\n"
+                            f"رطوبت: {humidity}%"
+                        ),
+                        'en': (
+                            f"🌦 *Weather in Perugia*\n\n"
+                            f"Condition: {weather}\n"
+                            f"Temperature: {temp}°C\n"
+                            f"Feels like: {feels_like}°C\n"
+                            f"Humidity: {humidity}%"
+                        ),
+                        'it': (
+                            f"🌦 *Meteo a Perugia*\n\n"
+                            f"Condizione: {weather}\n"
+                            f"Temperatura: {temp}°C\n"
+                            f"Percepita: {feels_like}°C\n"
+                            f"Umidità: {humidity}%"
+                        )
+                    }
+                    await query.edit_message_text(
+                        weather_text.get(lang),
+                        parse_mode='Markdown',
+                        reply_markup=get_main_menu_keyboard(lang)
+                    )
+            except Exception as e:
+                logger.error(f"Error fetching weather data: {e}")
+                error_text = {
+                    'fa': "خطایی در دریافت اطلاعات آب‌وهوا رخ داد.",
+                    'en': "An error occurred while fetching weather data.",
+                    'it': "Si è verificato un errore durante il recupero dei dati meteo."
+                }
+                await query.edit_message_text(error_text.get(lang), reply_markup=get_main_menu_keyboard(lang))
+
+        return MAIN_MENU
 
     return MAIN_MENU
