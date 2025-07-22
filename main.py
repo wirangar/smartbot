@@ -1,5 +1,6 @@
 import logging
 import json
+import os
 from pathlib import Path
 from telegram.ext import (
     Application,
@@ -7,7 +8,8 @@ from telegram.ext import (
     MessageHandler,
     CallbackQueryHandler,
     ConversationHandler,
-    filters
+    filters,
+    ContextTypes,
 )
 from src.config import logger, TELEGRAM_BOT_TOKEN, BASE_URL, PORT, WEBHOOK_SECRET
 from src.handlers.user_manager import (
@@ -19,11 +21,16 @@ from src.handlers.user_manager import (
     ask_email,
     cancel,
     show_profile_command,
-    SELECTING_LANG, ASKING_FIRST_NAME, ASKING_LAST_NAME, ASKING_AGE, ASKING_EMAIL, MAIN_MENU
+    SELECTING_LANG,
+    ASKING_FIRST_NAME,
+    ASKING_LAST_NAME,
+    ASKING_AGE,
+    ASKING_EMAIL,
+    MAIN_MENU,
 )
 from src.handlers.menu_handler import main_menu_command, help_command, handle_menu_callback, handle_action_callback
 from src.handlers.message_handler import handle_text_message, handle_voice_message
-from src.database import initialize_connections, get_db_cursor
+from src.database import initialize_connections, get_db_cursor, get_redis_client
 from src.services.isee_service import ISEEService
 from src.services.search_engine import SearchEngine
 from src.utils.paginator import Paginator
@@ -49,11 +56,27 @@ async def handle_pagination(update: Update, context: ContextTypes.DEFAULT_TYPE) 
         logger.warning(f"Invalid pagination action for user {user_id}: {action}")
         return MAIN_MENU
 
-    if page_data:
+    if not page_data or 'content' not in page_data:
+        messages = {
+            'fa': "❌ خطایی در صفحه‌بندی رخ داد یا دیگر صفحه‌ای وجود ندارد.",
+            'en': "❌ An error occurred in pagination or no more pages available.",
+            'it': "❌ Si è verificato un errore nella paginazione o non ci sono altre pagine."
+        }
         await query.message.edit_text(
-            sanitize_markdown(f"{page_data['content']['content']}\n\nصفحه {page_data['page_num']} از {page_data['total_pages']}" if lang == 'fa' else
-                            f"{page_data['content']['content']}\n\nPage {page_data['page_num']} of {page_data['total_pages']}" if lang == 'en' else
-                            f"{page_data['content']['content']}\n\nPagina {page_data['page_num']} di {page_data['total_pages']}"),
+            sanitize_markdown(messages[lang]),
+            parse_mode='MarkdownV2',
+            reply_markup=get_main_menu_keyboard(lang)
+        )
+        return MAIN_MENU
+
+    try:
+        await query.message.edit_text(
+            sanitize_markdown(
+                f"{page_data['content']['content']}\n\n"
+                f"{'صفحه' if lang == 'fa' else 'Page' if lang == 'en' else 'Pagina'} "
+                f"{page_data['page_num']} {'از' if lang == 'fa' else 'of' if lang == 'en' else 'di'} "
+                f"{page_data['total_pages']}"
+            ),
             parse_mode='MarkdownV2',
             reply_markup=paginator.get_pagination_markup(page_data, lang)
         )
@@ -66,11 +89,12 @@ async def handle_pagination(update: Update, context: ContextTypes.DEFAULT_TYPE) 
                         await query.message.reply_document(document=f)
             except Exception as e:
                 logger.error(f"Error sending file {page_data['content']['file_path']} for user {user_id}: {e}")
-    else:
+    except Exception as e:
+        logger.error(f"Error updating pagination message for user {user_id}: {e}")
         messages = {
-            'fa': "❌ دیگر صفحه‌ای وجود ندارد.",
-            'en': "❌ No more pages available.",
-            'it': "❌ Nessun'altra pagina disponibile."
+            'fa': "❌ خطایی در نمایش صفحه رخ داد.",
+            'en': "❌ An error occurred while displaying the page.",
+            'it': "❌ Si è verificato un errore durante la visualizzazione della pagina."
         }
         await query.message.edit_text(
             sanitize_markdown(messages[lang]),
@@ -85,24 +109,53 @@ async def main():
         logger.critical("TELEGRAM_BOT_TOKEN is not configured.")
         raise ValueError("TELEGRAM_BOT_TOKEN is missing.")
 
+    # بررسی متغیرهای محیطی
+    required_vars = [
+        "TELEGRAM_BOT_TOKEN",
+        "OPENAI_API_KEY",
+        "DATABASE_URL",
+        "GOOGLE_CREDS",
+        "SHEET_ID",
+        "OPENWEATHERMAP_API_KEY",
+        "ADMIN_CHAT_ID",
+        "REDIS_URL",
+    ]
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    if missing_vars:
+        logger.critical(f"Missing required environment variables: {', '.join(missing_vars)}")
+        raise EnvironmentError(f"Missing environment variables: {', '.join(missing_vars)}")
+
     # مقداردهی اولیه اتصال‌های پایگاه داده و Redis
     try:
         initialize_connections()
+        redis_client = get_redis_client()
+        if redis_client is None:
+            logger.warning("Redis client not initialized. Pagination and session features may not work.")
     except Exception as e:
         logger.critical(f"Failed to initialize database and Redis connections: {e}")
         raise
 
     # بارگذاری knowledge base
-    knowledge_base = get_knowledge_base()
+    try:
+        knowledge_base = get_knowledge_base()
+        if not knowledge_base:
+            logger.error("Knowledge base is empty or failed to load.")
+    except Exception as e:
+        logger.error(f"Failed to load knowledge base: {e}")
+        knowledge_base = {}
 
     # ایجاد اپلیکیشن تلگرام
-    application = (
-        Application.builder()
-        .token(TELEGRAM_BOT_TOKEN)
-        .read_timeout(10)
-        .write_timeout(10)
-        .build()
-    )
+    try:
+        application = (
+            Application.builder()
+            .token(TELEGRAM_BOT_TOKEN)
+            .read_timeout(10)
+            .write_timeout(10)
+            .build()
+        )
+    except Exception as e:
+        logger.critical(f"Failed to initialize Telegram application: {e}")
+        raise
 
     # ذخیره knowledge base و db_manager در bot_data
     application.bot_data['knowledge_base'] = knowledge_base
@@ -119,7 +172,7 @@ async def main():
             CommandHandler("menu", main_menu_command),
             CommandHandler("help", help_command),
             CommandHandler("profile", show_profile_command),
-            isee_service.get_conversation_handler().entry_points[0]
+            isee_service.get_conversation_handler().entry_points[0],
         ],
         states={
             SELECTING_LANG: [CallbackQueryHandler(select_language, pattern="^lang:")],
@@ -136,7 +189,7 @@ async def main():
                 CallbackQueryHandler(handle_pagination, pattern="^pagination:"),
                 MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text_message),
                 MessageHandler(filters.VOICE, handle_voice_message),
-                search_engine.get_handler()
+                search_engine.get_handler(),
             ],
         },
         fallbacks=[CommandHandler("cancel", cancel)],
@@ -157,7 +210,7 @@ async def main():
             lang = context.user_data.get('language', 'fa') if context.user_data else 'fa'
             await update.effective_message.reply_text(
                 sanitize_markdown(error_text.get(lang)),
-                parse_mode='MarkdownV2'
+                parse_mode='MarkdownV2',
             )
 
     application.add_error_handler(error_handler)
@@ -169,7 +222,7 @@ async def main():
         await application.bot.set_webhook(
             url=webhook_url,
             secret_token=WEBHOOK_SECRET,
-            allowed_updates=["message", "callback_query"]
+            allowed_updates=["message", "callback_query"],
         )
         logger.info(f"Webhook set successfully at {webhook_url}")
 
@@ -177,7 +230,7 @@ async def main():
             listen="0.0.0.0",
             port=PORT,
             secret_token=WEBHOOK_SECRET,
-            webhook_url=webhook_url
+            webhook_url=webhook_url,
         )
     except Exception as e:
         logger.critical(f"Failed to start webhook: {e}")
@@ -185,5 +238,4 @@ async def main():
 
 if __name__ == "__main__":
     import asyncio
-    import os
     asyncio.run(main())
