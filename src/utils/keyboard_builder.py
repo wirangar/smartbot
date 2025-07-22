@@ -2,6 +2,21 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from src.config import logger
 from src.utils.text_formatter import sanitize_markdown
 
+def get_language_keyboard() -> InlineKeyboardMarkup:
+    """ساخت کیبورد برای انتخاب زبان."""
+    try:
+        keyboard = [
+            [
+                InlineKeyboardButton("🇮🇷 فارسی", callback_data="lang:fa"),
+                InlineKeyboardButton("🇮🇹 Italiano", callback_data="lang:it"),
+                InlineKeyboardButton("🇬🇧 English", callback_data="lang:en")
+            ]
+        ]
+        return InlineKeyboardMarkup(keyboard)
+    except Exception as e:
+        logger.error(f"Error creating language keyboard: {e}")
+        return InlineKeyboardMarkup([])
+
 def get_main_menu_keyboard(lang: str = 'fa') -> InlineKeyboardMarkup:
     """ایجاد کیبورد منوی اصلی."""
     try:
