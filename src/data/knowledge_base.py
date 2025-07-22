@@ -8,7 +8,7 @@ from src.config import logger
 
 # مسیر فایل JSON پایگاه دانش
 BASE_DIR = Path(__file__).parent.parent
-KNOWLEDGE_FILE = BASE_DIR / 'src' / 'data' / 'knowledge_base_v2.json'
+KNOWLEDGE_FILE = BASE_DIR / 'data' / 'knowledge_base_v2.json'
 knowledge_base: Dict = {}
 
 def load_knowledge_base() -> None:
