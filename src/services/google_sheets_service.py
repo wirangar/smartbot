@@ -21,7 +21,11 @@ def get_gspread_client() -> gspread.Client:
             raise ValueError("Google credentials are missing.")
         # تبدیل رشته JSON به دیکشنری
         import json
-        creds_dict = json.loads(GOOGLE_CREDS)
+        try:
+            creds_dict = json.loads(GOOGLE_CREDS)
+        except json.JSONDecodeError as e:
+            logger.error(f"Invalid GOOGLE_CREDS format: {e}")
+            raise ValueError("GOOGLE_CREDS is not a valid JSON string.")
         credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, SCOPE)
         client = gspread.authorize(credentials)
         logger.info("Google Sheets client initialized successfully.")
@@ -32,9 +36,7 @@ def get_gspread_client() -> gspread.Client:
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 async def append_qa_to_sheet(user_id: int, question: str, answer: str) -> None:
-    """
-    ذخیره پرس‌وجو و پاسخ در Google Sheet.
-    """
+    """ذخیره پرس‌وجو و پاسخ در Google Sheet."""
     try:
         client = get_gspread_client()
         sheet = client.open_by_key(SHEET_ID).worksheet(QUESTIONS_SHEET_NAME)
@@ -50,9 +52,7 @@ async def append_qa_to_sheet(user_id: int, question: str, answer: str) -> None:
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 async def get_user_history_from_sheet(user_id: int, lang: str = 'fa') -> str:
-    """
-    بازیابی تاریخچه پرس‌وجوهای کاربر از Google Sheet.
-    """
+    """بازیابی تاریخچه پرس‌وجوهای کاربر از Google Sheet."""
     try:
         client = get_gspread_client()
         sheet = client.open_by_key(SHEET_ID).worksheet(QUESTIONS_SHEET_NAME)
@@ -95,9 +95,7 @@ async def get_user_history_from_sheet(user_id: int, lang: str = 'fa') -> str:
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
 async def get_scholarships_from_sheet(lang: str = 'fa') -> List[dict]:
-    """
-    بازیابی اطلاعات بورسیه‌ها از Google Sheet.
-    """
+    """بازیابی اطلاعات بورسیه‌ها از Google Sheet."""
     try:
         client = get_gspread_client()
         sheet = client.open_by_key(SHEET_ID).worksheet(SCHOLARSHIPS_SHEET_NAME)
