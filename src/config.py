@@ -16,7 +16,7 @@ BASE_DIR = Path(__file__).parent.parent
 def validate_env_vars():
     """بررسی وجود متغیرهای محیطی موردنیاز."""
     required_vars = [
-        "TELEGRAM_BOT_TOKEN",
+        "TELEGRAM_TOKEN",
         "OPENAI_API_KEY",
         "DATABASE_URL",
         "GOOGLE_CREDS",
