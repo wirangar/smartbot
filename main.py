@@ -12,7 +12,7 @@ from telegram.ext import (
     filters,
     ContextTypes,
 )
-from src.config import logger, TELEGRAM_BOT_TOKEN, BASE_URL, PORT, WEBHOOK_SECRET
+from src.config import logger, TELEGRAM_TOKEN, BASE_URL, PORT, WEBHOOK_SECRET
 from src.handlers.user_manager import (
     start,
     select_language,
