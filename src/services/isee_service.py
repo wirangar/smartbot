@@ -7,10 +7,10 @@ from src.utils.text_formatter import sanitize_markdown
 from src.database import get_db_cursor
 
 class ISEEState(Enum):
- FAMILY = 1
- INCOME = 2
- PROPERTY = 3
- PROPERTY_SIZE = 4
+    FAMILY = 1
+    INCOME = 2
+    PROPERTY = 3
+    PROPERTY_SIZE = 4
 
 class ISEEService:
     def __init__(self, json_data: dict, db_manager):
