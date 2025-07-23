@@ -2,6 +2,7 @@ import logging
 import json
 import os
 from pathlib import Path
+from telegram import Update
 from telegram.ext import (
     Application,
     CommandHandler,
