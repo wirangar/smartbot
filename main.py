@@ -237,6 +237,15 @@ async def main():
         logger.critical(f"Failed to start webhook: {e}")
         raise
 
+# 🟡 بخش نهایی اصلاح‌شده برای سازگاری با Render یا محیط‌های async:
 if __name__ == "__main__":
     import asyncio
-    asyncio.run(main())
+
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    loop.create_task(main())
+    loop.run_forever()
