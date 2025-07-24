@@ -12,11 +12,10 @@ logger = logging.getLogger(__name__)
 # مسیر پایه پروژه
 BASE_DIR = Path(__file__).parent.parent
 
-# متغیرهای محیطی
+# بررسی متغیرهای محیطی مورد نیاز
 def validate_env_vars():
-    """بررسی وجود متغیرهای محیطی موردنیاز."""
     required_vars = [
-        "TELEGRAM_TOKEN",
+        "TELEGRAM_TOKEN",  # هماهنگ با محیط Render
         "OPENAI_API_KEY",
         "DATABASE_URL",
         "GOOGLE_CREDS",
@@ -30,8 +29,8 @@ def validate_env_vars():
         logger.critical(f"Missing required environment variables: {', '.join(missing_vars)}")
         raise EnvironmentError(f"Missing environment variables: {', '.join(missing_vars)}")
 
-# متغیرهای محیطی
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
+# تعریف متغیرها
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")  # تغییر داده شد
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 DATABASE_URL = os.getenv("DATABASE_URL")
 REDIS_URL = os.getenv("REDIS_URL")
@@ -45,5 +44,5 @@ PORT = int(os.getenv("PORT", 8080))
 WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "scholarino-secret")
 ADMIN_CHAT_ID = os.getenv("ADMIN_CHAT_ID")
 
-# بررسی متغیرهای محیطی
+# بررسی نهایی
 validate_env_vars()
