@@ -5,6 +5,7 @@ from telegram.ext import ContextTypes, ConversationHandler
 from src.config import logger
 from src.utils.text_formatter import sanitize_markdown
 from src.database import get_db_cursor
+import json
 
 class ISEEState(Enum):
     FAMILY = 1
@@ -31,14 +32,13 @@ class ISEEService:
                                 self.scholarship_limit = float(line.split("€")[-1].replace(",", "").strip())
                                 return
                     break
-            self.scholarship_limit = 27948.60 # به‌روز برای 2025/2026
+            self.scholarship_limit = 27948.60  # به‌روز برای 2025/2026
             logger.info(f"Using default ISEE limit: {self.scholarship_limit}")
         except Exception as e:
             logger.error(f"Error setting up ISEE parameters: {e}")
             self.scholarship_limit = 27948.60
 
-    def calculate(self, family_members: int, annual_income: float,
-                  property_status: str, property_size: float = 0) -> dict:
+    def calculate(self, family_members: int, annual_income: float, property_status: str, property_size: float = 0) -> dict:
         """محاسبه عدد ISEE."""
         try:
             family_params = {1: 1.00, 2: 1.57, 3: 2.04, 4: 2.46, 5: 2.85}
@@ -100,6 +100,7 @@ class ISEEService:
     def get_conversation_handler(self):
         """بازگشت ConversationHandler برای محاسبه ISEE."""
         from src.handlers.user_manager import MAIN_MENU
+        from telegram.ext import CallbackQueryHandler, CommandHandler, MessageHandler, filters
         return ConversationHandler(
             entry_points=[CallbackQueryHandler(self.start, pattern="^menu:محاسبه ISEE$|^menu:Calculate ISEE$|^menu:Calcola ISEE$")],
             states={
@@ -255,7 +256,7 @@ class ISEEService:
 
     async def finish(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         """اتمام محاسبه ISEE و نمایش نتیجه."""
-        from src.handlers.user_manager import MAIN_MENU
+        from src.handlers.user_manager import MAIN_MENU, get_main_menu_keyboard
         data = context.user_data.get('isee', {})
         try:
             result = self.calculate(
@@ -338,7 +339,7 @@ class ISEEService:
 
     async def cancel(self, update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         """لغو فرآیند محاسبه ISEE."""
-        from src.handlers.user_manager import MAIN_MENU
+        from src.handlers.user_manager import MAIN_MENU, get_main_menu_keyboard
         lang = context.user_data.get('language', 'fa')
         messages = {
             'fa': "❌ محاسبه ISEE لغو شد.",
