@@ -1,9 +1,9 @@
 import logging
 import json
 from typing import Optional, Dict, List, Any
-from datetime import datetime
+from datetime import datetime, timedelta
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from src.config import logger
+from src.config import logger, PAGINATION_EXPIRE_TIME
 from src.database import get_redis_client
 from src.utils.text_formatter import sanitize_markdown
 from src.utils.keyboard_builder import get_main_menu_keyboard
@@ -11,7 +11,7 @@ from src.utils.keyboard_builder import get_main_menu_keyboard
 class Paginator:
     def __init__(self):
         self.redis = get_redis_client()
-        self.expire_time = 3600  # 1 ساعت
+        self.expire_time = PAGINATION_EXPIRE_TIME
 
     def _get_key(self, user_id: int) -> str:
         """ایجاد کلید منحصربه‌فرد برای کاربر در Redis."""
@@ -45,7 +45,16 @@ class Paginator:
             if not data:
                 logger.info(f"No pagination session found for user {user_id}")
                 return None
+
             session = json.loads(data)
+
+            # Check for expired session
+            created_at = datetime.fromisoformat(session['created_at'])
+            if datetime.now() - created_at > timedelta(seconds=self.expire_time):
+                logger.info(f"Pagination session for user {user_id} has expired.")
+                self.redis.delete(self._get_key(user_id))
+                return None
+
             session['current_page'] += 1
             if session['current_page'] >= session['total_pages']:
                 logger.info(f"Reached last page for user {user_id}")
@@ -66,7 +75,16 @@ class Paginator:
             if not data:
                 logger.info(f"No pagination session found for user {user_id}")
                 return None
+
             session = json.loads(data)
+
+            # Check for expired session
+            created_at = datetime.fromisoformat(session['created_at'])
+            if datetime.now() - created_at > timedelta(seconds=self.expire_time):
+                logger.info(f"Pagination session for user {user_id} has expired.")
+                self.redis.delete(self._get_key(user_id))
+                return None
+
             session['current_page'] -= 1
             if session['current_page'] < 0:
                 logger.info(f"Reached first page for user {user_id}")

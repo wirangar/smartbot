@@ -1,7 +1,7 @@
 import logging
-import re
 from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
+from email_validator import validate_email, EmailNotValidError
 
 from src.database import get_db_cursor
 from src.utils.keyboard_builder import get_language_keyboard, get_main_menu_keyboard
@@ -139,17 +139,18 @@ async def ask_email(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """ذخیره اطلاعات کاربر در پایگاه داده و نمایش منوی اصلی."""
     email = update.message.text.strip()
     lang = context.user_data.get('language', 'fa')
-    email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-    if not re.match(email_regex, email):
+    try:
+        validate_email(email)
+        context.user_data['email'] = email
+    except EmailNotValidError as e:
         error_text = {
-            'fa': "ایمیل نامعتبر است. لطفاً یک ایمیل معتبر وارد کنید (مثال: example@domain.com):",
-            'en': "Invalid email. Please enter a valid email (e.g., example@domain.com):",
-            'it': "Email non valida. Inserisci un'email valida (es. example@domain.com):"
+            'fa': f"ایمیل نامعتبر است: {e}. لطفاً یک ایمیل معتبر وارد کنید:",
+            'en': f"Invalid email: {e}. Please enter a valid email:",
+            'it': f"Email non valida: {e}. Inserisci un'email valida:"
         }
         await update.message.reply_text(error_text.get(lang))
         return ASKING_EMAIL
 
-    context.user_data['email'] = email
     user_id = update.effective_user.id
 
     # ذخیره در پایگاه داده با تلاش مجدد
@@ -206,46 +207,50 @@ async def show_profile(update: Update, context: ContextTypes.DEFAULT_TYPE, is_co
     user_id = update.effective_user.id
     lang = context.user_data.get('language', 'fa')
 
-    try:
-        with get_db_cursor() as cursor:
-            cursor.execute("SELECT first_name, last_name, age, email, score FROM users WHERE telegram_id = %s", (user_id,))
-            user_data = cursor.fetchone()
-
-        if user_data:
-            first_name, last_name, age, email, score = user_data
-            profile_text_map = {
-                'fa': f"👤 *پروفایل شما*\n\n*نام:* {first_name}\n*نام خانوادگی:* {last_name}\n*سن:* {age}\n*ایمیل:* {email}\n*امتیاز:* {score or 0} ✨",
-                'en': f"👤 *Your Profile*\n\n*First Name:* {first_name}\n*Last Name:* {last_name}\n*Age:* {age}\n*Email:* {email}\n*Score:* {score or 0} ✨",
-                'it': f"👤 *Il Tuo Profilo*\n\n*Nome:* {first_name}\n*Cognome:* {last_name}\n*Età:* {age}\n*Email:* {email}\n*Punteggio:* {score or 0} ✨"
+    user_data = context.user_data.get('profile')
+    if not user_data:
+        try:
+            with get_db_cursor(commit=False) as cursor:
+                cursor.execute("SELECT first_name, last_name, age, email, score FROM users WHERE telegram_id = %s", (user_id,))
+                user_data = cursor.fetchone()
+                if user_data:
+                    context.user_data['profile'] = user_data
+        except Exception as e:
+            logger.error(f"Failed to fetch profile for user {user_id}: {e}")
+            error_text_map = {
+                'fa': "خطایی در دریافت اطلاعات پروفایل رخ داد.",
+                'en': "An error occurred while fetching your profile.",
+                'it': "Si è verificato un errore durante il recupero del tuo profilo."
             }
-            profile_text = profile_text_map.get(lang)
-        else:
-            not_found_text_map = {
-                'fa': "اطلاعات پروفایل شما یافت نشد. لطفاً با /start ثبت‌نام کنید.",
-                'en': "Your profile information was not found. Please register with /start.",
-                'it': "Le tue informazioni del profilo non sono state trovate. Registrati con /start."
-            }
-            profile_text = not_found_text_map.get(lang)
+            error_text = error_text_map.get(lang)
+            if is_command:
+                await update.message.reply_text(error_text, reply_markup=get_main_menu_keyboard(lang))
+            else:
+                await update.callback_query.edit_message_text(error_text, reply_markup=get_main_menu_keyboard(lang))
+            return MAIN_MENU
 
-        if is_command:
-            await update.message.reply_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
-        else:
-            query = update.callback_query
-            await query.answer()
-            await query.edit_message_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
-
-    except Exception as e:
-        logger.error(f"Failed to fetch profile for user {user_id}: {e}")
-        error_text_map = {
-            'fa': "خطایی در دریافت اطلاعات پروفایل رخ داد.",
-            'en': "An error occurred while fetching your profile.",
-            'it': "Si è verificato un errore durante il recupero del tuo profilo."
+    if user_data:
+        first_name, last_name, age, email, score = user_data
+        profile_text_map = {
+            'fa': f"👤 *پروفایل شما*\n\n*نام:* {first_name}\n*نام خانوادگی:* {last_name}\n*سن:* {age}\n*ایمیل:* {email}\n*امتیاز:* {score or 0} ✨",
+            'en': f"👤 *Your Profile*\n\n*First Name:* {first_name}\n*Last Name:* {last_name}\n*Age:* {age}\n*Email:* {email}\n*Score:* {score or 0} ✨",
+            'it': f"👤 *Il Tuo Profilo*\n\n*Nome:* {first_name}\n*Cognome:* {last_name}\n*Età:* {age}\n*Email:* {email}\n*Punteggio:* {score or 0} ✨"
         }
-        error_text = error_text_map.get(lang)
-        if is_command:
-            await update.message.reply_text(error_text, reply_markup=get_main_menu_keyboard(lang))
-        else:
-            await update.callback_query.edit_message_text(error_text, reply_markup=get_main_menu_keyboard(lang))
+        profile_text = profile_text_map.get(lang)
+    else:
+        not_found_text_map = {
+            'fa': "اطلاعات پروفایل شما یافت نشد. لطفاً با /start ثبت‌نام کنید.",
+            'en': "Your profile information was not found. Please register with /start.",
+            'it': "Le tue informazioni del profilo non sono state trovate. Registrati con /start."
+        }
+        profile_text = not_found_text_map.get(lang)
+
+    if is_command:
+        await update.message.reply_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
+    else:
+        query = update.callback_query
+        await query.answer()
+        await query.edit_message_text(profile_text, parse_mode='Markdown', reply_markup=get_main_menu_keyboard(lang))
 
     return MAIN_MENU
 

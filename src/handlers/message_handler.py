@@ -72,6 +72,7 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
         return await search_engine.search(update, context)
 
     # پردازش پیام متنی عمومی با OpenAI
+    ai_response = None
     try:
         ai_response = await get_ai_response(user_message, lang)
         if ai_response:
@@ -81,7 +82,6 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
                 parse_mode='MarkdownV2',
                 reply_markup=get_main_menu_keyboard(lang)
             )
-            await append_qa_to_sheet(user_id, user_message, ai_response)
         else:
             error_text = {
                 'fa': "متأسفم، نتوانستم پاسخی تولید کنم. لطفاً دوباره امتحان کنید.",
@@ -105,6 +105,9 @@ async def handle_text_message(update: Update, context: ContextTypes.DEFAULT_TYPE
             parse_mode='MarkdownV2',
             reply_markup=get_main_menu_keyboard(lang)
         )
+    finally:
+        if ai_response:
+            await append_qa_to_sheet(user_id, user_message, ai_response)
 
     return MAIN_MENU
 
@@ -122,6 +125,7 @@ async def handle_voice_message(update: Update, context: ContextTypes.DEFAULT_TYP
         )
         return MAIN_MENU
 
+    temp_voice_path = None
     try:
         voice_file = await context.bot.get_file(update.message.voice.file_id)
         temp_dir = Path("./temp_audio")

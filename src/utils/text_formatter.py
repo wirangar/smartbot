@@ -12,13 +12,10 @@ def escape_markdown_v2(text: str) -> str:
         return text
     
     # لیست کاراکترهای خاص که نیاز به اسکیپ دارند
-    special_chars = r'[_*[\]()~`>#+\-=|{}.!]'
+    special_chars = r'[_*[]()~`>#+\-=|{}.!]'
     
     # اسکیپ کردن کاراکترهای خاص
-    escaped_text = re.sub(r'([%s])' % special_chars, r'\\\1', text)
-    
-    # جایگزینی \n با \n\n برای فاصله‌گذاری بهتر در تلگرام
-    escaped_text = escaped_text.replace('\n', '\n\n')
+    escaped_text = re.sub(f'([{re.escape(special_chars)}])', r'\\\1', text)
     
     logger.debug(f"Escaped MarkdownV2 text: {escaped_text[:100]}...")
     return escaped_text
@@ -28,9 +25,8 @@ def sanitize_markdown(text: str, max_length: int = 4096) -> str:
     آماده‌سازی متن برای ارسال در تلگرام با فرمت MarkdownV2.
     """
     try:
-        # حذف کاراکترهای غیرمجاز یا نامناسب
-        text = text.replace('\r', '')  # حذف carriage return
-        text = re.sub(r'[^\x00-\x7F\u0600-\u06FF]', '', text)  # حذف کاراکترهای غیر UTF-8 و غیرفارسی
+        # حذف کاراکترهای کنترلی به جز newline
+        text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', text)
         
         # اسکیپ کردن برای MarkdownV2
         sanitized_text = escape_markdown_v2(text)

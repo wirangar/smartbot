@@ -10,6 +10,55 @@ from src.config import logger
 BASE_DIR = Path(__file__).parent.parent
 KNOWLEDGE_FILE = BASE_DIR / 'src' / 'data' / 'knowledge_base_v2.json'
 knowledge_base: Dict = {}
+inverted_index: Dict[str, Dict[str, List[str]]] = {}
+
+def build_inverted_index():
+    """Build an inverted index for the knowledge base."""
+    global inverted_index
+    kb = get_knowledge_base()
+    for lang in ['fa', 'en', 'it']:
+        inverted_index[lang] = {}
+        for category_name, items in kb.items():
+            if not isinstance(items, list):
+                continue
+            for item in items:
+                if not isinstance(item, dict):
+                    continue
+
+                # Index title
+                title = item.get('title', {}).get(lang, '').lower()
+                for word in re.findall(r'\w+', title):
+                    if word not in inverted_index[lang]:
+                        inverted_index[lang][word] = []
+                    inverted_index[lang][word].append(f"menu:{category_name}:{item.get('id', '')}")
+
+                # Index description
+                description = item.get('description', {}).get(lang, '').lower()
+                for word in re.findall(r'\w+', description):
+                    if word not in inverted_index[lang]:
+                        inverted_index[lang][word] = []
+                    inverted_index[lang][word].append(f"menu:{category_name}:{item.get('id', '')}")
+
+                # Index subsections
+                for subsection in item.get('subsections', []):
+                    sub_title = subsection.get('title', {}).get(lang, '').lower()
+                    for word in re.findall(r'\w+', sub_title):
+                        if word not in inverted_index[lang]:
+                            inverted_index[lang][word] = []
+                        inverted_index[lang][word].append(f"menu:{category_name}:{item.get('id', '')}")
+
+                    sub_content = subsection.get('content', {}).get(lang, [])
+                    if isinstance(sub_content, str):
+                        for word in re.findall(r'\w+', sub_content):
+                            if word not in inverted_index[lang]:
+                                inverted_index[lang][word] = []
+                            inverted_index[lang][word].append(f"menu:{category_name}:{item.get('id', '')}")
+                    elif isinstance(sub_content, list):
+                        for line in sub_content:
+                            for word in re.findall(r'\w+', line):
+                                if word not in inverted_index[lang]:
+                                    inverted_index[lang][word] = []
+                                inverted_index[lang][word].append(f"menu:{category_name}:{item.get('id', '')}")
 
 def load_knowledge_base() -> None:
     """بارگذاری پایگاه دانش از فایل JSON."""
@@ -18,6 +67,8 @@ def load_knowledge_base() -> None:
         with open(KNOWLEDGE_FILE, 'r', encoding='utf-8') as f:
             knowledge_base = json.load(f)
         logger.info(f"Knowledge base '{KNOWLEDGE_FILE.name}' loaded successfully.")
+        build_inverted_index()
+        logger.info("Inverted index built successfully.")
     except FileNotFoundError:
         logger.error(f"Knowledge base file '{KNOWLEDGE_FILE.name}' not found.")
         # ایجاد فایل JSON خالی به‌عنوان پیش‌فرض
@@ -42,16 +93,18 @@ def get_content_by_path(path_parts: List[str], lang: str = 'fa') -> Tuple[str, s
     """
     kb = get_knowledge_base()
     if not path_parts or len(path_parts) < 2:
-        return "No content found.", None
+        logger.error(f"Invalid path_parts provided: {path_parts}")
+        return "Invalid request. Please try again.", None
 
     category_key, item_id = path_parts[0], path_parts[1]
-    category = kb.get(category_key, [])
-    if not isinstance(category, list):
-        logger.warning(f"Invalid category format: {category_key}")
-        return f"Category '{category_key}' is invalid.", None
+    category = kb.get(category_key)
+    if not category or not isinstance(category, list):
+        logger.warning(f"Invalid or missing category: {category_key}")
+        return f"Category '{category_key}' not found or is invalid.", None
 
     target_item = next((item for item in category if item.get('id') == item_id), None)
     if not target_item:
+        logger.warning(f"Item with ID '{item_id}' not found in category '{category_key}'.")
         return f"Item with ID '{item_id}' not found.", None
 
     output_parts = []
@@ -93,47 +146,52 @@ def get_content_by_path(path_parts: List[str], lang: str = 'fa') -> Tuple[str, s
 
 def search_knowledge_base(query: str, lang: str = 'fa') -> List[Dict]:
     """جستجوی پیشرفته در پایگاه دانش و بازگرداندن موارد منطبق."""
-    kb = get_knowledge_base()
-    results = []
-    query = query.lower().strip()
+    if not inverted_index:
+        build_inverted_index()
 
-    for category_name, items in kb.items():
-        if not isinstance(items, list):
-            logger.warning(f"Invalid data format for category '{category_name}'")
-            continue
-        for item in items:
-            if not isinstance(item, dict):
-                logger.warning(f"Invalid item format in category '{category_name}'")
-                continue
-            title = item.get('title', {}).get(lang, item.get('title', {}).get('en', '')).lower()
-            description = item.get('description', {}).get(lang, item.get('description', {}).get('en', '')).lower()
-            subsections = item.get('subsections', [])
-            # جستجو در عنوان و توضیحات
-            if query in title or query in description:
-                results.append({
-                    "title": item.get('title', {}).get(lang, item.get('title', {}).get('en', 'No Title')),
-                    "callback": f"menu:{category_name}:{item.get('id', '')}"
-                })
-            # جستجو در زیربخش‌ها
-            for subsection in subsections:
-                sub_title = subsection.get('title', {}).get(lang, subsection.get('title', {}).get('en', '')).lower()
-                sub_content = subsection.get('content', {}).get(lang, subsection.get('content', {}).get('en', [])).lower()
-                if query in sub_title or (isinstance(sub_content, str) and query in sub_content):
-                    results.append({
-                        "title": item.get('title', {}).get(lang, item.get('title', {}).get('en', 'No Title')),
-                        "callback": f"menu:{category_name}:{item.get('id', '')}"
-                    })
-                    break
+    query_words = re.findall(r'\w+', query.lower().strip())
+    if not query_words:
+        return []
 
-    # حذف موارد تکراری
-    seen = set()
-    unique_results = []
-    for result in results:
-        if result['callback'] not in seen:
-            seen.add(result['callback'])
-            unique_results.append(result)
+    # Get all documents that contain any of the query words
+    result_callbacks = set()
+    for word in query_words:
+        if word in inverted_index.get(lang, {}):
+            for callback in inverted_index[lang][word]:
+                result_callbacks.add(callback)
 
-    return unique_results
+    # Rank results by the number of matching words
+    ranked_results = {}
+    for callback in result_callbacks:
+        rank = 0
+        category_key, item_id = callback.replace("menu:", "").split(":")
+        item = next((i for i in knowledge_base.get(category_key, []) if i.get('id') == item_id), None)
+        if item:
+            text_to_search = (item.get('title', {}).get(lang, '') + " " +
+                              item.get('description', {}).get(lang, ''))
+            for sub in item.get('subsections', []):
+                text_to_search += " " + sub.get('title', {}).get(lang, '')
+                content = sub.get('content', {}).get(lang, [])
+                if isinstance(content, str):
+                    text_to_search += " " + content
+                elif isinstance(content, list):
+                    text_to_search += " ".join(content)
+
+            for word in query_words:
+                if word in text_to_search.lower():
+                    rank += 1
+
+            ranked_results[callback] = {
+                "rank": rank,
+                "title": item.get('title', {}).get(lang, item.get('title', {}).get('en', 'No Title')),
+                "callback": callback
+            }
+
+    # Sort results by rank
+    sorted_results = sorted(ranked_results.values(), key=lambda x: x['rank'], reverse=True)
+
+    # Remove rank from the final result
+    return [{ "title": res["title"], "callback": res["callback"]} for res in sorted_results]
 
 # بارگذاری اولیه پایگاه دانش
 load_knowledge_base()

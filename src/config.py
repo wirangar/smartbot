@@ -13,6 +13,9 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).parent.parent
 
 # متغیرهای محیطی
+class MissingEnvVarError(Exception):
+    pass
+
 def validate_env_vars():
     """بررسی وجود متغیرهای محیطی موردنیاز."""
     required_vars = [
@@ -26,8 +29,9 @@ def validate_env_vars():
     ]
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     if missing_vars:
-        logger.critical(f"Missing required environment variables: {', '.join(missing_vars)}")
-        raise EnvironmentError(f"Missing environment variables: {', '.join(missing_vars)}")
+        message = f"Missing required environment variables: {', '.join(missing_vars)}"
+        logger.critical(message)
+        raise ValueError(message)
 
 # متغیرهای محیطی
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -43,6 +47,27 @@ BASE_URL = os.getenv("BASE_URL")
 PORT = int(os.getenv("PORT", 8080))
 WEBHOOK_SECRET = os.getenv("WEBHOOK_SECRET", "scholarino-secret")
 ADMIN_CHAT_ID = os.getenv("ADMIN_CHAT_ID")
+
+# OpenAI models
+OPENAI_CHAT_MODEL = "gpt-4o"
+OPENAI_WHISPER_MODEL = "whisper-1"
+
+# OpenAI models
+OPENAI_CHAT_MODEL = "gpt-4o"
+OPENAI_WHISPER_MODEL = "whisper-1"
+
+# Paginator settings
+PAGINATION_EXPIRE_TIME = 3600  # 1 hour
+
+# ISEE calculation parameters
+ISEE_FAMILY_PARAMS = {1: 1.00, 2: 1.57, 3: 2.04, 4: 2.46, 5: 2.85}
+ISEE_PROPERTY_VALUE_MULTIPLIER = 500
+ISEE_PROPERTY_VALUE_PERCENTAGE = 0.2
+ISEE_FULL_SCHOLARSHIP_THRESHOLD_MULTIPLIER = 0.55
+ISEE_MEDIUM_SCHOLARSHIP_THRESHOLD_MULTIPLIER = 0.715
+ISEE_FULL_SCHOLARSHIP_AMOUNT = 5192
+ISEE_MEDIUM_SCHOLARSHIP_AMOUNT = 3634
+ISEE_PARTIAL_SCHOLARSHIP_AMOUNT = 2000
 
 # بررسی متغیرهای محیطی
 validate_env_vars()

@@ -4,7 +4,7 @@ from typing import Optional
 import openai
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from src.config import logger, OPENAI_API_KEY
+from src.config import logger, OPENAI_API_KEY, OPENAI_CHAT_MODEL, OPENAI_WHISPER_MODEL
 
 # تنظیم کلید API
 openai.api_key = OPENAI_API_KEY
@@ -38,7 +38,7 @@ async def get_ai_response(user_message: str, lang: str = 'fa') -> Optional[str]:
 
     try:
         response = await openai.chat.completions.create(
-            model="gpt-4o",
+            model=OPENAI_CHAT_MODEL,
             messages=messages,
             temperature=0.6,
             max_tokens=1500
@@ -69,7 +69,7 @@ async def process_voice_message(voice_file_path: Path, lang: str = 'fa') -> Opti
     try:
         with open(voice_file_path, "rb") as audio_file:
             transcript = await openai.audio.transcriptions.create(
-                model="whisper-1",
+                model=OPENAI_WHISPER_MODEL,
                 file=audio_file,
                 language=LANGUAGE_CODES.get(lang, 'en')
             )

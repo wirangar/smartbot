@@ -39,6 +39,13 @@ async def append_qa_to_sheet(user_id: int, question: str, answer: str) -> None:
         client = get_gspread_client()
         sheet = client.open_by_key(SHEET_ID).worksheet(QUESTIONS_SHEET_NAME)
         
+        # Check for duplicates
+        records = sheet.get_all_records()
+        for record in records:
+            if record.get('question') == question and record.get('user_id') == user_id:
+                logger.info(f"Duplicate Q&A found for user {user_id}. Not appending.")
+                return
+
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         row = [str(user_id), timestamp, question, answer]
         

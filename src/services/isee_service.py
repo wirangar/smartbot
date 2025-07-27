@@ -2,7 +2,7 @@ import logging
 from enum import Enum
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ContextTypes, ConversationHandler
-from src.config import logger
+from src.config import logger, ISEE_FAMILY_PARAMS, ISEE_PROPERTY_VALUE_MULTIPLIER, ISEE_PROPERTY_VALUE_PERCENTAGE, ISEE_FULL_SCHOLARSHIP_THRESHOLD_MULTIPLIER, ISEE_MEDIUM_SCHOLARSHIP_THRESHOLD_MULTIPLIER, ISEE_FULL_SCHOLARSHIP_AMOUNT, ISEE_MEDIUM_SCHOLARSHIP_AMOUNT, ISEE_PARTIAL_SCHOLARSHIP_AMOUNT
 from src.utils.text_formatter import sanitize_markdown
 from src.database import get_db_cursor
 
@@ -41,35 +41,34 @@ class ISEEService:
  property_status: str, property_size: float = 0) -> dict:
  """محاسبه عدد ISEE."""
  try:
- family_params = {1: 1.00, 2: 1.57, 3: 2.04, 4: 2.46, 5: 2.85}
- x = family_params.get(family_members, 2.85 + 0.35 * (family_members - 5))
- property_value = property_size * 500 * 0.2 if property_status == "مالک" else 0
+ x = ISEE_FAMILY_PARAMS.get(family_members, 2.85 + 0.35 * (family_members - 5))
+ property_value = property_size * ISEE_PROPERTY_VALUE_MULTIPLIER * ISEE_PROPERTY_VALUE_PERCENTAGE if property_status == "مالک" else 0
  total_assets = annual_income + property_value
  isee_value = round(total_assets / x, 2)
  
- if isee_value <= self.scholarship_limit * 0.55:
+ if isee_value <= self.scholarship_limit * ISEE_FULL_SCHOLARSHIP_THRESHOLD_MULTIPLIER:
  status = {"fa": "بورسیه کامل", "en": "Full scholarship", "it": "Borsa completa"}
- amount = 5192
+ amount = ISEE_FULL_SCHOLARSHIP_AMOUNT
  suggestion = {
- "fa": "شما واجد شرایط حداکثر کمک هزینه (5192 یورو + خوابگاه رایگان) هستید.",
- "en": "You are eligible for the maximum scholarship (5192 EUR + free dormitory).",
- "it": "Sei idoneo per la borsa massima (5192 EUR + dormitorio gratuito)."
+ "fa": f"شما واجد شرایط حداکثر کمک هزینه ({amount} یورو + خوابگاه رایگان) هستید.",
+ "en": f"You are eligible for the maximum scholarship ({amount} EUR + free dormitory).",
+ "it": f"Sei idoneo per la borsa massima ({amount} EUR + dormitorio gratuito)."
  }
- elif isee_value <= self.scholarship_limit * 0.715:
+ elif isee_value <= self.scholarship_limit * ISEE_MEDIUM_SCHOLARSHIP_THRESHOLD_MULTIPLIER:
  status = {"fa": "بورسیه متوسط", "en": "Medium scholarship", "it": "Borsa media"}
- amount = 3634
+ amount = ISEE_MEDIUM_SCHOLARSHIP_AMOUNT
  suggestion = {
- "fa": "شما واجد شرایط بورسیه متوسط (3634 یورو) هستید.",
- "en": "You are eligible for a medium scholarship (3634 EUR).",
- "it": "Sei idoneo per una borsa media (3634 EUR)."
+ "fa": f"شما واجد شرایط بورسیه متوسط ({amount} یورو) هستید.",
+ "en": f"You are eligible for a medium scholarship ({amount} EUR).",
+ "it": f"Sei idoneo per una borsa media ({amount} EUR)."
  }
  elif isee_value <= self.scholarship_limit:
  status = {"fa": "بورسیه جزئی", "en": "Partial scholarship", "it": "Borsa parziale"}
- amount = 2000
+ amount = ISEE_PARTIAL_SCHOLARSHIP_AMOUNT
  suggestion = {
- "fa": "شما واجد شرایط بورسیه جزئی (2000 یورو) هستید.",
- "en": "You are eligible for a partial scholarship (2000 EUR).",
- "it": "Sei idoneo per una borsa parziale (2000 EUR)."
+ "fa": f"شما واجد شرایط بورسیه جزئی ({amount} یورو) هستید.",
+ "en": f"You are eligible for a partial scholarship ({amount} EUR).",
+ "it": f"Sei idoneo per una borsa parziale ({amount} EUR)."
  }
  else:
  status = {"fa": "عدم واجد شرایط", "en": "Not eligible", "it": "Non idoneo"}
