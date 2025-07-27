@@ -9,7 +9,7 @@ from telegram.ext import (
     ConversationHandler,
     filters
 )
-from src.config import logger, TELEGRAM_BOT_TOKEN, BASE_URL, PORT, WEBHOOK_SECRET, OPENWEATHERMAP_API_KEY
+from src.config import logger, TELEGRAM_BOT_TOKEN, BASE_URL, PORT, WEBHOOK_SECRET, OPENWEATHERMAP_API_KEY, MissingEnvVarError
 from src.handlers.user_manager import (
     start,
     select_language,
@@ -90,18 +90,17 @@ def setup_handlers(application: Application):
     application.add_handler(conv_handler)
 
     async def error_handler(update, context):
-        logger.error(f"Update {update} caused error: {context.error}")
+        """Log Errors caused by Updates."""
+        logger.error(f"Update {update} caused error {context.error}")
         if update and update.effective_message:
-            error_text = {
-                'fa': "خطایی رخ داد. لطفاً دوباره امتحان کنید.",
-                'en': "An error occurred. Please try again.",
-                'it': "Si è verificato un errore. Riprova."
-            }
             lang = context.user_data.get('language', 'fa') if context.user_data else 'fa'
-            await update.effective_message.reply_text(
-                sanitize_markdown(error_text.get(lang)),
-                parse_mode='MarkdownV2'
-            )
+            error_message = f"An error occurred: {context.error}"
+            if lang == 'fa':
+                error_message = f"یک خطا رخ داد: {context.error}"
+            elif lang == 'it':
+                error_message = f"Si è verificato un errore: {context.error}"
+
+            await update.effective_message.reply_text(sanitize_markdown(error_message))
 
     application.add_error_handler(error_handler)
 
@@ -133,13 +132,13 @@ async def main():
     """Run the bot."""
     try:
         initialize_connections()
+        application = setup_application()
+        setup_handlers(application)
+        await run_webhook(application)
+    except (ValueError, MissingEnvVarError) as e:
+        logger.critical(f"Initialization failed: {e}")
     except Exception as e:
-        logger.critical(f"Failed to initialize database and Redis connections: {e}")
-        raise
-
-    application = setup_application()
-    setup_handlers(application)
-    await run_webhook(application)
+        logger.critical(f"An unexpected error occurred during startup: {e}")
 
 if __name__ == "__main__":
     import asyncio

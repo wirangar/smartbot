@@ -26,6 +26,7 @@ def sanitize_markdown(text: str, max_length: int = 4096) -> str:
     """
     try:
         # حذف کاراکترهای کنترلی به جز newline
+        text = text.replace('\r', '')
         text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', text)
         
         # اسکیپ کردن برای MarkdownV2
